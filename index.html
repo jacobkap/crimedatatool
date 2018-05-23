@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Crime Data Tool</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-loader.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" src="css/dygraph.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/datatool.js"></script>
+  <script src="js/dygraph.js"></script>
+  <script src="js/jquery-csv.js"></script>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="tab">
+    <button class="tablinks" onclick="opentab(event, 'Offenses Known')">Offenses Known</button>
+    <button class="tablinks" onclick="opentab(event, 'Arrests')">Arrests</button>
+    <!--
+    <button class="tablinks" onclick="opentab(event, 'Officers Killed and Assaulted')">Officers Killed and Assaulted</button>
+    <button class="tablinks" onclick="opentab(event, 'Supplementary Homicide Report')">Supplementary Homicide Report</button>
+    <button class="tablinks" onclick="opentab(event, 'Hate Crimes')">Hate Crimes</button>
+    <button class="tablinks" onclick="opentab(event, 'Arson')">Arson</button>
+  -->
+    <button style="float: right" ; class="tablinks" onclick="opentab(event, 'About')">About</button>
+  </div>
+
+  <div id="Offenses Known" class="tabcontent">
+
+    <script>
+      state_agencies = getStateAgencies();
+    </script>
+
+    <div class="row">
+      <div class="column sidebar" style="background-color:#aaa;">
+        <h3>State:</h3>
+        <select name="state" , id="state_dropdown" onchange="onChangeFun()"> <!--Supplement an id here instead of using 'text'-->
+          <script>
+          $.each(state_values, function(val, text) {
+              $('#state_dropdown').append( new Option(text,val) );
+          });
+          $("#state_dropdown").val(5) // Sets default to the Great State of
+                                     // California
+          </script>
+      </select>
+        <h3>Agency:</h3>
+        <select name="agency" id="agency_dropdown" onchange="updateGraph()"> <!--Supplement an id here instead of using 'text'-->
+          <script>
+            updateAgencies();
+          </script>
+      </select>
+        <h3>Crime:</h3>
+        <select name="crime" id="crime_dropdown" onchange="updateGraph()"> <!--Supplement an id here instead of using 'text'-->
+          <script>
+          $.each(crime_values, function(val, text) {
+            $('#crime_dropdown').append(new Option(text, val));
+          });
+          </script>
+      </select>
+        <br>
+        <br>
+        <input type="checkbox" id="rate" name="rate" value="rate" onchange="updateGraph()">
+        <label for="rate">Rate per 100,000 Population</label>
+        <br>
+        <h3>Type of Crime:</h3>
+        <input type="checkbox" id="actual" name="actual" checked onchange="updateGraph()">
+        <label for="actual">Actual</label>
+        <br>
+        <input type="checkbox" id="clearance" name="clearance" onchange="updateGraph()">
+        <label for="clearance">Clearance</label>
+        <br>
+        <input type="checkbox" id="clearance_under18" name="clearance_under18" onchange="updateGraph()">
+        <label for="clearance_under18">Clearance under age 18</label>
+        <br>
+        <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraph()">
+        <label for="unfounded">Unfounded</label>
+        <br>
+        <hr>
+        <br>
+
+        <p>Please note that data are only available for agencies that report all 12 months of the year.
+
+      </div>
+
+
+      <div class="column main" id="main">
+        <script type="text/javascript">
+          var ylab = '# of Crimes';
+          var visibilityVector = [false, false, false, false];
+          var title = "";
+
+
+          graphData = readCSV("data/ucr_test.csv");
+          data = graphData.split("\n");
+          headers = data[0];
+          finalData = subsetDataRows(data);
+          colsToKeep = getCrimeColumns(headers);
+          finalData = subsetColumns(finalData, colsToKeep);
+
+          graph = makeGraph(finalData, ylab, visibilityVector, title);
+
+          $(document).ready(function() {
+            graph.resize(800, 500)
+            updateGraph();
+          });
+        </script>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="About" class="tabcontent">
+
+  </div>
+
+  <script>
+    document.getElementsByClassName('tablinks')[0].click()
+  </script>
+
+</body>
+
+</html>
