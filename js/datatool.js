@@ -193,7 +193,7 @@ function makeTable(data) {
       data: temp[i],
       title: temp[i]
     });
-  }
+  } 
   var table = $('#table').DataTable({
     dom: 'lBfrtip',
     data: data,
