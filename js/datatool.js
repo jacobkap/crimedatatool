@@ -88,7 +88,6 @@ function updateGraph() {
 function makeGraph(data, ylab, visibilityVector, title) {
   var graph = new Dygraph(document.getElementById("graph"),
     data, {
-      animatedZooms: true,
       title: title,
       legend: 'always',
       ylabel: ylab,
@@ -118,7 +117,7 @@ function readCSV(csv) {
   $.ajax({
     url: scriptUrl,
     type: 'get',
-    dataType: 'html',
+    dataType: 'text',
     async: false,
     success: function(data) {
       result = data;
