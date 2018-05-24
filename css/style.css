@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: "Comic Sans MS", cursive, sans-serif
+    font-family: arial, serif, sans-serif
 }
 
 body {
@@ -94,7 +94,7 @@ body {
 
 .dygraph-ylabel {
    font-size: 18px; text-shadow: gray -2px 2px 2px;
-   transform: rotate(360deg);
+   transform: rotate(270deg);
  }
 
 .chart {
@@ -102,6 +102,6 @@ body {
 }
 
 .dygraph-legend {
-  text-align: center;
+  text-align: right;
   background-color: transparent !important;
 }
