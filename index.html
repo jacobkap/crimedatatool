@@ -7,13 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore.js"></script>
-  <script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
-  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.css"/>
+
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.css"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.css"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.js"></script>
 
+  <script src="js/test.js"></script>
   <script src="js/datatool.js"></script>
+  <script src="js/data.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 
 
@@ -87,6 +90,8 @@
         <label for="unfounded">Unfounded</label>
         <br>
         <hr>
+
+
         <br>
 
         <p>Please note that data are only available for agencies that report all 12 months of the year.
@@ -95,6 +100,8 @@
 
 
       <div class="column main" id="main">
+        <div id="graph"></div>
+        <div><table id="table" class="display" style="width:100%"></div>
         <script type="text/javascript">
           var ylab = '# of Crimes';
           var visibilityVector = [false, false, false, false];
@@ -104,20 +111,27 @@
           graphData = readCSV("data/ucr_test.csv");
           data = graphData.split("\n");
           headers = data[0];
-          finalData = subsetDataRows(data);
+          allColsData = subsetDataRows(data);
           colsToKeep = getCrimeColumns(headers);
-          finalData = subsetColumns(finalData, colsToKeep);
+          finalData = subsetColumns(allColsData, colsToKeep);
 
-          graph = makeGraph(finalData, ylab, visibilityVector, title);
+        graph = makeGraph(finalData, ylab, visibilityVector, title);
 
           $(document).ready(function() {
             graph.resize(800, 500)
-            updateGraph();
+          updateGraph();
           });
+        makeTable()
         </script>
-      </div>
 
+
+
+
+
+
+</div>
     </div>
+
   </div>
 
   <div id="About" class="tabcontent">

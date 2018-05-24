@@ -15,5 +15,12 @@ write(state_agencies, "state_agencies.json")
 
 ucr_test <-
   ucr %>%
-  filter(year > 1990)
+  filter(year > 1990) %>%
+  select(agency,
+         year,
+         state,
+         population,
+         state,
+         ori,
+         everything())
 write_csv(ucr_test, path = "ucr_test.csv")

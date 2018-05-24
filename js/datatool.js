@@ -22,7 +22,7 @@ function getORI() {
 }
 
 function getStateAgencies() {
-  var state_agencies =  $.getJSON({
+  var state_agencies = $.getJSON({
     url: "state_agencies.json",
     type: 'get',
     dataType: 'json',
@@ -32,28 +32,28 @@ function getStateAgencies() {
     }
   });
   state_agencies = state_agencies.responseJSON;
-  return(state_agencies);
+  return (state_agencies);
 }
 
 function getAgenciesInState() {
   state = state_values[$("#state_dropdown").val()];
   agencies = state_agencies.filter(s => s.state === state);
   agencies = agencies.map(function(item) {
-     return item["agency"];
-   });
-   agencies.sort(function(a, b){
-     if(a < b) return -1;
-     if(a > b) return 1;
-     return 0;
- });
-return agencies;
+    return item["agency"];
+  });
+  agencies.sort(function(a, b) {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
+  return agencies;
 }
 
 function subsetDataRows(data) {
-          ori = getORI();
-          data = data.filter(s => s.includes(ori));
-          data = data_object_fun(data, headers);
-          return data;
+  ori = getORI();
+  data = data.filter(s => s.includes(ori));
+  data = data_object_fun(data, headers);
+  return data;
 }
 
 
@@ -84,28 +84,29 @@ function updateGraph() {
 }
 
 function makeGraph(data, ylab, visibilityVector, title) {
-  var graph = new Dygraph(document.getElementById("main"),
-  data, {
-animatedZooms: true,
-title: title,
-legend: 'always',
-ylabel: ylab,
-xlabel: ' Year',
-visibility: visibilityVector
-});
-return(graph);
+  var graph = new Dygraph(document.getElementById("graph"),
+    data, {
+      animatedZooms: true,
+      title: title,
+      legend: 'always',
+      ylabel: ylab,
+      xlabel: ' Year',
+      visibility: visibilityVector
+    });
+  return (graph);
 }
 
 function onChangeFun() {
-    updateAgencies();
-    updateGraph();
+  updateAgencies();
+  updateGraph();
+  makeTable();
 }
 
 function updateAgencies() {
   agencies = getAgenciesInState();
   $('#agency_dropdown').empty();
   $.each(agencies, function(val, text) {
-      $('#agency_dropdown').append( new Option(text,val) );
+    $('#agency_dropdown').append(new Option(text, val));
   });
 }
 
@@ -140,14 +141,14 @@ function getCrimeColumns(arr) {
 function subsetColumns(data, colsToKeep) {
 
   data = _.map(data, function(currentObject) {
-          return _.pick(currentObject, colsToKeep);
-            });
+    return _.pick(currentObject, colsToKeep);
+  });
   data = data.map(objToString);
   data = data.join("\n");
 
   finalData = colsToKeep.toString() + "\n";
   finalData += data;
-  return(finalData);
+  return (finalData);
 }
 
 function data_object_fun(arr, headers) {
@@ -179,90 +180,37 @@ function objToString(obj) {
 }
 
 
+function makeTable() {
+  file_name = agencies[$("#agency_dropdown").val()] + "_" +
+    state_values[$("#state_dropdown").val()];
+  temp = headers.split(",");
+  z = [];
 
-var state_values = [
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "District Of Columbia",
-  "Florida",
-  "Georgia",
-  "Guam",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming"
-];
+  for (var i = 0; i < temp.length; i++) {
+    name = temp[i];
+    z.push({
+      data: temp[i],
+      title: temp[i]
+    });
+  }
+  $('#table').DataTable({
+    data: allColsData,
+    columns: z,
+    "scrollX": true,
+    "stripe": true,
+    "hover": true,
+    responsive: true,
+    fixedColumns: {
+      leftColumns: 2
+    },
+    dom: 'Bflript',
+    buttons: [{
+        extend: 'csvHtml5',
+        title: file_name
+      }
+    ]
 
-var crime_values = {
-  "murder": "Murder",
-  "manslaughter": "Manslaughter",
-  "rape_total": "Rape Total",
-  "force_rape": "Forcible Rape",
-  "att_rape": "Attempted Rape",
-  "robbery_total": "Robbery Total",
-  "gun_robbery": "Robbery -  Gun",
-  "knife_robbery": "Robbery - Knife",
-  "oth_weap_robbery": "Robbery - Other Weapon",
-  "strong_arm_robbery": "Robbery - Strong Arm",
-  "assault_total": "Assault Total",
-  "agg_assault": "Aggravated Assault",
-  "gun_assault": "Assault -  Gun",
-  "knife_assault": "Assault - Knife",
-  "oth_weap_assault": "Assault - Other Weapon",
-  "hand_feet_assault": "Assault - Strong Arm",
-  "simple_assault": "Simple Assault",
-  "burglary_total": "Burglary Total",
-  "burg_force_entry": "Burglary - Forcible Entry",
-  "burg_no_force_entry": "Burglary - Nonforcible Entry",
-  "att_burglary": "Attempted",
-  "larceny_total": "Larceny Total",
-  "mtr_vhc_theft_total": "Motor Vehicle Theft",
-  "auto_theft": "Auto Theft",
-  "truck_bus_theft": "Truck/Bus Theft",
-  "oth_vhc_theft": "Other Vehicle Theft",
-  "officers_kill_by_acc": "Officers Killed by Accident",
-  "officers_kill_by_fel": "Officers Killed by Felony",
-  "officers_assaulted": "Officers Assaulted"
-};
+
+  });
+
+}
