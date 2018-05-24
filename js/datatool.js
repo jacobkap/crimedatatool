@@ -39,7 +39,7 @@ function getAgenciesInState() {
   state = state_values[$("#state_dropdown").val()];
   agencies = state_agencies.filter(s => s.state === state);
   agencies = agencies.map(function(item) {
-    return item["agency"];
+    return item.agency;
   });
   agencies.sort(function(a, b) {
     if (a < b) return -1;
@@ -60,6 +60,8 @@ function subsetDataRows(data) {
 function updateGraph() {
 
   finalData = subsetDataRows(data);
+  table.destroy();
+  table = makeTable(finalData);
 
   colsToKeep = getCrimeColumns(headers);
   finalData = subsetColumns(finalData, colsToKeep);
@@ -99,7 +101,6 @@ function makeGraph(data, ylab, visibilityVector, title) {
 function onChangeFun() {
   updateAgencies();
   updateGraph();
-  makeTable();
 }
 
 function updateAgencies() {
@@ -180,7 +181,7 @@ function objToString(obj) {
 }
 
 
-function makeTable() {
+function makeTable(data) {
   file_name = agencies[$("#agency_dropdown").val()] + "_" +
     state_values[$("#state_dropdown").val()];
   temp = headers.split(",");
@@ -193,24 +194,22 @@ function makeTable() {
       title: temp[i]
     });
   }
-  $('#table').DataTable({
-    data: allColsData,
+  var table = $('#table').DataTable({
+    dom: 'lBfrtip',
+    data: data,
     columns: z,
     "scrollX": true,
     "stripe": true,
     "hover": true,
-    responsive: true,
     fixedColumns: {
       leftColumns: 2
     },
-    dom: 'Bflript',
     buttons: [{
         extend: 'csvHtml5',
         title: file_name
       }
     ]
 
-
   });
-
+return table;
 }
