@@ -94,8 +94,7 @@ body {
 
 .dygraph-ylabel {
    font-size: 18px; text-shadow: gray -2px 2px 2px;
-   transform: rotate(270deg);
- }
+}
 
 .chart {
   border: 1px dashed black; margin: 5px 5px 5px 50px; padding: 2px;

@@ -93,7 +93,8 @@ function makeGraph(data, ylab, visibilityVector, title) {
       legend: 'always',
       ylabel: ylab,
       xlabel: ' Year',
-      visibility: visibilityVector
+      visibility: visibilityVector,
+      showRangeSelector: true
     });
   return (graph);
 }
@@ -191,7 +192,7 @@ function makeTable(data) {
     name = temp[i];
     z.push({
       data: temp[i],
-      title: temp[i] 
+      title: temp[i]
     });
   }
   var table = $('#table').DataTable({
