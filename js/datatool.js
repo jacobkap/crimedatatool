@@ -192,8 +192,8 @@ function makeTable(data) {
     z.push({
       data: temp[i],
       title: temp[i]
-    });
-  } 
+    }); 
+  }
   var table = $('#table').DataTable({
     dom: 'lBfrtip',
     data: data,
