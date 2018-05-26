@@ -67,6 +67,8 @@ function updateAgencies() {
   $.each(agencies, function(val, text) {
     $('#agency_dropdown').append(new Option(text, val));
   });
+    $('#agency_dropdown').val(0);
+  $('.simple-select').trigger('chosen:updated');
 }
 
 

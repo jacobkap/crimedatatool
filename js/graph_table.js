@@ -7,6 +7,10 @@ function updateGraph(agencyData) {
   new_title += state_values[$("#state_dropdown").val()] + ': ';
   new_title += crime_values[$("#crime_dropdown").val()];
 
+  if ($("#rate").is(':checked')) {
+    new_title += " Rate";
+  }
+
 
   finalData = finalData.replace(/clr_18.*,/, "Clearance Under Age 18,");
   finalData = finalData.replace(/act.*,clr/, "Actual,clr");
@@ -29,9 +33,11 @@ function updateGraph(agencyData) {
 }
 
 function updateTable(data) {
-  table.clear().draw();
+  table.clear();
   table.rows.add(data); // Add new data
-  table.columns.adjust().draw();
+  table.column( '1' ).order( 'desc' );
+  table.draw();
+
 }
 
 
@@ -70,6 +76,8 @@ function makeTable(data) {
     "scrollX": true,
     "stripe": true,
     "hover": true,
+    "ordering": true,
+    "order": [1, "desc"],
     fixedColumns: {
       leftColumns: 2
     }

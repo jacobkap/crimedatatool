@@ -31,7 +31,7 @@
   <div class="row">
     <div class="column sidebar" style="background-color:#aaa;">
       <h3>State:</h3>
-      <select class="simple-select" id="state_dropdown" onchange="stateChangeFun()"> <!--Supplement an id here instead of using 'text'-->
+      <select class="simple-select" id="state_dropdown" onchange="stateChangeFun()">
           <script>
           $.each(state_values, function(val, text) {
               $('#state_dropdown').append( new Option(text,val) );
@@ -41,20 +41,24 @@
           </script>
       </select>
       <h3>Agency:</h3>
-      <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun()"> <!--Supplement an id here instead of using 'text'-->
+      <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun()">
           <script>
             updateAgencies();
           </script>
       </select>
       <h3>Crime:</h3>
-      <select class="simple-select" id="crime_dropdown" onchange="crimeChangeFun()"> <!--Supplement an id here instead of using 'text'-->
+      <select class="simple-select" id="crime_dropdown" onchange="crimeChangeFun()">
           <script>
           $.each(crime_values, function(val, text) {
             $('#crime_dropdown').append(new Option(text, val));
           });
+          console.log($("#crime_dropdown").val())
+          $("#crime_dropdown").val(0)
+          $('.simple-select').chosen();
 
-$('.simple-select').chosen({ width: "210px" });
           </script>
+
+
       </select>
       <br>
       <br>
@@ -72,7 +76,7 @@ $('.simple-select').chosen({ width: "210px" });
       <label for="clearance_under18">Clearance under age 18</label>
       <br>
       <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraph(agencyData)">
-      <label for="unfounded">Unfounded</label>
+      <label for="unfounded">Unfounded</label> 
       <br>
       <br>
       <button type="button" onclick="exportToCsv()">Download Data as CSV</button>
@@ -92,6 +96,7 @@ $('.simple-select').chosen({ width: "210px" });
         <table id="table" class="display" style="width:100%">
       </div>
       <script type="text/javascript">
+      $('.simple-select').trigger('chosen:updated');
         var ylab = '# of Crimes';
         var visibilityVector = [false, false, false, false];
         var title = "";
