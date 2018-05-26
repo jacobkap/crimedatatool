@@ -11,11 +11,15 @@
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.css">
-  <script src="js/test.js"></script>
-  <script src="js/datatool.js"></script>
-  <script src="js/data.js"></script>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.css" />
+
+  <<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.css">
+    <script src="js/test.js"></script>
+    <script src="js/graph_table.js"></script>
+    <script src="js/datatool.js"></script>
+    <script src="js/data.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -27,7 +31,7 @@
   <div class="row">
     <div class="column sidebar" style="background-color:#aaa;">
       <h3>State:</h3>
-      <select name="state" , id="state_dropdown" onchange="stateChangeFun()"> <!--Supplement an id here instead of using 'text'-->
+      <select class="simple-select" id="state_dropdown" onchange="stateChangeFun()"> <!--Supplement an id here instead of using 'text'-->
           <script>
           $.each(state_values, function(val, text) {
               $('#state_dropdown').append( new Option(text,val) );
@@ -37,37 +41,41 @@
           </script>
       </select>
       <h3>Agency:</h3>
-      <select name="agency" id="agency_dropdown" onchange="agencyChangeFun()"> <!--Supplement an id here instead of using 'text'-->
+      <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun()"> <!--Supplement an id here instead of using 'text'-->
           <script>
             updateAgencies();
           </script>
       </select>
       <h3>Crime:</h3>
-      <select name="crime" id="crime_dropdown" onchange="crimeChangeFun()"> <!--Supplement an id here instead of using 'text'-->
+      <select class="simple-select" id="crime_dropdown" onchange="crimeChangeFun()"> <!--Supplement an id here instead of using 'text'-->
           <script>
           $.each(crime_values, function(val, text) {
             $('#crime_dropdown').append(new Option(text, val));
           });
+
+$('.simple-select').chosen({ width: "210px" });
           </script>
       </select>
       <br>
       <br>
-      <input type="checkbox" id="rate" name="rate" value="rate" onchange="updateGraph()">
+      <input type="checkbox" id="rate" name="rate" value="rate" onchange="updateGraph(agencyData)">
       <label for="rate">Rate per 100,000 Population</label>
       <br>
       <h3>Type of Crime:</h3>
-      <input type="checkbox" id="actual" name="actual" checked onchange="updateGraph()">
+      <input type="checkbox" id="actual" name="actual" checked onchange="updateGraph(agencyData)">
       <label for="actual">Actual</label>
       <br>
-      <input type="checkbox" id="clearance" name="clearance" onchange="updateGraph()">
+      <input type="checkbox" id="clearance" name="clearance" onchange="updateGraph(agencyData)">
       <label for="clearance">Clearance</label>
       <br>
-      <input type="checkbox" id="clearance_under18" name="clearance_under18" onchange="updateGraph()">
+      <input type="checkbox" id="clearance_under18" name="clearance_under18" onchange="updateGraph(agencyData)">
       <label for="clearance_under18">Clearance under age 18</label>
       <br>
-      <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraph()">
+      <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraph(agencyData)">
       <label for="unfounded">Unfounded</label>
       <br>
+      <br>
+      <button type="button" onclick="exportToCsv()">Download Data as CSV</button>
       <hr>
 
 
@@ -88,13 +96,9 @@
         var visibilityVector = [false, false, false, false];
         var title = "";
 
-        csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/offenses/offenses_" +
-                  state_values[$("#state_dropdown").val()] + ".csv";
-        console.log(csv_url);  
-        graphData = readCSV(csv_url);
-        data = graphData.split("\n");
+        data = getStateData();
         headers = data[0];
-        allColsData = subsetDataRows(data);
+        allColsData = getAgencyData(data);
         colsToKeep = getCrimeColumns(headers);
         finalData = subsetColumns(allColsData, colsToKeep);
 
@@ -109,5 +113,7 @@
     </div>
   </div>
 </body>
+
+
 
 </html>

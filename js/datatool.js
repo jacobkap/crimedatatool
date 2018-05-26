@@ -6,6 +6,17 @@ function getORI() {
   return ori[0].ori;
 }
 
+function objToString(obj) {
+  var str = '';
+  for (var p in obj) {
+    if (obj.hasOwnProperty(p)) {
+      str += obj[p] + ',';
+    }
+  }
+  str = str.slice(0, -2);
+  return str;
+}
+
 function getStateAgencies() {
   var state_agencies = $.getJSON({
     url: "state_agencies.json",
@@ -18,106 +29,6 @@ function getStateAgencies() {
   });
   state_agencies = state_agencies.responseJSON;
   return (state_agencies);
-}
-
-function getAgenciesInState() {
-  state = state_values[$("#state_dropdown").val()];
-  agencies = state_agencies.filter(s => s.state === state);
-  agencies = agencies.map(function(item) {
-    return item.agency;
-  });
-  agencies.sort(function(a, b) {
-    if (a < b) return -1;
-    if (a > b) return 1;
-    return 0;
-  });
-  return agencies;
-}
-
-function subsetDataRows(data) {
-  ori = getORI();
-  data = data.filter(s => s.includes(ori));
-  data = data_object_fun(data, headers);
-  return data;
-}
-
-
-function updateGraph(finalData) {
-
-
-  colsToKeep = getCrimeColumns(headers);
-  finalData = subsetColumns(finalData, colsToKeep);
-  new_title = agencies[$("#agency_dropdown").val()] + ', ';
-  new_title += state_values[$("#state_dropdown").val()] + ': ';
-  new_title += crime_values[$("#crime_dropdown").val()];
-
-
-
-  visibilityVector = [];
-  visibilityVector.push($("#actual").is(':checked'));
-  visibilityVector.push($("#clearance").is(':checked'));
-  visibilityVector.push($("#clearance_under18").is(':checked'));
-  visibilityVector.push($("#unfounded").is(':checked'));
-
-  var ylab = '# of Crimes';
-  if ($("#rate").is(':checked')) {
-    ylab = 'Rate per 100,000 People';
-  }
-
-  makeGraph(finalData, ylab, visibilityVector, new_title);
-}
-
-function makeGraph(data, ylab, visibilityVector, title) {
-  var graph = new Dygraph(document.getElementById("graph"),
-    data, {
-      title: title,
-      legend: 'always',
-      ylabel: ylab,
-      xlabel: ' Year',
-      visibility: visibilityVector,
-      showRangeSelector: true
-    });
-  return (graph);
-}
-
-function crimeChangeFun() {
-  data = updateData();
-  finalData = subsetDataRows(data);
-  updateGraph(finalData);
-}
-
-function stateChangeFun() {
-  updateAgencies();
-  data = updateData();
-  finalData = subsetDataRows(data);
-  agencyChangeFun(finalData);
-}
-
-function updateData() {
-  csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/offenses/offenses_" +
-            state_values[$("#state_dropdown").val()] + ".csv";
-  console.log(csv_url);
-  graphData = readCSV(csv_url);
-  data = graphData.split("\n");
-  return data;
-}
-
-function agencyChangeFun() {
-  finalData = subsetDataRows(data);
-
-  table.clear().draw();
-  table.rows.add(finalData); // Add new data
-  table.columns.adjust().draw();
-
-  updateGraph(finalData);
-}
-
-function updateAgencies() {
-  agencies = getAgenciesInState();
-  $('#agency_dropdown').empty();
-  $.each(agencies, function(val, text) {
-    $('#agency_dropdown').append(new Option(text, val));
-  });
 }
 
 function readCSV(csv) {
@@ -135,6 +46,68 @@ function readCSV(csv) {
   return result;
 }
 
+function getAgenciesInState() {
+  state = state_values[$("#state_dropdown").val()];
+  agencies = state_agencies.filter(s => s.state === state);
+  agencies = agencies.map(function(item) {
+    return item.agency;
+  });
+  agencies.sort(function(a, b) {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
+  return agencies;
+}
+
+
+function updateAgencies() {
+  agencies = getAgenciesInState();
+  $('#agency_dropdown').empty();
+  $.each(agencies, function(val, text) {
+    $('#agency_dropdown').append(new Option(text, val));
+  });
+}
+
+
+
+
+function crimeChangeFun() {
+  agencyData = getAgencyData(stateData);
+  updateGraph(agencyData);
+}
+
+function stateChangeFun() {
+  stateData = getStateData();
+  updateAgencies();
+  agencyChangeFun();
+}
+
+function agencyChangeFun() {
+  agencyData = getAgencyData(stateData);
+  updateTable(agencyData);
+  updateGraph(agencyData);
+}
+
+
+
+function getStateData() {
+  csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/offenses/offenses_" +
+    state_values[$("#state_dropdown").val()] + ".csv";
+  console.log(csv_url);
+  stateData = readCSV(csv_url);
+  stateData = stateData.split("\n");
+  return stateData;
+}
+
+function getAgencyData(stateData) {
+  ori = getORI();
+  agencyData = stateData.filter(s => s.includes(ori));
+  agencyData = data_object_fun(agencyData, headers);
+  return agencyData;
+}
+
+
 
 function getCrimeColumns(arr) {
   crime = $('#crime_dropdown').val();
@@ -149,7 +122,6 @@ function getCrimeColumns(arr) {
 }
 
 function subsetColumns(data, colsToKeep) {
-
   data = _.map(data, function(currentObject) {
     return _.pick(currentObject, colsToKeep);
   });
@@ -178,41 +150,29 @@ function data_object_fun(arr, headers) {
 }
 
 
-function objToString(obj) {
-  var str = '';
-  for (var p in obj) {
-    if (obj.hasOwnProperty(p)) {
-      str += obj[p] + ',';
+function exportToCsv() {
+
+        data = allColsData.map(objToString);
+        data = data.join("\n");
+        data = headers +'\n' + data;
+        filename = "ucr_offenses_" +
+        agencies[$("#agency_dropdown").val()] + "_" +
+        state_values[$("#state_dropdown").val()] + ".csv";
+
+        var blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
     }
-  }
-  str = str.slice(0, -2);
-  return str;
-}
-
-
-function makeTable(data) {
-  file_name = agencies[$("#agency_dropdown").val()] + "_" +
-    state_values[$("#state_dropdown").val()];
-  temp = headers.split(",");
-  z = [];
-
-  for (var i = 0; i < temp.length; i++) {
-    name = temp[i];
-    z.push({
-      data: temp[i],
-      title: temp[i]
-    });
-  }
-  var table = $('#table').DataTable({
-    data: data,
-    columns: z,
-    "scrollX": true,
-    "stripe": true,
-    "hover": true,
-    fixedColumns: {
-      leftColumns: 2
-    }
-
-  });
-  return table;
-}
