@@ -14,8 +14,8 @@ function updateGraph(agencyData) {
 
   finalData = finalData.replace(/clr_18.*,/, "Clearance Under Age 18,");
   finalData = finalData.replace(/act.*,clr/, "Actual,clr");
-  finalData = finalData.replace(/clr_.*,/, "Clearance,");
-  finalData = finalData.replace(/unfound.*\n/, "Unfounded,\n");
+  finalData = finalData.replace(/clr_.*,Clear/, "Clearance,Clear");
+  finalData = finalData.replace(/unfound.*\n/, "Unfounded\n");
 
 
   visibilityVector = [];

@@ -7,7 +7,7 @@ var state_values = [
   "Colorado",
   "Connecticut",
   "Delaware",
-  "District Of Columbia",
+  "District of Columbia",
   "Florida",
   "Georgia",
   "Hawaii",

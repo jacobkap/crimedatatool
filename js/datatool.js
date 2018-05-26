@@ -13,8 +13,21 @@ function objToString(obj) {
       str += obj[p] + ',';
     }
   }
-  str = str.slice(0, -2);
+  console.log(str)
+  str = str.slice(0, -1); // Removes comma at end.
   return str;
+}
+
+function subsetColumns(data, colsToKeep) {
+  data = _.map(data, function(currentObject) {
+    return _.pick(currentObject, colsToKeep);
+  });
+  data = data.map(objToString);
+  data = data.join("\n");
+
+  data = colsToKeep.toString() + "\n" + data;
+
+  return (data);
 }
 
 function getStateAgencies() {
@@ -123,17 +136,7 @@ function getCrimeColumns(arr) {
   return (columnNames);
 }
 
-function subsetColumns(data, colsToKeep) {
-  data = _.map(data, function(currentObject) {
-    return _.pick(currentObject, colsToKeep);
-  });
-  data = data.map(objToString);
-  data = data.join("\n");
 
-  finalData = colsToKeep.toString() + "\n";
-  finalData += data;
-  return (finalData);
-}
 
 function data_object_fun(arr, headers) {
   headers = headers.split(",");
