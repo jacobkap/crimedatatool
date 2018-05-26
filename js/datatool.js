@@ -1,23 +1,8 @@
-function opentab(evt, tabName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
 function getORI() {
   state = state_values[$("#state_dropdown").val()];
   agency = agencies[$("#agency_dropdown").val()];
   ori = state_agencies.filter(x => x.state === state);
   ori = ori.filter(x => x.agency === agency);
-
   return ori[0].ori;
 }
 
@@ -57,11 +42,8 @@ function subsetDataRows(data) {
 }
 
 
-function updateGraph() {
+function updateGraph(finalData) {
 
-  finalData = subsetDataRows(data);
-  table.destroy();
-  table = makeTable(finalData);
 
   colsToKeep = getCrimeColumns(headers);
   finalData = subsetColumns(finalData, colsToKeep);
@@ -98,9 +80,25 @@ function makeGraph(data, ylab, visibilityVector, title) {
   return (graph);
 }
 
-function onChangeFun() {
+function crimeChangeFun() {
+  finalData = subsetDataRows(data);
+  updateGraph(finalData);
+}
+
+function stateChangeFun() {
   updateAgencies();
-  updateGraph();
+  finalData = subsetDataRows(data);
+  agencyChangeFun(finalData);
+}
+
+function agencyChangeFun() {
+  finalData = subsetDataRows(data);
+
+  table.clear().draw();
+  table.rows.add(finalData); // Add new data
+  table.columns.adjust().draw();
+
+  updateGraph(finalData);
 }
 
 function updateAgencies() {
@@ -195,7 +193,6 @@ function makeTable(data) {
     });
   }
   var table = $('#table').DataTable({
-    dom: 'lBfrtip',
     data: data,
     columns: z,
     "scrollX": true,
@@ -203,13 +200,8 @@ function makeTable(data) {
     "hover": true,
     fixedColumns: {
       leftColumns: 2
-    },
-    buttons: [{
-        extend: 'csvHtml5',
-        title: file_name
-      }
-    ]
+    }
 
   });
-return table;
+  return table;
 }
