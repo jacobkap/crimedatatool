@@ -81,14 +81,25 @@ function makeGraph(data, ylab, visibilityVector, title) {
 }
 
 function crimeChangeFun() {
+  data = updateData();
   finalData = subsetDataRows(data);
   updateGraph(finalData);
 }
 
 function stateChangeFun() {
   updateAgencies();
+  data = updateData();
   finalData = subsetDataRows(data);
   agencyChangeFun(finalData);
+}
+
+function updateData() {
+  csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/offenses/offenses_" +
+            state_values[$("#state_dropdown").val()] + ".csv";
+  console.log(csv_url);
+  graphData = readCSV(csv_url);
+  data = graphData.split("\n");
+  return data;
 }
 
 function agencyChangeFun() {

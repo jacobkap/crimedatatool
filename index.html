@@ -88,8 +88,10 @@
         var visibilityVector = [false, false, false, false];
         var title = "";
 
-
-        graphData = readCSV("https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/ucr_test.csv");
+        csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/offenses/offenses_" +
+                  state_values[$("#state_dropdown").val()] + ".csv";
+        console.log(csv_url);  
+        graphData = readCSV(csv_url);
         data = graphData.split("\n");
         headers = data[0];
         allColsData = subsetDataRows(data);
