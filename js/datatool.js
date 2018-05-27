@@ -13,7 +13,6 @@ function objToString(obj) {
       str += obj[p] + ',';
     }
   }
-  console.log(str)
   str = str.slice(0, -1); // Removes comma at end.
   return str;
 }
@@ -80,15 +79,19 @@ function updateAgencies() {
   $.each(agencies, function(val, text) {
     $('#agency_dropdown').append(new Option(text, val));
   });
-    $('#agency_dropdown').val(0);
+  $('#agency_dropdown').val(0);
   $('.simple-select').trigger('chosen:updated');
 }
 
+function rateChangeFun() {
+  agencyData = getAgencyData(stateData);
 
-
+  updateGraph(agencyData);
+  table.destroy();
+  table = makeTable(agencyData);
+}
 
 function crimeChangeFun() {
-  agencyData = getAgencyData(stateData);
   updateGraph(agencyData);
 }
 
@@ -100,8 +103,8 @@ function stateChangeFun() {
 
 function agencyChangeFun() {
   agencyData = getAgencyData(stateData);
-  updateTable(agencyData);
   updateGraph(agencyData);
+  updateTable(agencyData);
 }
 
 
@@ -109,7 +112,6 @@ function agencyChangeFun() {
 function getStateData() {
   csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/offenses/offenses_" +
     state_values[$("#state_dropdown").val()] + ".csv";
-  console.log(csv_url);
   stateData = readCSV(csv_url);
   stateData = stateData.split("\n");
   return stateData;
@@ -119,6 +121,12 @@ function getAgencyData(stateData) {
   ori = getORI();
   agencyData = stateData.filter(s => s.includes(ori));
   agencyData = data_object_fun(agencyData, headers);
+
+  if ($("#rate").is(':checked')) {
+    agencyData = _.map(agencyData, function(currentObject) {
+      return countToRate(currentObject);
+    });
+  }
   return agencyData;
 }
 
@@ -142,7 +150,6 @@ function data_object_fun(arr, headers) {
   headers = headers.split(",");
   var jsonObj = [];
   for (var i = 0; i < arr.length; i++) {
-    //  console.log(i);
     temp = arr[i];
     var data = temp.split(',');
     var obj = {};
@@ -155,29 +162,59 @@ function data_object_fun(arr, headers) {
 }
 
 
+function countToRate(data) {
+  data_keys = _.keys(data);
+  for (var i = 0; i < data_keys.length; i++) {
+    temp_match = data_keys[i].replace(/act_|clr_18_|clr_|unfound_/, "");
+    if (temp_match != data_keys[i] &
+      temp_match != "officers_assaulted" &
+      temp_match != "officers_killed_by_felony") {
+      rate_val = data[data_keys[i]] / data.population * 100000;
+      rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
+      data[data_keys[i]] = rate_val;
+      new_key = data_keys[i] + "_rate";
+      Object.defineProperty(data, new_key,
+        Object.getOwnPropertyDescriptor(data, data_keys[i]));
+      delete data[data_keys[i]];
+    }
+  }
+  return data;
+}
+
 function exportToCsv() {
 
-        data = allColsData.map(objToString);
-        data = data.join("\n");
-        data = headers +'\n' + data;
-        filename = "ucr_offenses_" +
-        agencies[$("#agency_dropdown").val()] + "_" +
-        state_values[$("#state_dropdown").val()] + ".csv";
+  data = agencyData.map(objToString);
+  data = data.join("\n");
+  data = objToString(_.keys(agencyData[0])) + '\n' + data;
+  type = "ucr_offenses_";
 
-        var blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
-        if (navigator.msSaveBlob) { // IE 10+
-            navigator.msSaveBlob(blob, filename);
-        } else {
-            var link = document.createElement("a");
-            if (link.download !== undefined) { // feature detection
-                // Browsers that support HTML5 download attribute
-                var url = URL.createObjectURL(blob);
-                link.setAttribute("href", url);
-                link.setAttribute("download", filename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
+  if ($("#rate").is(':checked')) {
+    type += "rate_";
+  } else {
+    type += "count_";
+  }
+
+  filename = type +
+    agencies[$("#agency_dropdown").val()] + "_" +
+    state_values[$("#state_dropdown").val()] + ".csv";
+
+
+  var blob = new Blob([data], {
+    type: 'text/csv;charset=utf-8;'
+  });
+  if (navigator.msSaveBlob) { // IE 10+
+    navigator.msSaveBlob(blob, filename);
+  } else {
+    var link = document.createElement("a");
+    if (link.download !== undefined) { // feature detection
+      // Browsers that support HTML5 download attribute
+      var url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
+  }
+}

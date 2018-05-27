@@ -2,6 +2,12 @@ function updateGraph(agencyData) {
 
 
   colsToKeep = getCrimeColumns(headers);
+  if ($("#rate").is(':checked')) {
+    colsToKeep = _.map(colsToKeep, function(x) {
+        return x += "_rate";
+    });
+    colsToKeep[0] = "year";
+  }
   finalData = subsetColumns(agencyData, colsToKeep);
   new_title = agencies[$("#agency_dropdown").val()] + ', ';
   new_title += state_values[$("#state_dropdown").val()] + ': ';
@@ -35,7 +41,7 @@ function updateGraph(agencyData) {
 function updateTable(data) {
   table.clear();
   table.rows.add(data); // Add new data
-  table.column( '1' ).order( 'desc' );
+  table.column('1').order('desc');
   table.draw();
 
 }
@@ -57,6 +63,36 @@ function makeGraph(data, ylab, visibilityVector, title) {
   return (graph);
 }
 
+function fixTableName(name) {
+  crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
+  if (crime_match == name) {
+    name = name.replace(/_/g, " ");
+    name = name.replace(/^\w/, c => c.toUpperCase());
+    return name;
+  }
+  crime_match_regex = new RegExp(crime_match);
+  name = name.replace(/act_/, "Actual ");
+  name = name.replace(/clr_18_/, "Clearance Under Age 18 ");
+  name = name.replace(/clr_/, "Clearance ");
+  name = name.replace(/unfound_/, "Unfounded ");
+  name = name.replace(crime_match_regex, crime_values[crime_match]);
+
+  if ($("#rate").is(':checked')) {
+    name += " Rate";
+  }
+  return name;
+}
+
+function fixTableDataName(name) {
+  crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
+  if (crime_match != name) {
+    if ($("#rate").is(':checked')) {
+      name += "_rate";
+    }
+  }
+  return name;
+}
+
 function makeTable(data) {
   file_name = agencies[$("#agency_dropdown").val()] + "_" +
     state_values[$("#state_dropdown").val()];
@@ -64,10 +100,12 @@ function makeTable(data) {
   z = [];
 
   for (var i = 0; i < temp.length; i++) {
-    name = temp[i];
+    label_name = fixTableName(temp[i]);
+    data_name = fixTableDataName(temp[i]);
     z.push({
-      data: temp[i],
-      title: temp[i]
+      data: data_name,
+      title: label_name,
+      className: "dt-head-left dt-body-right"
     });
   }
   var table = $('#table').DataTable({

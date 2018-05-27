@@ -13,13 +13,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.css" />
 
-  <<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.css">
-    <script src="js/test.js"></script>
-    <script src="js/graph_table.js"></script>
-    <script src="js/datatool.js"></script>
-    <script src="js/data.js"></script>
-    <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.css">
+  <script src="js/test.js"></script>
+  <script src="js/graph_table.js"></script>
+  <script src="js/datatool.js"></script>
+  <script src="data/data.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -30,6 +30,7 @@
 
   <div class="row">
     <div class="column sidebar" style="background-color:#aaa;">
+      <p>Enter a police agency to see its crime over time </p>
       <h3>State:</h3>
       <select class="simple-select" id="state_dropdown" onchange="stateChangeFun()">
           <script>
@@ -52,7 +53,6 @@
           $.each(crime_values, function(val, text) {
             $('#crime_dropdown').append(new Option(text, val));
           });
-          console.log($("#crime_dropdown").val())
           $("#crime_dropdown").val(0)
           $('.simple-select').chosen();
 
@@ -62,7 +62,7 @@
       </select>
       <br>
       <br>
-      <input type="checkbox" id="rate" name="rate" value="rate" onchange="updateGraph(agencyData)">
+      <input type="checkbox" id="rate" name="rate" value="rate" onchange="rateChangeFun()">
       <label for="rate">Rate per 100,000 Population</label>
       <br>
       <h3>Type of Crime:</h3>
@@ -76,11 +76,13 @@
       <label for="clearance_under18">Clearance under age 18</label>
       <br>
       <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraph(agencyData)">
-      <label for="unfounded">Unfounded</label> 
+      <label for="unfounded">Unfounded</label>
       <br>
       <br>
-      <button type="button" onclick="exportToCsv()">Download Data as CSV</button>
       <hr>
+      <button type="button" onclick="exportToCsv()">
+        Download Data as CSV
+      </button>
 
 
       <br>
@@ -93,10 +95,10 @@
     <div class="column main" id="main">
       <div id="graph"></div>
       <div>
-        <table id="table" class="display" style="width:100%">
+        <table id="table" class="display cell-border" style="width:100%">
       </div>
       <script type="text/javascript">
-      $('.simple-select').trigger('chosen:updated');
+        $('.simple-select').trigger('chosen:updated');
         var ylab = '# of Crimes';
         var visibilityVector = [false, false, false, false];
         var title = "";
@@ -106,7 +108,6 @@
         allColsData = getAgencyData(data);
         colsToKeep = getCrimeColumns(headers);
         finalData = subsetColumns(allColsData, colsToKeep);
-
         graph = makeGraph(finalData, ylab, visibilityVector, title);
 
         $(document).ready(function() {
