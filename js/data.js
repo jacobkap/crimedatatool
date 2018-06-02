@@ -73,7 +73,7 @@ var crime_values = {
   "burglary_total": "Burglary Total",
   "burg_force_entry": "Burglary - Forcible Entry",
   "burg_no_force_entry": "Burglary - Nonforcible Entry",
-  "attempted_burglary": "Attempted",
+  "attempted_burglary": "Attempted Burglary",
   "larceny_total": "Larceny Total",
   "mtr_vhc_theft_total": "Motor Vehicle Theft",
   "auto_theft": "Auto Theft",
