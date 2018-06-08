@@ -1,1 +1,1 @@
-Temporary website link is https://jacobkap.github.io/crimedatatool/
+Temporary website link is crimedatatool.com

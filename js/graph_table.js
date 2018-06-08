@@ -1,66 +1,90 @@
-function updateGraph(agencyData) {
+function updateGraph(div, agencyData, headers, type) {
 
-
-  colsToKeep = getCrimeColumns(headers);
+  colsForGraph = getCrimeColumns(headers, type);
   if ($("#rate").is(':checked')) {
-    colsToKeep = _.map(colsToKeep, function(x) {
+    colsForGraph = _.map(colsForGraph, function(x) {
         return x += "_rate";
     });
-    colsToKeep[0] = "year";
+    colsForGraph[0] = "year";
   }
-  finalData = subsetColumns(agencyData, colsToKeep);
-  new_title = agencies[$("#agency_dropdown").val()] + ', ';
-  new_title += state_values[$("#state_dropdown").val()] + ': ';
+  graphData = subsetColumns(agencyData, colsForGraph);
+  new_title = agencyData[0].agency + ', ';
+  new_title += agencyData[0].state + ': ';
+  if (type == "offenses") {
   new_title += crime_values[$("#crime_dropdown").val()];
+  }
+  if (type == "arrests") {
+  new_title += arrest_values[$("#arrests_crime_dropdown").val()];
+    new_title += " " + arrest_categories[$("#arrests_category_dropdown").val()];
+  }
 
   if ($("#rate").is(':checked')) {
     new_title += " Rate";
   }
 
 
-  finalData = finalData.replace(/clr_18.*,/, "Clearance Under Age 18,");
-  finalData = finalData.replace(/act.*,clr/, "Actual,clr");
-  finalData = finalData.replace(/clr_.*,Clear/, "Clearance,Clear");
-  finalData = finalData.replace(/unfound.*\n/, "Unfounded\n");
+  graphData = graphData.replace(/clr_18.*,/, "Clearance Under Age 18,");
+  graphData = graphData.replace(/act.*,clr/, "Actual,clr");
+  graphData = graphData.replace(/clr_.*,Clear/, "Clearance,Clear");
+  graphData = graphData.replace(/unfound.*\n/, "Unfounded\n");
+
+  visibilityVector = [true, false, false, false];
+
+  if (type == "offenses") {
+  visibilityVector = [];
+  visibilityVector.push($("#actual").is(':checked'));
+  visibilityVector.push($("#clearance").is(':checked'));
+  visibilityVector.push($("#clearance_under18").is(':checked'));
+  visibilityVector.push($("#unfounded").is(':checked'));
+  }
 
 
+  var ylab = '# of Crimes';
+  if (type == "arrests") ylab = "# of Arrests";
+  if ($("#rate").is(':checked')) {
+    ylab = 'Rate per 100,000 People';
+  }
+
+  graph = makeGraph(div, graphData, ylab, visibilityVector, new_title);
+  return graph;
+}
+
+function updateTable(table_name, data) {
+  table_name.clear();
+  table_name.rows.add(data); // Add new data
+  table_name.column('1').order('desc');
+  table_name.draw();
+}
+
+
+function updateGraphVisibility(graph) {
   visibilityVector = [];
   visibilityVector.push($("#actual").is(':checked'));
   visibilityVector.push($("#clearance").is(':checked'));
   visibilityVector.push($("#clearance_under18").is(':checked'));
   visibilityVector.push($("#unfounded").is(':checked'));
 
-  var ylab = '# of Crimes';
-  if ($("#rate").is(':checked')) {
-    ylab = 'Rate per 100,000 People';
-  }
-
-  makeGraph(finalData, ylab, visibilityVector, new_title);
-}
-
-function updateTable(data) {
-  table.clear();
-  table.rows.add(data); // Add new data
-  table.column('1').order('desc');
-  table.draw();
-
+  graph.updateOptions({
+                  visibility: visibilityVector
+                });
 }
 
 
-function makeGraph(data, ylab, visibilityVector, title) {
-  var graph = new Dygraph(document.getElementById("graph"),
+function makeGraph(div, data, ylab, visibilityVector, title) {
+  new_graph = new Dygraph(document.getElementById(div),
     data, {
       title: title,
+      drawGrid: true,
+      independentTicks: true,
       labelsSeparateLines: true,
       legend: 'always',
       ylabel: ylab,
       xlabel: ' Year',
       visibility: visibilityVector,
-      showRangeSelector: true,
       colors: ['#d7191c', '#7b3294', '#008837', '#0571b0'],
       strokeWidth: 1.3 // Width of lines
     });
-  return (graph);
+  return (new_graph);
 }
 
 function fixTableName(name) {
@@ -93,7 +117,7 @@ function fixTableDataName(name) {
   return name;
 }
 
-function makeTable(data) {
+function makeTable(div, data, headers) {
   file_name = agencies[$("#agency_dropdown").val()] + "_" +
     state_values[$("#state_dropdown").val()];
   temp = headers.split(",");
@@ -108,7 +132,7 @@ function makeTable(data) {
       className: "dt-head-left dt-body-right"
     });
   }
-  var table = $('#table').DataTable({
+  var table = $(div).DataTable({
     data: data,
     columns: z,
     "scrollX": true,
@@ -121,5 +145,7 @@ function makeTable(data) {
     }
 
   });
+  arrests_graph = makeGraph("arrests_graph", arrests_graph_data, ylab, visibilityVector, title);
+  arrests_graph.resize(800, 500);
   return table;
 }

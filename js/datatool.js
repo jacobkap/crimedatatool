@@ -1,10 +1,3 @@
-function getORI() {
-  state = state_values[$("#state_dropdown").val()];
-  agency = agencies[$("#agency_dropdown").val()];
-  ori = state_agencies.filter(x => x.state === state);
-  ori = ori.filter(x => x.agency === agency);
-  return ori[0].ori;
-}
 
 function objToString(obj) {
   var str = '';
@@ -29,9 +22,9 @@ function subsetColumns(data, colsToKeep) {
   return (data);
 }
 
-function getStateAgencies() {
+function getStateAgencies(agency_type) {
   var state_agencies = $.getJSON({
-    url: "state_agencies.json",
+    url: agency_type + ".json",
     type: 'get',
     dataType: 'json',
     async: false,
@@ -43,82 +36,68 @@ function getStateAgencies() {
   return (state_agencies);
 }
 
-function readCSV(csv) {
-  var result = null;
-  var scriptUrl = csv;
-  $.ajax({
-    url: scriptUrl,
-    type: 'get',
-    dataType: 'text',
-    async: false,
-    success: function(data) {
-      result = data;
-    }
-  });
-  return result;
-}
-
-function getAgenciesInState() {
-  state = state_values[$("#state_dropdown").val()];
-  agencies = state_agencies.filter(s => s.state === state);
-  agencies = agencies.map(function(item) {
-    return item.agency;
-  });
-  agencies.sort(function(a, b) {
-    if (a < b) return -1;
-    if (a > b) return 1;
-    return 0;
-  });
-  return agencies;
-}
-
-
-function updateAgencies() {
-  agencies = getAgenciesInState();
-  $('#agency_dropdown').empty();
-  $.each(agencies, function(val, text) {
-    $('#agency_dropdown').append(new Option(text, val));
-  });
-  $('#agency_dropdown').val(0);
-  $('.simple-select').trigger('chosen:updated');
-}
-
-function rateChangeFun() {
-  agencyData = getAgencyData(stateData);
-
-  updateGraph(agencyData);
-  table.destroy();
-  table = makeTable(agencyData);
-}
-
-function crimeChangeFun() {
-  updateGraph(agencyData);
-}
-
-function stateChangeFun() {
-  stateData = getStateData();
-  updateAgencies();
-  agencyChangeFun();
-}
-
-function agencyChangeFun() {
-  agencyData = getAgencyData(stateData);
-  updateGraph(agencyData);
-  updateTable(agencyData);
-}
-
-
-
-function getStateData() {
-  csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/offenses/offenses_" +
-    state_values[$("#state_dropdown").val()] + ".csv";
+function getStateData(type) {
+  csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/" +
+  type + "/" + type + "_";
+  if (type == "offenses") {
+    csv_url += state_values[$("#state_dropdown").val()];
+  }
+  if (type == "arrests")  {
+    csv_url += state_values[$("#arrests_state_dropdown").val()];
+    csv_url += "_" + $("#arrests_crime_dropdown").val();
+  }
+  csv_url +=".csv";
   stateData = readCSV(csv_url);
   stateData = stateData.split("\n");
   return stateData;
 }
 
-function getAgencyData(stateData) {
-  ori = getORI();
+function main(type, agencies, state_dropdown, crime_dropdown) {
+  stateData = getStateData(type);
+  headers = stateData[0];
+  colsForGraph = getCrimeColumns(headers, type);
+
+  if (type == "offenses") {
+    state = state_values[$("#state_dropdown").val()];
+    agency = agencies[$("#agency_dropdown").val()];
+    ori = getORI(offenses_state_agencies, state, agency);
+  }
+  if (type == "arrests") {
+    state = state_values[$("#arrests_state_dropdown").val()];
+    agency = agencies[$("#arrests_agency_dropdown").val()];
+    ori = getORI(arrests_state_agencies, state, agency);
+  }
+
+  tableData = getAgencyData(stateData, headers, ori);
+  graphData = subsetColumns(tableData, colsForGraph);
+  return [tableData, graphData, headers];
+}
+
+function getORI(state_agencies, state, agency) {
+  ori = state_agencies.filter(x => x.state === state);
+  ori = ori.filter(x => x.agency === agency);
+  return ori[0].ori;
+}
+
+function getCrimeColumns(arr, type) {
+  if (type == "offenses") {
+  crime = $("#crime_dropdown").val();
+}
+if (type == "arrests") {
+  crime = $("#arrests_crime_dropdown").val();
+  crime += "_" + $("#arrests_category_dropdown").val();
+}
+  arr = arr.split(",");
+  columnNames = ["year"];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].includes(crime)) {
+      columnNames.push(arr[i]);
+    }
+  }
+  return (columnNames);
+}
+
+function getAgencyData(stateData, headers, ori) {
   agencyData = stateData.filter(s => s.includes(ori));
   agencyData = data_object_fun(agencyData, headers);
 
@@ -130,21 +109,19 @@ function getAgencyData(stateData) {
   return agencyData;
 }
 
-
-
-function getCrimeColumns(arr) {
-  crime = $('#crime_dropdown').val();
-  arr = arr.split(",");
-  columnNames = ["year"];
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i].includes(crime)) {
-      columnNames.push(arr[i]);
-    }
-  }
-  return (columnNames);
+function getAgenciesInState(data, state_dropdown) {
+  state = state_values[$(state_dropdown).val()];
+  agencies = data.filter(s => s.state === state);
+  agencies = agencies.map(function(item) {
+    return item.agency;
+  });
+  agencies.sort(function(a, b) {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
+  return agencies;
 }
-
-
 
 function data_object_fun(arr, headers) {
   headers = headers.split(",");
@@ -159,62 +136,4 @@ function data_object_fun(arr, headers) {
     jsonObj.push(obj);
   }
   return (jsonObj);
-}
-
-
-function countToRate(data) {
-  data_keys = _.keys(data);
-  for (var i = 0; i < data_keys.length; i++) {
-    temp_match = data_keys[i].replace(/act_|clr_18_|clr_|unfound_/, "");
-    if (temp_match != data_keys[i] &
-      temp_match != "officers_assaulted" &
-      temp_match != "officers_killed_by_felony") {
-      rate_val = data[data_keys[i]] / data.population * 100000;
-      rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
-      data[data_keys[i]] = rate_val;
-      new_key = data_keys[i] + "_rate";
-      Object.defineProperty(data, new_key,
-        Object.getOwnPropertyDescriptor(data, data_keys[i]));
-      delete data[data_keys[i]];
-    }
-  }
-  return data;
-}
-
-function exportToCsv() {
-
-  data = agencyData.map(objToString);
-  data = data.join("\n");
-  data = objToString(_.keys(agencyData[0])) + '\n' + data;
-  type = "ucr_offenses_";
-
-  if ($("#rate").is(':checked')) {
-    type += "rate_";
-  } else {
-    type += "count_";
-  }
-
-  filename = type +
-    agencies[$("#agency_dropdown").val()] + "_" +
-    state_values[$("#state_dropdown").val()] + ".csv";
-
-
-  var blob = new Blob([data], {
-    type: 'text/csv;charset=utf-8;'
-  });
-  if (navigator.msSaveBlob) { // IE 10+
-    navigator.msSaveBlob(blob, filename);
-  } else {
-    var link = document.createElement("a");
-    if (link.download !== undefined) { // feature detection
-      // Browsers that support HTML5 download attribute
-      var url = URL.createObjectURL(blob);
-      link.setAttribute("href", url);
-      link.setAttribute("download", filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  }
 }
