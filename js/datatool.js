@@ -44,7 +44,6 @@ function getStateData(type) {
   }
   if (type == "arrests")  {
     csv_url += state_values[$("#arrests_state_dropdown").val()];
-    csv_url += "_" + $("#arrests_crime_dropdown").val();
   }
   csv_url +=".csv";
   stateData = readCSV(csv_url);

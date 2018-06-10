@@ -145,7 +145,5 @@ function makeTable(div, data, headers) {
     }
 
   });
-  arrests_graph = makeGraph("arrests_graph", arrests_graph_data, ylab, visibilityVector, title);
-  arrests_graph.resize(800, 500);
   return table;
 }

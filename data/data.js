@@ -139,7 +139,7 @@ var arrest_categories = {
   "tot_male_adult": "Total Male Adult",
   "tot_male_juv": "Total Male Juvenile",
   "tot_female_adult": "Total Female Adult",
-  "tot_female_juv": "Total Female Juvenile",
+  "tot_female_juv": "Total Female Juvenile", /*
   "male_under_10": "Male under age 10",
   "male_10_12": "Male aged 10-12",
   "male_13_14": "Male aged 13-14",
@@ -191,5 +191,5 @@ var arrest_categories = {
   "juv_white": "Total Juvenile White",
   "juv_black": "Total Juvenile Black",
   "juv_asian": "Total Juvenile Asian",
-  "juv_indian": "Total Juveile Indian"
+  "juv_indian": "Total Juveile Indian" */
 };
