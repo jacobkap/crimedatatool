@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+
+
   <title>Crime Data Tool</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,7 +44,7 @@
     <i class="fa fa-bars"></i>
 </div>
 <div class="row">
-      <div class="column sidebar" id = "sidebar" style="background-color:#aaa;">
+      <div class="column sidebar" style="background-color:#aaa;">
         <p>Enter a police agency to see its crime over time </p>
         <h3>State:</h3>
         <select class="simple-select" id="state_dropdown" onchange="offenses_stateChangeFun()">
@@ -103,7 +105,7 @@
       </div>
 
 
-      <div class="column main" id="main">
+      <div class="column main">
         <br><br>
         <div id="graph" style="width:95%;height:500px"></div>
         <br><br>
@@ -123,6 +125,11 @@
           offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
 
           table = makeTable("#table", table_data, offenses_headers)
+$('.simple-select').chosen();
+          $(document).ready(function(){
+ resizeChosen();
+ jQuery(window).on('resize', resizeChosen);
+});
         </script>
       </div>
     </div>

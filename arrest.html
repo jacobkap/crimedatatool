@@ -120,6 +120,11 @@
     $("#graph").ready(function() {
       offenses_graph = updateGraph("graph", table_data, offenses_headers, "offenses");
     });
+
+    $(document).ready(function(){
+ resizeChosen();
+ jQuery(window).on('resize', resizeChosen);
+});
   </script>
 
 </div>
