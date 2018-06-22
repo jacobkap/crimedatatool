@@ -23,7 +23,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="data/data.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/mobile_formatting.css" />
+
     <link rel="stylesheet" href="css/style.css" />
 
   <script>
@@ -92,8 +92,9 @@
 </div>
 
 <div class="column main" id="main">
-  <div id="arrests_graph"></div>
-  <table id="arrests_table" class="display cell-border"></table>
+  <div id="arrests_graph"  style="width:95%;;height:500px"></div>
+  <br><br>
+  <div><table id="arrests_table" class="display cell-border"></table></div>
 
 
 
@@ -113,14 +114,10 @@
 
     arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_headers)
 
-    $("#arrests_graph").ready(function() {
-      arrests_graph.resize(800, 500)
-    });
 
     arrests_graph = updateGraph("arrests_graph", arrests_table_data, arrests_headers, "arrests");
 
     $("#graph").ready(function() {
-      offenses_graph.resize(800, 500)
       offenses_graph = updateGraph("graph", table_data, offenses_headers, "offenses");
     });
   </script>
