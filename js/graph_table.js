@@ -136,6 +136,7 @@ function makeTable(div, data, headers) {
     data: data,
     columns: z,
     "scrollX": true,
+     "sScrollX": "100%",
     "stripe": true,
     "hover": true,
     "ordering": true,

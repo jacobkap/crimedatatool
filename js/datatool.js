@@ -1,3 +1,12 @@
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
 
 function objToString(obj) {
   var str = '';
@@ -40,10 +49,16 @@ function getStateData(type) {
   csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/" +
   type + "/" + type + "_";
   if (type == "offenses") {
-    csv_url += state_values[$("#state_dropdown").val()];
+    state = state_values[$("#state_dropdown").val()];
+    state = state.replace(" ", "_");
+    state = state.replace(" ", "_");
+    csv_url += state;
   }
   if (type == "arrests")  {
-    csv_url += state_values[$("#arrests_state_dropdown").val()];
+    state = state_values[$("#arrests_state_dropdown").val()];
+    state = state.replace(" ", "_");
+    state = state.replace(" ", "_");
+    csv_url += state;
   }
   csv_url +=".csv";
   stateData = readCSV(csv_url);
