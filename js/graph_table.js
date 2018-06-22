@@ -81,6 +81,7 @@ function makeGraph(div, data, ylab, visibilityVector, title) {
       ylabel: ylab,
       xlabel: ' Year',
       visibility: visibilityVector,
+      interactionModel: {},
       colors: ['#d7191c', '#7b3294', '#008837', '#0571b0'],
       strokeWidth: 1.3 // Width of lines
     });
@@ -136,7 +137,7 @@ function makeTable(div, data, headers) {
     data: data,
     columns: z,
     "scrollX": true,
-     "sScrollX": "100%",
+    "sScrollX": "100%",
     "stripe": true,
     "hover": true,
     "ordering": true,
