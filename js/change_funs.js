@@ -26,17 +26,19 @@ function arrests_categoryChangeFun() {
 }
 
 function offenses_stateChangeFun() {
-  offenses_agencies = updateAgencies(offenses_state_agencies, "#agency_dropdown", "#state_dropdown");
+  offense_agencies = updateAgencies("crime", "#agency_dropdown", state_dropdown);
   offenses_agencyChangeFun("graph");
 }
 
 function offenses_agencyChangeFun(graph_div) {
-  main_results = main("offenses", offenses_agencies, "#state_dropdown", "#crime_dropdown");
+  main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
   table_data = main_results[0];
   offenses_graph_data = main_results[1];
   offenses_headers = main_results[2];
-  offenses_graph = updateGraph('graph', table_data, offenses_headers, "offenses");
   updateTable(table, table_data);
+
+  offenses_graph = updateGraph('graph', table_data, offenses_headers, "offenses");
+
 }
 
 function arrests_stateChangeFun() {
@@ -55,8 +57,8 @@ function arrests_agencyChangeFun() {
   updateTable(arrests_table, arrests_table_data);
 }
 
-function updateAgencies(stateData, agencyDropdown, stateDropdown) {
-  agencies = getAgenciesInState(stateData, stateDropdown);
+function updateAgencies(type, agencyDropdown, stateDropdown) {
+  agencies = getStateAgencies(type);
   $(agencyDropdown).empty();
   $.each(agencies, function(val, text) {
     $(agencyDropdown).append(new Option(text, val));

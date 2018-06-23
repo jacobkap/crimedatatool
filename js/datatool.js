@@ -28,6 +28,7 @@ function objToString(obj) {
 }
 
 function subsetColumns(data, colsToKeep) {
+  data.shift();
   data = _.map(data, function(currentObject) {
     return _.pick(currentObject, colsToKeep);
   });
@@ -39,9 +40,13 @@ function subsetColumns(data, colsToKeep) {
   return (data);
 }
 
-function getStateAgencies(agency_type) {
+function getStateAgencies(type) {
+  url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
+  if (type == "crime") {
+    url += "offenses/" + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
+  }
   var state_agencies = $.getJSON({
-    url: agency_type + ".json",
+    url: url,
     type: 'get',
     dataType: 'json',
     async: false,
@@ -54,35 +59,49 @@ function getStateAgencies(agency_type) {
 }
 
 function getStateData(type) {
-  csv_url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/" +
-  type + "/" + type + "_";
+  url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
   if (type == "offenses") {
     state = state_values[$("#state_dropdown").val()];
+    state = state.replace(/ /g,"_");
+    agencies = offense_agencies[$("#agency_dropdown").val()];
+    agencies = agencies.replace(/ /g,"_");
+    agencies = agencies.replace(/:/g,"_");
+    agencies = agencies.replace(/__/g,"_");
     state = state.replace(" ", "_");
-    state = state.replace(" ", "_");
-    csv_url += state;
+    url += "offenses/" + state + "_" + agencies;
   }
   if (type == "arrests")  {
     state = state_values[$("#arrests_state_dropdown").val()];
     state = state.replace(" ", "_");
     state = state.replace(" ", "_");
-    csv_url += state;
+    url += state;
   }
-  csv_url +=".csv";
-  stateData = readCSV(csv_url);
+  url +=".csv";
+  stateData = readCSV(url);
   stateData = stateData.split("\n");
   return stateData;
 }
+function getAgencyData(stateData, headers) {
+//  agencyData = stateData.filter(s => s.includes(ori));
+  agencyData = data_object_fun(stateData, headers);
 
-function main(type, agencies, state_dropdown, crime_dropdown) {
+  if ($("#rate").is(':checked')) {
+    agencyData = _.map(agencyData, function(currentObject) {
+      return countToRate(currentObject);
+    });
+  }
+  return agencyData;
+}
+
+function main(type, state_dropdown, crime_dropdown) {
   stateData = getStateData(type);
   headers = stateData[0];
   colsForGraph = getCrimeColumns(headers, type);
 
   if (type == "offenses") {
-    state = state_values[$("#state_dropdown").val()];
-    agency = agencies[$("#agency_dropdown").val()];
-    ori = getORI(offenses_state_agencies, state, agency);
+  //  state = state_values[$("#state_dropdown").val()];
+//    agency = agencies[$("#agency_dropdown").val()];
+//    ori = getORI(offenses_state_agencies, state, agency);
   }
   if (type == "arrests") {
     state = state_values[$("#arrests_state_dropdown").val()];
@@ -90,7 +109,8 @@ function main(type, agencies, state_dropdown, crime_dropdown) {
     ori = getORI(arrests_state_agencies, state, agency);
   }
 
-  tableData = getAgencyData(stateData, headers, ori);
+  tableData = getAgencyData(stateData, headers);
+  tableData.pop();
   graphData = subsetColumns(tableData, colsForGraph);
   return [tableData, graphData, headers];
 }
@@ -117,32 +137,6 @@ if (type == "arrests") {
     }
   }
   return (columnNames);
-}
-
-function getAgencyData(stateData, headers, ori) {
-  agencyData = stateData.filter(s => s.includes(ori));
-  agencyData = data_object_fun(agencyData, headers);
-
-  if ($("#rate").is(':checked')) {
-    agencyData = _.map(agencyData, function(currentObject) {
-      return countToRate(currentObject);
-    });
-  }
-  return agencyData;
-}
-
-function getAgenciesInState(data, state_dropdown) {
-  state = state_values[$(state_dropdown).val()];
-  agencies = data.filter(s => s.state === state);
-  agencies = agencies.map(function(item) {
-    return item.agency;
-  });
-  agencies.sort(function(a, b) {
-    if (a < b) return -1;
-    if (a > b) return 1;
-    return 0;
-  });
-  return agencies;
 }
 
 function data_object_fun(arr, headers) {
