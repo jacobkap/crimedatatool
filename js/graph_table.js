@@ -140,8 +140,8 @@ function makeTable(div, data, headers) {
     "sScrollX": "100%",
     "stripe": true,
     "hover": true,
-    "ordering": true,
-    "order": [1, "desc"],
+  //  "ordering": true,
+  //  "order": [1, "desc"],
     fixedColumns: {
       leftColumns: 2
     }
