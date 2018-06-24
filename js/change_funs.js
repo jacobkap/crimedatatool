@@ -20,9 +20,7 @@ table.destroy();
 }
 
 function offenses_crimeChangeFun() {
-  offenses_graph = updateGraph('graph', table_data, offenses_headers, "offenses");
-  table.destroy();
-  table = makeTable("#table", table_data, table_headers);
+  offenses_agencyChangeFun("graph");
 }
 
 function arrests_crimeChangeFun() {
