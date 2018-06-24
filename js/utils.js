@@ -57,7 +57,6 @@ if (type == "arrests") {
 }
 
 function makeCrimeDropdown() {
-  $("#crime_dropdown").empty();
   $.each(crime_values, function(val, text) {
     $('#crime_dropdown').append(new Option(text, val));
   });

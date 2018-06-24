@@ -35,7 +35,7 @@ function offenses_agencyChangeFun(graph_div) {
   table_data = main_results[0];
   offenses_graph_data = main_results[1];
   offenses_headers = main_results[2];
-    offenses_graph = updateGraph('graph', table_data, offenses_headers, "offenses");
+  offenses_graph = updateGraph('graph', table_data, offenses_headers, "offenses");
   updateTable(table, table_data);
 
 
