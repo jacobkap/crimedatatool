@@ -5,6 +5,8 @@
 
 
   <title>Crime Data Tool</title>
+  <link rel="stylesheet" href="css/misc.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <script type="text/javascript"> (function() {
     var css = document.createElement('link');
      css.href = '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css';
@@ -29,8 +31,7 @@
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="data/data.js"></script>
-    <link rel="stylesheet" href="css/misc.css" />
-    <link rel="stylesheet" href="css/style.css" />
+
 
 </head>
 
@@ -63,7 +64,6 @@
         <select class="simple-select" id="agency_dropdown" onchange="offenses_agencyChangeFun()">
 
         <script>
-          offense_agencies = updateAgencies("crime", "#agency_dropdown", state_dropdown);
         </script>
 
         </select>
@@ -118,18 +118,20 @@
           var title = "";
 
 
-          main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
-          table_data = main_results[0];
-          offenses_graph_data = main_results[1];
-          offenses_headers = main_results[2];
 
-          offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
-
-          table = makeTable("#table", table_data, offenses_headers)
-$('.simple-select').chosen();
           $(document).ready(function(){
- resizeChosen();
- jQuery(window).on('resize', resizeChosen);
+            $('.simple-select').chosen();
+                 resizeChosen();
+            offense_agencies = updateAgencies("crime", "#agency_dropdown", state_dropdown);
+            main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
+            table_data = main_results[0];
+            offenses_graph_data = main_results[1];
+            offenses_headers = main_results[2];
+
+            offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
+
+            table = makeTable("#table", table_data, offenses_headers)
+       jQuery(window).on('resize', resizeChosen);
 });
         </script>
       </div>
