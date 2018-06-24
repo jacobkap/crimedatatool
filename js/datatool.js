@@ -1,19 +1,18 @@
-
 function resizeChosen() {
-   $(".chosen-container").each(function() {
-       $(this).attr('style', 'width: 85%');
-   });
+  $(".chosen-container").each(function() {
+    $(this).attr('style', 'width: 85%');
+  });
 }
 
 
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
 }
 
 function objToString(obj) {
@@ -27,15 +26,32 @@ function objToString(obj) {
   return str;
 }
 
-function subsetColumns(data, colsToKeep) {
+function subsetColumns(data, columns, output) {
   data.shift();
-  data = _.map(data, function(currentObject) {
-    return _.pick(currentObject, colsToKeep);
-  });
-  data = data.map(objToString);
-  data = data.join("\n");
+  if ($("#rate").is(':checked')) {
+    columns = _.map(columns, function(x) {
+      return x + "_rate";
+    });
+    if (output == "table") {
+      columns[0] = "agency";
+      columns[1] = "year";
+      columns[2] = "state";
+      columns[3] = "population";
+      columns[4] = "ORI";
+    } else {
+      columns[0] = "year";
+    }
 
-  data = colsToKeep.toString() + "\n" + data;
+  }
+
+  data = _.map(data, function(currentObject) {
+    return _.pick(currentObject, columns);
+  });
+  if (output == "graph") {
+    data = data.map(objToString);
+    data = data.join("\n");
+    data = columns.toString() + "\n" + data;
+  }
 
   return (data);
 }
@@ -62,27 +78,27 @@ function getStateData(type) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
   if (type == "offenses") {
     state = state_values[$("#state_dropdown").val()];
-    state = state.replace(/ /g,"_");
+    state = state.replace(/ /g, "_");
     agencies = offense_agencies[$("#agency_dropdown").val()];
-    agencies = agencies.replace(/ /g,"_");
-    agencies = agencies.replace(/:/g,"_");
-    agencies = agencies.replace(/__/g,"_");
+    agencies = agencies.replace(/ /g, "_");
+    agencies = agencies.replace(/:/g, "_");
+    agencies = agencies.replace(/__/g, "_");
     state = state.replace(" ", "_");
     url += "offenses/" + state + "_" + agencies;
   }
-  if (type == "arrests")  {
+  if (type == "arrests") {
     state = state_values[$("#arrests_state_dropdown").val()];
     state = state.replace(" ", "_");
     state = state.replace(" ", "_");
     url += state;
   }
-  url +=".csv";
+  url += ".csv";
   stateData = readCSV(url);
   stateData = stateData.split("\n");
   return stateData;
 }
+
 function getAgencyData(stateData, headers) {
-//  agencyData = stateData.filter(s => s.includes(ori));
   agencyData = data_object_fun(stateData, headers);
 
   if ($("#rate").is(':checked')) {
@@ -96,26 +112,32 @@ function getAgencyData(stateData, headers) {
 function main(type, state_dropdown, crime_dropdown) {
   stateData = getStateData(type);
   headers = stateData[0];
-  colsForGraph = getCrimeColumns(headers, type);
+  colsForGraph = getCrimeColumns(headers, type, "graph");
+  colsForTable = getCrimeColumns(headers, type, "table");
 
 
   tableData = getAgencyData(stateData, headers);
   tableData.pop();
-  graphData = subsetColumns(tableData, colsForGraph);
-  return [tableData, graphData, headers];
+  graphData = subsetColumns(tableData, colsForGraph, "graph");
+
+  return [tableData, graphData, headers, colsForTable];
 }
 
 
-function getCrimeColumns(arr, type) {
+function getCrimeColumns(arr, type, output) {
   if (type == "offenses") {
-  crime = $("#crime_dropdown").val();
-}
-if (type == "arrests") {
-  crime = $("#arrests_crime_dropdown").val();
-  crime += "_" + $("#arrests_category_dropdown").val();
-}
+    crime = $("#crime_dropdown").val();
+  }
+  if (type == "arrests") {
+    crime = $("#arrests_crime_dropdown").val();
+    crime += "_" + $("#arrests_category_dropdown").val();
+  }
   arr = arr.split(",");
-  columnNames = ["year"];
+  if (output == "graph") {
+    columnNames = ["year"];
+  } else {
+    columnNames = ["agency", "year", "state", "population", "ORI"];
+  }
   for (var i = 0; i < arr.length; i++) {
     if (arr[i].includes(crime)) {
       columnNames.push(arr[i]);

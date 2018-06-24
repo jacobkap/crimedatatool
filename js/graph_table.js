@@ -1,13 +1,7 @@
 function updateGraph(div, agencyData, headers, type) {
+  colsForGraph = getCrimeColumns(headers, type, "graph");
 
-  colsForGraph = getCrimeColumns(headers, type);
-  if ($("#rate").is(':checked')) {
-    colsForGraph = _.map(colsForGraph, function(x) {
-        return x += "_rate";
-    });
-    colsForGraph[0] = "year";
-  }
-  graphData = subsetColumns(agencyData, colsForGraph);
+  graphData = subsetColumns(agencyData, colsForGraph, "graph");
   new_title = agencyData[0].agency + ', ';
   new_title += agencyData[0].state + ': ';
   if (type == "offenses") {
@@ -49,11 +43,37 @@ function updateGraph(div, agencyData, headers, type) {
   return graph;
 }
 
-function updateTable(table_name, data) {
+function updateTable(table_name, data, type, headers) {
   table_name.clear();
-  table_name.rows.add(data); // Add new data
-  table_name.column('1').order('desc');
-  table_name.draw();
+    colsForTable = getCrimeColumns(headers, type, "table");
+    data = subsetColumns(data, colsForTable, "table");
+
+  z = [];
+  for (var n = 0; n < colsForTable.length; n++) {
+    label_name = fixTableName(colsForTable[n]);
+    data_name = fixTableDataName(colsForTable[n]);
+    z.push({
+      data: data_name,
+      title: label_name,
+      className: "dt-head-left dt-body-right"
+    });
+  }
+  plus = "";
+    if ($("#rate").is(':checked')) {
+      plus = " Rate";
+    }
+  for (var i=5; i<table_name.columns().nodes().length; i++) {
+        if ($("#rate").is(':checked')) {
+    $( table.column( i ).header() ).text($( table.column( i ).header() ).text() + " Rate");
+  } else {
+    $( table.column( i ).header() ).text(z[i].title);
+  }
+}
+table_name.rows.add({
+  data: data,
+  columns: z}); // Add new data
+table_name.column('1').order('desc');
+table_name.draw();
 }
 
 
@@ -90,7 +110,7 @@ function makeGraph(div, data, ylab, visibilityVector, title) {
 
 function fixTableName(name) {
   crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
-  if (crime_match == name) {
+  if (!crime_match.includes("officer") && crime_match == name) {
     name = name.replace(/_/g, " ");
     name = name.replace(/^\w/, c => c.toUpperCase());
     return name;
@@ -110,7 +130,7 @@ function fixTableName(name) {
 
 function fixTableDataName(name) {
   crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
-  if (crime_match != name) {
+  if (crime_match != name || crime_match.includes("officer")) {
     if ($("#rate").is(':checked')) {
       name += "_rate";
     }
@@ -119,9 +139,11 @@ function fixTableDataName(name) {
 }
 
 function makeTable(div, data, headers) {
+  data = subsetColumns(data, headers, "table");
+
   file_name = agencies[$("#agency_dropdown").val()] + "_" +
     state_values[$("#state_dropdown").val()];
-  temp = headers.split(",");
+  temp = headers;
   z = [];
 
   for (var i = 0; i < temp.length; i++) {
@@ -140,8 +162,8 @@ function makeTable(div, data, headers) {
     "sScrollX": "100%",
     "stripe": true,
     "hover": true,
-  //  "ordering": true,
-  //  "order": [1, "desc"],
+    "ordering": true,
+    "order": [1, "desc"],
     fixedColumns: {
       leftColumns: 2
     }

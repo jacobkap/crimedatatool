@@ -4,7 +4,7 @@
 <head>
 
 
-  <title>Crime Data Tool</title>
+  <title>Offenses Known and Cleared</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,20 +13,15 @@
   <script src="js/change_funs.min.js"></script>
   <script src="js/graph_table.js"></script>
   <script src="js/datatool.min.js"></script>
-  <link rel="stylesheet" href="css/style.min.css" />
-  <link rel="stylesheet" href="css/misc.min.css" />
 
+  <link rel="stylesheet" href="css/misc.min.css" />
+  <link rel="stylesheet" href="css/style.min.css" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
-
-
-
-
-
 
 </head>
 
@@ -110,12 +105,13 @@
             table_data = main_results[0];
             offenses_graph_data = main_results[1];
             offenses_headers = main_results[2];
-            var ylab = '# of Crimes';
-            var visibilityVector = [true, false, false, false];
-            var title = "";
+            table_headers = main_results[3];
+            ylab = '# of Crimes';
+            visibilityVector = [true, false, false, false];
+            title = "";
             offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
             $("#graph").ready($("#loader").hide())
-            table = makeTable("#table", table_data, offenses_headers)
+            table = makeTable("#table", table_data, table_headers)
             jQuery(window).on('resize', resizeChosen);
 });
         </script>

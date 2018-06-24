@@ -15,7 +15,8 @@ function readCSV(csv) {
 
 function exportToCsv(tableData, type) {
 
-  data = tableData.map(objToString);
+  data = tableData.reverse();
+  data = data.map(objToString);
   data = data.join("\n");
   data = objToString(_.keys(tableData[0])) + '\n' + data;
   offense_type = "ucr_offenses_";
@@ -28,12 +29,13 @@ function exportToCsv(tableData, type) {
 
 if (type == "offenses") {
   filename = offense_type;
+  filename += offense_agencies[$("#agency_dropdown").val()] + "_" +
+    state_values[$("#state_dropdown").val()] + ".csv";
 }
 if (type == "arrests") {
   filename = "ucr_arrests_";
 }
-  filename += agencies[$("#agency_dropdown").val()] + "_" +
-    state_values[$("#state_dropdown").val()] + ".csv";
+
 
 
   var blob = new Blob([data], {
@@ -75,11 +77,11 @@ function countToRate(data) {
   data_keys = _.keys(data);
   for (var i = 0; i < data_keys.length; i++) {
     temp_match = data_keys[i].replace(/act_|clr_18_|clr_|unfound_/, "");
-    if (temp_match != data_keys[i] &
-      temp_match != "officers_assaulted" &
-      temp_match != "officers_killed_by_felony") {
+    if (temp_match != data_keys[i] ||
+      temp_match.includes("officer")) {
       rate_val = data[data_keys[i]] / data.population * 100000;
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
+      if (isNaN(rate_val)) { rate_val = 0; }
       data[data_keys[i]] = rate_val;
       new_key = data_keys[i] + "_rate";
       Object.defineProperty(data, new_key,
