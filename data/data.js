@@ -53,6 +53,7 @@ var state_values = [
 ];
 
 var crime_values = {
+  "all_crimes": "All Crimes",
   "aggravated_assault": "Aggravated Assault",
   "assault_total": "Assault - Total",
   "gun_assault": "Assault -  Gun",
@@ -71,8 +72,8 @@ var crime_values = {
   "officers_killed_by_accident": "Officers Killed by Accident",
   "officers_killed_by_felony": "Officers Killed by Felony",
   "rape_total": "Rape - Total",
-  "force_rape": "Rape - Forcible",
   "attempted_rape": "Rape - Attempted",
+    "force_rape": "Rape - Forcible",
   "robbery_total": "Robbery Total",
   "gun_robbery": "Robbery -  Gun",
   "knife_robbery": "Robbery - Knife",
