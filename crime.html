@@ -9,10 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script type="text/javascript" src="data/data.min.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/change_funs.js"></script>
+  <script src="js/utils.min.js"></script>
+  <script src="js/change_funs.min.js"></script>
   <script src="js/graph_table.js"></script>
-  <script src="js/datatool.js"></script>
+  <script src="js/datatool.min.js"></script>
   <link rel="stylesheet" href="css/style.min.css" />
   <link rel="stylesheet" href="css/misc.min.css" />
 
@@ -114,9 +114,9 @@
             var visibilityVector = [true, false, false, false];
             var title = "";
             offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
-            $("#graph").ready($(".loader").hide())
+            $("#graph").ready($("#loader").hide())
             table = makeTable("#table", table_data, offenses_headers)
-       jQuery(window).on('resize', resizeChosen);
+            jQuery(window).on('resize', resizeChosen);
 });
         </script>
       </div>
