@@ -5,32 +5,26 @@
 
 
   <title>Crime Data Tool</title>
-  <link rel="stylesheet" href="css/misc.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <script type="text/javascript"> (function() {
-    var css = document.createElement('link');
-     css.href = '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css';
-     css.rel = 'stylesheet';
-   css.type = 'text/css';
-   document.getElementsByTagName('head')[0].appendChild(css); })();
-    </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="data/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/change_funs.js"></script>
+    <script src="js/graph_table.js"></script>
+    <script src="js/datatool.js"></script>
+  <link rel="stylesheet" href="css/misc.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
-  <script src="js/test.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/change_funs.js"></script>
-  <script src="js/graph_table.js"></script>
-  <script src="js/datatool.js"></script>
 
 
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="data/data.js"></script>
+
+
 
 
 </head>
@@ -121,7 +115,7 @@
 
           $(document).ready(function(){
             $('.simple-select').chosen();
-                 resizeChosen();
+            resizeChosen();
             offense_agencies = updateAgencies("crime", "#agency_dropdown", state_dropdown);
             main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
             table_data = main_results[0];
