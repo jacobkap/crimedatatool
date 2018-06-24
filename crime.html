@@ -8,18 +8,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script type="text/javascript" src="data/data.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/change_funs.js"></script>
-    <script src="js/graph_table.js"></script>
-    <script src="js/datatool.js"></script>
-      <link rel="stylesheet" href="css/style.min.css" />
+  <script type="text/javascript" src="data/data.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/change_funs.js"></script>
+  <script src="js/graph_table.js"></script>
+  <script src="js/datatool.js"></script>
+  <link rel="stylesheet" href="css/style.min.css" />
   <link rel="stylesheet" href="css/misc.min.css" />
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
 
@@ -33,11 +33,11 @@
 <body>
 
   <div class="topnav" id="myTopnav">
-  <a href="home.html">Home</a>
-  <a class="active" href="crime.html">Crimes</a>
-  <a href="arrest.html">Arrests</a>
-  <a href="police.html">Police Officers Killed and Assaulted</a>
-  <a class="icon" onclick="myFunction()">
+    <a href="home.html">Home</a>
+    <a class="active" href="crime.html">Crimes</a>
+    <a href="arrest.html">Arrests</a>
+    <a href="police.html">Police Officers Killed and Assaulted</a>
+    <a class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
 </div>
 <div class="row">
@@ -45,14 +45,7 @@
         <p>Enter a police agency to see its crime over time </p>
         <h3>State:</h3>
         <select class="simple-select" id="state_dropdown" onchange="offenses_stateChangeFun()">
-          <script>
-          $.each(state_values, function(val, text) {
-              $('#state_dropdown').append( new Option(text,val) );
-          });
-          $("#state_dropdown").val(4) // Sets default to the Great State of
-                                     // California
-          </script>
-      </select>
+          </select>
         <br><br>
 
         <h3>Agency:</h3>
@@ -65,12 +58,6 @@
         <br><br>
         <h3>Crime:</h3>
         <select class="simple-select" id="crime_dropdown" onchange="offenses_crimeChangeFun()">
-          <script>
-          $.each(crime_values, function(val, text) {
-            $('#crime_dropdown').append(new Option(text, val));
-          });
-          $("#crime_dropdown").val(0)
-          </script>
       </select>
         <br>
         <br>
@@ -102,29 +89,29 @@
 
 
       <div class="column main">
+        <div class="loader"></div>
         <br><br>
         <div id="graph" style="width:95%;height:500px"></div>
         <br><br>
       <div><table id="table" class="display cell-border"></table></div>
 
         <script type="text/javascript">
-          var ylab = '# of Crimes';
-          var visibilityVector = [true, false, false, false];
-          var title = "";
+            $(document).ready(function(){
 
-
-
-          $(document).ready(function(){
             $('.simple-select').chosen();
             resizeChosen();
+            makeStateDropdown("#state_dropdown")
+            makeCrimeDropdown();
             offense_agencies = updateAgencies("crime", "#agency_dropdown", state_dropdown);
             main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
             table_data = main_results[0];
             offenses_graph_data = main_results[1];
             offenses_headers = main_results[2];
-
+            var ylab = '# of Crimes';
+            var visibilityVector = [true, false, false, false];
+            var title = "";
             offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
-
+            $("#graph").ready($(".loader").hide())
             table = makeTable("#table", table_data, offenses_headers)
        jQuery(window).on('resize', resizeChosen);
 });

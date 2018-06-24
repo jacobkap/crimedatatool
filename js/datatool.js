@@ -98,16 +98,6 @@ function main(type, state_dropdown, crime_dropdown) {
   headers = stateData[0];
   colsForGraph = getCrimeColumns(headers, type);
 
-  if (type == "offenses") {
-  //  state = state_values[$("#state_dropdown").val()];
-//    agency = agencies[$("#agency_dropdown").val()];
-//    ori = getORI(offenses_state_agencies, state, agency);
-  }
-  if (type == "arrests") {
-    state = state_values[$("#arrests_state_dropdown").val()];
-    agency = agencies[$("#arrests_agency_dropdown").val()];
-    ori = getORI(arrests_state_agencies, state, agency);
-  }
 
   tableData = getAgencyData(stateData, headers);
   tableData.pop();
@@ -115,11 +105,6 @@ function main(type, state_dropdown, crime_dropdown) {
   return [tableData, graphData, headers];
 }
 
-function getORI(state_agencies, state, agency) {
-  ori = state_agencies.filter(x => x.state === state);
-  ori = ori.filter(x => x.agency === agency);
-  return ori[0].ori;
-}
 
 function getCrimeColumns(arr, type) {
   if (type == "offenses") {

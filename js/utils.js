@@ -56,6 +56,21 @@ if (type == "arrests") {
   }
 }
 
+function makeCrimeDropdown() {
+  $("#crime_dropdown").empty();
+  $.each(crime_values, function(val, text) {
+    $('#crime_dropdown').append(new Option(text, val));
+  });
+  $("#crime_dropdown").val("aggravated_assault");
+}
+
+function makeStateDropdown(dropdown) {
+  $.each(state_values, function(val, text) {
+      $(dropdown).append( new Option(text,val) );
+  });
+  $(dropdown).val(4); // Sets default to the Great State of
+                             // California
+}
 
 function countToRate(data) {
   data_keys = _.keys(data);
