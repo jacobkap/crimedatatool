@@ -39,43 +39,9 @@ function updateGraph(div, agencyData, headers, type) {
     ylab = 'Rate per 100,000 People';
   }
 
-  graph = makeGraph(div, graphData, ylab, visibilityVector, new_title);
-  return graph;
+  temp_graph = makeGraph(div, graphData, ylab, visibilityVector, new_title);
+  return temp_graph;
 }
-
-function updateTable(table_name, data, type, headers) {
-  table_name.clear();
-    colsForTable = getCrimeColumns(headers, type, "table");
-    data = subsetColumns(data, colsForTable, "table");
-
-  z = [];
-  for (var n = 0; n < colsForTable.length; n++) {
-    label_name = fixTableName(colsForTable[n]);
-    data_name = fixTableDataName(colsForTable[n]);
-    z.push({
-      data: data_name,
-      title: label_name,
-      className: "dt-head-left dt-body-right"
-    });
-  }
-  plus = "";
-    if ($("#rate").is(':checked')) {
-      plus = " Rate";
-    }
-  for (var i=5; i<table_name.columns().nodes().length; i++) {
-        if ($("#rate").is(':checked')) {
-    $( table.column( i ).header() ).text($( table.column( i ).header() ).text() + " Rate");
-  } else {
-    $( table.column( i ).header() ).text(z[i].title);
-  }
-}
-table_name.rows.add({
-  data: data,
-  columns: z}); // Add new data
-table_name.column('1').order('desc');
-table_name.draw();
-}
-
 
 function updateGraphVisibility(graph) {
   visibilityVector = [];
@@ -99,6 +65,7 @@ function makeGraph(div, data, ylab, visibilityVector, title) {
       labelsSeparateLines: true,
       legend: 'always',
       ylabel: ylab,
+      includeZero: true ,
       xlabel: ' Year',
       visibility: visibilityVector,
       interactionModel: {},
@@ -138,7 +105,7 @@ function fixTableDataName(name) {
   return name;
 }
 
-function makeTable(div, data, headers) {
+function makeTable(div, data, headers, table_name) {
   data = subsetColumns(data, headers, "table");
 
   file_name = agencies[$("#agency_dropdown").val()] + "_" +
@@ -155,7 +122,7 @@ function makeTable(div, data, headers) {
       className: "dt-head-left dt-body-right"
     });
   }
-  var table = $(div).DataTable({
+  temp_table = $(div).DataTable({
     data: data,
     columns: z,
     "scrollX": true,
@@ -169,5 +136,5 @@ function makeTable(div, data, headers) {
     }
 
   });
-  return table;
+  return temp_table;
 }

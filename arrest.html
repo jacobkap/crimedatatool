@@ -2,128 +2,98 @@
 <html lang="en">
 
 <head>
-  <title>Arrests</title>
+  <title>Offenses Known and Cleared</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.0/underscore.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.css" />
-  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.css">
-  <script src="js/test.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/change_funs.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jacob Kaplan">
+  <meta name="description" content="Explore arrest data in the United States with this
+      website. All of the data comes from the
+      FBI's Uniform Crime Reporting (UCR) program data.">
+
+  <script type="text/javascript" src="data/data.min.js"></script>
+  <script src="js/utils.min.js"></script>
+  <script src="js/change_funs.min.js"></script>
   <script src="js/graph_table.js"></script>
-  <script src="js/datatool.js"></script>
+  <script src="js/datatool.min.js"></script>
 
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="data/data.js"></script>
+  <link rel="stylesheet" href="css/misc.min.css" />
+  <link rel="stylesheet" href="css/style.min.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="css/style.css" />
-
-  <script>
-
-    arrests_state_agencies = getStateAgencies("arrests_state_agencies");
-  </script>
-
 </head>
+
 <body>
   <div class="topnav" id="myTopnav">
-  <a  href="home.html">Home</a>
-  <a href="crime.html">Crimes</a>
-  <a class="active" href="arrest.html">Arrests</a>
-  <a href="police.html">Police Officers Killed and Assaulted</a>
-  <a class="icon" onclick="myFunction()">
+    <a href="home.html">Home</a>
+    <a href="crime.html">Crimes</a>
+    <a class="active" href="arrest.html">Arrests</a>
+    <a href="police.html">Police Officers Killed and Assaulted</a>
+    <a class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
 </div>
 
-
 <div class="column sidebar" style="background-color:#aaa;">
   <p>Enter a police agency to see its arrests over time </p>
-
   <h3>State:</h3>
+  <br>
   <select class="simple-select" id="arrests_state_dropdown" onchange="arrests_stateChangeFun()"></select>
   <br><br>
   <h3>Agency:</h3>
+  <br>
   <select class="simple-select" id="arrests_agency_dropdown" onchange="arrests_agencyChangeFun()"></select>
   <br><br>
   <h3>Crime:</h3>
+  <br>
   <select class="simple-select" id="arrests_crime_dropdown" onchange="arrests_crimeChangeFun()">
-  <script>
-  $.each(arrest_values, function(val, text) {
-    $('#arrests_crime_dropdown').append(new Option(text, val));
-  });
-  $('#arrests_crime_dropdown').val(1);
-  </script>
   </select>
   <br><br>
   <h3>Arrest Category:</h3>
+  <br>
   <select class="simple-select" id="arrests_category_dropdown" onchange="arrests_categoryChangeFun()">
-    <script>
-    $.each(arrest_categories, function(val, text) {
-      $('#arrests_category_dropdown').append(new Option(text, val));
-    });
-    $('#arrests_category_dropdown').val(1);
-    </script>
   </select>
-
-  <script>
-    $.each(state_values, function(val, text) {
-      $('#arrests_state_dropdown').append(new Option(text, val));
-    });
-
-    $('#arrests_state_dropdown').val(4); // Sets default to the Great State of
-    // California
-    arrests_agencies = updateAgencies(arrests_state_agencies, "#arrests_agency_dropdown", "#arrests_state_dropdown");
-    $('.simple-select').chosen();
-    var arrests_state_data = getStateData("arrests", "#arrests_state_dropdown");
-    arrest_headers = arrests_state_data[0];
-    arrests_agency_data = getAgencyData(arrests_state_agencies, arrests_state_data, arrest_headers);
-  </script>
   <br><br>
   <hr>
-  <button type="button" onclick="exportToCsv(arrests_table_data, 'arrests')">Download Data as CSV</button>
-
+  <button type="button" onclick="exportToCsv(arrests_table_data, 'arrests')">Download Agency Data as CSV</button>
 </div>
-
 <div class="column main" id="main">
+  <br>
+          <div id="loader"></div>
   <div id="arrests_graph"  style="width:95%;;height:500px"></div>
   <br><br>
   <div><table id="arrests_table" class="display cell-border"></table></div>
 
 
 
-  <script>
-    arrests_main_results = main("arrests", arrests_agencies,
-      "#arrests_state_dropdown", "#arrests_crime_dropdown");
-    arrests_table_data = arrests_main_results[0];
-    arrests_graph_data = arrests_main_results[1];
-    arrests_headers = arrests_main_results[2];
+  <script type="text/javascript">
+      $(document).ready(function(){
 
-    ylab = '# of Arrests';
-    visibilityVector = [true, false, false, false];
-    title = "";
-    console.log(title)
-    arrests_graph = makeGraph("arrests_graph", arrests_graph_data, ylab, visibilityVector, title);
-
-
-    arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_headers)
-
-
-    arrests_graph = updateGraph("arrests_graph", arrests_table_data, arrests_headers, "arrests");
-
-    $("#graph").ready(function() {
-      offenses_graph = updateGraph("graph", table_data, offenses_headers, "offenses");
-    });
-
-    $(document).ready(function(){
- resizeChosen();
- jQuery(window).on('resize', resizeChosen);
+      $('.simple-select').chosen();
+      resizeChosen();
+      makeStateDropdown("#arrests_state_dropdown")
+      makeCrimeDropdown("arrest", "#arrests_crime_dropdown");
+      makeArrestCategoriesDropdown();
+      arrest_agencies = updateAgencies("arrest",
+       "#arrests_agency_dropdown",
+        "#arrests_state_dropdown");
+      main_results = main("arrest",
+       "#arrests_state_dropdown",
+       "#arrests_state_dropdown");
+      arrests_table_data = main_results[0];
+      arrests_graph_data = main_results[1];
+      arrests_headers = main_results[2];
+      arrests_table_headers = main_results[3];
+      ylab = '# of Arrests';
+      visibilityVector = [true];
+      title = "";
+      arrests_graph = makeGraph("arrests_graph", arrests_graph_data, ylab, visibilityVector, title);
+      $("#graph").ready($("#loader").hide())
+      arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers)
+      jQuery(window).on('resize', resizeChosen);
 });
   </script>
 

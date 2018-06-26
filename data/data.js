@@ -86,9 +86,9 @@ var crime_values = {
 };
 
 var arrest_values = {
-  "arson": "Arson",
   "agg_assault": "Aggravated Assault",
   "oth_assault": "Assault - Other",
+  "arson": "Arson",
   "burglary": "Burglary",
   "curfew": "Curfew",
   "disorder_cond": "Disorderly Conduct",

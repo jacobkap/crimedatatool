@@ -5,29 +5,33 @@
   <title>Crime Data Tool</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="css/style.css" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jacob Kaplan">
+  <meta name="description" content="Explore crime, arrest, and police injury/death
+      data  in the United States with this website. All of the data comes from the
+      FBI's Uniform Crime Reporting (UCR) program data.">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
   <script>
-  /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-  function myFunction() {
+    /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+    function myFunction() {
       var x = document.getElementById("myTopnav");
       if (x.className === "topnav") {
-          x.className += " responsive";
+        x.className += " responsive";
       } else {
-          x.className = "topnav";
+        x.className = "topnav";
       }
-  }
+    }
   </script>
   <div class="topnav" id="myTopnav">
-  <a class="active" href="home.html">Home</a>
-  <a  href="crime.html">Crimes</a>
-  <a href="arrest.html">Arrests</a>
-  <a href="police.html">Police Officers Killed and Assaulted</a>
-  <a class="icon" onclick="myFunction()">
+    <a class="active" href="home.html">Home</a>
+    <a href="crime.html">Crimes</a>
+    <a href="arrest.html">Arrests</a>
+    <a href="police.html">Police Officers Killed and Assaulted</a>
+    <a class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
 </div>
 

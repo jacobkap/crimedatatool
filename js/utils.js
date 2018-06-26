@@ -58,11 +58,18 @@ if (type == "arrests") {
   }
 }
 
-function makeCrimeDropdown() {
-  $.each(crime_values, function(val, text) {
-    $('#crime_dropdown').append(new Option(text, val));
+function makeCrimeDropdown(type, dropdown) {
+  if (type == "crime") {
+    crime = crime_values;
+    starter = "all_crimes";
+  } else if (type == "arrest") {
+    crime = arrest_values;
+    starter = "agg_assault";
+  }
+  $.each(crime, function(val, text) {
+    $(dropdown).append(new Option(text, val));
   });
-  $("#crime_dropdown").val("aggravated_assault");
+  $(dropdown).val(starter);
 }
 
 function makeStateDropdown(dropdown) {
@@ -71,6 +78,13 @@ function makeStateDropdown(dropdown) {
   });
   $(dropdown).val(4); // Sets default to the Great State of
                              // California
+}
+
+function makeArrestCategoriesDropdown() {
+  $.each(arrest_categories, function(val, text) {
+    $('#arrests_category_dropdown').append(new Option(text, val));
+  });
+  $('#arrests_category_dropdown').val("tot_arrests");
 }
 
 function countToRate(data) {
@@ -90,4 +104,37 @@ function countToRate(data) {
     }
   }
   return data;
+}
+
+
+function getStateAgencies(type) {
+  url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
+  if (type == "crime") {
+    url += "offenses/" + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
+  } else if (type == "arrest") {
+      url += "arrests/" + state_values[$("#arrests_state_dropdown").val()] + "_agency_choices.json";
+  }
+  var state_agencies = $.getJSON({
+    url: url,
+    type: 'get',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+      result = data;
+    }
+  });
+  state_agencies = state_agencies.responseJSON;
+  return (state_agencies);
+}
+
+function updateAgencies(type, agencyDropdown, stateDropdown) {
+  agencies = getStateAgencies(type);
+  $(agencyDropdown).empty();
+  $.each(agencies, function(val, text) {
+    $(agencyDropdown).append(new Option(text, val));
+  });
+  $(agencyDropdown).val(0);
+
+  $('.simple-select').trigger('chosen:updated');
+  return agencies;
 }

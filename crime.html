@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-
   <title>Offenses Known and Cleared</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jacob Kaplan">
+  <meta name="description" content="Explore crime and clearances by
+      arrest data in the United States with this website. All of the data comes from the
+      FBI's Uniform Crime Reporting (UCR) program data.">
 
   <script type="text/javascript" src="data/data.min.js"></script>
   <script src="js/utils.min.js"></script>
@@ -24,7 +25,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
 
   <div class="topnav" id="myTopnav">
@@ -78,9 +78,7 @@
         <br>
         <br>
         <hr>
-        <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download Data as CSV</button>
-
-
+        <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download Agency Data as CSV</button>
         <br>
         <p>Please note that data are only available for agencies that report all 12 months of the year.
       </div>
@@ -99,8 +97,8 @@
             $('.simple-select').chosen();
             resizeChosen();
             makeStateDropdown("#state_dropdown")
-            makeCrimeDropdown();
-            offense_agencies = updateAgencies("crime", "#agency_dropdown", state_dropdown);
+            makeCrimeDropdown("crime", '#crime_dropdown');
+            offense_agencies = updateAgencies("crime", "#agency_dropdown", "#state_dropdown");
             main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
             table_data = main_results[0];
             offenses_graph_data = main_results[1];

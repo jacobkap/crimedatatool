@@ -56,41 +56,29 @@ function subsetColumns(data, columns, output) {
   return (data);
 }
 
-function getStateAgencies(type) {
-  url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
-  if (type == "crime") {
-    url += "offenses/" + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
-  }
-  var state_agencies = $.getJSON({
-    url: url,
-    type: 'get',
-    dataType: 'json',
-    async: false,
-    success: function(data) {
-      result = data;
-    }
-  });
-  state_agencies = state_agencies.responseJSON;
-  return (state_agencies);
-}
+
 
 function getStateData(type) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
   if (type == "offenses") {
     state = state_values[$("#state_dropdown").val()];
     state = state.replace(/ /g, "_");
+    state = state.replace(" ", "_");
     agencies = offense_agencies[$("#agency_dropdown").val()];
     agencies = agencies.replace(/ /g, "_");
     agencies = agencies.replace(/:/g, "_");
     agencies = agencies.replace(/__/g, "_");
-    state = state.replace(" ", "_");
     url += "offenses/" + state + "_" + agencies;
   }
-  if (type == "arrests") {
+  if (type == "arrest") {
     state = state_values[$("#arrests_state_dropdown").val()];
+    state = state.replace(/ /g, "_");
     state = state.replace(" ", "_");
-    state = state.replace(" ", "_");
-    url += state;
+    agencies = arrest_agencies[$("#arrests_agency_dropdown").val()];
+    agencies = agencies.replace(/ /g, "_");
+    agencies = agencies.replace(/:/g, "_");
+    agencies = agencies.replace(/__/g, "_");
+    url += "arrests/" + state + "_" + agencies;
   }
   url += ".csv";
   stateData = readCSV(url);
@@ -115,7 +103,6 @@ function main(type, state_dropdown, crime_dropdown) {
   colsForGraph = getCrimeColumns(headers, type, "graph");
   colsForTable = getCrimeColumns(headers, type, "table");
 
-
   tableData = getAgencyData(stateData, headers);
   tableData.pop();
   graphData = subsetColumns(tableData, colsForGraph, "graph");
@@ -125,19 +112,22 @@ function main(type, state_dropdown, crime_dropdown) {
 
 
 function getCrimeColumns(arr, type, output) {
-  if (type == "offenses") {
-    crime = $("#crime_dropdown").val();
-  }
-  if (type == "arrests") {
-    crime = $("#arrests_crime_dropdown").val();
-    crime += "_" + $("#arrests_category_dropdown").val();
-  }
   arr = arr.split(",");
   if (output == "graph") {
     columnNames = ["year"];
   } else {
     columnNames = ["agency", "year", "state", "population", "ORI"];
   }
+  if (type == "offenses") {
+    crime = $("#crime_dropdown").val();
+  }
+  if (type == "arrest") {
+    crime = $("#arrests_crime_dropdown").val();
+    if (output == "graph") {
+    crime += "_" + $("#arrests_category_dropdown").val();
+  }
+  }
+
   for (var i = 0; i < arr.length; i++) {
     if (arr[i].includes(crime)) {
       columnNames.push(arr[i]);
