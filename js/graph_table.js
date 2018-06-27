@@ -22,6 +22,11 @@ function updateGraph(div, agencyData, headers, type) {
   graphData = subsetColumns(agencyData, colsForGraph, "graph");
   title = getTitle(agencyData, type);
 
+    var ylab = '# of Crimes';
+    if (type == "arrests") ylab = "# of Arrests";
+    if ($("#rate").is(':checked')) {
+      ylab = 'Rate per 100,000 People';
+    }
 
   graphData = graphData.replace(/clr_18.*,/, "Clearance Under Age 18,");
   graphData = graphData.replace(/act.*,clr/, "Actual,clr");
@@ -38,12 +43,10 @@ function updateGraph(div, agencyData, headers, type) {
     visibilityVector.push($("#unfounded").is(':checked'));
   }
 
+if (type == "leoka") {
+  ylab = "";
+}
 
-  var ylab = '# of Crimes';
-  if (type == "arrests") ylab = "# of Arrests";
-  if ($("#rate").is(':checked')) {
-    ylab = 'Rate per 100,000 People';
-  }
 
   temp_graph = makeGraph(div, graphData, ylab, visibilityVector, title);
   return temp_graph;
