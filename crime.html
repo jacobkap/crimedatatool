@@ -7,13 +7,14 @@
   <meta name="author" content="Jacob Kaplan">
   <meta name="description" content="Explore crime and clearances by
       arrest data in the United States with this website. All of the data comes from the
-      FBI's Uniform Crime Reporting (UCR) program data.">
+      FBI's Uniform Crime Reporting (UCR) Program Data: Offenses Known and
+      Clearances by Arrest.">
 
   <script type="text/javascript" src="data/data.min.js"></script>
-  <script src="js/utils.min.js"></script>
-  <script src="js/change_funs.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/change_funs.js"></script>
   <script src="js/graph_table.js"></script>
-  <script src="js/datatool.min.js"></script>
+  <script src="js/datatool.js"></script>
 
   <link rel="stylesheet" href="css/misc.min.css" />
   <link rel="stylesheet" href="css/style.min.css" />
@@ -98,7 +99,8 @@
             resizeChosen();
             makeStateDropdown("#state_dropdown")
             makeCrimeDropdown("crime", '#crime_dropdown');
-            offense_agencies = updateAgencies("crime", "#agency_dropdown", "#state_dropdown");
+            offenses_largest_agency = getStateAgencies("crime", true);
+            offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
             main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
             table_data = main_results[0];
             offenses_graph_data = main_results[1];
@@ -106,7 +108,7 @@
             table_headers = main_results[3];
             ylab = '# of Crimes';
             visibilityVector = [true, false, false, false];
-            title = "";
+            title = getTitle(table_data, "offenses");
             offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
             $("#graph").ready($("#loader").hide())
             table = makeTable("#table", table_data, table_headers)

@@ -27,14 +27,19 @@ function exportToCsv(tableData, type) {
     offense_type += "count_";
   }
 
-if (type == "offenses") {
-  filename = offense_type;
-  filename += offense_agencies[$("#agency_dropdown").val()] + "_" +
-    state_values[$("#state_dropdown").val()] + ".csv";
-}
-if (type == "arrests") {
-  filename = "ucr_arrests_";
-}
+  if (type == "offenses") {
+    filename = "ucr_" + offense_type;
+    filename += offense_agencies[$("#agency_dropdown").val()] + "_" +
+      state_values[$("#state_dropdown").val()] + ".csv";
+  } else if (type == "arrests") {
+    filename = "ucr_arrests_";
+    filename += arrest_agencies[$("#arrests_agency_dropdown").val()] + "_" +
+      state_values[$("#arrests_state_dropdown").val()] + ".csv";
+  } else if (type == "leoka") {
+    filename = "ucr_police_";
+    filename += leoka_agencies[$("#leoka_agency_dropdown").val()] + "_" +
+      state_values[$("#leoka_state_dropdown").val()] + ".csv";
+  }
 
 
 
@@ -65,6 +70,9 @@ function makeCrimeDropdown(type, dropdown) {
   } else if (type == "arrest") {
     crime = arrest_values;
     starter = "agg_assault";
+  } else if (type == "leoka") {
+    crime = leoka_values;
+    starter = "total_officers";
   }
   $.each(crime, function(val, text) {
     $(dropdown).append(new Option(text, val));
@@ -74,10 +82,10 @@ function makeCrimeDropdown(type, dropdown) {
 
 function makeStateDropdown(dropdown) {
   $.each(state_values, function(val, text) {
-      $(dropdown).append( new Option(text,val) );
+    $(dropdown).append(new Option(text, val));
   });
   $(dropdown).val(4); // Sets default to the Great State of
-                             // California
+  // California
 }
 
 function makeArrestCategoriesDropdown() {
@@ -95,7 +103,9 @@ function countToRate(data) {
       temp_match.includes("officer")) {
       rate_val = data[data_keys[i]] / data.population * 100000;
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
-      if (isNaN(rate_val)) { rate_val = 0; }
+      if (isNaN(rate_val)) {
+        rate_val = 0;
+      }
       data[data_keys[i]] = rate_val;
       new_key = data_keys[i] + "_rate";
       Object.defineProperty(data, new_key,
@@ -107,15 +117,23 @@ function countToRate(data) {
 }
 
 
-function getStateAgencies(type) {
+function getStateAgencies(type, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
   if (type == "crime") {
-    url += "offenses/" + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
+    url += "offenses/";
+    final_url = url + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
   } else if (type == "arrest") {
-      url += "arrests/" + state_values[$("#arrests_state_dropdown").val()] + "_agency_choices.json";
+    url += "arrests/";
+    final_url = url + state_values[$("#arrests_state_dropdown").val()] + "_agency_choices.json";
+  } else if (type == "leoka") {
+    url += "leoka/";
+    final_url = url + state_values[$("#leoka_state_dropdown").val()] + "_agency_choices.json";
+  }
+  if (largest_agencies === true) {
+    final_url = url + "largest_agency_choices.json";
   }
   var state_agencies = $.getJSON({
-    url: url,
+    url: final_url,
     type: 'get',
     dataType: 'json',
     async: false,
@@ -127,13 +145,20 @@ function getStateAgencies(type) {
   return (state_agencies);
 }
 
-function updateAgencies(type, agencyDropdown, stateDropdown) {
+function updateAgencies(type, largestAgencies, agencyDropdown, stateDropdown) {
   agencies = getStateAgencies(type);
   $(agencyDropdown).empty();
   $.each(agencies, function(val, text) {
     $(agencyDropdown).append(new Option(text, val));
   });
-  $(agencyDropdown).val(0);
+  largest_agency = state_values[$(stateDropdown).val()];
+  largest_agency = _.filter(largestAgencies, function(x) {
+    return x.state == largest_agency;
+  });
+  largest_agency = largest_agency[0].agency;
+  largest_agency = _.indexOf(agencies, largest_agency);
+  $(agencyDropdown).val(largest_agency);
+  //$(agencyDropdown).val(0);
 
   $('.simple-select').trigger('chosen:updated');
   return agencies;

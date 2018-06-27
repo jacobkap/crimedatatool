@@ -1,20 +1,26 @@
+function getTitle(data, type) {
+  title = data[0].agency + ', ';
+  title += data[0].state + ': ';
+  if (type == "offenses") {
+    title += crime_values[$("#crime_dropdown").val()];
+  } else if (type == "arrest") {
+    title += arrest_values[$("#arrests_crime_dropdown").val()];
+    title += " " + arrest_categories[$("#arrests_category_dropdown").val()];
+  } else if (type == "leoka") {
+    title += leoka_values[$("#leoka_category_dropdown").val()];
+  }
+
+  if ($("#rate").is(':checked')) {
+    title += " Rate";
+  }
+  return title;
+}
+
 function updateGraph(div, agencyData, headers, type) {
   colsForGraph = getCrimeColumns(headers, type, "graph");
 
   graphData = subsetColumns(agencyData, colsForGraph, "graph");
-  new_title = agencyData[0].agency + ', ';
-  new_title += agencyData[0].state + ': ';
-  if (type == "offenses") {
-  new_title += crime_values[$("#crime_dropdown").val()];
-  }
-  if (type == "arrests") {
-  new_title += arrest_values[$("#arrests_crime_dropdown").val()];
-    new_title += " " + arrest_categories[$("#arrests_category_dropdown").val()];
-  }
-
-  if ($("#rate").is(':checked')) {
-    new_title += " Rate";
-  }
+  title = getTitle(agencyData, type);
 
 
   graphData = graphData.replace(/clr_18.*,/, "Clearance Under Age 18,");
@@ -25,11 +31,11 @@ function updateGraph(div, agencyData, headers, type) {
   visibilityVector = [true, false, false, false];
 
   if (type == "offenses") {
-  visibilityVector = [];
-  visibilityVector.push($("#actual").is(':checked'));
-  visibilityVector.push($("#clearance").is(':checked'));
-  visibilityVector.push($("#clearance_under18").is(':checked'));
-  visibilityVector.push($("#unfounded").is(':checked'));
+    visibilityVector = [];
+    visibilityVector.push($("#actual").is(':checked'));
+    visibilityVector.push($("#clearance").is(':checked'));
+    visibilityVector.push($("#clearance_under18").is(':checked'));
+    visibilityVector.push($("#unfounded").is(':checked'));
   }
 
 
@@ -39,7 +45,7 @@ function updateGraph(div, agencyData, headers, type) {
     ylab = 'Rate per 100,000 People';
   }
 
-  temp_graph = makeGraph(div, graphData, ylab, visibilityVector, new_title);
+  temp_graph = makeGraph(div, graphData, ylab, visibilityVector, title);
   return temp_graph;
 }
 
@@ -51,8 +57,8 @@ function updateGraphVisibility(graph) {
   visibilityVector.push($("#unfounded").is(':checked'));
 
   graph.updateOptions({
-                  visibility: visibilityVector
-                });
+    visibility: visibilityVector
+  });
 }
 
 
@@ -65,7 +71,7 @@ function makeGraph(div, data, ylab, visibilityVector, title) {
       labelsSeparateLines: true,
       legend: 'always',
       ylabel: ylab,
-      includeZero: true ,
+      includeZero: true,
       xlabel: ' Year',
       visibility: visibilityVector,
       interactionModel: {},

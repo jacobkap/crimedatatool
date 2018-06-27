@@ -3,7 +3,7 @@ function rateChangeFun() {
 }
 
 function offenses_stateChangeFun() {
-  offense_agencies = updateAgencies("crime", "#agency_dropdown", state_dropdown);
+  offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", state_dropdown);
   offenses_agencyChangeFun("graph");
 }
 
@@ -38,10 +38,36 @@ function arrests_categoryChangeFun() {
 }
 
 function arrests_stateChangeFun() {
-  arrest_agencies = updateAgencies("arrest", "#arrests_agency_dropdown", "#arrests_state_dropdown");
+  arrest_agencies = updateAgencies("arrest", arrests_largest_agency, "#arrests_agency_dropdown", "#arrests_state_dropdown");
   arrests_agencyChangeFun("arrests_graph");
 }
 
 function arrests_crimeChangeFun() {
   arrests_agencyChangeFun("arrests_graph");
+}
+
+
+function leoka_agencyChangeFun() {
+  main_results = main("leoka",
+    "#leoka_state_dropdown",
+    "#leoka_state_dropdown");
+  leoka_table_data = main_results[0];
+  leoka_graph_data = main_results[1];
+  leoka_headers = main_results[2];
+  leoka_table_headers = main_results[3];
+  ylab = '# of ';
+  visibilityVector = [true];
+  title = "";
+  leoka_graph = updateGraph("leoka_graph", leoka_table_data, leoka_headers, "leoka");
+  arrests_table.destroy();
+  arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers);
+}
+
+function leoka_stateChangeFun() {
+  leoka_agencies = updateAgencies("leoka", leoka_largest_agency, "#leoka_agency_dropdown", "#leoka_state_dropdown");
+  leoka_agencyChangeFun("leoka_graph");
+}
+
+function leoka_categoryChangeFun() {
+  leoka_agencyChangeFun("leoka_graph");
 }

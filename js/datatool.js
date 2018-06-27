@@ -69,8 +69,7 @@ function getStateData(type) {
     agencies = agencies.replace(/:/g, "_");
     agencies = agencies.replace(/__/g, "_");
     url += "offenses/" + state + "_" + agencies;
-  }
-  if (type == "arrest") {
+  } else if (type == "arrest") {
     state = state_values[$("#arrests_state_dropdown").val()];
     state = state.replace(/ /g, "_");
     state = state.replace(" ", "_");
@@ -79,6 +78,15 @@ function getStateData(type) {
     agencies = agencies.replace(/:/g, "_");
     agencies = agencies.replace(/__/g, "_");
     url += "arrests/" + state + "_" + agencies;
+  } else if (type == "leoka") {
+    state = state_values[$("#leoka_state_dropdown").val()];
+    state = state.replace(/ /g, "_");
+    state = state.replace(" ", "_");
+    agencies = leoka_agencies[$("#leoka_agency_dropdown").val()];
+    agencies = agencies.replace(/ /g, "_");
+    agencies = agencies.replace(/:/g, "_");
+    agencies = agencies.replace(/__/g, "_");
+    url += "leoka/" + state + "_" + agencies;
   }
   url += ".csv";
   stateData = readCSV(url);
@@ -120,13 +128,14 @@ function getCrimeColumns(arr, type, output) {
   }
   if (type == "offenses") {
     crime = $("#crime_dropdown").val();
-  }
-  if (type == "arrest") {
+  } else if (type == "arrest") {
     crime = $("#arrests_crime_dropdown").val();
     if (output == "graph") {
-    crime += "_" + $("#arrests_category_dropdown").val();
-  }
-  }
+      crime += "_" + $("#arrests_category_dropdown").val();
+    }} else if (type == "leoka") {
+      crime = $("#leoka_category_dropdown").val();
+    }
+  
 
   for (var i = 0; i < arr.length; i++) {
     if (arr[i].includes(crime)) {

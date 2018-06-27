@@ -131,6 +131,46 @@ var arrest_values = {
   "weapons": "Weapons Offenses"
 };
 
+var leoka_values = {
+               "total_officers": "Police Officers - Total",
+               "female_employees_officers": "Police Officers - Female",
+               "male_employees_officers": "Police Officers - Male",
+               "total_civilians": "Civilians - Total",
+               "female_employees_civilians": "Civilians - Female",
+               "male_employees_civilians": "Civilians - Male",
+               "officers_killed_accident": "Officers Killed by Accident",
+               "officers_killed_felony": "Officers Killed by Felony",
+               "assault_injury_total": "Assault With Injury - Total",
+               "assault_injury_gun": "Assault With Injury - Gun Used",
+               "assault_injury_knife": "Assault With Injury - Knife Used",
+               "assault_injury_hand_feet": "Assault With Injury - Unarmed Offender",
+               "assault_injury_other": "Assault With Injury - Other Weapon",
+
+               "assault_no_injury_total": "Assault Without Injury - Total",
+               "assault_no_injury_gun": "Assault Without Injury - Gun Used",
+               "assault_no_injury_knife": "Assault Without Injury - Knife Used",
+               "assault_no_injury_hand_feet": "Assault Without Injury - Unarmed Offender",
+               "assault_no_injury_other": "Assault Without Injury - Other Weapon",
+
+               "total_assault_total": "Total Assault - Total",
+               "total_assault_gun": "Total Assault - Gun Used",
+               "total_assault_knife": "Total Assault - Knife Used",
+               "total_assault_hand_feet": "Total Assault - Unarmed Offender",
+               "total_assault_other": "Total Assault - Other Weapon",
+
+               "all_oth_total_assault": "Assault - Other Scenario",
+               "ambush_total_assault": "Assault - Ambush",
+               "att_oth_arrest_total_assault": "Assault - Attempted Other Arrest",
+               "burglary_total_assault": "Assault - Burglary",
+               "civil_disorder_total_assault": "Assault - Civil Disorder",
+               "cust_prisoners_total_assault": "Assault - Custody of Prisoner",
+               "deranged_total_assault": "Assault - Deranged Offender",
+               "disturbance_total_assault": "Assault - Disturbance",
+               "robbery_total_assault": "Assault - Robbery",
+               "susp_pers_total_assault": "Assault - Suspicious Person",
+               "traffic_total_assault": "Assault - Traffic"
+};
+
 var arrest_categories = {
   "tot_arrests": "Total Arrests",
   "tot_adult": "Total Adult",
