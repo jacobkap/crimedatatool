@@ -55,7 +55,7 @@ function leoka_agencyChangeFun() {
   leoka_graph_data = main_results[1];
   leoka_headers = main_results[2];
   leoka_table_headers = main_results[3];
-  ylab = '# of ';
+  ylab = '';
   visibilityVector = [true];
   title = "";
   leoka_graph = updateGraph("leoka_graph", leoka_table_data, leoka_headers, "leoka");
