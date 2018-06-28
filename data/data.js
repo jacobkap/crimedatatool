@@ -1,3 +1,11 @@
+default_table_headers = [
+  "agency",
+  "year",
+  "state",
+  "population",
+  "ORI"
+];
+
 var state_values = [
   "Alabama",
   "Alaska",

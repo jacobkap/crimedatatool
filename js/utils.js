@@ -147,6 +147,7 @@ function getStateAgencies(type, largest_agencies = false) {
 
 function updateAgencies(type, largestAgencies, agencyDropdown, stateDropdown) {
   agencies = getStateAgencies(type);
+  agencies.sort();
   $(agencyDropdown).empty();
   $.each(agencies, function(val, text) {
     $(agencyDropdown).append(new Option(text, val));
