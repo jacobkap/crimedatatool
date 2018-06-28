@@ -27,7 +27,7 @@ function objToString(obj) {
 }
 
 function subsetColumns(data, columns, output) {
-  data.shift();
+
   if ($("#rate").is(':checked')) {
     columns = _.map(columns, function(x) {
       return x + "_rate";
@@ -113,14 +113,15 @@ function main(type, state_dropdown, crime_dropdown) {
 
   tableData = getAgencyData(stateData, headers);
   tableData.pop();
+  tableData.shift();
   graphData = subsetColumns(tableData, colsForGraph, "graph");
 
   return [tableData, graphData, headers, colsForTable];
 }
 
 
-function getCrimeColumns(arr, type, output) {
-  arr = arr.split(",");
+function getCrimeColumns(headers, type, output) {
+  headers = headers.split(",");
   if (output == "graph") {
     columnNames = ["year"];
   } else {
@@ -135,13 +136,21 @@ function getCrimeColumns(arr, type, output) {
     }} else if (type == "leoka") {
       crime = $("#leoka_category_dropdown").val();
     }
-  
 
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i].includes(crime)) {
-      columnNames.push(arr[i]);
+
+if (type == "leoka") {
+  for (var i = 0; i < headers.length; i++) {
+    if (headers[i] === crime) {
+      columnNames.push(headers[i]);
     }
   }
+} else {
+  for (var n = 0; n < headers.length; n++) {
+    if (headers[n].includes(crime)) {
+      columnNames.push(headers[n]);
+    }
+  }
+}
   return (columnNames);
 }
 

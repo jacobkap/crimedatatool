@@ -110,7 +110,7 @@
             ylab = '# of Crimes';
             visibilityVector = [true, false, false, false];
             title = getTitle(table_data, "offenses");
-            offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title);
+            offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title, "offenses");
             $("#graph").ready($("#loader").hide())
             table = makeTable("#table", table_data, table_headers)
             jQuery(window).on('resize', resizeChosen);

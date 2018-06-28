@@ -15,7 +15,7 @@ function offenses_agencyChangeFun(graph_div) {
   table_headers = main_results[3];
   offenses_graph = updateGraph('graph', table_data, offenses_headers, "offenses");
   table.destroy();
-  table = makeTable("#table", table_data, table_headers);
+  table = makeTable("#table", table_data, table_headers, "offenses");
 }
 
 function offenses_crimeChangeFun() {
@@ -30,7 +30,7 @@ function arrests_agencyChangeFun() {
   arrest_table_headers = arrests_main_results[3];
   arrests_graph = updateGraph('arrests_graph', arrests_table_data, arrests_headers, "arrest");
   arrests_table.destroy();
-  arrests_table = makeTable("#arrests_table", arrests_table_data, arrest_table_headers);
+  arrests_table = makeTable("#arrests_table", arrests_table_data, arrest_table_headers, "arrests");
 }
 
 function arrests_categoryChangeFun() {
@@ -60,7 +60,7 @@ function leoka_agencyChangeFun() {
   title = "";
   leoka_graph = updateGraph("leoka_graph", leoka_table_data, leoka_headers, "leoka");
   arrests_table.destroy();
-  arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers);
+  arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka");
 }
 
 function leoka_stateChangeFun() {

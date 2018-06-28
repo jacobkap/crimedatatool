@@ -22,11 +22,11 @@ function updateGraph(div, agencyData, headers, type) {
   graphData = subsetColumns(agencyData, colsForGraph, "graph");
   title = getTitle(agencyData, type);
 
-    var ylab = '# of Crimes';
-    if (type == "arrests") ylab = "# of Arrests";
-    if ($("#rate").is(':checked')) {
-      ylab = 'Rate per 100,000 People';
-    }
+  var ylab = '# of Crimes';
+  if (type == "arrests") ylab = "# of Arrests";
+  if ($("#rate").is(':checked')) {
+    ylab = 'Rate per 100,000 People';
+  }
 
   graphData = graphData.replace(/clr_18.*,/, "Clearance Under Age 18,");
   graphData = graphData.replace(/act.*,clr/, "Actual,clr");
@@ -43,9 +43,9 @@ function updateGraph(div, agencyData, headers, type) {
     visibilityVector.push($("#unfounded").is(':checked'));
   }
 
-if (type == "leoka") {
-  ylab = "";
-}
+  if (type == "leoka") {
+    ylab = "";
+  }
 
 
   temp_graph = makeGraph(div, graphData, ylab, visibilityVector, title);
@@ -84,7 +84,7 @@ function makeGraph(div, data, ylab, visibilityVector, title) {
   return (new_graph);
 }
 
-function fixTableName(name) {
+function fixTableName(name, type) {
   crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
   if (!crime_match.includes("officer") && crime_match == name) {
     name = name.replace(/_/g, " ");
@@ -96,7 +96,23 @@ function fixTableName(name) {
   name = name.replace(/clr_18_/, "Clearance Under Age 18 ");
   name = name.replace(/clr_/, "Clearance ");
   name = name.replace(/unfound_/, "Unfounded ");
-  name = name.replace(crime_match_regex, crime_values[crime_match]);
+  if (type == "offenses") {
+    //offenses_data_names = _.keys(crime_values);
+  //  offenses_value_names = _.values(crime_values);
+  //  name = offenses_value_names[_.indexOf(offenses_value_names, name)];
+
+    name = name.replace(crime_match_regex, crime_values[crime_match]);
+  } else if (type == "arrests") {
+    real_name = name;
+    name = name.replace(/ tot.*/g, "");
+    arrests_data_names = _.keys(arrest_values);
+    arrests_value_names = _.values(arrest_values);
+    name = arrests_value_names[_.indexOf(arrests_value_names, name)];
+  } else if (type == "leoka") {
+    leoka_data_names = _.keys(leoka_values);
+    leoka_value_names = _.values(leoka_values);
+    name = leoka_value_names[_.indexOf(leoka_data_names, name)];
+  }
 
   if ($("#rate").is(':checked')) {
     name += " Rate";
@@ -114,17 +130,14 @@ function fixTableDataName(name) {
   return name;
 }
 
-function makeTable(div, data, headers, table_name) {
+function makeTable(div, data, headers, type) {
   data = subsetColumns(data, headers, "table");
 
-  file_name = agencies[$("#agency_dropdown").val()] + "_" +
-    state_values[$("#state_dropdown").val()];
-  temp = headers;
   z = [];
 
-  for (var i = 0; i < temp.length; i++) {
-    label_name = fixTableName(temp[i]);
-    data_name = fixTableDataName(temp[i]);
+  for (var i = 0; i < headers.length; i++) {
+    label_name = fixTableName(headers[i], type);
+    data_name = fixTableDataName(headers[i]);
     z.push({
       data: data_name,
       title: label_name,
@@ -135,6 +148,7 @@ function makeTable(div, data, headers, table_name) {
     data: data,
     columns: z,
     "scrollX": true,
+    "sScrollXInner": "100%",
     "sScrollX": "100%",
     "stripe": true,
     "hover": true,

@@ -82,9 +82,7 @@
       arrest_agencies = updateAgencies("arrest", arrests_largest_agency,
        "#arrests_agency_dropdown",
         "#arrests_state_dropdown");
-      main_results = main("arrest",
-       "#arrests_state_dropdown",
-       "#arrests_state_dropdown");
+      main_results = main("arrest", "#arrests_state_dropdown", "#arrests_crime_dropdown");
       arrests_table_data = main_results[0];
       arrests_graph_data = main_results[1];
       arrests_headers = main_results[2];
@@ -94,7 +92,7 @@
       title = getTitle(arrests_table_data, "arrest");
       arrests_graph = makeGraph("arrests_graph", arrests_graph_data, ylab, visibilityVector, title);
       $("#graph").ready($("#loader").hide())
-      arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers)
+      arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers, "arrests")
       jQuery(window).on('resize', resizeChosen);
 });
   </script>
