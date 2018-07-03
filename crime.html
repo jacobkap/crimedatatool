@@ -16,6 +16,7 @@
   <script src="js/graph_table.js"></script>
   <script src="js/datatool.js"></script>
 
+  <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.min.css" />
   <link rel="stylesheet" href="css/style.min.css" />
 
@@ -25,17 +26,24 @@
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-  <div class="topnav" id="myTopnav">
-    <a href="index.html">Home</a>
-    <a class="active" href="crime.html">Crimes</a>
-    <a href="arrest.html">Arrests</a>
-    <a href="police.html">Police Officers Killed and Assaulted</a>
-    <a class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"></i>
-</div>
+  <div class="navigation-wrapper">
+    <div class="top-navigation">
+      <nav role="navigation" id="site-nav" class="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a class = "on" href="crime.html">Crimes</a></li>
+          <li><a href="arrest.html">Arrests</a></li>
+          <li><a href="police.html">Police</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+
 <div class="row">
       <div class="column sidebar" style="background-color:#aaa;">
         <p>Enter a police agency to see its crime over time </p>
@@ -68,13 +76,10 @@
         <br><br>
         <input type="checkbox" id="actual" name="actual" checked onchange="updateGraphVisibility(offenses_graph)">
         <label for="actual">Actual</label>
-        <br>
         <input type="checkbox" id="clearance" name="clearance" onchange="updateGraphVisibility(offenses_graph)">
         <label for="clearance">Clearance</label>
-        <br>
         <input type="checkbox" id="clearance_under18" name="clearance_under18" onchange="updateGraphVisibility(offenses_graph)">
         <label for="clearance_under18">Clearance under age 18</label>
-        <br>
         <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraphVisibility(offenses_graph)">
         <label for="unfounded">Unfounded</label>
         <br>
@@ -88,9 +93,7 @@
 
       <div class="column main">
         <div id="loader"></div>
-        <br><br>
         <div id="graph" style="width:95%;height:500px"></div>
-        <br><br>
       <div><table id="table" class="display cell-border"></table></div>
 
         <script type="text/javascript">

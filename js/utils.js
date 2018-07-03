@@ -19,7 +19,6 @@ function exportToCsv(tableData, type) {
   data = data.map(objToString);
   data = data.join("\n");
   data = objToString(_.keys(tableData[0])) + '\n' + data;
-  offense_type = "ucr_offenses_";
 
   if ($("#rate").is(':checked')) {
     offense_type += "rate_";
@@ -28,7 +27,7 @@ function exportToCsv(tableData, type) {
   }
 
   if (type == "offenses") {
-    filename = "ucr_" + offense_type;
+    filename = "ucr_offenses_";
     filename += offense_agencies[$("#agency_dropdown").val()] + "_" +
       state_values[$("#state_dropdown").val()] + ".csv";
   } else if (type == "arrests") {
