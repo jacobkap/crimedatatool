@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Offenses Known and Cleared</title>
   <meta charset="UTF-8">
@@ -26,8 +27,9 @@
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
 </head>
+
 <body>
 
   <div class="navigation-wrapper">
@@ -35,92 +37,96 @@
       <nav role="navigation" id="site-nav" class="nav">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a class = "on" href="crime.html">Crimes</a></li>
+          <li><a class="on" href="crime.html">Crimes</a></li>
           <li><a href="arrest.html">Arrests</a></li>
           <li><a href="police.html">Police</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li><a href="faw.html">FAQ</a></li>
         </ul>
       </nav>
     </div>
   </div>
 
 
-<div class="row">
-      <div class="column sidebar" style="background-color:#aaa;">
-        <p>Enter a police agency to see its crime over time </p>
-        <h3>State:</h3>
-        <br>
-        <select class="simple-select" id="state_dropdown" onchange="offenses_stateChangeFun()">
+  <div class="row">
+    <div class="column sidebar" style="background-color:#aaa;">
+      <p>Enter a police agency to see its crime over time </p>
+      <h3>State:</h3>
+      <br>
+      <select class="simple-select" id="state_dropdown" onchange="offenses_stateChangeFun()">
           </select>
-        <br><br>
+      <br><br>
 
-        <h3>Agency:</h3>
-        <br>
-        <select class="simple-select" id="agency_dropdown" onchange="offenses_agencyChangeFun()">
+      <h3>Agency:</h3>
+      <br>
+      <select class="simple-select" id="agency_dropdown" onchange="offenses_agencyChangeFun()">
 
         <script>
         </script>
 
         </select>
-        <br><br>
-        <h3>Crime:</h3>
-        <br>
-        <select class="simple-select" id="crime_dropdown" onchange="offenses_crimeChangeFun()">
+      <br><br>
+      <h3>Crime:</h3>
+      <br>
+      <select class="simple-select" id="crime_dropdown" onchange="offenses_crimeChangeFun()">
       </select>
       <!--
         <br><br>
         <input type="checkbox" id="rate" name="rate" value="rate" onchange="rateChangeFun()">
         <label for="rate">Rate per 100,000 Population</label>
       -->
-        <br><br>
-        <h3>Type of Crime:</h3>
-        <br><br>
-        <input type="checkbox" id="actual" name="actual" checked onchange="updateGraphVisibility(offenses_graph)">
-        <label for="actual">Actual</label>
-        <input type="checkbox" id="clearance" name="clearance" onchange="updateGraphVisibility(offenses_graph)">
-        <label for="clearance">Clearance</label>
-        <input type="checkbox" id="clearance_under18" name="clearance_under18" onchange="updateGraphVisibility(offenses_graph)">
-        <label for="clearance_under18">Clearance under age 18</label>
-        <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraphVisibility(offenses_graph)">
-        <label for="unfounded">Unfounded</label>
-        <br>
-        <br>
-        <hr>
-        <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download Agency Data as CSV</button>
-        <br>
-        <p>Please note that data are only available for agencies that report all 12 months of the year.
-      </div>
-
-
-      <div class="column main">
-        <div id="loader"></div>
-        <div id="graph" style="width:95%;height:500px"></div>
-      <div><table id="table" class="display cell-border"></table></div>
-
-        <script type="text/javascript">
-            $(document).ready(function(){
-
-            $('.simple-select').chosen();
-            resizeChosen();
-            makeStateDropdown("#state_dropdown")
-            makeCrimeDropdown("crime", '#crime_dropdown');
-            offenses_largest_agency = getStateAgencies("crime", true);
-            offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
-            main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
-            table_data = main_results[0];
-            offenses_graph_data = main_results[1];
-            offenses_headers = main_results[2];
-            table_headers = main_results[3];
-            ylab = '# of Crimes';
-            visibilityVector = [true, false, false, false];
-            title = getTitle(table_data, "offenses");
-            offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title, "offenses");
-            $("#graph").ready($("#loader").hide())
-            table = makeTable("#table", table_data, table_headers)
-            jQuery(window).on('resize', resizeChosen);
-});
-        </script>
-      </div>
+      <br><br>
+      <h3>Type of Crime:</h3>
+      <br><br>
+      <input type="checkbox" id="actual" name="actual" checked onchange="updateGraphVisibility(offenses_graph)">
+      <label for="actual">Actual</label>
+      <input type="checkbox" id="clearance" name="clearance" onchange="updateGraphVisibility(offenses_graph)">
+      <label for="clearance">Clearance</label>
+      <input type="checkbox" id="clearance_under18" name="clearance_under18" onchange="updateGraphVisibility(offenses_graph)">
+      <label for="clearance_under18">Clearance under age 18</label>
+      <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraphVisibility(offenses_graph)">
+      <label for="unfounded">Unfounded</label>
+      <br>
+      <br>
+      <hr>
+      <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download Agency Data as CSV</button>
+      <br>
+      <p>Please note that data are only available for agencies that report all 12 months of the year.
     </div>
-      </body>
 
-      </html>
+
+    <div class="column main">
+      <div id="loader"></div>
+      <div id="graph" style="width:95%;height:500px"></div>
+      <div>
+        <table id="table" class="display cell-border"></table>
+      </div>
+
+      <script type="text/javascript">
+        $(document).ready(function() {
+
+          $('.simple-select').chosen();
+          resizeChosen();
+          makeStateDropdown("#state_dropdown")
+          makeCrimeDropdown("crime", '#crime_dropdown');
+          offenses_largest_agency = getStateAgencies("crime", true);
+          offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
+          main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
+          table_data = main_results[0];
+          offenses_graph_data = main_results[1];
+          offenses_headers = main_results[2];
+          table_headers = main_results[3];
+          ylab = '# of Crimes';
+          visibilityVector = [true, false, false, false];
+          title = getTitle(table_data, "offenses");
+          offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title, "offenses");
+          $("#graph").ready($("#loader").hide())
+          table = makeTable("#table", table_data, table_headers)
+          jQuery(window).on('resize', resizeChosen);
+        });
+      </script>
+    </div>
+  </div>
+</body>
+
+</html>
