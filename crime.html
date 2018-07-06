@@ -6,7 +6,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-99359926-4');
@@ -30,15 +33,17 @@
 
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.min.css" />
-  <link rel="stylesheet" href="css/style.min.css" />
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -58,8 +63,7 @@
   </div>
 
 
-  <div class="row">
-    <div class="column sidebar" style="background-color:#aaa;">
+    <div class="column sidebar">
       <p>Enter a police agency to see its crime over time </p>
       <h3>State:</h3>
       <br>
@@ -70,10 +74,6 @@
       <h3>Agency:</h3>
       <br>
       <select class="simple-select" id="agency_dropdown" onchange="offenses_agencyChangeFun()">
-
-        <script>
-        </script>
-
         </select>
       <br><br>
       <h3>Crime:</h3>
@@ -87,17 +87,21 @@
       -->
       <br><br>
       <h3>Type of Crime:</h3>
-      <br><br>
-      <input type="checkbox" id="actual" name="actual" checked onchange="updateGraphVisibility(offenses_graph)">
-      <label for="actual">Actual</label>
-      <input type="checkbox" id="clearance" name="clearance" onchange="updateGraphVisibility(offenses_graph)">
-      <label for="clearance">Clearance</label>
-      <input type="checkbox" id="clearance_under18" name="clearance_under18" onchange="updateGraphVisibility(offenses_graph)">
-      <label for="clearance_under18">Clearance under age 18</label>
-      <input type="checkbox" id="unfounded" name="unfounded" onchange="updateGraphVisibility(offenses_graph)">
-      <label for="unfounded">Unfounded</label>
+
       <br>
+
+      <input type="checkbox" id="actual"checked  onchange="updateGraphVisibility(offenses_graph)"></input>
+      <label class="label-text fa" for="actual">Actual</label>
       <br>
+      <input type="checkbox" id="clearance" onchange="updateGraphVisibility(offenses_graph)"></input>
+      <label class="label-text fa" for="clearance">Clearance</label>
+      <br>
+      <input type="checkbox" id="clearance_under18" onchange="updateGraphVisibility(offenses_graph)"></input>
+      <label class="label-text fa" for="clearance_under18">Clearance under age 18</label>
+      <br>
+      <input type="checkbox" id="unfounded" onchange="updateGraphVisibility(offenses_graph)"></input>
+      <label class="label-text fa" for="unfounded">Unfounded</label>
+
       <hr>
       <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download Agency Data as CSV</button>
       <br>
@@ -136,7 +140,6 @@
         });
       </script>
     </div>
-  </div>
 
   <div class="footer-wrap">
     <footer>
