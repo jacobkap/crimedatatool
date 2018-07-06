@@ -152,6 +152,10 @@ function makeTable(div, data, headers, type) {
     "sScrollX": "100%",
     "stripe": true,
     "hover": true,
+    "lengthChange": false,
+    "paging":   false,
+    "searching": false,
+    "pageLength": 100,
     "ordering": true,
     "order": [1, "desc"],
     fixedColumns: {
