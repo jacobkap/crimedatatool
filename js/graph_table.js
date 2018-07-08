@@ -71,16 +71,17 @@ function makeGraph(div, data, ylab, visibilityVector, title) {
       title: title,
       drawGrid: true,
       independentTicks: true,
-      labelsSeparateLines: true,
       legend: 'always',
       ylabel: ylab,
       includeZero: true,
+      labelsKMB: true,
       xlabel: ' Year',
       visibility: visibilityVector,
       interactionModel: {},
-      colors: ['#d7191c', '#7b3294', '#008837', '#0571b0'],
+      colors: ['#ca0020', '#7b3294', '#4dac26', '#0571b0'],
       strokeWidth: 1.3 // Width of lines
     });
+
   return (new_graph);
 }
 
