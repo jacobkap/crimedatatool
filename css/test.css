@@ -1294,6 +1294,7 @@ body {
 .top-navigation li a.on {
   color: #008837 ;
   font-weight: bold;
+      font-size: 22px;
 }
 
 .top-navigation li:last-child {

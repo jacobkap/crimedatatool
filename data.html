@@ -3,14 +3,17 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-99359926-4');
-</script>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-99359926-4');
+  </script>
 
   <title>Crime Data Tool</title>
   <meta charset="UTF-8">
@@ -28,7 +31,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body class="page">
@@ -63,61 +66,70 @@
 
     <article class="post">
 
-<h1>Data Available for Download</h1>
-<br>
-<p>The data linked here is far more comprehensive than that accessible through the tools on this website (i.e. all variables for all agencies in all years when the unit of analysis is agency). Some of the UCR data sets also have monthly data available.</p>
-<br>
-<p>These data are freely available to download and use. If you do use these data, please cite.</p>
+      <h1>Data Available for Download</h1>
+      <br>
+      <p>The data available here are the various data sets I have collected and cleaned. Most of these are related to crime, though some are merely government data or data I am interested in. Since I have cleaned all this data myself, if you find any bugs
+        please email me. You should also email me if you have any requests or suggestions for data.<br/><br/>
 
-<button class="accordion">Uniform Crime Reporting (UCR) Program Data: Arrests by Age, Sex, and Race, 1980-2015</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E102263V2">Uniform Crime Reporting (UCR) Program Data: Arrests by Age, Sex, and Race, 1980-2015</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-06-06. https://doi.org/10.3886/E102263V2</p>
-</div>
+         The data set that are used to create the tools for this site are far more comprehensive than what is available through the tools (i.e. all variables
+        for all agencies in all years are available to download). For a full description of what is available in each data set, click the link to go to the download page on openICPSR. On that page I include a description of the data and precisely
+        what I did to "clean" it. <br/><br/>
 
-<button class="accordion">Uniform Crime Reporting (UCR) Program Data: Arson 2001-2015</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E103540V2">Uniform Crime Reporting (UCR) Program Data: Arson 2001-2015</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-06-06. https://doi.org/10.3886/E103540V2</p>
-</div>
+        These data are freely available to download and use. If you do use these data, please cite.</p>
 
-<button class="accordion">Uniform Crime Reporting (UCR) Program Data: Law Enforcement Officers Killed and Assaulted (LEOKA) 1975-2015</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E102180V3">Uniform Crime Reporting Program Data: Law Enforcement Officers Killed and Assaulted (LEOKA) 1975-2015</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-06-06. https://doi.org/10.3886/E102180V3</p>
-</div>
+      <button class="accordion">Annual Survey of Public Employment & Payroll (ASPEP) 1992-2016</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="http://doi.org/10.3886/E101399V3">Annual Survey of Public Employment & Payroll (ASPEP) 1992-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-03-27. https://doi.org/10.3886/E101399V3</p>
+      </div>
 
-<button class="accordion">Uniform Crime Reporting (UCR) Program Data: Offenses Known and Clearances by Arrest, 1960-2016</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E100707V6">Uniform Crime Reporting Program Data: Offenses Known and Clearances by Arrest, 1960-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-06-06. https://doi.org/10.3886/E100707V6</p>
-</div>
+      <button class="accordion">Annual Survey of State Government Finances 1992-2016</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E101880V1">Annual Survey of State Government Finances 1992-2016.</a> Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-03-11. https://doi.org/10.3886/E101880V1</p>
+      </div>
 
-<button class="accordion">Uniform Crime Reporting (UCR) Program Data: Hate Crime Data 1992-2015</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E103500V2">Uniform Crime Reporting (UCR) Program Data: Hate Crime Data 1992-2015</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-06-06. https://doi.org/10.3886/E103500V2</p>
-</div>
+      <button class="accordion">California Jail Profile Survey 1995-2018</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="http://doi.org/10.3886/E104560V1">California Jail Profile Survey 1995-2018.</a> Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-07-07. https://doi.org/10.3886/E104560V1</p>
+      </div>
 
-<button class="accordion">Uniform Crime Reporting (UCR) Program Data: Supplementary Homicide Reports, 1976-2016</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E100699V5">Uniform Crime Reporting (UCR) Program Data: Supplementary Homicide Reports, 1976-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-06-19. https://doi.org/10.3886/E100699V5</p>
-</div>
+      <button class="accordion">Uniform Crime Reporting (UCR) Program Data: Arrests by Age, Sex, and Race, 1980-2015</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E102263V3">Uniform Crime Reporting (UCR) Program Data: Arrests by Age, Sex, and Race, 1980-2016.</a> Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-07-08. https://doi.org/10.3886/E102263V3</p>
+      </div>
 
-<button class="accordion">Annual Survey of Public Employment & Payroll (ASPEP) 1992-2016</button>
-<div class="panel">
-<p>Kaplan, Jacob. <a href="http://doi.org/10.3886/E101399V3">Annual Survey of Public Employment & Payroll (ASPEP) 1992-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-03-27. https://doi.org/10.3886/E101399V3</p>
-</div>
+      <button class="accordion">Uniform Crime Reporting (UCR) Program Data: Arson 2001-2015</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E103540V3">Uniform Crime Reporting (UCR) Program Data: Arson 2001-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-07-08. https://doi.org/10.3886/E103540V3</p>
+      </div>
 
-<button class="accordion">Annual Survey of State Government Finances 1992-2016</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E101880V1">Annual Survey of State Government Finances 1992-2016.</a> Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-03-11. https://doi.org/10.3886/E101880V1</p>
-</div>
+      <button class="accordion">Uniform Crime Reporting (UCR) Program Data: Law Enforcement Officers Killed and Assaulted (LEOKA) 1975-2015</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E102180V4">Uniform Crime Reporting Program Data: Law Enforcement Officers Killed and Assaulted (LEOKA) 1975-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research
+          [distributor], 2018-07-08. https://doi.org/10.3886/E102180V4</p>
+      </div>
 
-<button class="accordion">California Jail Profile Survey 1995-2018</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="http://doi.org/10.3886/E104560V1">California Jail Profile Survey 1995-2018.</a> Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-07-07. https://doi.org/10.3886/E104560V1</p>
-</div>
+      <button class="accordion">Uniform Crime Reporting (UCR) Program Data: Offenses Known and Clearances by Arrest, 1960-2016</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E100707V6">Uniform Crime Reporting Program Data: Offenses Known and Clearances by Arrest, 1960-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor],
+          2018-06-06. https://doi.org/10.3886/E100707V6</p>
+      </div>
 
-<button class="accordion">United States Governors 1775-2018</button>
-<div class="panel">
-  <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E102000V1">United States Governors 1775-2018</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-03-17. https://doi.org/10.3886/E102000V1</p>
-</div>
+      <button class="accordion">Uniform Crime Reporting (UCR) Program Data: Hate Crime Data 1992-2015</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="	http://doi.org/10.3886/E103500V3">Uniform Crime Reporting (UCR) Program Data: Hate Crime Data 1992-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-07-08. https://doi.org/10.3886/E103500V3</p>
+      </div>
+
+      <button class="accordion">Uniform Crime Reporting (UCR) Program Data: Supplementary Homicide Reports, 1976-2016</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E100699V5">Uniform Crime Reporting (UCR) Program Data: Supplementary Homicide Reports, 1976-2016</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-06-19.
+          https://doi.org/10.3886/E100699V5
+        </p>
+      </div>
+
+      <button class="accordion">United States Governors 1775-2018</button>
+      <div class="panel">
+        <p>Kaplan, Jacob. <a href="https://doi.org/10.3886/E102000V1">United States Governors 1775-2018</a>. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2018-03-17. https://doi.org/10.3886/E102000V1</p>
+      </div>
 
 
 
@@ -132,21 +144,21 @@
 
 
     <script>
-var acc = document.getElementsByClassName("accordion");
-var i;
+      var acc = document.getElementsByClassName("accordion");
+      var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  });
-}
-</script>
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    </script>
 </body>
 
 </html>
