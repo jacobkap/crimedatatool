@@ -44,6 +44,8 @@ function subsetColumns(data, columns, output) {
 
   }
 
+
+
   data = _.map(data, function(currentObject) {
     return _.pick(currentObject, columns);
   });
@@ -94,8 +96,18 @@ function getStateData(type) {
   return stateData;
 }
 
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
 function getAgencyData(stateData, headers) {
   agencyData = data_object_fun(stateData, headers);
+  agencyData.pop();
+  agencyData.shift();
+  agencyData = sortByKey(agencyData, "year");
 
   if ($("#rate").is(':checked')) {
     agencyData = _.map(agencyData, function(currentObject) {
@@ -112,11 +124,9 @@ function main(type, state_dropdown, crime_dropdown) {
   colsForTable = getCrimeColumns(headers, type, "table");
 
   tableData = getAgencyData(stateData, headers);
-  tableData.pop();
-  tableData.shift();
-  graphData = subsetColumns(tableData, colsForGraph, "graph");
 
-  return [tableData, graphData, headers, colsForTable];
+
+  return [tableData, colsForGraph, colsForTable];
 }
 
 

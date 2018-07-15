@@ -3,14 +3,17 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-99359926-4');
-</script>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-99359926-4');
+  </script>
 
   <title>Police Officers Killed and Assaulted</title>
   <meta charset="UTF-8">
@@ -35,10 +38,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -49,7 +52,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="crime.html">Crimes</a></li>
           <li><a href="arrest.html">Arrests</a></li>
-          <li><a class = "on" href="police.html">Police</a></li>
+          <li><a class="on" href="police.html">Police</a></li>
           <li><a href="data.html">Data</a></li>
         </ul>
       </nav>
@@ -79,7 +82,7 @@
   <div class="column main">
     <br>
     <div id="loader"></div>
-    <div id="leoka_graph" style="width:95%;height:500px"></div>
+    <canvas id="leoka_graph" style="width:95%;height:500px"></canvas>
     <div>
       <table id="leoka_table" class="display cell-border"></table>
     </div>
@@ -91,6 +94,7 @@
 
         $('.simple-select').chosen();
         resizeChosen();
+        ctx_leoka = document.getElementById("leoka_graph").getContext('2d');
         makeStateDropdown("#leoka_state_dropdown")
         makeCrimeDropdown("leoka", "#leoka_category_dropdown");
         leoka_largest_agency = getStateAgencies("leoka", true);
@@ -98,17 +102,13 @@
         leoka_agencies = updateAgencies("leoka", leoka_largest_agency,
           "#leoka_agency_dropdown",
           "#leoka_state_dropdown");
-        main_results = main("leoka",
-          "#leoka_state_dropdown",
-          "#leoka_category_dropdown");
+
+        main_results = main("leoka", "#leoka_state_dropdown", "#leoka_crime_dropdown");
         leoka_table_data = main_results[0];
-        leoka_graph_data = main_results[1];
-        leoka_headers = main_results[2];
-        leoka_table_headers = main_results[3];
-        ylab = '';
-        visibilityVector = [true];
-        title = getTitle(leoka_table_data, "leoka");
-        leoka_graph = makeGraph("leoka_graph", leoka_graph_data, ylab, visibilityVector, title);
+        leoka_graph_headers = main_results[1];
+        leoka_table_headers = main_results[2];
+        leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
+
         $("#leoka_graph").ready($("#loader").hide())
         arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka")
         jQuery(window).on('resize', resizeChosen);

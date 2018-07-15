@@ -1,11 +1,148 @@
+function allowSaveGraph() {
+  var url = myLine.toBase64Image();
+}
+
+function getGraphDataset(tableData, colsForGraph, type) {
+  data = _.map(tableData, function(currentObject) {
+    return _.pick(currentObject, colsForGraph);
+  });
+  if (type == "offenses") {
+    years = [];
+    data1 = [];
+    data2 = [];
+    data3 = [];
+    data4 = [];
+
+    for (var i = 0; i < data.length; i++) {
+      years.push(data[i][colsForGraph[0]]);
+      data1.push(data[i][colsForGraph[1]]);
+      data2.push(data[i][colsForGraph[2]]);
+      data3.push(data[i][colsForGraph[3]]);
+      data4.push(data[i][colsForGraph[4]]);
+    }
+
+    final_data = [
+      makeGraphObjects(data1, "#ca0020", colsForGraph[1]),
+      makeGraphObjects(data2, "#0571b0", colsForGraph[2]),
+      makeGraphObjects(data3, "#7b3294", colsForGraph[3]),
+      makeGraphObjects(data4, "#008837", colsForGraph[4])
+    ];
+  } else {
+    years = [];
+    data1 = [];
+
+    for (var n = 0; n < data.length; n++) {
+      years.push(data[n][colsForGraph[0]]);
+      data1.push(data[n][colsForGraph[1]]);
+    }
+
+    final_data = [makeGraphObjects(data1, "#ca0020", colsForGraph[1])];
+    final_data[0].hidden = false;
+  }
+  return final_data;
+
+}
+
+function makeGraphObjects(data, color, label) {
+  obj = {
+    borderColor: color,
+    fill: false,
+    label: label,
+    data: data,
+    onAnimationComplete: allowSaveGraph,
+    hidden: true,
+    radius: 0 // Removes dots
+  };
+  return obj;
+}
+
+function makeGraph(data, graph_div, colsForGraph, type) {
+  title = getTitle(data, type);
+
+  if (type == "offenses") {
+    yaxis_label = '# of Crimes';
+  } else if (type == "arrests") {
+    yaxis_label = "# of Arrests";
+  } else if (type == "leoka") {
+    yaxis_label = "";
+  }
+
+  graph_datasets = getGraphDataset(data, colsForGraph, type);
+
+  myLineChart = new Chart(graph_div, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: graph_datasets
+    },
+    options: {
+      legend: {
+        display: true
+      },
+      title: {
+        display: true,
+        position: 'top',
+        text: title,
+        fontSize: 14
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            maxRotation: 0,
+            minRotation: 0,
+            maxTicksLimit: 10
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            userCallback: function(value, index, values) {
+              value = value.toString();
+              value = value.split(/(?=(?:...)*$)/);
+              value = value.join(',');
+              return value;
+            }
+          },
+          scaleLabel: {
+            fontSize: 22,
+            fontColor: "#000000",
+            display: true,
+            labelString: yaxis_label
+          }
+        }]
+      },
+      responsive: true,
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        callbacks: {
+          label: function(tooltipItems, data) {
+            value = tooltipItems.yLabel;
+            value = value.toString();
+            value = value.split(/(?=(?:...)*$)/);
+            value = value.join(',');
+            return value;
+          }
+        }
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      }
+    }
+  });
+
+  return (myLineChart);
+}
+
 function getTitle(data, type) {
   title = data[0].agency + ', ';
   title += data[0].state + ': ';
   if (type == "offenses") {
     title += crime_values[$("#crime_dropdown").val()];
-  } else if (type == "arrest") {
+  } else if (type == "arrests") {
     title += arrest_values[$("#arrests_crime_dropdown").val()];
-    title += " " + arrest_categories[$("#arrests_category_dropdown").val()];
+    title += ", " + arrest_categories[$("#arrests_category_dropdown").val()];
   } else if (type == "leoka") {
     title += leoka_values[$("#leoka_category_dropdown").val()];
   }
@@ -16,74 +153,6 @@ function getTitle(data, type) {
   return title;
 }
 
-function updateGraph(div, agencyData, headers, type) {
-  colsForGraph = getCrimeColumns(headers, type, "graph");
-
-  graphData = subsetColumns(agencyData, colsForGraph, "graph");
-  title = getTitle(agencyData, type);
-
-  var ylab = '# of Crimes';
-  if (type == "arrests") ylab = "# of Arrests";
-  if ($("#rate").is(':checked')) {
-    ylab = 'Rate per 100,000 People';
-  }
-
-  graphData = graphData.replace(/clr_18.*,/, "Clearance Under Age 18,");
-  graphData = graphData.replace(/act.*,clr/, "Actual,clr");
-  graphData = graphData.replace(/clr_.*,Clear/, "Clearance,Clear");
-  graphData = graphData.replace(/unfound.*\n/, "Unfounded\n");
-
-  visibilityVector = [true, false, false, false];
-
-  if (type == "offenses") {
-    visibilityVector = [];
-    visibilityVector.push($("#actual").is(':checked'));
-    visibilityVector.push($("#clearance").is(':checked'));
-    visibilityVector.push($("#clearance_under18").is(':checked'));
-    visibilityVector.push($("#unfounded").is(':checked'));
-  }
-
-  if (type == "leoka") {
-    ylab = "";
-  }
-
-
-  temp_graph = makeGraph(div, graphData, ylab, visibilityVector, title);
-  return temp_graph;
-}
-
-function updateGraphVisibility(graph) {
-  visibilityVector = [];
-  visibilityVector.push($("#actual").is(':checked'));
-  visibilityVector.push($("#clearance").is(':checked'));
-  visibilityVector.push($("#clearance_under18").is(':checked'));
-  visibilityVector.push($("#unfounded").is(':checked'));
-
-  graph.updateOptions({
-    visibility: visibilityVector
-  });
-}
-
-
-function makeGraph(div, data, ylab, visibilityVector, title) {
-  new_graph = new Dygraph(document.getElementById(div),
-    data, {
-      title: title,
-      drawGrid: true,
-      independentTicks: true,
-      legend: 'always',
-      ylabel: ylab,
-      includeZero: true,
-      labelsKMB: true,
-      xlabel: ' Year',
-      visibility: visibilityVector,
-      interactionModel: {},
-      colors: ['#ca0020', '#7b3294', '#4dac26', '#0571b0'],
-      strokeWidth: 1.3 // Width of lines
-    });
-
-  return (new_graph);
-}
 
 function fixTableName(name, type) {
   crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
@@ -99,8 +168,8 @@ function fixTableName(name, type) {
   name = name.replace(/unfound_/, "Unfounded ");
   if (type == "offenses") {
     //offenses_data_names = _.keys(crime_values);
-  //  offenses_value_names = _.values(crime_values);
-  //  name = offenses_value_names[_.indexOf(offenses_value_names, name)];
+    //  offenses_value_names = _.values(crime_values);
+    //  name = offenses_value_names[_.indexOf(offenses_value_names, name)];
 
     name = name.replace(crime_match_regex, crime_values[crime_match]);
   } else if (type == "arrests") {
@@ -147,6 +216,7 @@ function makeTable(div, data, headers, type) {
   }
   temp_table = $(div).DataTable({
     data: data,
+    render: $.fn.dataTable.render.number( ',', 3),
     columns: z,
     "scrollX": true,
     "sScrollXInner": "100%",
@@ -154,7 +224,7 @@ function makeTable(div, data, headers, type) {
     "stripe": true,
     "hover": true,
     "lengthChange": false,
-    "paging":   false,
+    "paging": false,
     "searching": false,
     "pageLength": 100,
     "ordering": true,
@@ -165,4 +235,8 @@ function makeTable(div, data, headers, type) {
 
   });
   return temp_table;
+}
+
+function formatNumber(n) {
+  return n.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }

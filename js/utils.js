@@ -20,11 +20,13 @@ function exportToCsv(tableData, type) {
   data = data.join("\n");
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
+/*
   if ($("#rate").is(':checked')) {
     offense_type += "rate_";
   } else {
     offense_type += "count_";
   }
+  */
 
   if (type == "offenses") {
     filename = "ucr_offenses_";

@@ -42,6 +42,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css" />
@@ -91,16 +92,16 @@
 
       <br>
 
-      <input type="checkbox" id="actual"checked  onchange="updateGraphVisibility(offenses_graph)"></input>
+      <input type="checkbox" id="actual"checked  onchange="crimeBoxesUpdate()"></input>
       <label class="label-text fa" for="actual">Actual</label>
       <br>
-      <input type="checkbox" id="clearance" onchange="updateGraphVisibility(offenses_graph)"></input>
+      <input type="checkbox" id="clearance" onchange="crimeBoxesUpdate()"></input>
       <label class="label-text fa" for="clearance">Clearance</label>
       <br>
-      <input type="checkbox" id="clearance_under18" onchange="updateGraphVisibility(offenses_graph)"></input>
+      <input type="checkbox" id="clearance_under18" onchange="crimeBoxesUpdate()"></input>
       <label class="label-text fa" for="clearance_under18">Clearance under age 18</label>
       <br>
-      <input type="checkbox" id="unfounded" onchange="updateGraphVisibility(offenses_graph)"></input>
+      <input type="checkbox" id="unfounded" onchange="crimeBoxesUpdate()"></input>
       <label class="label-text fa" for="unfounded">Unfounded</label>
 
       <hr>
@@ -112,7 +113,7 @@
 
     <div class="column main">
       <div id="loader"></div>
-      <div id="graph" style="width:95%;height:500px"></div>
+      <canvas id="graph" style="width:95%;height:500px"></canvas>
       <img id="demoimg"  style="width:95%;height:500px">
       <div>
         <table id="table" class="display cell-border"></table>
@@ -123,19 +124,17 @@
 
           $('.simple-select').chosen();
           resizeChosen();
+          ctx_results = document.getElementById("graph").getContext('2d');
           makeStateDropdown("#state_dropdown")
           makeCrimeDropdown("crime", '#crime_dropdown');
           offenses_largest_agency = getStateAgencies("crime", true);
           offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
           main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
           table_data = main_results[0];
-          offenses_graph_data = main_results[1];
-          offenses_headers = main_results[2];
-          table_headers = main_results[3];
-          ylab = '# of Crimes';
-          visibilityVector = [true, false, false, false];
-          title = getTitle(table_data, "offenses");
-          offenses_graph = makeGraph("graph", offenses_graph_data, ylab, visibilityVector, title, "offenses");
+          graph_headers = main_results[1];
+          table_headers = main_results[2];
+          offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
+          crimeBoxesUpdate();
           $("#graph").ready($("#loader").hide())
           table = makeTable("#table", table_data, table_headers)
           jQuery(window).on('resize', resizeChosen);
