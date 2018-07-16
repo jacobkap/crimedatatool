@@ -81,7 +81,7 @@ var crime_values = {
   "officers_killed_by_felony": "Officers Killed by Felony",
   "rape_total": "Rape - Total",
   "attempted_rape": "Rape - Attempted",
-    "force_rape": "Rape - Forcible",
+  "force_rape": "Rape - Forcible",
   "robbery_total": "Robbery Total",
   "gun_robbery": "Robbery -  Gun",
   "knife_robbery": "Robbery - Knife",

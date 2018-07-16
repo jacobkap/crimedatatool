@@ -160,6 +160,9 @@ if (type == "leoka") {
       columnNames.push(headers[n]);
     }
   }
+  if (crime === "theft_total") {
+    columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
+  }
 }
   return (columnNames);
 }

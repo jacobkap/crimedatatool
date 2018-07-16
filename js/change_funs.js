@@ -1,4 +1,10 @@
 function crimeBoxesUpdate() {
+  if (!$("#actual").is(':checked') &&
+    !$("#clearance").is(':checked') &&
+    !$("#clearance_under18").is(':checked') &&
+    !$("#unfounded").is(':checked')) {
+    $("#actual").prop("checked", true);
+  }
 
   offenses_graph.data.datasets[0].hidden = !$("#actual").is(':checked');
   offenses_graph.data.datasets[1].hidden = !$("#clearance").is(':checked');
@@ -17,20 +23,20 @@ function offenses_stateChangeFun() {
   offenses_agencyChangeFun();
 }
 
-function offenses_agencyChangeFun(graph_div) {
+function offenses_agencyChangeFun() {
   main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
   table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
   offenses_graph.destroy();
-  offenses_graph = makeGraph(table_data, ctx_results, graph_headers);
-  crimeBoxesUpdate();
+  offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
   table.destroy();
   table = makeTable("#table", table_data, table_headers, "offenses");
+  crimeBoxesUpdate();
 }
 
 function offenses_crimeChangeFun() {
-  offenses_agencyChangeFun("graph");
+  offenses_agencyChangeFun();
 }
 
 function arrests_agencyChangeFun() {
