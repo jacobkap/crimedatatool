@@ -22,10 +22,10 @@ function getGraphDataset(tableData, colsForGraph, type) {
     }
 
     final_data = [
-      makeGraphObjects(data1, "#ca0020", colsForGraph[1]),
-      makeGraphObjects(data2, "#0571b0", colsForGraph[2]),
-      makeGraphObjects(data3, "#7b3294", colsForGraph[3]),
-      makeGraphObjects(data4, "#008837", colsForGraph[4])
+      makeGraphObjects(data1, "#ca0020", "Actual"),
+      makeGraphObjects(data2, "#0571b0", "Clearance"),
+      makeGraphObjects(data3, "#7b3294", "Clearance under age 18"),
+      makeGraphObjects(data4, "#008837", "Unfounded")
     ];
   } else {
     years = [];
@@ -61,10 +61,13 @@ function makeGraph(data, graph_div, colsForGraph, type) {
 
   if (type == "offenses") {
     yaxis_label = '# of Crimes';
+    legend_display = true;
   } else if (type == "arrests") {
     yaxis_label = "# of Arrests";
+        legend_display = false;
   } else if (type == "leoka") {
     yaxis_label = "";
+        legend_display = false;
   }
 
   graph_datasets = getGraphDataset(data, colsForGraph, type);
@@ -77,7 +80,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     },
     options: {
       legend: {
-        display: true
+        display: legend_display
       },
       title: {
         display: true,
