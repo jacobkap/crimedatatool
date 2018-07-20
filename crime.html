@@ -93,16 +93,16 @@
       <br>
 
       <input type="checkbox" id="actual"checked  onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="actual">Actual</label>
+      <label class="label-text fa" for="actual">Actual Offenses</label>
       <br>
       <input type="checkbox" id="clearance" onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="clearance">Clearance</label>
+      <label class="label-text fa" for="clearance">Total Offenses Cleared</label>
       <br>
       <input type="checkbox" id="clearance_under18" onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="clearance_under18">Clearance under age 18</label>
+      <label class="label-text fa" for="clearance_under18">Offenses Cleared Involving<br>Only Persons Under age 18</label>
       <br>
       <input type="checkbox" id="unfounded" onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="unfounded">Unfounded</label>
+      <label class="label-text fa" for="unfounded">Unfounded Offenses</label>
 
       <hr>
       <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download Agency Data as CSV</button>

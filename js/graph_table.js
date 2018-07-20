@@ -22,10 +22,10 @@ function getGraphDataset(tableData, colsForGraph, type) {
     }
 
     final_data = [
-      makeGraphObjects(data1, "#ca0020", "Actual"),
-      makeGraphObjects(data2, "#0571b0", "Clearance"),
-      makeGraphObjects(data3, "#7b3294", "Clearance under age 18"),
-      makeGraphObjects(data4, "#008837", "Unfounded")
+      makeGraphObjects(data1, "#ca0020", "Actual Offenses"),
+      makeGraphObjects(data2, "#0571b0", "Offenses Cleared"),
+      makeGraphObjects(data3, "#7b3294", "Offenses Cleared Involving Only Persons Under age 18"),
+      makeGraphObjects(data4, "#008837", "Unfounded Offenses")
     ];
   } else {
     years = [];
@@ -51,6 +51,7 @@ function makeGraphObjects(data, color, label) {
     data: data,
     onAnimationComplete: allowSaveGraph,
     hidden: true,
+    displayLegend:false,
     radius: 0 // Removes dots
   };
   return obj;
@@ -66,7 +67,12 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     yaxis_label = "# of Arrests";
         legend_display = false;
   } else if (type == "leoka") {
-    yaxis_label = "";
+    yaxis_label = "# of People";
+    if (colsForGraph[1].includes("killed")) {
+      yaxis_label = "# of Officer Deaths";
+    } else if (colsForGraph[1].includes("assault")) {
+      yaxis_label = "# of Assaults"
+    }
         legend_display = false;
   }
 
@@ -86,14 +92,16 @@ function makeGraph(data, graph_div, colsForGraph, type) {
         display: true,
         position: 'top',
         text: title,
-        fontSize: 14
+        fontSize: 22,
+        fontColor: "black"
       },
       scales: {
         xAxes: [{
           ticks: {
             maxRotation: 0,
             minRotation: 0,
-            maxTicksLimit: 10
+            maxTicksLimit: 10,
+            fontSize: 14
           }
         }],
         yAxes: [{
@@ -104,7 +112,8 @@ function makeGraph(data, graph_div, colsForGraph, type) {
               value = value.split(/(?=(?:...)*$)/);
               value = value.join(',');
               return value;
-            }
+            },
+            fontSize: 14
           },
           scaleLabel: {
             fontSize: 22,
