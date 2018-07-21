@@ -113,8 +113,7 @@
 
     <div class="column main">
       <div id="loader"></div>
-      <canvas id="graph" style="width:95%;height:500px"></canvas>
-      <img id="demoimg"  style="width:95%;height:500px">
+      <canvas id="graph" style="width:95%;height:500px;"></canvas>
       <div>
         <table id="table" class="display cell-border"></table>
       </div>
@@ -129,12 +128,13 @@
           makeCrimeDropdown("crime", '#crime_dropdown');
           offenses_largest_agency = getStateAgencies("crime", true);
           offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
+
           main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
           table_data = main_results[0];
           graph_headers = main_results[1];
           table_headers = main_results[2];
+
           offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
-          crimeBoxesUpdate();
           $("#graph").ready($("#loader").hide())
           table = makeTable("#table", table_data, table_headers)
           jQuery(window).on('resize', resizeChosen);

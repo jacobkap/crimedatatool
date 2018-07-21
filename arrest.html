@@ -3,14 +3,17 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-99359926-4');
-</script>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-99359926-4');
+  </script>
 
   <title>Arrests</title>
   <meta charset="UTF-8">
@@ -34,10 +37,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
@@ -47,7 +50,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="crime.html">Crimes</a></li>
-          <li><a class = "on" href="arrest.html">Arrests</a></li>
+          <li><a class="on" href="arrest.html">Arrests</a></li>
           <li><a href="police.html">Police</a></li>
           <li><a href="data.html">Data</a></li>
         </ul>
@@ -80,8 +83,10 @@
   </div>
   <div class="column main">
     <div id="loader"></div>
-          <canvas id="arrests_graph" style="width:95%;height:500px"></canvas>
-    <div><table id="arrests_table" class="display cell-border"></table></div>
+    <canvas id="arrests_graph" style="width:95%;height:500px"></canvas>
+    <div>
+      <table id="arrests_table" class="display cell-border"></table>
+    </div>
 
 
 

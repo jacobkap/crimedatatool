@@ -5,10 +5,12 @@ function crimeBoxesUpdate() {
     !$("#unfounded").is(':checked')) {
     $("#actual").prop("checked", true);
   }
-  offenses_graph.destroy();
+
+  $('#graph').remove();
+  $('.main').prepend('<canvas id="graph" style="width:95%;height:500px;"></canvas>');
+  ctx_results = document.getElementById("graph").getContext('2d');
   offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
 
-  offenses_graph.update();
 }
 
 function rateChangeFun() {
@@ -25,7 +27,10 @@ function offenses_agencyChangeFun() {
   table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
-  offenses_graph.destroy();
+
+  $('#graph').remove();
+  $('.main').prepend('<canvas id="graph" style="width:95%;height:500px;"></canvas>');
+  ctx_results = document.getElementById("graph").getContext('2d');
   offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
   table.destroy();
   table = makeTable("#table", table_data, table_headers, "offenses");
@@ -41,7 +46,10 @@ function arrests_agencyChangeFun() {
   arrests_table_data = main_results[0];
   arrests_graph_headers = main_results[1];
   arrests_table_headers = main_results[2];
-  arrests_graph.destroy();
+
+  $('#arrests_graph').remove();
+  $('.main').prepend('<canvas id="arrests_graph" style="width:95%;height:500px;"></canvas>');
+  ctx_arrests = document.getElementById("arrests_graph").getContext('2d');
   arrests_graph = makeGraph(arrests_table_data, ctx_arrests, arrests_graph_headers, "arrests");
   arrests_table.destroy();
   arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers, "arrests");
@@ -67,7 +75,9 @@ function leoka_agencyChangeFun() {
   leoka_graph_headers = main_results[1];
   leoka_table_headers = main_results[2];
 
-  leoka_graph.destroy();
+  $('#leoka_graph').remove();
+  $('.main').prepend('<canvas id="leoka_graph" style="width:95%;height:500px;"></canvas>');
+  ctx_leoka = document.getElementById("leoka_graph").getContext('2d');
   leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
   arrests_table.destroy();
   arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka");

@@ -177,7 +177,6 @@ function makeGraph(data, graph_div, colsForGraph, type) {
       }
     }
   });
-
   return (myLineChart);
 }
 
