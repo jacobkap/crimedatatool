@@ -2,6 +2,8 @@ function allowSaveGraph() {
   var url = myLine.toBase64Image();
 }
 
+
+
 function getGraphDataset(tableData, colsForGraph, type) {
   data = _.map(tableData, function(currentObject) {
     return _.pick(currentObject, colsForGraph);
@@ -27,6 +29,33 @@ function getGraphDataset(tableData, colsForGraph, type) {
       makeGraphObjects(data3, "#7b3294", "Offenses Cleared Involving Only Persons Under age 18"),
       makeGraphObjects(data4, "#008837", "Unfounded Offenses")
     ];
+    final_data[0].hidden = false;
+    final_data[1].hidden = false;
+    final_data[2].hidden = false;
+    final_data[3].hidden = false;
+
+
+    if (!$("#actual").is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != "Actual Offenses";
+      });
+    }
+    if (!$("#clearance").is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != "Total Offenses Cleared";
+      });
+    }
+    if (!$("#clearance_under18").is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != "Offenses Cleared Involving Only Persons Under age 18";
+      });
+    }
+    if (!$("#unfounded").is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != "Unfounded Offenses";
+      });
+    }
+
   } else {
     years = [];
     data1 = [];
@@ -51,7 +80,6 @@ function makeGraphObjects(data, color, label) {
     data: data,
     onAnimationComplete: allowSaveGraph,
     hidden: true,
-    displayLegend:false,
     radius: 0 // Removes dots
   };
   return obj;
@@ -65,15 +93,15 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     legend_display = true;
   } else if (type == "arrests") {
     yaxis_label = "# of Arrests";
-        legend_display = false;
+    legend_display = false;
   } else if (type == "leoka") {
     yaxis_label = "# of People";
     if (colsForGraph[1].includes("killed")) {
       yaxis_label = "# of Officer Deaths";
     } else if (colsForGraph[1].includes("assault")) {
-      yaxis_label = "# of Assaults"
+      yaxis_label = "# of Assaults";
     }
-        legend_display = false;
+    legend_display = false;
   }
 
   graph_datasets = getGraphDataset(data, colsForGraph, type);
@@ -102,6 +130,12 @@ function makeGraph(data, graph_div, colsForGraph, type) {
             minRotation: 0,
             maxTicksLimit: 10,
             fontSize: 14
+          },
+          scaleLabel: {
+            fontSize: 22,
+            fontColor: "#000000",
+            display: true,
+            labelString: "Year"
           }
         }],
         yAxes: [{
@@ -228,7 +262,7 @@ function makeTable(div, data, headers, type) {
   }
   temp_table = $(div).DataTable({
     data: data,
-    render: $.fn.dataTable.render.number( ',', 3),
+    render: $.fn.dataTable.render.number(',', 3),
     columns: z,
     "scrollX": true,
     "sScrollXInner": "100%",

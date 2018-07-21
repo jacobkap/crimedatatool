@@ -5,53 +5,8 @@ function crimeBoxesUpdate() {
     !$("#unfounded").is(':checked')) {
     $("#actual").prop("checked", true);
   }
-
-  offenses_graph.data.datasets[0].hidden = !$("#actual").is(':checked');
-  offenses_graph.data.datasets[1].hidden = !$("#clearance").is(':checked');
-  offenses_graph.data.datasets[2].hidden = !$("#clearance_under18").is(':checked');
-  offenses_graph.data.datasets[3].hidden = !$("#unfounded").is(':checked');
-
-
-if (!$("#actual").is(':checked')) {
-  offenses_graph.data.datasets[0].borderColor = "#ffffff";
-  offenses_graph.data.datasets[0].backgroundColor = "#ffffff";
-  offenses_graph.data.datasets[0].label = "";
-} else {
-  offenses_graph.data.datasets[0].borderColor = "#ca0020";
-  offenses_graph.data.datasets[0].backgroundColor = "#e5e5e5";
-  offenses_graph.data.datasets[0].label = "Actual Offenses";
-}
-
-if (!$("#clearance").is(':checked')) {
-  offenses_graph.data.datasets[1].borderColor = "#ffffff";
-  offenses_graph.data.datasets[1].backgroundColor = "#ffffff";
-  offenses_graph.data.datasets[1].label = "";
-} else {
-  offenses_graph.data.datasets[1].borderColor = "#0571b0";
-  offenses_graph.data.datasets[1].backgroundColor = "#e5e5e5";
-  offenses_graph.data.datasets[1].label = "Offenses Cleared";
-}
-
-if (!$("#clearance_under18").is(':checked')) {
-  offenses_graph.data.datasets[2].borderColor = "#ffffff";
-  offenses_graph.data.datasets[2].backgroundColor = "#ffffff";
-  offenses_graph.data.datasets[2].label = "";
-} else {
-  offenses_graph.data.datasets[2].borderColor = "#7b3294";
-  offenses_graph.data.datasets[2].backgroundColor = "#e5e5e5";
-  offenses_graph.data.datasets[2].label = "Offenses Cleared Involving Only Persons Under age 18";
-}
-
-if (!$("#unfounded").is(':checked')) {
-  offenses_graph.data.datasets[3].borderColor = "#ffffff";
-  offenses_graph.data.datasets[3].backgroundColor = "#ffffff";
-  offenses_graph.data.datasets[3].label = "";
-} else {
-  offenses_graph.data.datasets[3].borderColor = "#008837";
-  offenses_graph.data.datasets[3].backgroundColor = "#e5e5e5";
-  offenses_graph.data.datasets[3].label = "Unfounded Offenses";
-}
-
+  offenses_graph.destroy();
+  offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
 
   offenses_graph.update();
 }
