@@ -128,6 +128,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
           ticks: {
             maxRotation: 0,
             minRotation: 0,
+            autoSkip: true,
             maxTicksLimit: 10,
             fontSize: 14
           },
@@ -248,6 +249,17 @@ function fixTableDataName(name) {
 function makeTable(div, data, headers, type) {
   data = subsetColumns(data, headers, "table");
 
+  data_keys = _.keys(data[0]);
+  data_keys = data_keys.filter(function(a){
+    return a !== 'agency' && a !== 'year' &&
+           a !== 'state'  && a !== 'ORI';
+  });
+  for (var m = 0; m < data.length; m++) {
+    for (n = 0; n < data_keys.length; n++) {
+      data[m][data_keys[n]] = parseFloat(data[m][data_keys[n]]).toLocaleString();
+    }
+  }
+
   z = [];
 
   for (var i = 0; i < headers.length; i++) {
@@ -261,7 +273,6 @@ function makeTable(div, data, headers, type) {
   }
   temp_table = $(div).DataTable({
     data: data,
-    render: $.fn.dataTable.render.number(',', 3),
     columns: z,
     "scrollX": true,
     "sScrollXInner": "100%",
@@ -274,10 +285,10 @@ function makeTable(div, data, headers, type) {
     "pageLength": 100,
     "ordering": true,
     "order": [1, "desc"],
+    "fixedHeader": true,
     fixedColumns: {
       leftColumns: 2
     }
-
   });
   return temp_table;
 }
