@@ -20,29 +20,27 @@ function exportToCsv(tableData, type) {
   data = data.join("\n");
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
-  /*
-    if ($("#rate").is(':checked')) {
-      offense_type += "rate_";
+
+  if (checkIfRateChecked(type)) {
+      rate_or_count = "rate_";
     } else {
-      offense_type += "count_";
+      rate_or_count = "count_";
     }
-    */
+
 
   if (type == "offenses") {
-    filename = "ucr_offenses_";
+    filename = "ucr_offenses_" + rate_or_count;
     filename += offense_agencies[$("#agency_dropdown").val()] + "_" +
       state_values[$("#state_dropdown").val()] + ".csv";
   } else if (type == "arrests") {
-    filename = "ucr_arrests_";
+    filename = "ucr_arrests_" + rate_or_count;
     filename += arrest_agencies[$("#arrests_agency_dropdown").val()] + "_" +
       state_values[$("#arrests_state_dropdown").val()] + ".csv";
   } else if (type == "leoka") {
-    filename = "ucr_police_";
+    filename = "ucr_police_" + rate_or_count;
     filename += leoka_agencies[$("#leoka_agency_dropdown").val()] + "_" +
       state_values[$("#leoka_state_dropdown").val()] + ".csv";
   }
-
-
 
   var blob = new Blob([data], {
     type: 'text/csv;charset=utf-8;'
