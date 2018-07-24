@@ -32,7 +32,7 @@
 
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.min.css" />
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
@@ -72,9 +72,14 @@
     <br>
     <select class="simple-select" id="leoka_category_dropdown" onchange="leoka_categoryChangeFun()">
   </select>
+
+  <br><br>
+  <input type="checkbox" id="leoka_rate" name="leoka_rate" value="leoka_rate" onchange="rateChangeFun('leoka')">
+  <label for="leoka_rate">Rate per 100,000 Population</label>
+
     <br><br>
     <hr>
-    <button type="button" onclick="exportToCsv(leoka_table_data, 'leoka')">Download Agency Data as CSV</button>
+    <button type="button" onclick="exportToCsv(leoka_table_data, 'leoka')">Download All Agency Data as CSV</button>
     <br>
     <p>Please note that data are only available for agencies that report all 12 months of the year.
   </div>

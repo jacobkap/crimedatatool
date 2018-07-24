@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.min.css" />
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen.jquery.min.js"></script>
@@ -76,9 +77,14 @@
     <br>
     <select class="simple-select" id="arrests_category_dropdown" onchange="arrests_categoryChangeFun()">
   </select>
+
+  <br><br>
+  <input type="checkbox" id="arrests_rate" name="arrests_rate" value="arrests_rate" onchange="rateChangeFun('arrests')">
+  <label for="arrests_rate">Rate per 100,000 Population</label>
+
     <br><br>
     <hr>
-    <button type="button" onclick="exportToCsv(arrests_table_data, 'arrests')">Download Agency Data as CSV</button>
+    <button type="button" onclick="exportToCsv(arrests_table_data, 'arrest')">Download All Agency Data as CSV</button>
   </div>
   <div class="column main">
     <div id="loader"></div>
@@ -96,14 +102,14 @@
         resizeChosen();
         ctx_arrests = document.getElementById("arrests_graph").getContext('2d');
         makeStateDropdown("#arrests_state_dropdown")
-        makeCrimeDropdown("arrest", "#arrests_crime_dropdown");
+        makeCrimeDropdown("arrests", "#arrests_crime_dropdown");
         makeArrestCategoriesDropdown();
-        arrests_largest_agency = getStateAgencies("arrest", largest_agencies = true);
-        arrest_agencies = updateAgencies("arrest", arrests_largest_agency,
+        arrests_largest_agency = getStateAgencies("arrests", largest_agencies = true);
+        arrest_agencies = updateAgencies("arrests", arrests_largest_agency,
           "#arrests_agency_dropdown",
           "#arrests_state_dropdown");
 
-        main_results = main("arrest", "#arrests_state_dropdown", "#arrests_crime_dropdown");
+        main_results = main("arrests", "#arrests_state_dropdown", "#arrests_crime_dropdown");
         arrests_table_data = main_results[0];
         arrests_graph_headers = main_results[1];
         arrests_table_headers = main_results[2];

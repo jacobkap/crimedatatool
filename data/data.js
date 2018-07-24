@@ -60,6 +60,14 @@ var state_values = [
   "Wyoming"
 ];
 
+agency_desc_vals = {
+  "year" : "Year",
+  "ORI" : "ORI",
+  "agency" : "Agency",
+  "state" : "State",
+  "population" : "Population"
+};
+
 var crime_values = {
   "all_crimes": "All Crimes",
   "aggravated_assault": "Aggravated Assault",

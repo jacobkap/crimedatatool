@@ -20,13 +20,13 @@ function exportToCsv(tableData, type) {
   data = data.join("\n");
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
-/*
-  if ($("#rate").is(':checked')) {
-    offense_type += "rate_";
-  } else {
-    offense_type += "count_";
-  }
-  */
+  /*
+    if ($("#rate").is(':checked')) {
+      offense_type += "rate_";
+    } else {
+      offense_type += "count_";
+    }
+    */
 
   if (type == "offenses") {
     filename = "ucr_offenses_";
@@ -68,7 +68,7 @@ function makeCrimeDropdown(type, dropdown) {
   if (type == "crime") {
     crime = crime_values;
     starter = "all_crimes";
-  } else if (type == "arrest") {
+  } else if (type == "arrests") {
     crime = arrest_values;
     starter = "agg_assault";
   } else if (type == "leoka") {
@@ -85,7 +85,7 @@ function makeStateDropdown(dropdown) {
   $.each(state_values, function(val, text) {
     $(dropdown).append(new Option(text, val));
   });
-  $(dropdown).val(32); // Sets default to New York
+  $(dropdown).val(4); // Sets default to California
 }
 
 function makeArrestCategoriesDropdown() {
@@ -95,16 +95,21 @@ function makeArrestCategoriesDropdown() {
   $('#arrests_category_dropdown').val("tot_arrests");
 }
 
-function countToRate(data) {
+function countToRate(data, per_officer = false) {
   data_keys = _.keys(data);
   for (var i = 0; i < data_keys.length; i++) {
-    temp_match = data_keys[i].replace(/act_|clr_18_|clr_|unfound_/, "");
-    if (temp_match != data_keys[i] ||
-      temp_match.includes("officer")) {
+    if (!data_keys[i].includes("agency") &&
+      !data_keys[i].includes("year") &&
+      !data_keys[i].includes("state") &&
+      !data_keys[i].includes("population") &&
+      !data_keys[i].includes("ORI")) {
       rate_val = data[data_keys[i]] / data.population * 100000;
+      if (per_officer === true) {
+       rate_val = data[data_keys[i]] / data.total_officers;
+      }
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
-      if (isNaN(rate_val)) {
-        rate_val = 0;
+      if (!isFinite(rate_val)) {
+        rate_val = NaN;
       }
       data[data_keys[i]] = rate_val;
       new_key = data_keys[i] + "_rate";
@@ -122,7 +127,7 @@ function getStateAgencies(type, largest_agencies = false) {
   if (type == "crime") {
     url += "offenses/";
     final_url = url + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
-  } else if (type == "arrest") {
+  } else if (type == "arrests") {
     url += "arrests/";
     final_url = url + state_values[$("#arrests_state_dropdown").val()] + "_agency_choices.json";
   } else if (type == "leoka") {

@@ -5,9 +5,17 @@ function allowSaveGraph() {
 
 
 function getGraphDataset(tableData, colsForGraph, type) {
+  if (checkIfRateChecked(type)) {
+    colsForGraph = _.map(colsForGraph, function(x) {
+      return x + "_rate";
+    });
+    colsForGraph[0] = "year";
+  }
+
   data = _.map(tableData, function(currentObject) {
     return _.pick(currentObject, colsForGraph);
   });
+
   if (type == "offenses") {
     years = [];
     data1 = [];
@@ -90,9 +98,15 @@ function makeGraph(data, graph_div, colsForGraph, type) {
 
   if (type == "offenses") {
     yaxis_label = '# of Crimes';
+    if (checkIfRateChecked(type)) {
+      yaxis_label = 'Rate per 100,000 Population';
+    }
     legend_display = true;
   } else if (type == "arrests") {
     yaxis_label = "# of Arrests";
+    if (checkIfRateChecked(type)) {
+      yaxis_label = 'Rate per 100,000 Population';
+    }
     legend_display = false;
   } else if (type == "leoka") {
     yaxis_label = "# of People";
@@ -100,6 +114,9 @@ function makeGraph(data, graph_div, colsForGraph, type) {
       yaxis_label = "# of Officer Deaths";
     } else if (colsForGraph[1].includes("assault")) {
       yaxis_label = "# of Assaults";
+    }
+    if (checkIfRateChecked(type)) {
+      yaxis_label = 'Rate per 100,000 Population';
     }
     legend_display = false;
   }
@@ -193,53 +210,59 @@ function getTitle(data, type) {
     title += leoka_values[$("#leoka_category_dropdown").val()];
   }
 
-  if ($("#rate").is(':checked')) {
+  if (checkIfRateChecked(type)) {
     title += " Rate";
   }
   return title;
 }
 
-
 function fixTableName(name, type) {
-  crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
-  if (!crime_match.includes("officer") && crime_match == name) {
-    name = name.replace(/_/g, " ");
-    name = name.replace(/^\w/, c => c.toUpperCase());
-    return name;
-  }
-  crime_match_regex = new RegExp(crime_match);
-  name = name.replace(/act_/, "Actual ");
-  name = name.replace(/clr_18_/, "Clearance Under Age 18 ");
-  name = name.replace(/clr_/, "Clearance ");
-  name = name.replace(/unfound_/, "Unfounded ");
+    temp_name = name;
+//    console.log(name);
+    name = name.replace(/_rate/g, "");
   if (type == "offenses") {
-    //offenses_data_names = _.keys(crime_values);
-    //  offenses_value_names = _.values(crime_values);
-    //  name = offenses_value_names[_.indexOf(offenses_value_names, name)];
-
-    name = name.replace(crime_match_regex, crime_values[crime_match]);
+    temp1 = name.replace(/act_.*/, "Actual ");
+    temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
+    temp3 = name.replace(/clr_[a-z].*/, "Clearance ");
+    temp4 = name.replace(/unfound_.*/, "Unfounded ");
+    name = name.replace(/act_|clr_18_|clr_|unfound_/, "");
+    name = crime_values[name];
+    if (temp1 != temp_name) name = temp1 + name;
+    if (temp2 != temp_name) name = temp2 + name;
+    if (temp3 != temp_name) name = temp3 + name;
+    if (temp4 != temp_name) name = temp4 + name;
   } else if (type == "arrests") {
-    real_name = name;
-    name = name.replace(/ tot.*/g, "");
-    arrests_data_names = _.keys(arrest_values);
-    arrests_value_names = _.values(arrest_values);
-    name = arrests_value_names[_.indexOf(arrests_value_names, name)];
+    tot_section = name.replace(/.*_tot/g, "tot");
+    name = name.replace(/_tot.*/g, "");
+    name = arrest_values[name];
+    tot_section = arrest_categories[tot_section];
+    if (tot_section !== undefined) name = name + " " + tot_section;
   } else if (type == "leoka") {
-    leoka_data_names = _.keys(leoka_values);
-    leoka_value_names = _.values(leoka_values);
-    name = leoka_value_names[_.indexOf(leoka_data_names, name)];
+    name = leoka_values[name];
   }
 
-  if ($("#rate").is(':checked')) {
+if (name === undefined) {
+  name = temp_name.replace(/^\w/, c => c.toUpperCase());
+}
+
+  if (checkIfRateChecked(type) &&
+    !name.includes("Agency") &&
+    !name.includes("Year") &&
+    !name.includes("State") &&
+    !name.includes("Population") &&
+    !name.includes("ORI")) {
     name += " Rate";
   }
   return name;
 }
 
-function fixTableDataName(name) {
-  crime_match = name.replace(/act_|clr_18_|clr_|unfound_/, "");
-  if (crime_match != name || crime_match.includes("officer")) {
-    if ($("#rate").is(':checked')) {
+function fixTableDataName(name, type) {
+  if (!name.includes("agency") &&
+    !name.includes("year") &&
+    !name.includes("state") &&
+    !name.includes("population") &&
+    !name.includes("ORI")) {
+    if (checkIfRateChecked(type)) {
       name += "_rate";
     }
   }
@@ -247,12 +270,12 @@ function fixTableDataName(name) {
 }
 
 function makeTable(div, data, headers, type) {
-  data = subsetColumns(data, headers, "table");
+  data = subsetColumns(data, headers, "table", type);
 
   data_keys = _.keys(data[0]);
-  data_keys = data_keys.filter(function(a){
+  data_keys = data_keys.filter(function(a) {
     return a !== 'agency' && a !== 'year' &&
-           a !== 'state'  && a !== 'ORI';
+      a !== 'state' && a !== 'ORI';
   });
   for (var m = 0; m < data.length; m++) {
     for (n = 0; n < data_keys.length; n++) {
@@ -264,7 +287,7 @@ function makeTable(div, data, headers, type) {
 
   for (var i = 0; i < headers.length; i++) {
     label_name = fixTableName(headers[i], type);
-    data_name = fixTableDataName(headers[i]);
+    data_name = fixTableDataName(headers[i], type);
     z.push({
       data: data_name,
       title: label_name,

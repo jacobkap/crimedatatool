@@ -83,11 +83,11 @@
       <br>
       <select class="simple-select" id="crime_dropdown" onchange="offenses_crimeChangeFun()">
       </select>
-      <!--
+
         <br><br>
-        <input type="checkbox" id="rate" name="rate" value="rate" onchange="rateChangeFun()">
-        <label for="rate">Rate per 100,000 Population</label>
-      -->
+        <input type="checkbox" id="offenses_rate" name="offenses_rate" value="offenses_rate" onchange="rateChangeFun('offenses')">
+        <label for="offenses_rate">Rate per 100,000 Population</label>
+
       <br><br>
       <h3>Type of Crime:</h3>
 
@@ -106,7 +106,7 @@
       <label class="label-text fa" for="unfounded">Unfounded Offenses</label>
 
       <hr>
-      <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download Agency Data as CSV</button>
+      <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download All Agency Data as CSV</button>
       <br>
       <p>Please note that data are only available for agencies that report all 12 months of the year.
     </div>
@@ -137,7 +137,7 @@
 
           offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
           $("#graph").ready($("#loader").hide())
-          table = makeTable("#table", table_data, table_headers)
+          table = makeTable("#table", table_data, table_headers, "offenses")
           jQuery(window).on('resize', resizeChosen);
         });
       </script>

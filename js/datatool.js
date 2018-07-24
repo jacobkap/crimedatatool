@@ -26,12 +26,13 @@ function objToString(obj) {
   return str;
 }
 
-function subsetColumns(data, columns, output) {
+function subsetColumns(data, columns, output, type) {
 
-  if ($("#rate").is(':checked')) {
+  if (checkIfRateChecked(type)) {
     columns = _.map(columns, function(x) {
       return x + "_rate";
     });
+
     if (output == "table") {
       columns[0] = "agency";
       columns[1] = "year";
@@ -43,8 +44,6 @@ function subsetColumns(data, columns, output) {
     }
 
   }
-
-
 
   data = _.map(data, function(currentObject) {
     return _.pick(currentObject, columns);
@@ -71,7 +70,7 @@ function getStateData(type) {
     agencies = agencies.replace(/:/g, "_");
     agencies = agencies.replace(/__/g, "_");
     url += "offenses/" + state + "_" + agencies;
-  } else if (type == "arrest") {
+  } else if (type == "arrests") {
     state = state_values[$("#arrests_state_dropdown").val()];
     state = state.replace(/ /g, "_");
     state = state.replace(" ", "_");
@@ -103,18 +102,28 @@ function sortByKey(array, key) {
     });
 }
 
-function getAgencyData(stateData, headers) {
+function getAgencyData(stateData, headers, type) {
   agencyData = data_object_fun(stateData, headers);
   agencyData.pop();
   agencyData.shift();
   agencyData = sortByKey(agencyData, "year");
 
-  if ($("#rate").is(':checked')) {
+  if (checkIfRateChecked(type)) {
     agencyData = _.map(agencyData, function(currentObject) {
       return countToRate(currentObject);
     });
   }
   return agencyData;
+}
+
+function checkIfRateChecked(type) {
+  if (type == "offenses") {
+    return $("#offenses_rate").is(':checked');
+  } else if (type == "arrests") {
+    return $("#arrests_rate").is(':checked');
+  } else if (type == "leoka") {
+    return $("#leoka_rate").is(':checked');
+  }
 }
 
 function main(type, state_dropdown, crime_dropdown) {
@@ -123,7 +132,7 @@ function main(type, state_dropdown, crime_dropdown) {
   colsForGraph = getCrimeColumns(headers, type, "graph");
   colsForTable = getCrimeColumns(headers, type, "table");
 
-  tableData = getAgencyData(stateData, headers);
+  tableData = getAgencyData(stateData, headers, type);
 
 
   return [tableData, colsForGraph, colsForTable];
@@ -139,7 +148,7 @@ function getCrimeColumns(headers, type, output) {
   }
   if (type == "offenses") {
     crime = $("#crime_dropdown").val();
-  } else if (type == "arrest") {
+  } else if (type == "arrests") {
     crime = $("#arrests_crime_dropdown").val();
     if (output == "graph") {
       crime += "_" + $("#arrests_category_dropdown").val();

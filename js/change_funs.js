@@ -13,8 +13,14 @@ function crimeBoxesUpdate() {
 
 }
 
-function rateChangeFun() {
-  offenses_agencyChangeFun("graph");
+function rateChangeFun(type) {
+  if (type == "offenses") {
+    offenses_agencyChangeFun();
+  } else if (type == "arrests") {
+    arrests_agencyChangeFun();
+  } else if (type == "leoka") {
+    leoka_agencyChangeFun();
+  }
 }
 
 function offenses_stateChangeFun() {
@@ -42,7 +48,7 @@ function offenses_crimeChangeFun() {
 }
 
 function arrests_agencyChangeFun() {
-  main_results = main("arrest", "#arrests_state_dropdown", "#arrests_crime_dropdown");
+  main_results = main("arrests", "#arrests_state_dropdown", "#arrests_crime_dropdown");
   arrests_table_data = main_results[0];
   arrests_graph_headers = main_results[1];
   arrests_table_headers = main_results[2];
@@ -60,7 +66,7 @@ function arrests_categoryChangeFun() {
 }
 
 function arrests_stateChangeFun() {
-  arrest_agencies = updateAgencies("arrest", arrests_largest_agency, "#arrests_agency_dropdown", "#arrests_state_dropdown");
+  arrest_agencies = updateAgencies("arrests", arrests_largest_agency, "#arrests_agency_dropdown", "#arrests_state_dropdown");
   arrests_agencyChangeFun();
 }
 
