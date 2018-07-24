@@ -160,9 +160,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
           ticks: {
             beginAtZero: true,
             userCallback: function(value, index, values) {
-              value = value.toString();
-              value = value.split(/(?=(?:...)*$)/);
-              value = value.join(',');
+              value = value.toLocaleString();
               return value;
             },
             fontSize: 14
@@ -182,9 +180,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
         callbacks: {
           label: function(tooltipItems, data) {
             value = tooltipItems.yLabel;
-            value = value.toString();
-            value = value.split(/(?=(?:...)*$)/);
-            value = value.join(',');
+            value = value.toLocaleString();
             return value;
           }
         }
