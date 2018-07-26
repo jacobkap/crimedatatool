@@ -104,8 +104,15 @@ function sortByKey(array, key) {
 
 function getAgencyData(stateData, headers, type) {
   agencyData = data_object_fun(stateData, headers);
+
   agencyData.pop();
   agencyData.shift();
+  // fixes issue where year 2000 is sometimes set as "2e3"
+  for (var i = 0; i < agencyData.length; i++) {
+    if (agencyData[i].year == "2e3") {
+      agencyData[i].year = "2000";
+    }
+  }
   agencyData = sortByKey(agencyData, "year");
 
   if (checkIfRateChecked(type)) {
@@ -133,6 +140,7 @@ function main(type, state_dropdown, crime_dropdown) {
   colsForTable = getCrimeColumns(headers, type, "table");
 
   tableData = getAgencyData(stateData, headers, type);
+
 
 
   return [tableData, colsForGraph, colsForTable];
