@@ -32,10 +32,10 @@ function getGraphDataset(tableData, colsForGraph, type) {
     }
 
     final_data = [
-      makeGraphObjects(data1, "#ca0020", "Actual Offenses"),
-      makeGraphObjects(data2, "#0571b0", "Total Offenses Cleared"),
-      makeGraphObjects(data3, "#7b3294", "Offenses Cleared Involving Only Persons Under age 18"),
-      makeGraphObjects(data4, "#008837", "Unfounded Offenses")
+      makeGraphObjects(data1, "#b2182b", "Actual Offenses"),
+      makeGraphObjects(data2, "#ef8a62", "Total Offenses Cleared"),
+      makeGraphObjects(data3, "#67a9cf", "Offenses Cleared Involving Only Persons Under age 18"),
+      makeGraphObjects(data4, "#2166ac", "Unfounded Offenses")
     ];
     final_data[0].hidden = false;
     final_data[1].hidden = false;
