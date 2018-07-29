@@ -5,9 +5,14 @@ function allowSaveGraph() {
 
 
 function getGraphDataset(tableData, colsForGraph, type) {
+  rate_type = "_rate";
+  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+    rate_type = "_rate_per_officer";
+  }
+
   if (checkIfRateChecked(type)) {
     colsForGraph = _.map(colsForGraph, function(x) {
-      return x + "_rate";
+      return x + rate_type;
     });
     colsForGraph[0] = "year";
   }
@@ -118,6 +123,9 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     if (checkIfRateChecked(type)) {
       yaxis_label = 'Rate per 100,000 Population';
     }
+    if ($("#leoka_rate_per_officer").is(':checked')) {
+      yaxis_label = "Rate per Officer";
+    }
     legend_display = false;
   }
 
@@ -209,6 +217,9 @@ function getTitle(data, type) {
   if (checkIfRateChecked(type)) {
     title += " Rate";
   }
+  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+    title += " per Officer";
+  }
   return title;
 }
 
@@ -248,18 +259,26 @@ if (name === undefined) {
     !name.includes("Population") &&
     !name.includes("ORI")) {
     name += " Rate";
+    if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+      name += " per Officer";
+    }
   }
   return name;
 }
 
 function fixTableDataName(name, type) {
+  rate_type = "_rate";
+  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+    rate_type = "_rate_per_officer";
+  }
+
   if (!name.includes("agency") &&
     !name.includes("year") &&
     !name.includes("state") &&
     !name.includes("population") &&
     !name.includes("ORI")) {
     if (checkIfRateChecked(type)) {
-      name += "_rate";
+      name += rate_type;
     }
   }
   return name;
@@ -287,7 +306,7 @@ function makeTable(div, data, headers, type) {
     z.push({
       data: data_name,
       title: label_name,
-      className: "dt-head-left dt-body-right"
+      className: "dt-head-left dt-body-left"
     });
   }
   temp_table = $(div).DataTable({

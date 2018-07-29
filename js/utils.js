@@ -21,10 +21,14 @@ function exportToCsv(tableData, type) {
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
 
+
   if (checkIfRateChecked(type)) {
       rate_or_count = "rate_";
     } else {
       rate_or_count = "count_";
+    }
+     if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+      rate_or_count = "rate_per_officer_";
     }
 
 
@@ -65,13 +69,13 @@ function exportToCsv(tableData, type) {
 function makeCrimeDropdown(type, dropdown) {
   if (type == "crime") {
     crime = crime_values;
-    starter = "all_crimes";
+    starter = "murder";
   } else if (type == "arrests") {
     crime = arrest_values;
-    starter = "agg_assault";
+    starter = "murder";
   } else if (type == "leoka") {
     crime = leoka_values;
-    starter = "total_officers";
+    starter = "female_employees_officers";
   }
   $.each(crime, function(val, text) {
     $(dropdown).append(new Option(text, val));
@@ -94,6 +98,8 @@ function makeArrestCategoriesDropdown() {
 }
 
 function countToRate(data, per_officer = false) {
+
+  per_officer = $("#leoka_rate_per_officer").is(':checked');
   data_keys = _.keys(data);
   for (var i = 0; i < data_keys.length; i++) {
     if (!data_keys[i].includes("agency") &&
@@ -104,13 +110,17 @@ function countToRate(data, per_officer = false) {
       rate_val = data[data_keys[i]] / data.population * 100000;
       if (per_officer === true) {
        rate_val = data[data_keys[i]] / data.total_officers;
-      }
+     }
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
       if (!isFinite(rate_val)) {
         rate_val = NaN;
       }
       data[data_keys[i]] = rate_val;
-      new_key = data_keys[i] + "_rate";
+      rate_type = "_rate";
+      if (per_officer === true) {
+        rate_type = "_rate_per_officer";
+      }
+      new_key = data_keys[i] + rate_type;
       Object.defineProperty(data, new_key,
         Object.getOwnPropertyDescriptor(data, data_keys[i]));
       delete data[data_keys[i]];

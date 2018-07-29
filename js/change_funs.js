@@ -23,6 +23,15 @@ function rateChangeFun(type) {
   }
 }
 
+function leokoRateBoxesPop() {
+    $("#leoka_rate_per_officer").prop("checked", false);
+    rateChangeFun("leoka");
+}
+function leokoRateBoxesOfficer() {
+    $("#leoka_rate").prop("checked", false);
+    rateChangeFun("leoka");
+}
+
 function offenses_stateChangeFun() {
   offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", state_dropdown, "offenses");
   offenses_agencyChangeFun();

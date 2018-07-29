@@ -27,10 +27,14 @@ function objToString(obj) {
 }
 
 function subsetColumns(data, columns, output, type) {
+  rate_type = "_rate";
+  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+    rate_type = "_rate_per_officer";
+  }
 
   if (checkIfRateChecked(type)) {
     columns = _.map(columns, function(x) {
-      return x + "_rate";
+      return x + rate_type;
     });
 
     if (output == "table") {
@@ -96,13 +100,14 @@ function getStateData(type) {
 }
 
 function sortByKey(array, key) {
-    return array.sort(function(a, b) {
-        var x = a[key]; var y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-    });
+  return array.sort(function(a, b) {
+    var x = a[key];
+    var y = b[key];
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
 }
 
-function getAgencyData(stateData, headers, type) {
+function getAgencyData(stateData, headers, table_headers, type) {
   agencyData = data_object_fun(stateData, headers);
 
   agencyData.pop();
@@ -114,6 +119,10 @@ function getAgencyData(stateData, headers, type) {
     }
   }
   agencyData = sortByKey(agencyData, "year");
+
+  agencyData = _.map(agencyData, function(x) {
+    return _.pick(x, table_headers);
+  });
 
   if (checkIfRateChecked(type)) {
     agencyData = _.map(agencyData, function(currentObject) {
@@ -129,7 +138,8 @@ function checkIfRateChecked(type) {
   } else if (type == "arrests") {
     return $("#arrests_rate").is(':checked');
   } else if (type == "leoka") {
-    return $("#leoka_rate").is(':checked');
+    return ($("#leoka_rate").is(':checked') ||
+      $("#leoka_rate_per_officer").is(':checked'));
   }
 }
 
@@ -139,8 +149,19 @@ function main(type, state_dropdown, crime_dropdown) {
   colsForGraph = getCrimeColumns(headers, type, "graph");
   colsForTable = getCrimeColumns(headers, type, "table");
 
-  tableData = getAgencyData(stateData, headers, type);
+  tableData = getAgencyData(stateData, headers, colsForTable, type);
 
+  // Removes the total officer column used to make the rate
+  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_officers") {
+    tableData = _.map(tableData, function(x) {
+      return _.omit(x, "total_officers");
+    });
+
+    index = colsForGraph.indexOf("total_officers");
+    colsForGraph.splice(index, 1);
+    index = colsForTable.indexOf("total_officers");
+    colsForTable.splice(index, 1);
+  }
 
 
   return [tableData, colsForGraph, colsForTable];
@@ -160,27 +181,31 @@ function getCrimeColumns(headers, type, output) {
     crime = $("#arrests_crime_dropdown").val();
     if (output == "graph") {
       crime += "_" + $("#arrests_category_dropdown").val();
-    }} else if (type == "leoka") {
-      crime = $("#leoka_category_dropdown").val();
     }
+  } else if (type == "leoka") {
+    crime = $("#leoka_category_dropdown").val();
+  }
 
 
-if (type == "leoka") {
-  for (var i = 0; i < headers.length; i++) {
-    if (headers[i] === crime) {
-      columnNames.push(headers[i]);
+  if (type == "leoka") {
+    for (var i = 0; i < headers.length; i++) {
+      if (headers[i] === crime) {
+        columnNames.push(headers[i]);
+      }
+    }
+  } else {
+    for (var n = 0; n < headers.length; n++) {
+      if (headers[n].includes(crime)) {
+        columnNames.push(headers[n]);
+      }
+    }
+    if (crime === "theft_total") {
+      columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
     }
   }
-} else {
-  for (var n = 0; n < headers.length; n++) {
-    if (headers[n].includes(crime)) {
-      columnNames.push(headers[n]);
-    }
+  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_officers") {
+    columnNames.push("total_officers");
   }
-  if (crime === "theft_total") {
-    columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
-  }
-}
   return (columnNames);
 }
 
