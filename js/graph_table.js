@@ -214,12 +214,11 @@ function getTitle(data, type) {
     title += leoka_values[$("#leoka_category_dropdown").val()];
   }
 
-  if (checkIfRateChecked(type)) {
-    title += " Rate";
-  }
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
-    title += " per Officer";
-  }
+    title += ", Rate per Officer";
+  } else if (checkIfRateChecked(type)) {
+      title += ", Rate per 100,000 Population";
+    }
   return title;
 }
 

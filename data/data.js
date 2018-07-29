@@ -148,8 +148,6 @@ var arrest_values = {
 };
 
 var leoka_values = {
-
-
   "ambush_total_assault": "Assault - Ambush",
   "att_oth_arrest_total_assault": "Assault - Attempted Other Arrest",
   "burglary_total_assault": "Assault - Burglary",

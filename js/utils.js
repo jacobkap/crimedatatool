@@ -75,7 +75,7 @@ function makeCrimeDropdown(type, dropdown) {
     starter = "murder";
   } else if (type == "leoka") {
     crime = leoka_values;
-    starter = "female_employees_officers";
+    starter = "total_assault_total";
   }
   $.each(crime, function(val, text) {
     $(dropdown).append(new Option(text, val));
