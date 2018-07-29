@@ -147,6 +147,13 @@ function main(type, state_dropdown, crime_dropdown) {
   stateData = getStateData(type);
   headers = stateData[0];
   colsForGraph = getCrimeColumns(headers, type, "graph");
+
+  // Reorder cols for graph to make clearance before clearance 18.
+  Array.prototype.move = function (from, to) {
+    this.splice(to, 0, this.splice(from, 1)[0]);
+  };
+  colsForGraph.move(3,2);
+
   colsForTable = getCrimeColumns(headers, type, "table");
 
   tableData = getAgencyData(stateData, headers, colsForTable, type);
