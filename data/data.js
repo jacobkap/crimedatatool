@@ -81,7 +81,10 @@ var crime_values = {
   "attempted_burglary": "Burglary - Attempted",
   "burg_force_entry": "Burglary - Forcible Entry",
   "burg_no_force_entry": "Burglary - Nonforcible Entry",
-  "mtr_vhc_theft_total": "Motor Vehicle Theft",
+  "mtr_vhc_theft_total": "Motor Vehicle Theft - Total",
+  "auto_theft": "Motor Vehicle Theft - Auto",
+  "other_vhc_theft": "Motor Vehicle Theft - Other Vehicle",
+  "truck_bus_theft": "Motor Vehicle Theft - Truck/Bus",
   "manslaughter": "Manslaughter",
   "murder": "Murder",
   "officers_assaulted": "Officers Assaulted",
@@ -95,10 +98,7 @@ var crime_values = {
   "knife_robbery": "Robbery - Knife",
   "other_weapon_robbery": "Robbery - Other Weapon",
   "strong_arm_robbery": "Robbery - Strong Arm",
-  "theft_total": "Theft - Total",
-  "auto_theft": "Theft - Auto Theft",
-  "other_vhc_theft": "Theft - Other Vehicle Theft",
-  "truck_bus_theft": "Theft - Truck/Bus Theft"
+  "theft_total": "Theft - Total"
 };
 
 var arrest_values = {
