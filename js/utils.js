@@ -87,7 +87,7 @@ function makeStateDropdown(dropdown) {
   $.each(state_values, function(val, text) {
     $(dropdown).append(new Option(text, val));
   });
-  $(dropdown).val(4); // Sets default to California
+  $(dropdown).val(32); // Sets default to New York
 }
 
 function makeArrestCategoriesDropdown() {
