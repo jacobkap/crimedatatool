@@ -157,7 +157,10 @@ h3 {
 .main {
   width: 80%;
 }
-
+br {
+   display: block;
+   margin: 1px 0;
+}
 /* Clear floats after the columns */
 
 .row:after {
