@@ -186,6 +186,10 @@ br {
   .main {
     width: 80%;
   }
+
+  .crosswalk {
+    width: 95%;
+  }
    .chart-container {
     height: 400px !important;
   }
