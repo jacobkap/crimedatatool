@@ -10,7 +10,7 @@ change_url = function() {
 
 
 change_data_from_url = function() {
-  new_url = get_info_for_url();
+  new_url = window.location;
 
   split_url = new_url.split("&");
   state_val = split_url[0].split("=");
