@@ -138,9 +138,11 @@
           offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
           $("#graph").ready($("#loader").hide())
           table = makeTable("#table", table_data, table_headers, "offenses")
+
+              change_url();
           jQuery(window).on('resize', resizeChosen);
 
-          change_url();
+
         });
 
 
