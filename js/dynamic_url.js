@@ -3,8 +3,8 @@ change_url = function() {
   agency_val = offense_agencies[$("#agency_dropdown").val()];
   crime_val = crime_values[$("#crime_dropdown").val()];
 
-  new_url = "http://crimedatatool.com/crime.html/" + "state=" + state_val + "&agency=" + agency_val + "&crime=" + crime_val;
-  window.history.pushState(new_url, 'Title', new_url);
+  new_url =  "state=" + state_val + "&agency=" + agency_val + "&crime=" + crime_val;
+  window.history.pushState("", 'Crime', new_url);
   return(new_url);
 };
 

@@ -11,7 +11,6 @@
       dataLayer.push(arguments);
     }
     gtag('js', new Date());
-
     gtag('config', 'UA-99359926-4');
   </script>
 
@@ -139,7 +138,7 @@
           $("#graph").ready($("#loader").hide())
           table = makeTable("#table", table_data, table_headers, "offenses")
 
-              change_url();
+          change_url();
           jQuery(window).on('resize', resizeChosen);
 
 
