@@ -10,11 +10,10 @@ change_url = function() {
 
 
 change_data_from_url = function() {
-  url = window.location.pathname;
+  url = window.location.hash;
 
   split_url = url.split("&");
-  state_val = split_url[0].replace(/.*(?=state=)/, "");
-  state_val = state_val.replace("state=", "");
+  state_val = state_val.replace("#state=", "");
   agency_val = split_url[1].replace("agency=", "");
   crime_val = split_url[2].replace("crime=", "");
 
