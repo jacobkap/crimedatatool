@@ -1,5 +1,5 @@
 change_url = function() {
-  console.log(window.location.hash)
+  console.log(window.location.hash);
   state_val = state_values[$("#state_dropdown").val()];
   agency_val = offense_agencies[$("#agency_dropdown").val()];
   crime_val = crime_values[$("#crime_dropdown").val()];
@@ -11,7 +11,7 @@ change_url = function() {
 
 
 change_data_from_url = function() {
-  console.log("changing data from url")
+  console.log("changing data from url");
   url = window.location.hash;
 
   split_url = url.split("&");
