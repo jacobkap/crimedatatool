@@ -1,4 +1,5 @@
 change_url = function() {
+  console.log(window.location.hash)
   state_val = state_values[$("#state_dropdown").val()];
   agency_val = offense_agencies[$("#agency_dropdown").val()];
   crime_val = crime_values[$("#crime_dropdown").val()];
