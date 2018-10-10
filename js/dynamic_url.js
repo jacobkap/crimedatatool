@@ -24,13 +24,14 @@ change_data_from_url = function() {
   crime_val = crime_val.replace(/%20/g, " ");
 
   state_val = _.indexOf(state_values, state_val);
-  agency_val = _.indexOf(offense_agencies, agency_val);
   crime_val = _.indexOf(_.values(crime_values), crime_val);
   crime_val = _.keys(crime_values)[crime_val];
 
   $("#state_dropdown").val(state_val);
   $("#state_dropdown").trigger("chosen:updated");
 
+  offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
+  agency_val = _.indexOf(offense_agencies, agency_val);
   $("#agency_dropdown").val(agency_val);
   $("#agency_dropdown").trigger("chosen:updated");
 
