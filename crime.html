@@ -139,11 +139,11 @@
           table = makeTable("#table", table_data, table_headers, "offenses")
 
 
-        //  if (window.location.hash != "") {
+          if (window.location.hash != "") {
             change_data_from_url()
-      //    } else {
-      //    change_url();
-      //  }
+          } else {
+          change_url();
+        }
           jQuery(window).on('resize', resizeChosen);
 
 
