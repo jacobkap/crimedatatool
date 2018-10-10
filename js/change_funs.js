@@ -50,7 +50,7 @@ function offenses_agencyChangeFun() {
   table.destroy();
   table = makeTable("#table", table_data, table_headers, "offenses");
   crimeBoxesUpdate();
-//   change_url();
+  change_url();
 }
 
 function offenses_crimeChangeFun() {
