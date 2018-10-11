@@ -48,6 +48,6 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
   $(rate_checkbox).prop("checked", rate_checked);
 }
 
-return agencies;
+return(agencies);
 
 };
