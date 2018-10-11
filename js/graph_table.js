@@ -5,6 +5,7 @@ function allowSaveGraph() {
 
 
 function getGraphDataset(tableData, colsForGraph, type) {
+
   rate_type = "_rate";
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
     rate_type = "_rate_per_officer";
@@ -229,9 +230,9 @@ function fixTableName(name, type) {
   if (type == "offenses") {
     temp1 = name.replace(/act_.*/, "Actual ");
     temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
-    temp3 = name.replace(/clr_[a-z].*/, "Clearance ");
+    temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
     temp4 = name.replace(/unfound_.*/, "Unfounded ");
-    name = name.replace(/act_|clr_18_|clr_|unfound_/, "");
+    name = name.replace(/act_|clr_18_|tot_clr_|unfound_/, "");
     name = crime_values[name];
     if (temp1 != temp_name) name = temp1 + name;
     if (temp2 != temp_name) name = temp2 + name;

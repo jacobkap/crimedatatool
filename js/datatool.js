@@ -152,7 +152,6 @@ function main(type, state_dropdown, crime_dropdown) {
   Array.prototype.move = function (from, to) {
     this.splice(to, 0, this.splice(from, 1)[0]);
   };
-  colsForGraph.move(3,2);
 
   colsForTable = getCrimeColumns(headers, type, "table");
 
