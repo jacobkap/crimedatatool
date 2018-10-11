@@ -119,6 +119,14 @@
         $("#graph").ready($("#loader").hide())
         arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers, "arrests")
         jQuery(window).on('resize', resizeChosen);
+
+
+        if (window.location.hash == "") {
+          change_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", arrest_agencies, crime_values)
+        } else {
+        change_data_from_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", arrest_values, arrests_largest_agency, "arrests");
+        offenses_agencyChangeFun();
+      }
       });
     </script>
 
