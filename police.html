@@ -119,13 +119,15 @@
 
         $("#leoka_graph").ready($("#loader").hide())
         arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka")
-        jQuery(window).on('resize', resizeChosen);
+
 
         if (window.location.hash == "") {
           change_url("#leoka_state_dropdown", "#agency_dropdown", "#leoka_crime_dropdown", leoka_agencies, leoka_values)
         } else {
         change_data_from_url("#leoka_state_dropdown", "#agency_dropdown", "#leoka_crime_dropdown", leoka_values, leoka_largest_agency, "leoka");
-        offenses_agencyChangeFun();
+        leoka_agencyChangeFun();4
+
+                jQuery(window).on('resize', resizeChosen);
       }
       });
     </script>
