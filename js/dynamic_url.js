@@ -36,8 +36,8 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
   $(state_dropdown).val(state_val);
   $(state_dropdown).trigger("chosen:updated");
 
-  temp_agencies   = updateAgencies(type, largest_agency, agency_dropdown, state_dropdown);
-  agency_val = _.indexOf(temp_agencies, agency_val);
+  agencies   = updateAgencies(type, largest_agency, agency_dropdown, state_dropdown);
+  agency_val = _.indexOf(agencies, agency_val);
   $(agency_dropdown).val(agency_val);
   $(agency_dropdown).trigger("chosen:updated");
 
@@ -47,5 +47,7 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
   if (rate_checked === true) {
   $(rate_checkbox).prop("checked", rate_checked);
 }
+
+return agencies;
 
 };
