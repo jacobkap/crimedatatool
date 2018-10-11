@@ -11,7 +11,6 @@ change_url = function(state_dropdown, agency_dropdown, category_dropdown, agenci
 
 
 change_data_from_url = function() {
-  console.log("changing data from url");
   url = window.location.hash;
 
   split_url = url.split("&");
