@@ -1,22 +1,29 @@
-change_url = function(state_dropdown, agency_dropdown, category_dropdown, agencies, category_values) {
+change_url = function(state_dropdown, agency_dropdown, category_dropdown, rate_checkbox,  agencies, category_values) {
   state_val = state_values[$(state_dropdown).val()];
   agency_val = agencies[$(agency_dropdown).val()];
   category_val = category_values[$(category_dropdown).val()];
 
+  rate_checked = $(rate_checkbox).prop("checked");
 
-  new_url =  window.location.pathname + "#state=" + state_val + "&agency=" + agency_val + "&category=" + category_val;
+
+  new_url =  window.location.pathname +
+   "#state=" + state_val +
+   "&agency=" + agency_val +
+    "&category=" + category_val +
+    "&rate=" + rate_checked;
   window.history.pushState("", 'Title', new_url);
   return(new_url);
 };
 
 
-change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdown, category_values, largest_agency, type) {
+change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdown, rate_checkbox, category_values, largest_agency, type) {
   url = window.location.hash;
 
   split_url = url.split("&");
   state_val = split_url[0].replace("#state=", "");
   agency_val = split_url[1].replace("agency=", "");
   category_val = split_url[2].replace("category=", "");
+  rate_checked = split_url[3].replace("rate=", "");
 
   state_val = state_val.replace(/%20/g, " ");
   agency_val = agency_val.replace(/%20/g, " ");
@@ -36,5 +43,7 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
 
   $(category_dropdown).val(category_val);
   $(category_dropdown).trigger("chosen:updated");
+
+  $(rate_checkbox).prop("checked", rate_checked);
 
 };

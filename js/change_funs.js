@@ -10,7 +10,6 @@ function crimeBoxesUpdate() {
   $('.main').prepend('<canvas id="graph" style="width:95%;height:500px;"></canvas>');
   ctx_results = document.getElementById("graph").getContext('2d');
   offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
-
 }
 
 function rateChangeFun(type) {

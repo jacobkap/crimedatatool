@@ -140,9 +140,9 @@
 
 
           if (window.location.hash == "") {
-            change_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", offense_agencies, crime_values)
+            change_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", "#offenses_rate", offense_agencies, crime_values)
           } else {
-          change_data_from_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", crime_values, offenses_largest_agency, "crime");
+          change_data_from_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", "#offenses_rate", crime_values, offenses_largest_agency, "crime");
           offenses_agencyChangeFun();
         }
           jQuery(window).on('resize', resizeChosen);
