@@ -10,7 +10,7 @@ change_url = function(state_dropdown, agency_dropdown, category_dropdown, agenci
 };
 
 
-change_data_from_url = function() {
+change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdown, category_values) {
   url = window.location.hash;
 
   split_url = url.split("&");
@@ -23,19 +23,18 @@ change_data_from_url = function() {
   category_val = category_val.replace(/%20/g, " ");
 
   state_val = _.indexOf(state_values, state_val);
-  category_val = _.indexOf(_.values(crime_values), category_val);
-  category_val = _.keys(crime_values)[category_val];
+  category_val = _.indexOf(_.values(category_values), category_val);
+  category_val = _.keys(category_values)[category_val];
 
-  $("#state_dropdown").val(state_val);
-  $("#state_dropdown").trigger("chosen:updated");
+  $(state_dropdown).val(state_val);
+  $(state_dropdown).trigger("chosen:updated");
 
   offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
   agency_val = _.indexOf(offense_agencies, agency_val);
-  $("#agency_dropdown").val(agency_val);
-  $("#agency_dropdown").trigger("chosen:updated");
+  $(agency_dropdown).val(agency_val);
+  $(agency_dropdown).trigger("chosen:updated");
 
-  $("#crime_dropdown").val(category_val);
-  $("#crime_dropdown").trigger("chosen:updated");
-  offenses_agencyChangeFun();
+  $(category_dropdown).val(category_val);
+  $(category_dropdown).trigger("chosen:updated");
 
 };
