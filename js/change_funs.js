@@ -98,7 +98,7 @@ function leoka_agencyChangeFun() {
   leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
   arrests_table.destroy();
   arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka");
-  change_url("#leoka_state_dropdown", "#agency_dropdown", "#leoka_crime_dropdown", leoka_agencies, leoka_values);
+  change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_crime_dropdown", leoka_agencies, leoka_values);
 }
 
 function leoka_stateChangeFun() {
