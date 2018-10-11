@@ -44,8 +44,8 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
   $(category_dropdown).val(category_val);
   $(category_dropdown).trigger("chosen:updated");
 
-  if (rate_checked === true) {
-  $(rate_checkbox).prop("checked", rate_checked);
-}
+//  if (rate_checked === true) {
+//  $(rate_checkbox).prop("checked", rate_checked);
+//}
 
 };
