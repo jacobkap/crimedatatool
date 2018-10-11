@@ -23,6 +23,7 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
   agency_val   = split_url[1].replace("agency=", "");
   category_val = split_url[2].replace("category=", "");
   rate_checked = split_url[3].replace("rate=", "");
+  rate_checked = $.parseJSON(rate_checked);
 
   state_val    = state_val.replace(/%20/g, " ");
   agency_val   = agency_val.replace(/%20/g, " ");
