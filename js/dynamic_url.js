@@ -1,5 +1,4 @@
 change_url = function(state_dropdown, agency_dropdown, category_dropdown, agencies, category_values) {
-  console.log(window.location.hash);
   state_val = state_values[$(state_dropdown).val()];
   agency_val = agencies[$(agency_dropdown).val()];
   category_val = category_values[$(category_dropdown).val()];
