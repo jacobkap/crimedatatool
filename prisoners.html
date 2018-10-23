@@ -15,13 +15,12 @@
     gtag('config', 'UA-99359926-4');
   </script>
 
-  <title>Arrests</title>
+  <title>Prisoners in the United States</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Jacob Kaplan">
-  <meta name="description" content="Explore arrest data in the United States. All of the data comes from the
-      FBI's Uniform Crime Reporting (UCR) Program Data: Arrests by Age, Sex,
-      and Race.">
+  <meta name="description" content="Explore prisoner data in the United States. All of the data comes from the
+      Bureau of Justice Statistics' National Prisoner Statistics 1978-2016 data.">
 
   <script src="data/data.js"></script>
   <script src="js/utils.js"></script>
@@ -38,7 +37,7 @@
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <script src="js/chosen.jquery.js"></script>
+  <script src="js/chosen.jquery.js"></script>
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -50,8 +49,9 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="crime.html">Crime</a></li>
-          <li><a class="on" href="arrest.html">Arrest</a></li>
+          <li><a href="arrest.html">Arrest</a></li>
           <li><a href="police.html">Police</a></li>
+          <li><a class="on" href="prisoners.html">Prisoners</a></li>
           <li><a href="data.html">Data</a></li>
           <li><a href="research.html">Research</a></li>
         </ul>
@@ -60,36 +60,26 @@
   </div>
 
   <div class="column sidebar">
-    <p>Enter a police agency to see its arrests over time.</p>
-    <h3>State:</h3>
+    <p>Enter a jurisdiction to see its prisoner data.</p>
+    <h3>Jurisdiction:</h3>
     <br>
-    <select class="simple-select" id="arrests_state_dropdown" onchange="arrests_stateChangeFun()"></select>
+    <select class="simple-select" id="prisoners_jurisdictions"></select>
     <br><br>
-    <h3>Agency:</h3>
+    <h3>Category:</h3>
     <br>
-    <select class="simple-select" id="arrests_agency_dropdown" onchange="arrests_agencyChangeFun()"></select>
+    <select class="simple-select" id="prisoners_categories"></select>
     <br><br>
-    <h3>Crime:</h3>
+    <h3>Subcategory:</h3>
     <br>
-    <select class="simple-select" id="arrests_crime_dropdown" onchange="arrests_crimeChangeFun()"></select>
-    <br><br>
-    <h3>Arrest Category:</h3>
-    <br>
-    <select class="simple-select" id="arrests_category_dropdown" onchange="arrests_categoryChangeFun()">
-  </select>
-
+    <select class="simple-select" id="prisoners_subcategories"></select>
   <br><br>
   <input type="checkbox" id="arrests_rate" name="arrests_rate" value="arrests_rate" onchange="rateChangeFun('arrests')">
   <label for="arrests_rate">Rate per 100,000 Population</label>
 
     <br><br>
     <hr>
-    <button type="button" onclick="exportToCsv(arrests_table_data, 'arrests')">Download All Agency Data as CSV</button>
-    <br>
-    <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
+    <button type="button" onclick="exportToCsv(arrests_table_data, 'arrests')">Download Data as CSV</button>
   </div>
-
-
   <div class="column main">
     <div id="loader"></div>
     <canvas id="arrests_graph" style="width:95%;height:500px"></canvas>
@@ -105,14 +95,13 @@
         $('.simple-select').chosen();
         resizeChosen();
         ctx_arrests = document.getElementById("arrests_graph").getContext('2d');
-        makeStateDropdown("#arrests_state_dropdown")
-        makeCrimeDropdown("arrests", "#arrests_crime_dropdown");
-        makeArrestCategoriesDropdown();
-        arrests_largest_agency = getStateAgencies("arrests", largest_agencies = true);
-        arrest_agencies = updateAgencies("arrests", arrests_largest_agency,
-          "#arrests_agency_dropdown",
-          "#arrests_state_dropdown");
+        makeJurisdictionDropdown();
+        makePrisonerCategoriesDropdown();
+        makePrisonerSubcategoriesDropdown();
 
+        $('.simple-select').trigger('chosen:updated');
+
+/*
         main_results = main("arrests", "#arrests_state_dropdown", "#arrests_crime_dropdown");
         arrests_table_data = main_results[0];
         arrests_graph_headers = main_results[1];
@@ -121,7 +110,7 @@
 
         $("#graph").ready($("#loader").hide())
         arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers, "arrests")
-        jQuery(window).on('resize', resizeChosen);
+
 
 
         if (window.location.hash == "") {
@@ -130,6 +119,8 @@
         arrest_agencies = change_data_from_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_values, arrests_largest_agency, "arrests");
         arrests_agencyChangeFun();
       }
+      */
+      jQuery(window).on('resize', resizeChosen);
       });
     </script>
 

@@ -82,6 +82,7 @@ function getStateData(type) {
     agencies = agencies.replace(/ /g, "_");
     agencies = agencies.replace(/:/g, "_");
     agencies = agencies.replace(/__/g, "_");
+    url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_data/master/data/";
     url += "arrests/" + state + "_" + agencies;
   } else if (type == "leoka") {
     state = state_values[$("#leoka_state_dropdown").val()];

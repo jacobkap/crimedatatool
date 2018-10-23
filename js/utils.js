@@ -90,6 +90,28 @@ function makeStateDropdown(dropdown) {
   $(dropdown).val(32); // Sets default to New York
 }
 
+function makeJurisdictionDropdown() {
+  $.each(prisoners_state_values, function(val, text) {
+    $("#prisoners_jurisdictions").append(new Option(text, val));
+  });
+  $("#prisoners_jurisdictions").val(0); // Sets default to Total Prisoners
+}
+function makePrisonerCategoriesDropdown() {
+  $.each(prisoner_categories, function(val, text) {
+    $('#prisoners_categories').append(new Option(text, val));
+  });
+  $('#prisoners_categories').val(0);
+}
+function makePrisonerSubcategoriesDropdown() {
+  $('#prisoners_subcategories').empty();
+  values = prisoners_subcategory[$('#prisoners_categories').val()];
+  values = _.values(values);
+  $.each(values, function(val, text) {
+    $('#prisoners_subcategories').append(new Option(text, val));
+  });
+  $('#prisoners_subcategories').val(0);
+}
+
 function makeArrestCategoriesDropdown() {
   $.each(arrest_categories, function(val, text) {
     $('#arrests_category_dropdown').append(new Option(text, val));
@@ -132,10 +154,12 @@ function countToRate(data, per_officer = false) {
 
 function getStateAgencies(type, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
+
   if (type == "crime") {
     url += "offenses/";
     final_url = url + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
   } else if (type == "arrests") {
+    url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_data/master/data/";
     url += "arrests/";
     final_url = url + state_values[$("#arrests_state_dropdown").val()] + "_agency_choices.json";
   } else if (type == "leoka") {

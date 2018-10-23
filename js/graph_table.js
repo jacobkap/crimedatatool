@@ -211,6 +211,7 @@ function getTitle(data, type) {
   } else if (type == "arrests") {
     title += arrest_values[$("#arrests_crime_dropdown").val()];
     title += ", " + arrest_categories[$("#arrests_category_dropdown").val()];
+    title += " - Arrests";
   } else if (type == "leoka") {
     title += leoka_values[$("#leoka_category_dropdown").val()];
   }
@@ -225,7 +226,6 @@ function getTitle(data, type) {
 
 function fixTableName(name, type) {
     temp_name = name;
-//    console.log(name);
     name = name.replace(/_rate/g, "");
   if (type == "offenses") {
     temp1 = name.replace(/act_.*/, "Actual ");
@@ -240,7 +240,19 @@ function fixTableName(name, type) {
     if (temp4 != temp_name) name = temp4 + name;
   } else if (type == "arrests") {
     tot_section = name.replace(/.*_tot/g, "tot");
+    // Fix adult race name
+    if (tot_section == name) {
+      tot_section = name.replace(/.*_adult/g, "adult");
+    }
+    // Fix juvenile race name
+    if (tot_section == name) {
+      tot_section = name.replace(/.*_juv/g, "juv");
+    }
+//    console.log(tot_section)
     name = name.replace(/_tot.*/g, "");
+    name = name.replace(/_adult.*/g, "");
+    name = name.replace(/_juv.*/g, "");
+  
     name = arrest_values[name];
     tot_section = arrest_categories[tot_section];
     if (tot_section !== undefined) name = name + " " + tot_section;
