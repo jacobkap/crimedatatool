@@ -119,8 +119,8 @@ function makePrisonerSubcategoriesDropdown() {
 }
 
 function makePrisonerSexDropdown() {
-  choices = ["Female", "Male", "Total"];
-  $.each(choices, function(val, text) {
+  prisoner_sex_choices = ["Female", "Male", "Total"];
+  $.each(prisoner_sex_choices, function(val, text) {
     $("#prisoners_sex").append(new Option(text, val));
   });
   $("#prisoners_sex").val(2); // Sets default to Total Prisoners
