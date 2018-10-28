@@ -121,8 +121,22 @@ function prisonerSubcategoryChange() {
   prisoners_graph_headers = main_results[1];
   prisoners_table_headers = main_results[2];
 
+  $('#prisoners_graph').remove();
+  $('.main').prepend('<canvas id="prisoners_graph" style="width:95%;height:500px;"></canvas>');
+  ctx_prisoners = document.getElementById("prisoners_graph").getContext('2d');
+  prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
+
   prisoners_table.destroy();
   prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners");
+}
+
+function prisonerSexChange() {
+  prisoners_graph_headers = getCrimeColumns(headers, "prisoners", "graph");
+
+  $('#prisoners_graph').remove();
+  $('.main').prepend('<canvas id="prisoners_graph" style="width:95%;height:500px;"></canvas>');
+  ctx_prisoners = document.getElementById("prisoners_graph").getContext('2d');
+  prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
 }
 
 

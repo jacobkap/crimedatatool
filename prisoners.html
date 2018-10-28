@@ -75,7 +75,7 @@
     <br><br>
     <h3>Prisoner Sex:</h3>
     <br>
-    <select class="simple-select" id="prisoners_sex"></select>
+    <select class="simple-select" id="prisoners_sex" onchange = "prisonerSexChange()"></select>
   <br><br>
   <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="rateChangeFun('prisoners')">
   <label for="prisoners_rate">Rate per 100,000 Population</label>
@@ -111,11 +111,11 @@
         prisoners_table_headers = main_results[2];
         prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners")
 
-/*
-prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
+
+        prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
 
 $("#graph").ready($("#loader").hide())
-
+/*
         if (window.location.hash == "") {
           change_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_agencies, arrest_values)
         } else {

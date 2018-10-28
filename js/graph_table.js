@@ -128,6 +128,12 @@ function makeGraph(data, graph_div, colsForGraph, type) {
       yaxis_label = "Rate per Officer";
     }
     legend_display = false;
+  }  else if (type == "prisoners") {
+    yaxis_label = "# of Prisoners";
+    if (checkIfRateChecked(type)) {
+      yaxis_label = 'Rate per 100,000 Population';
+    }
+    legend_display = false;
   }
 
   graph_datasets = getGraphDataset(data, colsForGraph, type);
@@ -214,6 +220,13 @@ function getTitle(data, type) {
     title += " - Arrests";
   } else if (type == "leoka") {
     title += leoka_values[$("#leoka_category_dropdown").val()];
+  } else if (type == "prisoners") {
+    title = data[0].state + ': ';
+    title += _.values(prisoner_categories)[$("#prisoners_categories").val()];
+    title += ", ";
+    name  = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    title += prisoners_subcategory[$('#prisoners_categories').val()][name];
+    title += ", " + prisoner_sex_choices[$("#prisoners_sex").val()];
   }
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {

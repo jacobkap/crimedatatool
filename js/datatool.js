@@ -187,6 +187,7 @@ function getCrimeColumns(headers, type, output) {
   if (type == "prisoners" && output == "table") {
     columnNames = ["state", "year"];
   }
+
   if (type == "offenses") {
     crime = $("#crime_dropdown").val();
   } else if (type == "arrests") {
@@ -198,6 +199,11 @@ function getCrimeColumns(headers, type, output) {
     crime = $("#leoka_category_dropdown").val();
   } else if (type == "prisoners") {
     crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    if (output == "graph") {
+      sex_choice = prisoner_sex_choices[$("#prisoners_sex").val()];
+      sex_choice = "_" + sex_choice.toLowerCase();
+      crime += sex_choice;
+    }
   }
 
 

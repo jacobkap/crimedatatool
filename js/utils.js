@@ -119,7 +119,6 @@ function makePrisonerSubcategoriesDropdown() {
 }
 
 function makePrisonerSexDropdown() {
-  prisoner_sex_choices = ["Female", "Male", "Total"];
   $.each(prisoner_sex_choices, function(val, text) {
     $("#prisoners_sex").append(new Option(text, val));
   });
