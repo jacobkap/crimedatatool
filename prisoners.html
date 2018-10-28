@@ -63,30 +63,33 @@
     <p>Enter a jurisdiction to see its prisoner data.</p>
     <h3>Jurisdiction:</h3>
     <br>
-    <select class="simple-select" id="prisoners_jurisdictions"></select>
+    <select class="simple-select" id="prisoners_jurisdictions" onchange = "prisonerJurisdictionChange()"></select>
     <br><br>
     <h3>Category:</h3>
     <br>
-    <select class="simple-select" id="prisoners_categories"></select>
+    <select class="simple-select" id="prisoners_categories" onchange="prisonerCategoryChange()" ></select>
     <br><br>
     <h3>Subcategory:</h3>
     <br>
-    <select class="simple-select" id="prisoners_subcategories"></select>
+    <select class="simple-select" id="prisoners_subcategories" onchange = "prisonerSubcategoryChange()"></select>
+    <br><br>
+    <h3>Prisoner Sex:</h3>
+    <br>
+    <select class="simple-select" id="prisoners_sex"></select>
   <br><br>
-  <input type="checkbox" id="arrests_rate" name="arrests_rate" value="arrests_rate" onchange="rateChangeFun('arrests')">
-  <label for="arrests_rate">Rate per 100,000 Population</label>
+  <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="rateChangeFun('prisoners')">
+  <label for="prisoners_rate">Rate per 100,000 Population</label>
 
     <br><br>
     <hr>
-    <button type="button" onclick="exportToCsv(arrests_table_data, 'arrests')">Download Data as CSV</button>
+    <button type="button" onclick="exportToCsv(prisoners_table_data, 'prisoners')">Download Data as CSV</button>
   </div>
   <div class="column main">
     <div id="loader"></div>
-    <canvas id="arrests_graph" style="width:95%;height:500px"></canvas>
+    <canvas id="prisoners_graph" style="width:95%;height:500px"></canvas>
     <div>
-      <table id="arrests_table" class="display cell-border"></table>
+      <table id="prisoners_table" class="display cell-border"></table>
     </div>
-
 
 
     <script type="text/javascript">
@@ -94,24 +97,24 @@
 
         $('.simple-select').chosen();
         resizeChosen();
-        ctx_arrests = document.getElementById("arrests_graph").getContext('2d');
+        ctx_prisoners = document.getElementById("prisoners_graph").getContext('2d');
         makeJurisdictionDropdown();
         makePrisonerCategoriesDropdown();
-        makePrisonerSubcategoriesDropdown();
-
+        prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
+        makePrisonerSexDropdown();
         $('.simple-select').trigger('chosen:updated');
 
+
+        main_results = main("prisoners")
+        prisoners_table_data = main_results[0];
+        prisoners_graph_headers = main_results[1];
+        prisoners_table_headers = main_results[2];
+        prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners")
+
 /*
-        main_results = main("arrests", "#arrests_state_dropdown", "#arrests_crime_dropdown");
-        arrests_table_data = main_results[0];
-        arrests_graph_headers = main_results[1];
-        arrests_table_headers = main_results[2];
-        arrests_graph = makeGraph(arrests_table_data, ctx_arrests, arrests_graph_headers, "arrests");
+prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
 
-        $("#graph").ready($("#loader").hide())
-        arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers, "arrests")
-
-
+$("#graph").ready($("#loader").hide())
 
         if (window.location.hash == "") {
           change_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_agencies, arrest_values)

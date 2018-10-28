@@ -108,3 +108,24 @@ function leoka_stateChangeFun() {
 function leoka_categoryChangeFun() {
   leoka_agencyChangeFun();
 }
+
+function prisonerCategoryChange() {
+  prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
+  prisonerSubcategoryChange();
+  $('.simple-select').trigger('chosen:updated');
+}
+
+function prisonerSubcategoryChange() {
+  main_results = main("prisoners");
+  prisoners_table_data = main_results[0];
+  prisoners_graph_headers = main_results[1];
+  prisoners_table_headers = main_results[2];
+
+  prisoners_table.destroy();
+  prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners");
+}
+
+
+function prisonerJurisdictionChange() {
+  prisonerSubcategoryChange();
+}

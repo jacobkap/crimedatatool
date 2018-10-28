@@ -68,92 +68,115 @@ agency_desc_vals = {
   "population": "Population"
 };
 
-prisoners_state_values = ["U.S. Prison Total", "Federal Prison Total", "State Prison Total"];
+prisoners_state_values = ["US Prison Total", "Federal Prison Total", "State Prison Total"];
 prisoners_state_values = prisoners_state_values.concat(state_values);
 
-var prisoner_categories = [
-  "Prisoners in Custody",
-  "Race/Ethnicity",
-  "Releases",
-  "Admissions",
-  "Prison Capacity",
-  "Juvenile/Non-Citizen Prisoners",
-  "Prisoner Deaths",
-  "Prisoners with HIV/AIDS"
-];
+var prisoner_categories = {
+  "custody" : "Prisoners in Custody",
+  "jurisdiction" : "Prisoners in Jurisdiction",
+  "race_ethnicity" : "Race/Ethnicity",
+  "admission" :  "Admissions",
+  "release" : "Releases",
+  "capacity" : "Prison Capacity",
+  "noncitizen_juvenile" : "Non-Citizen/Juvenile Prisoners",
+  "death" : "Prisoner Deaths",
+  "aids" : "Prisoners with HIV/AIDS"
+};
 
 var prisoners_subcategory = [{
-                "inmates_under_jurisdiction_housed_in_local_facilities_operated_by_county_or_other_local_authority" : "In Local Facility",
-                "local_facilities_solely_to_ease_prison_crowding" : "In Local Facility to Ease Prison Overcrowding",
-                "inmates_under_jurisdiction_housed_in_privately_operated_correctional_facility_in_state" : "In Privately Owned Prison In-State",
-                "inmates_under_jurisdiction_housed_in_privately_operated_correctional_facility_in_other_state" : "In Privately Owned Prison Out-of-State",
-                "total_under_jurisdiction" : "Total Prisoners",
-                "jurisdiction_unsentenced" : "Unsentenced Prisoners"},
+    "custody_unsentenced": "Unsentenced Prisoners",
+    "total_under_custody": "Total Prisoners",
+    "custody_public_prisons": "In Public Prison",
+    "custody_private_prison": "In Private Prison"
+  },
 
-                // Race/ethnicity
-                {"american_indian_or_alaska_native" : "American Indian or Alaksa Native",
-                "asian_or_pacific_islander" : "Asian",
-                "black" : "Black",
-                "hispanic_or_latino" : "Hispanic/Latino",
-                "native_hawaiian_or_other_pacific_islander" : "Native Hawaiian or Other Pacific Islander",
-                "additional_other_categories_for_race" : "Other",
-                "two_or_more_races" : "Two or More Races",
-                "unknown_race" : "Unknown",
-                "white" : "White"},
+  {
+    "jurisdiction_housed_in_local_facility": "In Local Facility",
+    "local_facilities_solely_to_ease_prison_crowding": "In Local Facility to Ease Prison Overcrowding",
+    "jurisdiction_private_prison_in_state": "In Private Prison In-State",
+    "jurisdiction_private_prison_out_of_state": "In Private Prison Out-of-State",
+    "total_under_jurisdiction": "Total Prisoners",
+    "jurisdiction_unsentenced": "Unsentenced Prisoners"
+  },
 
-                // Admissions
-                {'awol_returns_with_or_without_new_sentences' : "AWOL Returns",
-                "escapee_returns_with_or_without_new_sentences" : "Escapee Returns",
-                "new_court_commitments" : "New Court Commitment",
-                "other_conditional_release_violators_admitted_with_new_sentence" : "Other Conditional Release Violators With New Sentence",
-                "other_conditional_release_violators_admitted_without_new_sentence" : "Other Conditional Release Violators Without New Sentence",
-                "other_admissions" : "Other Admissions",
-                "parole_violators_with_new_sentence" : "Parole Violators With New Sentence",
-                "parole_violators_without_new_sentence" : "Parole Violators Without New Sentence",
-                "returns_from_appeal_or_bond" : "Returns From Appeal or Bond",
-                "total_admissions" : "Total Admissions",
-                "transfers_admitted_from_other_jurisdictions" : "Transfers From Other Jurisdiction"},
+  // Race/ethnicity
+  {
+    "american_indian": "American Indian",
+    "asian": "Asian",
+    "black": "Black",
+    "hispanic_or_latino": "Hispanic/Latino",
+    "native_hawaiian": "Native Hawaiian",
+    "additional_other_categories_for_race": "Other",
+    "two_or_more_races": "Two or More Races",
+    "unknown_race": "Unknown",
+    "white": "White"
+  },
 
-                // Releases
-                {"awol_release" : "AWOL Released",
-                "conditional_release_probations" : "Conditional Release Probation",
-                "discretionary_parole" : "Discretionary Parole",
-                "escape_from_confinement" : "Escaped from Confinement",
-                "unconditional_release_expirations_of_sentence" : "Expiration of Sentence",
-                "other_conditional_release" : "Other Conditional Release",
-                "other_unconditional_release" : "Other Unconditional Release",
-                "release_to_appeal_or_bond" : "Release to Appeal or Bond",
-                "unconditional_release_commutations" : "Sentence Commuted",
-                "supervised_mandatory_release" : "Supervised Mandatory Release",
-                "total_releases" : "Total Released",
-                "transfers_to_other_jurisdictions" : "Transferred to Other Jurisdiction"},
+  // Admissions
+  {
+    "awol_returns_with_or_without_new_sentences": "AWOL Returns",
+    "escapee_returns_with_or_without_new_sentences": "Escapee Returns",
+    "new_court_commitments": "New Court Commitment",
+    "other_conditional_release_violators_admitted_with_new_sentence": "Other Conditional Release Violators With New Sentence",
+    "other_conditional_release_violators_admitted_without_new_sentence": "Other Conditional Release Violators Without New Sentence",
+    "other_admissions": "Other Admissions",
+    "parole_violators_with_new_sentence": "Parole Violators With New Sentence",
+    "parole_violators_without_new_sentence": "Parole Violators Without New Sentence",
+    "returns_from_appeal_or_bond": "Returns From Appeal or Bond",
+    "total_admissions": "Total Admissions",
+    "transfers_admitted_from_other_jurisdictions": "Transfers From Other Jurisdiction"
+  },
 
-                // Capacity
-                {"design_capacity" : "Design Capacity of Prisons",
-                "operational_capacity" : "Operational Capacity of Prisons",
-                "rated_capacity" : "Rated Capacity of Prisons"},
+  // Releases
+  {
+    "awol_release": "AWOL Released",
+    "conditional_release_probations": "Conditional Release Probation",
+    "discretionary_parole": "Discretionary Parole",
+    "escape_from_confinement": "Escaped from Confinement",
+    "unconditional_release_expirations_of_sentence": "Expiration of Sentence",
+    "other_conditional_release": "Other Conditional Release",
+    "other_unconditional_release": "Other Unconditional Release",
+    "release_to_appeal_or_bond": "Release to Appeal or Bond",
+    "unconditional_release_commutations": "Sentence Commuted",
+    "supervised_mandatory_release": "Supervised Mandatory Release",
+    "total_releases": "Total Released",
+    "transfers_to_other_jurisdictions": "Transferred to Other Jurisdiction"
+  },
+
+  // Capacity
+  {
+    "design_capacity": "Design Capacity of Prisons",
+    "operational_capacity": "Operational Capacity of Prisons",
+    "rated_capacity": "Rated Capacity of Prisons"
+  },
 
 
-                // Minors and non-citizens
-                {"in_custody_not_u_s_citizens" : "Not U.S. Citizen",
-                "in_custody_under_18_years_of_age" : "Under 18 Years of Age"},
+  // Minors and non-citizens
+  {
+    "in_custody_not_us_citizens": "Not U.S. Citizen",
+    "in_custody_under_18_years_of_age": "Under 18 Years of Age"
+  },
 
-                // Death
-                {"deaths_from_accidental_injury_to_self" : "Accidental Injury to Self",
-                "deaths_from_aids" : "AIDS",
-                "deaths_caused_by_another_person" : "Caused by Another Person",
-                "deaths_from_execution" : "Execution",
-                "deaths_from_illness_or_natural_cause" : "Illness or Natural Cause",
-                "deaths_from_homicide_by_other_inmates" : "Murder by Other Inmates",
-                "deaths_from_other_homicide" : "Other Murder",
-                "deaths_from_suicide" : "Suicide",
-                "total_deaths" : "Total Deaths"},
+  // Death
+  {
+    "deaths_from_accidental_injury_to_self": "Accidental Injury to Self",
+    "deaths_from_aids": "AIDS",
+    "deaths_caused_by_another_person": "Caused by Another Person",
+    "deaths_from_execution": "Execution",
+    "deaths_from_illness_or_natural_cause": "Illness or Natural Cause",
+    "deaths_from_homicide_by_other_inmates": "Murder by Other Inmates",
+    "deaths_from_other_homicide": "Other Murder",
+    "deaths_from_suicide": "Suicide",
+    "total_deaths": "Total Deaths"
+  },
 
-                // HIV/AIDS
-                {"asymptomatic_hiv_positive" : "Asymptomatic HIV Positive",
-                "confirmed_to_have_aids" : "Confirmed to have AIDS",
-                "infected_with_lesser_forms_of_symptomatic_hiv_disease" : "Infected with Lesser Forms of Symptomatic HIV",
-                "total_in_custody_hiv_positive_or_with_aids" : "Total Prisoners With HIV or Aids"}
+  // HIV/AIDS
+  {
+    "asymptomatic_hiv_positive": "Asymptomatic HIV Positive",
+    "confirmed_to_have_aids": "Confirmed to have AIDS",
+    "infected_with_lesser_forms_of_symptomatic_hiv_disease": "Infected with Lesser Forms of Symptomatic HIV",
+    "total_in_custody_hiv_positive_or_with_aids": "Total Prisoners With HIV or Aids"
+  }
 ];
 
 var crime_values = {
@@ -290,15 +313,15 @@ var arrest_categories = {
   "tot_female_juv": "Female Juvenile",
 
   // Race
-  "adult_amer_indian": "Adult American Indian",
-  "adult_asian": "Adult Asian",
-  "adult_black": "Adult Black",
-  "adult_white": "Adult White",
+  "adult_amer_indian": "American Indian Adult",
+  "adult_asian": "Asian Adult",
+  "adult_black": "Black Adult",
+  "adult_white": "White Adult",
 
-  "juv_amer_indian": "Juvenile American Indian",
-  "juv_asian": "Juvenile Asian",
-  "juv_white": "Juvenile White",
-  "juv_black": "Juvenile Black"
+  "juv_amer_indian": "American Indian Juvenile",
+  "juv_asian": "Asian Juvenile",
+  "juv_white": "White Juvenile",
+  "juv_black": "Black Juvenile"
   /*
    "male_under_10": "Male under age 10",
    "male_10_12": "Male aged 10-12",

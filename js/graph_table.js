@@ -252,12 +252,21 @@ function fixTableName(name, type) {
     name = name.replace(/_tot.*/g, "");
     name = name.replace(/_adult.*/g, "");
     name = name.replace(/_juv.*/g, "");
-  
+
     name = arrest_values[name];
     tot_section = arrest_categories[tot_section];
     if (tot_section !== undefined) name = name + " " + tot_section;
   } else if (type == "leoka") {
     name = leoka_values[name];
+  } else if (type == "prisoners") {
+     temp1 = name.replace(/.*_female/, " Female");
+     temp2 = name.replace(/.*_male/, " Male");
+     temp3 = name.replace(/.*_total/, " Total");
+     name = name.replace(/_total|_female|_male/, "");
+     name = prisoners_subcategory[$('#prisoners_categories').val()][name];
+     if (temp1 != temp_name) name += temp1;
+     if (temp2 != temp_name) name += temp2;
+     if (temp3 != temp_name) name += temp3;
   }
 
 if (name === undefined) {

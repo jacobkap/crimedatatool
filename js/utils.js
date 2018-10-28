@@ -96,20 +96,34 @@ function makeJurisdictionDropdown() {
   });
   $("#prisoners_jurisdictions").val(0); // Sets default to Total Prisoners
 }
+
 function makePrisonerCategoriesDropdown() {
-  $.each(prisoner_categories, function(val, text) {
+  temp = _.values(prisoner_categories);
+  $.each(temp, function(val, text) {
     $('#prisoners_categories').append(new Option(text, val));
   });
   $('#prisoners_categories').val(0);
 }
+
 function makePrisonerSubcategoriesDropdown() {
   $('#prisoners_subcategories').empty();
   values = prisoners_subcategory[$('#prisoners_categories').val()];
+  keys   = _.keys(values);
   values = _.values(values);
   $.each(values, function(val, text) {
     $('#prisoners_subcategories').append(new Option(text, val));
   });
   $('#prisoners_subcategories').val(0);
+
+  return(keys);
+}
+
+function makePrisonerSexDropdown() {
+  choices = ["Female", "Male", "Total"];
+  $.each(choices, function(val, text) {
+    $("#prisoners_sex").append(new Option(text, val));
+  });
+  $("#prisoners_sex").val(2); // Sets default to Total Prisoners
 }
 
 function makeArrestCategoriesDropdown() {

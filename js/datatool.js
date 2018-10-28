@@ -61,14 +61,11 @@ function subsetColumns(data, columns, output, type) {
   return (data);
 }
 
-
-
 function getStateData(type) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
   if (type == "offenses") {
     state = state_values[$("#state_dropdown").val()];
     state = state.replace(/ /g, "_");
-    state = state.replace(" ", "_");
     agencies = offense_agencies[$("#agency_dropdown").val()];
     agencies = agencies.replace(/ /g, "_");
     agencies = agencies.replace(/:/g, "_");
@@ -77,7 +74,6 @@ function getStateData(type) {
   } else if (type == "arrests") {
     state = state_values[$("#arrests_state_dropdown").val()];
     state = state.replace(/ /g, "_");
-    state = state.replace(" ", "_");
     agencies = arrest_agencies[$("#arrests_agency_dropdown").val()];
     agencies = agencies.replace(/ /g, "_");
     agencies = agencies.replace(/:/g, "_");
@@ -87,12 +83,18 @@ function getStateData(type) {
   } else if (type == "leoka") {
     state = state_values[$("#leoka_state_dropdown").val()];
     state = state.replace(/ /g, "_");
-    state = state.replace(" ", "_");
     agencies = leoka_agencies[$("#leoka_agency_dropdown").val()];
     agencies = agencies.replace(/ /g, "_");
     agencies = agencies.replace(/:/g, "_");
     agencies = agencies.replace(/__/g, "_");
     url += "leoka/" + state + "_" + agencies;
+  } else if (type == "prisoners") {
+    state = prisoners_state_values[$("#prisoners_jurisdictions").val()];
+    state = state.replace(/ /g, "_");
+    temp_cat = _.keys(prisoner_categories);
+    category = temp_cat[$("#prisoners_categories").val()];
+    category = category.replace(/ /g, "_");
+    url += "prisoners/" + state + "_" + category + "_prisoners";
   }
   url += ".csv";
   stateData = readCSV(url);
@@ -144,7 +146,7 @@ function checkIfRateChecked(type) {
   }
 }
 
-function main(type, state_dropdown, crime_dropdown) {
+function main(type) {
   stateData = getStateData(type);
   headers = stateData[0];
   colsForGraph = getCrimeColumns(headers, type, "graph");
@@ -182,6 +184,9 @@ function getCrimeColumns(headers, type, output) {
   } else {
     columnNames = ["agency", "year", "state", "population", "ORI"];
   }
+  if (type == "prisoners" && output == "table") {
+    columnNames = ["state", "year"];
+  }
   if (type == "offenses") {
     crime = $("#crime_dropdown").val();
   } else if (type == "arrests") {
@@ -191,6 +196,8 @@ function getCrimeColumns(headers, type, output) {
     }
   } else if (type == "leoka") {
     crime = $("#leoka_category_dropdown").val();
+  } else if (type == "prisoners") {
+    crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
   }
 
 
