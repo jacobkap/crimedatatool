@@ -70,6 +70,45 @@ function getGraphDataset(tableData, colsForGraph, type) {
       });
     }
 
+  } else if (type == "prisoners"){
+    years = [];
+    data1 = [];
+    data2 = [];
+    data3 = [];
+    data4 = [];
+
+    for (var i2 = 0; i2 < data.length; i2++) {
+      years.push(data[i2][colsForGraph[0]]);
+      data1.push(data[i2][colsForGraph[1]]);
+      data2.push(data[i2][colsForGraph[2]]);
+      data3.push(data[i2][colsForGraph[3]]);
+    }
+
+    final_data = [
+      makeGraphObjects(data1, "#1b9e77", "Female"),
+      makeGraphObjects(data2, "#d95f02", "Male"),
+      makeGraphObjects(data3, "#7570b3", "Total Prisoners"),
+    ];
+    final_data[0].hidden = false;
+    final_data[1].hidden = false;
+    final_data[2].hidden = false;
+
+    if (!$("#prisoners_female_sex").is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != "Female";
+      });
+    }
+    if (!$("#prisoners_male_sex").is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != "Male";
+      });
+    }
+    if (!$("#prisoners_total_sex").is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != "Total Prisoners";
+      });
+    }
+
   } else {
     years = [];
     data1 = [];
@@ -85,6 +124,7 @@ function getGraphDataset(tableData, colsForGraph, type) {
   return final_data;
 
 }
+
 
 function makeGraphObjects(data, color, label) {
   obj = {
@@ -133,7 +173,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     if (checkIfRateChecked(type)) {
       yaxis_label = 'Rate per 100,000 Population';
     }
-    legend_display = false;
+    legend_display = true;
   }
 
   graph_datasets = getGraphDataset(data, colsForGraph, type);
@@ -226,7 +266,6 @@ function getTitle(data, type) {
     title += ", ";
     name  = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
     title += prisoners_subcategory[$('#prisoners_categories').val()][name];
-    title += ", " + prisoner_sex_choices[$("#prisoners_sex").val()];
   }
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {

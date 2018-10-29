@@ -143,6 +143,8 @@ function checkIfRateChecked(type) {
   } else if (type == "leoka") {
     return ($("#leoka_rate").is(':checked') ||
       $("#leoka_rate_per_officer").is(':checked'));
+  } else if (type == "prisoners") {
+    return $("#prisoners_rate").is(':checked');
   }
 }
 
@@ -157,7 +159,9 @@ function main(type) {
   };
 
   colsForTable = getCrimeColumns(headers, type, "table");
-
+  allAgencyData = data_object_fun(stateData, headers);
+  allAgencyData.pop();
+  allAgencyData.shift();
   tableData = getAgencyData(stateData, headers, colsForTable, type);
 
   // Removes the total officer column used to make the rate
@@ -173,7 +177,7 @@ function main(type) {
   }
 
 
-  return [tableData, colsForGraph, colsForTable];
+  return [tableData, colsForGraph, colsForTable, allAgencyData];
 }
 
 
@@ -199,11 +203,7 @@ function getCrimeColumns(headers, type, output) {
     crime = $("#leoka_category_dropdown").val();
   } else if (type == "prisoners") {
     crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
-    if (output == "graph") {
-      sex_choice = prisoner_sex_choices[$("#prisoners_sex").val()];
-      sex_choice = "_" + sex_choice.toLowerCase();
-      crime += sex_choice;
-    }
+
   }
 
 

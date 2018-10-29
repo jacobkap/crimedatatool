@@ -14,22 +14,23 @@ function readCSV(csv) {
 }
 
 function exportToCsv(tableData, type) {
-
   data = tableData.reverse();
-  data = data.map(objToString);
-  data = data.join("\n");
-  data = objToString(_.keys(tableData[0])) + '\n' + data;
-
-
 
   if (checkIfRateChecked(type)) {
       rate_or_count = "rate_";
+      data = _.map(data, function(currentObject) {
+        return countToRate(currentObject);
+      });
     } else {
       rate_or_count = "count_";
     }
      if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
       rate_or_count = "rate_per_officer_";
     }
+
+    data = data.map(objToString);
+    data = data.join("\n");
+    data = objToString(_.keys(tableData[0])) + '\n' + data;
 
 
   if (type == "offenses") {
@@ -44,6 +45,10 @@ function exportToCsv(tableData, type) {
     filename = "ucr_police_" + rate_or_count;
     filename += leoka_agencies[$("#leoka_agency_dropdown").val()] + "_" +
       state_values[$("#leoka_state_dropdown").val()] + ".csv";
+  } else if (type == "prisoners") {
+    filename = "prisoners_" + rate_or_count;
+    filename += prisoners_state_values[$("#prisoners_jurisdictions").val()] + "_" +
+      _.values(prisoner_categories)[$("#prisoners_categories").val()] + ".csv";
   }
 
   var blob = new Blob([data], {
@@ -118,12 +123,6 @@ function makePrisonerSubcategoriesDropdown() {
   return(keys);
 }
 
-function makePrisonerSexDropdown() {
-  $.each(prisoner_sex_choices, function(val, text) {
-    $("#prisoners_sex").append(new Option(text, val));
-  });
-  $("#prisoners_sex").val(2); // Sets default to Total Prisoners
-}
 
 function makeArrestCategoriesDropdown() {
   $.each(arrest_categories, function(val, text) {
@@ -136,6 +135,10 @@ function countToRate(data, per_officer = false) {
 
   per_officer = $("#leoka_rate_per_officer").is(':checked');
   data_keys = _.keys(data);
+if (per_officer === true) {
+officer_count = data.total_officers;
+}
+
   for (var i = 0; i < data_keys.length; i++) {
     if (!data_keys[i].includes("agency") &&
       !data_keys[i].includes("year") &&
@@ -144,7 +147,7 @@ function countToRate(data, per_officer = false) {
       !data_keys[i].includes("ORI")) {
       rate_val = data[data_keys[i]] / data.population * 100000;
       if (per_officer === true) {
-       rate_val = data[data_keys[i]] / data.total_officers;
+       rate_val = data[data_keys[i]] / officer_count;
      }
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
       if (!isFinite(rate_val)) {

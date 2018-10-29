@@ -105,7 +105,7 @@
       <label class="label-text fa" for="unfounded">Unfounded Offenses</label>
 
       <hr>
-      <button type="button" onclick="exportToCsv(table_data, 'offenses')">Download All Agency Data as CSV</button>
+      <button type="button" onclick="exportToCsv(crime_all_data, 'offenses')">Download All Agency Data as CSV</button>
       <br>
       <p>Please note that data are only available for agencies that report all 12 months of the year.
     </div>
@@ -133,6 +133,7 @@
           table_data = main_results[0];
           graph_headers = main_results[1];
           table_headers = main_results[2];
+          crime_all_data = main_results[3];
 
           offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
           $("#graph").ready($("#loader").hide())

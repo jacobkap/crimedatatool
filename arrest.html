@@ -84,7 +84,7 @@
 
     <br><br>
     <hr>
-    <button type="button" onclick="exportToCsv(arrests_table_data, 'arrests')">Download All Agency Data as CSV</button>
+    <button type="button" onclick="exportToCsv(arrests_all_data, 'arrests')">Download All Agency Data as CSV</button>
     <br>
     <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
   </div>
@@ -117,6 +117,7 @@
         arrests_table_data = main_results[0];
         arrests_graph_headers = main_results[1];
         arrests_table_headers = main_results[2];
+        arrests_all_data = main_results[3];
         arrests_graph = makeGraph(arrests_table_data, ctx_arrests, arrests_graph_headers, "arrests");
 
         $("#graph").ready($("#loader").hide())

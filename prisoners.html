@@ -72,17 +72,25 @@
     <h3>Subcategory:</h3>
     <br>
     <select class="simple-select" id="prisoners_subcategories" onchange = "prisonerSubcategoryChange()"></select>
-    <br><br>
-    <h3>Prisoner Sex:</h3>
-    <br>
-    <select class="simple-select" id="prisoners_sex" onchange = "prisonerSexChange()"></select>
   <br><br>
   <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="rateChangeFun('prisoners')">
   <label for="prisoners_rate">Rate per 100,000 Population</label>
+  <br><br>
+  <h3>Prisoner Sex:</h3>
 
+  <br>
+
+  <input type="checkbox" id="prisoners_female_sex"   onchange="prisonerBoxesUpdate()"></input>
+  <label class="label-text fa" for="prisoners_female_sex">Female</label>
+  <br>
+  <input type="checkbox" id="prisoners_male_sex" onchange="prisonerBoxesUpdate()"></input>
+  <label class="label-text fa" for="prisoners_male_sex">Male</label>
+  <br>
+  <input type="checkbox" id="prisoners_total_sex"checked onchange="prisonerBoxesUpdate()"></input>
+  <label class="label-text fa" for="prisoners_total_sex">Total</label>
     <br><br>
     <hr>
-    <button type="button" onclick="exportToCsv(prisoners_table_data, 'prisoners')">Download Data as CSV</button>
+    <button type="button" onclick="exportToCsv(prisoner_all_data, 'prisoners')">Download Data as CSV</button>
   </div>
   <div class="column main">
     <div id="loader"></div>
@@ -101,7 +109,6 @@
         makeJurisdictionDropdown();
         makePrisonerCategoriesDropdown();
         prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
-        makePrisonerSexDropdown();
         $('.simple-select').trigger('chosen:updated');
 
 
@@ -109,6 +116,8 @@
         prisoners_table_data = main_results[0];
         prisoners_graph_headers = main_results[1];
         prisoners_table_headers = main_results[2];
+        prisoner_all_data = main_results[3];
+        prisoners_graph_headers = prisoners_table_headers.slice(1, 6)
         prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners")
 
 

@@ -83,7 +83,7 @@
 
     <br><br>
     <hr>
-    <button type="button" onclick="exportToCsv(leoka_table_data, 'leoka')">Download All Agency Data as CSV</button>
+    <button type="button" onclick="exportToCsv(leoka_all_data, 'leoka')">Download All Agency Data as CSV</button>
     <br>
     <p>Please note that data are only available for agencies that report all 12 months of the year.
   </div>
@@ -115,6 +115,7 @@
         leoka_table_data = main_results[0];
         leoka_graph_headers = main_results[1];
         leoka_table_headers = main_results[2];
+        leoka_all_data = main_results[3];
         leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
 
         $("#leoka_graph").ready($("#loader").hide())

@@ -41,6 +41,7 @@ function offenses_agencyChangeFun() {
   table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
+  crime_all_data = main_results[3];
 
   $('#graph').remove();
   $('.main').prepend('<canvas id="graph" style="width:95%;height:500px;"></canvas>');
@@ -61,6 +62,7 @@ function arrests_agencyChangeFun() {
   arrests_table_data = main_results[0];
   arrests_graph_headers = main_results[1];
   arrests_table_headers = main_results[2];
+  arrests_all_data = main_results[3];
 
   $('#arrests_graph').remove();
   $('.main').prepend('<canvas id="arrests_graph" style="width:95%;height:500px;"></canvas>');
@@ -90,6 +92,7 @@ function leoka_agencyChangeFun() {
   leoka_table_data = main_results[0];
   leoka_graph_headers = main_results[1];
   leoka_table_headers = main_results[2];
+  leoka_all_data = main_results[3];
 
   $('#leoka_graph').remove();
   $('.main').prepend('<canvas id="leoka_graph" style="width:95%;height:500px;"></canvas>');
@@ -120,6 +123,9 @@ function prisonerSubcategoryChange() {
   prisoners_table_data = main_results[0];
   prisoners_graph_headers = main_results[1];
   prisoners_table_headers = main_results[2];
+  prisoner_all_data = main_results[3];
+  prisoners_graph_headers = prisoners_table_headers;
+        prisoners_graph_headers = prisoners_table_headers.slice(1, 6);
 
   $('#prisoners_graph').remove();
   $('.main').prepend('<canvas id="prisoners_graph" style="width:95%;height:500px;"></canvas>');
@@ -132,6 +138,19 @@ function prisonerSubcategoryChange() {
 
 function prisonerSexChange() {
   prisoners_graph_headers = getCrimeColumns(headers, "prisoners", "graph");
+
+  $('#prisoners_graph').remove();
+  $('.main').prepend('<canvas id="prisoners_graph" style="width:95%;height:500px;"></canvas>');
+  ctx_prisoners = document.getElementById("prisoners_graph").getContext('2d');
+  prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
+}
+
+function prisonerBoxesUpdate() {
+  if (!$("#prisoners_female_sex").is(':checked') &&
+    !$("#prisoners_male_sex").is(':checked') &&
+    !$("#prisoners_total_sex").is(':checked')) {
+    $("#prisoners_total_sex").prop("checked", true);
+  }
 
   $('#prisoners_graph').remove();
   $('.main').prepend('<canvas id="prisoners_graph" style="width:95%;height:500px;"></canvas>');

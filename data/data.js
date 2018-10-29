@@ -83,8 +83,6 @@ var prisoner_categories = {
   "aids" : "Prisoners with HIV/AIDS"
 };
 
-prisoner_sex_choices = ["Female", "Male", "Total"];
-
 var prisoners_subcategory = [{
     "custody_unsentenced": "Unsentenced Prisoners",
     "total_under_custody": "Total Prisoners",
