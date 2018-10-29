@@ -18,9 +18,6 @@ function exportToCsv(tableData, type) {
 
   if (checkIfRateChecked(type)) {
       rate_or_count = "rate_";
-      data = _.map(data, function(currentObject) {
-        return countToRate(currentObject);
-      });
     } else {
       rate_or_count = "count_";
     }

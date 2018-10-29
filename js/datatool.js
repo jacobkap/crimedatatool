@@ -162,6 +162,12 @@ function main(type) {
   allAgencyData = data_object_fun(stateData, headers);
   allAgencyData.pop();
   allAgencyData.shift();
+  if (checkIfRateChecked(type)) {
+      allAgencyData = _.map(allAgencyData, function(currentObject) {
+        return countToRate(currentObject);
+      });
+    }
+
   tableData = getAgencyData(stateData, headers, colsForTable, type);
 
   // Removes the total officer column used to make the rate
