@@ -45,7 +45,7 @@
           <li><a href="police.html">Police</a></li>
           <li><a href="data.html">Data</a></li>
           <li><a href="research.html">Research</a></li>
-          <li><a class="on" href="data.html">FAQ</a></li>
+          <li><a class="on" href="faq.html">FAQ</a></li>
         </ul>
       </nav>
     </div>
@@ -70,7 +70,7 @@
       <h1>General</h1>
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>The data comes from either <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/index.html">NACJD</a> or the FBI (if you email them they'll mail you a DVD with data). I get the data as fixed-width text files and use an SPSS setup file (with NACJD this comes with the data, with the FBI I make it myself using their Record Description PDFs) using my R package asciiSetupReader. I then minorly clean and combine the files in R. All the setup files I made, the FBI Record Descriptions, and my R code is available in my <a href="https://github.com/jacobkap/crime_data">GitHub Repo here.</a> For any specific questions, please email me.</p>
+        <p>The data comes from either <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/index.html">NACJD</a> or the FBI (if you email them at 	cjis_comm@leo.gov they'll mail you a DVD with data). I get the data as fixed-width text files and use an SPSS setup file (with NACJD this comes with the data, with the FBI I make it myself using their Record Description PDFs) using my R package asciiSetupReader. I then minorly clean and combine the files in R. All the setup files I made, the FBI Record Descriptions, and my R code is available in my <a href="https://github.com/jacobkap/crime_data">GitHub Repo here.</a> For any specific questions, please email me.</p>
       </div>
 
       <h1>Crime - Offenses Known and Clearances by Arrest</h1>
@@ -85,9 +85,9 @@
         <p>This data doesn't differentiate between a "real zero" and a "not reported zero". If an agency doesn't report any crimes (even if crimes did occur), the data will say zero crimes occurred. Even though the data indicates how many months of the year that agency reported, that doesn't necessarily mean that they reported fully. An agency that reports all 12 months of the year may still report only incomplete data. Agencies can report partial data each month and still be considered to have reported that month. Chicago, for example, reports every month but until the last few years didn't report any rapes.</p>
       </div>
 
-      <button class="accordion">Does this include all crimes reported (Hierarchy Rule)</button>
+      <button class="accordion">Does this include all crimes reported? (Hierarchy Rule)</button>
       <div class="panel">
-        <p>No, this data only includes the most serious crime in an incident (except for motor vehicle theft which is always included). For incidents where most the one crime happens (for example, a robbery and a murder), only the more serious (murder in this case) will be counted. This is called the Hierarchy Rule. See more on pages 10-12 of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's Manual for UCR data</a> which details the hierarchy.</p>
+        <p>No, this data only includes the most serious crime in an incident (except for motor vehicle theft which is always included). For incidents where most the one crime happens (for example, a robbery and a murder), only the more serious (murder in this case) will be counted. This is called the Hierarchy Rule. See more on pages 10-12 of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's Manual for UCR data</a> which details the Hierarchy Rule.</p>
       </div>
 
       <button class="accordion">If this data only includes the most serious crime in an incident, how reliable is the data? (Does the Hierarchy Rule mess up our data?)</button>
