@@ -67,10 +67,35 @@
 
     <article class="post">
 
-      <button class="accordion">Question</button>
+      <h1>General</h1>
+      <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>Answer</p>
+        <p>The data comes from either <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/index.html">NACJD</a> or the FBI (if you email them they'll mail you a DVD with data). I get the data as fixed-width text files and use an SPSS setup file (with NACJD this comes with the data, with the FBI I make it myself using their Record Description PDFs) using my R package asciiSetupReader. I then minorly clean and combine the files in R. All the setup files I made, the FBI Record Descriptions, and my R code is available in my <a href="https://github.com/jacobkap/crime_data">GitHub Repo here.</a> For any specific questions, please email me.</p>
       </div>
+
+      <h1>Crime - Offenses Known and Clearances by Arrest</h1>
+
+      <button class="accordion">Why are there negative numbers? Is that a mistake?</button>
+      <div class="panel">
+        <p>Negative values reflect adjustments of previous returns. So if the agency reports, for example, a burglary in January then in February discovers that it wasn't actually a burglary, they will record that both as 1 unfounded burglary and -1 actual burglary in February. This is so it "deletes" the erroneously recorded burglary from January. See more on pages 82-83 of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's Manual for UCR data</a>. </p>
+      </div>
+
+      <button class="accordion">The data says there were 0 crimes but I know that a crime happened. Why does it say 0?</button>
+      <div class="panel">
+        <p>This data doesn't differentiate between a "real zero" and a "not reported zero". If an agency doesn't report any crimes (even if crimes did occur), the data will say zero crimes occurred. Even though the data indicates how many months of the year that agency reported, that doesn't necessarily mean that they reported fully. An agency that reports all 12 months of the year may still report only incomplete data. Agencies can report partial data each month and still be considered to have reported that month. Chicago, for example, reports every month but until the last few years didn't report any rapes.</p>
+      </div>
+
+      <button class="accordion">Does this include all crimes reported (Hierarchy Rule)</button>
+      <div class="panel">
+        <p>No, this data only includes the most serious crime in an incident (except for motor vehicle theft which is always included). For incidents where most the one crime happens (for example, a robbery and a murder), only the more serious (murder in this case) will be counted. This is called the Hierarchy Rule. See more on pages 10-12 of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's Manual for UCR data</a> which details the hierarchy.</p>
+      </div>
+
+      <button class="accordion">If this data only includes the most serious crime in an incident, how reliable is the data? (Does the Hierarchy Rule mess up our data?)</button>
+      <div class="panel">
+        <p>Though the Hierarchy Rule does mean this data is an undercount, data from other sources indicate it isn't much of an undercount. The FBI's other data set, the National Inicident-Based Reporting System (NIBRS) contains every crime that occurs in an incident (i.e. it doesn't use the Hierarchy Rule). Using this we can measure how many crimes the Hierarchy Rule excludes (Most major cities do not report to NIBRS so what we find in NIBRS may not apply to them). In over 90% of incidents, only one crime is committed. Additionally, when people talk about "crime" they usualyl mean murder which, while a very bad way to discuss crime, means the UCR data here is accurate on that measure.</p>
+      </div>
+
+
 
 
 
