@@ -120,10 +120,12 @@ function makeLeokaWeaponDropdown() {
   $.each(temp, function(val, text) {
     $('#leoka_weapons').append(new Option(text, val));
   });
-  $('#leoka_weapons').val(0);
+  $('#leoka_weapons').val(4);
 }
 
 function makeLeokaSubcategoriesDropdown() {
+  leoka_subcategory_starts = [12, 1, 5];
+
   $('#leoka_subcategory_dropdown').empty();
   values = leoka_subcategories[$('#leoka_category_dropdown').val()];
   keys   = _.keys(values);
@@ -131,7 +133,7 @@ function makeLeokaSubcategoriesDropdown() {
   $.each(values, function(val, text) {
     $('#leoka_subcategory_dropdown').append(new Option(text, val));
   });
-  $('#leoka_subcategory_dropdown').val(0);
+  $('#leoka_subcategory_dropdown').val(leoka_subcategory_starts[$('#leoka_category_dropdown').val()]);
 
   return([keys, values]);
 }

@@ -274,6 +274,7 @@ function getTitle(data, type) {
     title += ", ";
     name  = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
     title += prisoners_subcategory[$('#prisoners_categories').val()][name];
+    subtitle = "";
   }
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {

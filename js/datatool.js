@@ -171,7 +171,7 @@ function main(type) {
   tableData = getAgencyData(stateData, headers, colsForTable, type);
 
   // Removes the total officer column used to make the rate
-  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_employees_officers") {
+  if (type == "leoka" && leoka_subcatergory_keys[$("#leoka_subcategory_dropdown").val()] != "total_employees_officers") {
     tableData = _.map(tableData, function(x) {
       return _.omit(x, "total_employees_officers");
     });
@@ -211,6 +211,12 @@ function getCrimeColumns(headers, type, output) {
     if (leoka_categories[$("#leoka_category_dropdown").val()] == "Officers Assaulted") {
       weapon = _.keys(leoka_weapons)[$("#leoka_weapons").val()];
       crime = crime + "_" + weapon;
+
+// The total columns have slightly different names than others so this makes them work.
+      if (crime == "total_total_assaults") crime = "total_assaults_total";
+      if (crime == "assaults_no_injury_total_assaults") crime = "assaults_no_injury_total";
+      if (crime == "assaults_with_injury_total_assaults") crime = "assaults_with_injury_total";
+
     }
   } else if (type == "prisoners") {
     crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
@@ -232,7 +238,7 @@ function getCrimeColumns(headers, type, output) {
       columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
     }
   }
-  
+
   if (type == "leoka" && leoka_subcatergory_keys[$("#leoka_subcategory_dropdown").val()] != "total_employees_officers") {
     columnNames.push("total_employees_officers");
   }
