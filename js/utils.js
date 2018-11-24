@@ -162,7 +162,7 @@ function countToRate(data, per_officer = false) {
   per_officer = $("#leoka_rate_per_officer").is(':checked');
   data_keys = _.keys(data);
 if (per_officer === true) {
-officer_count = data.total_officers;
+officer_count = data.total_employees_officers;
 }
 
   for (var i = 0; i < data_keys.length; i++) {

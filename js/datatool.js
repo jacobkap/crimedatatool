@@ -171,14 +171,14 @@ function main(type) {
   tableData = getAgencyData(stateData, headers, colsForTable, type);
 
   // Removes the total officer column used to make the rate
-  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_officers") {
+  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_employees_officers") {
     tableData = _.map(tableData, function(x) {
-      return _.omit(x, "total_officers");
+      return _.omit(x, "total_employees_officers");
     });
 
-    index = colsForGraph.indexOf("total_officers");
+    index = colsForGraph.indexOf("total_employees_officers");
     colsForGraph.splice(index, 1);
-    index = colsForTable.indexOf("total_officers");
+    index = colsForTable.indexOf("total_employees_officers");
     colsForTable.splice(index, 1);
   }
 
@@ -234,8 +234,8 @@ function getCrimeColumns(headers, type, output) {
       columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
     }
   }
-  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_officers") {
-    columnNames.push("total_officers");
+  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_employees_officers") {
+    columnNames.push("total_employees_officers");
   }
   return (columnNames);
 }
