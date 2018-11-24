@@ -76,7 +76,7 @@
     <select class="simple-select" id="leoka_category_dropdown" onchange="leoka_categoryChangeFun()"></select>
     <h3>Subcategory:</h3>
     <br>
-    <select class="simple-select" id="leoka_subcategory_dropdown" onchange="leoka_subcategoryChangeFun()"></select>
+    <select class="simple-select" id="leoka_subcategory_dropdown" onchange="leoka_agencyChangeFun()"></select>
     <div id = "weaponsDiv">
     <h3>Offender Weapon:</h3>
     <br>
@@ -110,23 +110,23 @@
       $(document).ready(function() {
 
         makeLeokaWeaponDropdown();
-        toggle_leoka_weapon_display() 
+        toggle_leoka_weapon_display()
 
         $('.simple-select').chosen();
         resizeChosen();
         ctx_leoka = document.getElementById("leoka_graph").getContext('2d');
         makeStateDropdown("#leoka_state_dropdown")
         makeCrimeDropdown("leoka", "#leoka_category_dropdown");
-        leoka_largest_agency = getStateAgencies("leoka", true);
-
         leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
-        $('.simple-select').trigger('chosen:updated');
+        leoka_subcatergory_values = leoka_subcatergory_keys[1];
+        leoka_subcatergory_keys = leoka_subcatergory_keys[0];
+        leoka_largest_agency = getStateAgencies("leoka", true);
 
         leoka_agencies = updateAgencies("leoka", leoka_largest_agency,
           "#leoka_agency_dropdown",
           "#leoka_state_dropdown");
 
-        main_results = main("leoka", "#leoka_state_dropdown", "#leoka_crime_dropdown");
+        main_results = main("leoka", "#leoka_state_dropdown", "#leoka_category_dropdown");
         leoka_table_data = main_results[0];
         leoka_graph_headers = main_results[1];
         leoka_table_headers = main_results[2];

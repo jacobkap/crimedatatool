@@ -110,14 +110,13 @@ function leoka_stateChangeFun() {
 
 function leoka_categoryChangeFun() {
   leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
+  leoka_subcatergory_values = leoka_subcatergory_keys[1];
+  leoka_subcatergory_keys = leoka_subcatergory_keys[0];
   $('.simple-select').trigger('chosen:updated');
-  leoka_subcategoryChangeFun();
+  leoka_agencyChangeFun();
   toggle_leoka_weapon_display();
 }
 
-function leoka_subcategoryChangeFun() {
-  leoka_agencyChangeFun();
-}
 
 function prisonerCategoryChange() {
   prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();

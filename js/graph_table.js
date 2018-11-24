@@ -259,7 +259,15 @@ function getTitle(data, type) {
     title += ", " + arrest_categories[$("#arrests_category_dropdown").val()];
     title += " - Arrests";
   } else if (type == "leoka") {
-    title += leoka_values[$("#leoka_category_dropdown").val()];
+    title += leoka_categories[$("#leoka_category_dropdown").val()];
+
+    title += ", " + leoka_subcatergory_values[$("#leoka_subcategory_dropdown").val()];
+
+    if (leoka_categories[$("#leoka_category_dropdown").val()] == "Officers Assaulted") {
+      weapon = _.values(leoka_weapons)[$("#leoka_weapons").val()];
+      title = title + " - " + weapon;
+    }
+
   } else if (type == "prisoners") {
     title = data[0].state + ': ';
     title += _.values(prisoner_categories)[$("#prisoners_categories").val()];

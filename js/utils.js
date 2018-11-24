@@ -133,7 +133,7 @@ function makeLeokaSubcategoriesDropdown() {
   });
   $('#leoka_subcategory_dropdown').val(0);
 
-  return(keys);
+  return([keys, values]);
 }
 
 function makePrisonerSubcategoriesDropdown() {
