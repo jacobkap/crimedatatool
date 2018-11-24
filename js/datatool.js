@@ -154,7 +154,7 @@ function main(type) {
   colsForGraph = getCrimeColumns(headers, type, "graph");
 
   // Reorder cols for graph to make clearance before clearance 18.
-  Array.prototype.move = function (from, to) {
+  Array.prototype.move = function(from, to) {
     this.splice(to, 0, this.splice(from, 1)[0]);
   };
 
@@ -163,10 +163,10 @@ function main(type) {
   allAgencyData.pop();
   allAgencyData.shift();
   if (checkIfRateChecked(type)) {
-      allAgencyData = _.map(allAgencyData, function(currentObject) {
-        return countToRate(currentObject);
-      });
-    }
+    allAgencyData = _.map(allAgencyData, function(currentObject) {
+      return countToRate(currentObject);
+    });
+  }
 
   tableData = getAgencyData(stateData, headers, colsForTable, type);
 
@@ -206,7 +206,12 @@ function getCrimeColumns(headers, type, output) {
       crime += "_" + $("#arrests_category_dropdown").val();
     }
   } else if (type == "leoka") {
-    crime = $("#leoka_category_dropdown").val();
+    crime = leoka_subcatergory_keys[$("#leoka_subcategory_dropdown").val()];
+
+    if (leoka_categories[$("#leoka_category_dropdown").val()] == "Officers Assaulted") {
+      weapon = _.keys(leoka_weapons)[$("#leoka_weapons").val()];
+      crime = crime + "_" + weapon;
+    }
   } else if (type == "prisoners") {
     crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
 

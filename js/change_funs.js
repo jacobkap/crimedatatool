@@ -109,6 +109,13 @@ function leoka_stateChangeFun() {
 }
 
 function leoka_categoryChangeFun() {
+  leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
+  $('.simple-select').trigger('chosen:updated');
+  leoka_subcategoryChangeFun();
+  toggle_leoka_weapon_display();
+}
+
+function leoka_subcategoryChangeFun() {
   leoka_agencyChangeFun();
 }
 

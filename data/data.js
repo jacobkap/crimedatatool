@@ -84,7 +84,7 @@ var prisoner_categories = {
 };
 
 var prisoners_subcategory = [{
-    "custody_unsentenced": "Unsentenced Prisoners",
+    "custody_unsentenced": "Unsentenced or <1 Year Sentence Prisoners",
     "total_under_custody": "Total Prisoners",
     "custody_public_prisons": "In Public Prison",
     "custody_private_prison": "In Private Prison"
@@ -96,7 +96,7 @@ var prisoners_subcategory = [{
     "jurisdiction_private_prison_in_state": "In Private Prison In-State",
     "jurisdiction_private_prison_out_of_state": "In Private Prison Out-of-State",
     "total_under_jurisdiction": "Total Prisoners",
-    "jurisdiction_unsentenced": "Unsentenced Prisoners"
+    "jurisdiction_unsentenced": "Unsentenced or <1 Year Sentence Prisoners"
   },
 
   // Race/ethnicity
@@ -257,6 +257,56 @@ var arrest_values = {
   "vandalism": "Vandalism",
   "weapons": "Weapons Offenses"
 };
+
+var leoka_weapons = {
+  "assault_gun" : "Gun",
+  "assault_knife" : "Knife",
+  "assault_oth_weap" : "Other Weapon",
+  "assault_unarmed" : "Unarmed",
+  "total_assaults" : "Total"
+};
+
+var leoka_categories = [
+  "Officers Assaulted",
+  "Officers Killed",
+  "Police Department Employees"
+];
+
+leoka_subcategories = [
+  {
+    "ambush" : "Ambush",
+    "burglary" : "Burglary",
+    "deranged" : "Handling Person with Mental Illness",
+    "disturbance" : "Disturbance (fight, domestic violence, etc.)",
+    "oth_arrest" : "Attempt to Make Other Arrest",
+    "prisoner" : "Custody of Prisoner",
+    "riot" : "Civil Disorder (riot)",
+    "robbery" : "Robbery",
+    "susp_pers" : "Suspicious Person",
+    "traffic" : "Traffic Stop",
+    "assaults_with_injury" : "Total Assaults - With Injury",
+    "assaults_no_injury" : "Total Assaults - Without Injury",
+    "total" : "Total Assaults",
+  },
+  {
+    "officers_killed_by_accident" : "Killed by Accident",
+    "officers_killed_by_felony" : "Killed by Felony"
+  },
+  {
+    "female_employees_civilians" : "Civilians - Female",
+    "male_employees_civilians" : "Civilians - Male",
+    "total_employees_civilians" : "Civilians - Total",
+
+    "female_employees_officers" : "Officers - Female",
+    "male_employees_officers" : "Officers - Male",
+    "total_employees_officers" : "Officers - Total",
+
+    "female_employees_total" : "Total Employees - Female",
+    "male_employees_total" : "Total Employees - Male",
+    "total_employees_total" : "Total Employees - Total",
+  }
+];
+
 
 var leoka_values = {
   "ambush_total_assault": "Assault - Ambush",

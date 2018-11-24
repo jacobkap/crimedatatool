@@ -73,8 +73,15 @@
     <br><br>
     <h3>Category:</h3>
     <br>
-    <select class="simple-select" id="leoka_category_dropdown" onchange="leoka_categoryChangeFun()">
-  </select>
+    <select class="simple-select" id="leoka_category_dropdown" onchange="leoka_categoryChangeFun()"></select>
+    <h3>Subcategory:</h3>
+    <br>
+    <select class="simple-select" id="leoka_subcategory_dropdown" onchange="leoka_subcategoryChangeFun()"></select>
+    <div id = "weaponsDiv">
+    <h3>Offender Weapon:</h3>
+    <br>
+    <select class="simple-select" id="leoka_weapons" onchange="leoka_agencyChangeFun()"></select>
+  </div>
 
   <br><br>
   <input type="checkbox" id="leoka_rate" name="leoka_rate" value="leoka_rate" onchange="leokoRateBoxesPop()">
@@ -102,13 +109,19 @@
     <script type="text/javascript">
       $(document).ready(function() {
 
+        makeLeokaWeaponDropdown();
+        toggle_leoka_weapon_display() 
+
         $('.simple-select').chosen();
         resizeChosen();
         ctx_leoka = document.getElementById("leoka_graph").getContext('2d');
         makeStateDropdown("#leoka_state_dropdown")
         makeCrimeDropdown("leoka", "#leoka_category_dropdown");
         leoka_largest_agency = getStateAgencies("leoka", true);
-        makeArrestCategoriesDropdown();
+
+        leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
+        $('.simple-select').trigger('chosen:updated');
+
         leoka_agencies = updateAgencies("leoka", leoka_largest_agency,
           "#leoka_agency_dropdown",
           "#leoka_state_dropdown");
@@ -118,6 +131,7 @@
         leoka_graph_headers = main_results[1];
         leoka_table_headers = main_results[2];
         leoka_all_data = main_results[3];
+
         leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
 
         $("#leoka_graph").ready($("#loader").hide())
@@ -130,6 +144,7 @@
         leoka_agencies = change_data_from_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_values, leoka_largest_agency, "leoka");
         leoka_agencyChangeFun();
       }
+
 
                 jQuery(window).on('resize', resizeChosen);
       });

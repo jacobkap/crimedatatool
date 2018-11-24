@@ -76,13 +76,21 @@ function makeCrimeDropdown(type, dropdown) {
     crime = arrest_values;
     starter = "murder";
   } else if (type == "leoka") {
-    crime = leoka_values;
-    starter = "total_assault_total";
+    crime = leoka_categories;
+    starter = 2;
   }
   $.each(crime, function(val, text) {
     $(dropdown).append(new Option(text, val));
   });
   $(dropdown).val(starter);
+}
+
+function toggle_leoka_weapon_display() {
+  if (leoka_categories[$("#leoka_category_dropdown").val()] != "Officers Assaulted") {
+    $("#weaponsDiv").hide();
+  } else {
+    $("#weaponsDiv").show();
+  }
 }
 
 function makeStateDropdown(dropdown) {
@@ -104,7 +112,28 @@ function makePrisonerCategoriesDropdown() {
   $.each(temp, function(val, text) {
     $('#prisoners_categories').append(new Option(text, val));
   });
-  $('#prisoners_categories').val(0);
+  $('#prisoners_categories').val(4);
+}
+
+function makeLeokaWeaponDropdown() {
+  temp = _.values(leoka_weapons);
+  $.each(temp, function(val, text) {
+    $('#leoka_weapons').append(new Option(text, val));
+  });
+  $('#leoka_weapons').val(0);
+}
+
+function makeLeokaSubcategoriesDropdown() {
+  $('#leoka_subcategory_dropdown').empty();
+  values = leoka_subcategories[$('#leoka_category_dropdown').val()];
+  keys   = _.keys(values);
+  values = _.values(values);
+  $.each(values, function(val, text) {
+    $('#leoka_subcategory_dropdown').append(new Option(text, val));
+  });
+  $('#leoka_subcategory_dropdown').val(0);
+
+  return(keys);
 }
 
 function makePrisonerSubcategoriesDropdown() {
