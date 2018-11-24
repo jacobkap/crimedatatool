@@ -253,11 +253,11 @@ function getTitle(data, type) {
   title = data[0].agency + ', ';
   title += data[0].state + ': ';
   if (type == "offenses") {
-    title += crime_values[$("#crime_dropdown").val()];
+    subtitle = crime_values[$("#crime_dropdown").val()];
   } else if (type == "arrests") {
-    title += arrest_values[$("#arrests_crime_dropdown").val()];
-    title += ", " + arrest_categories[$("#arrests_category_dropdown").val()];
-    title += " - Arrests";
+    subtitle = arrest_values[$("#arrests_crime_dropdown").val()];
+    subtitle += ", " + arrest_categories[$("#arrests_category_dropdown").val()];
+    subtitle += " - Arrests";
   } else if (type == "leoka") {
     subtitle = leoka_categories[$("#leoka_category_dropdown").val()];
 
@@ -267,7 +267,6 @@ function getTitle(data, type) {
       weapon = _.values(leoka_weapons)[$("#leoka_weapons").val()];
       subtitle = subtitle + " - " + weapon;
     }
-    title = [title, subtitle];
 
   } else if (type == "prisoners") {
     title = data[0].state + ': ';
@@ -278,10 +277,12 @@ function getTitle(data, type) {
   }
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
-    title += ", Rate per Officer";
+    subtitle += ", Rate per Officer";
   } else if (checkIfRateChecked(type)) {
-      title += ", Rate per 100,000 Population";
+      subtitle += ", Rate per 100,000 Population";
     }
+
+  title = [title, subtitle];
   return title;
 }
 
