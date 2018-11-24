@@ -234,7 +234,7 @@ function getCrimeColumns(headers, type, output) {
       columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
     }
   }
-  if (type == "leoka" && $("#leoka_category_dropdown").val() != "total_employees_officers") {
+  if (type == "leoka" && leoka_subcatergory_keys[$("#leoka_subcategory_dropdown").val()] != "total_employees_officers") {
     columnNames.push("total_employees_officers");
   }
   return (columnNames);
