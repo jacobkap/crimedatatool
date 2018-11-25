@@ -79,15 +79,15 @@ function getGraphDataset(tableData, colsForGraph, type) {
 
     for (var i2 = 0; i2 < data.length; i2++) {
       years.push(data[i2][colsForGraph[0]]);
-      data1.push(data[i2][colsForGraph[1]]);
-      data2.push(data[i2][colsForGraph[2]]);
+      data1.push(data[i2][colsForGraph[2]]);
+      data2.push(data[i2][colsForGraph[1]]);
       data3.push(data[i2][colsForGraph[3]]);
     }
 
     final_data = [
       makeGraphObjects(data1, "#1b9e77", "Female"),
       makeGraphObjects(data2, "#d95f02", "Male"),
-      makeGraphObjects(data3, "#7570b3", "Total Prisoners"),
+      makeGraphObjects(data3, "#7570b3", "Total"),
     ];
     final_data[0].hidden = false;
     final_data[1].hidden = false;
