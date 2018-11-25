@@ -105,7 +105,7 @@ function getGraphDataset(tableData, colsForGraph, type) {
     }
     if (!$("#police_total_sex").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
-        return x.label != "Total Prisoners";
+        return x.label != "Total";
       });
     }
 
