@@ -70,7 +70,7 @@ function getGraphDataset(tableData, colsForGraph, type) {
       });
     }
 
-  } else if (type == "prisoners"){
+  } else if (type == "leoka" && leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") {
     years = [];
     data1 = [];
     data2 = [];
@@ -93,17 +93,17 @@ function getGraphDataset(tableData, colsForGraph, type) {
     final_data[1].hidden = false;
     final_data[2].hidden = false;
 
-    if (!$("#prisoners_female_sex").is(':checked')) {
+    if (!$("#police_female_sex").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
         return x.label != "Female";
       });
     }
-    if (!$("#prisoners_male_sex").is(':checked')) {
+    if (!$("#police_male_sex").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
         return x.label != "Male";
       });
     }
-    if (!$("#prisoners_total_sex").is(':checked')) {
+    if (!$("#police_total_sex").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
         return x.label != "Total Prisoners";
       });
@@ -168,6 +168,9 @@ function makeGraph(data, graph_div, colsForGraph, type) {
       yaxis_label = "Rate per Officer";
     }
     legend_display = false;
+    if (leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") {
+      legend_display = true;
+    }
   }  else if (type == "prisoners") {
     yaxis_label = "# of Prisoners";
     if (checkIfRateChecked(type)) {
@@ -270,11 +273,11 @@ function getTitle(data, type) {
 
   } else if (type == "prisoners") {
     title = data[0].state + ': ';
-    title += _.values(prisoner_categories)[$("#prisoners_categories").val()];
-    title += ", ";
+    subtitle = _.values(prisoner_categories)[$("#prisoners_categories").val()];
+    subtitle += ", ";
     name  = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
-    title += prisoners_subcategory[$('#prisoners_categories').val()][name];
-    subtitle = "";
+    subtitle += prisoners_subcategory[$('#prisoners_categories').val()][name];
+
   }
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
@@ -372,30 +375,39 @@ function makeTable(div, data, headers, type) {
   data = subsetColumns(data, headers, "table", type);
 
   data_keys = _.keys(data[0]);
+  console.log(data_keys);
   data_keys = data_keys.filter(function(a) {
     return a !== 'agency' && a !== 'year' &&
       a !== 'state' && a !== 'ORI';
   });
+    console.log(data_keys);
+
+    console.log(data.length);
+    console.log(data_keys.length);
+
+  // Adds commas in numbers to make it easier to read!
   for (var m = 0; m < data.length; m++) {
     for (n = 0; n < data_keys.length; n++) {
       data[m][data_keys[n]] = parseFloat(data[m][data_keys[n]]).toLocaleString();
     }
   }
 
-  z = [];
-
+ // Makes real (as they appear in the data) names and pretty names
+ // as they will appear in the table.
+  table_columns = [];
   for (var i = 0; i < headers.length; i++) {
     label_name = fixTableName(headers[i], type);
     data_name = fixTableDataName(headers[i], type);
-    z.push({
+    table_columns.push({
       data: data_name,
       title: label_name,
       className: "dt-head-left dt-body-left"
     });
   }
+  console.log(table_columns)
   temp_table = $(div).DataTable({
     data: data,
-    columns: z,
+    columns: table_columns,
     "scrollX": true,
     "sScrollXInner": "100%",
     "sScrollX": "100%",
@@ -415,6 +427,8 @@ function makeTable(div, data, headers, type) {
   return temp_table;
 }
 
+/*
 function formatNumber(n) {
   return n.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
+*/

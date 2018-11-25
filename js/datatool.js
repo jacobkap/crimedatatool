@@ -171,7 +171,7 @@ function main(type) {
   tableData = getAgencyData(stateData, headers, colsForTable, type);
 
   // Removes the total officer column used to make the rate
-  if (type == "leoka" && leoka_subcatergory_keys[$("#leoka_subcategory_dropdown").val()] != "total_employees_officers") {
+  if (type == "leoka" && leoka_categories[$("#leoka_category_dropdown").val()] != "Police Department Employees") {
     tableData = _.map(tableData, function(x) {
       return _.omit(x, "total_employees_officers");
     });
@@ -224,7 +224,7 @@ function getCrimeColumns(headers, type, output) {
   }
   if (type == "leoka") {
     for (var i = 0; i < headers.length; i++) {
-      if (headers[i] === crime) {
+      if (headers[i].includes(crime)) {
         columnNames.push(headers[i]);
       }
     }
@@ -239,7 +239,7 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (type == "leoka" && leoka_subcatergory_keys[$("#leoka_subcategory_dropdown").val()] != "total_employees_officers") {
+  if (type == "leoka" && leoka_categories[$("#leoka_category_dropdown").val()] != "Police Department Employees") {
     columnNames.push("total_employees_officers");
   }
   return (columnNames);

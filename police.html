@@ -83,6 +83,19 @@
     <select class="simple-select" id="leoka_weapons" onchange="leoka_agencyChangeFun()"></select>
   </div>
 
+  <div id = "policeSex">
+    <h3>Officer Sex:</h3>
+    <br>
+    <input type="checkbox" id="police_female_sex"   onchange="policeSexBoxesUpdate()"></input>
+    <label class="label-text fa" for="police_female_sex">Female</label>
+    <br>
+    <input type="checkbox" id="police_male_sex" onchange="policeSexBoxesUpdate()"></input>
+    <label class="label-text fa" for="police_male_sex">Male</label>
+    <br>
+    <input type="checkbox" id="police_total_sex"checked onchange="policeSexBoxesUpdate()"></input>
+    <label class="label-text fa" for="police_total_sex">Total</label>
+  </div>
+
   <br><br>
   <input type="checkbox" id="leoka_rate" name="leoka_rate" value="leoka_rate" onchange="leokoRateBoxesPop()">
   <label for="leoka_rate">Rate per 100,000 Population</label>
@@ -111,17 +124,19 @@
 
         makeLeokaWeaponDropdown();
         toggle_leoka_weapon_display()
+        $("#policeSex").show();
 
         $('.simple-select').chosen();
         resizeChosen();
         ctx_leoka = document.getElementById("leoka_graph").getContext('2d');
         makeStateDropdown("#leoka_state_dropdown")
         makeCrimeDropdown("leoka", "#leoka_category_dropdown");
+
         leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
         leoka_subcatergory_values = leoka_subcatergory_keys[1];
         leoka_subcatergory_keys = leoka_subcatergory_keys[0];
-        leoka_largest_agency = getStateAgencies("leoka", true);
 
+        leoka_largest_agency = getStateAgencies("leoka", true);
         leoka_agencies = updateAgencies("leoka", leoka_largest_agency,
           "#leoka_agency_dropdown",
           "#leoka_state_dropdown");
@@ -135,16 +150,16 @@
         leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
 
         $("#leoka_graph").ready($("#loader").hide())
-        arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka")
+        leoka_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka")
 
-
+/*
         if (window.location.hash == "") {
           change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_agencies, leoka_values)
         } else {
         leoka_agencies = change_data_from_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_values, leoka_largest_agency, "leoka");
         leoka_agencyChangeFun();
       }
-
+*/
 
                 jQuery(window).on('resize', resizeChosen);
       });

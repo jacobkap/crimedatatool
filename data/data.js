@@ -293,17 +293,17 @@ leoka_subcategories = [
     "officers_killed_by_felony" : "Killed by Felony"
   },
   {
-    "female_employees_civilians" : "Civilians - Female",
-    "male_employees_civilians" : "Civilians - Male",
-    "total_employees_civilians" : "Civilians - Total",
+    "employees_civilians" : "Civilians",
+  //  "male_employees_civilians" : "Civilians - Male",
+  //  "total_employees_civilians" : "Civilians - Total",
 
-    "female_employees_officers" : "Officers - Female",
-    "male_employees_officers" : "Officers - Male",
-    "total_employees_officers" : "Officers - Total",
+    "employees_officers" : "Officers",
+//    "male_employees_officers" : "Officers - Male",
+//    "total_employees_officers" : "Officers - Total",
 
-    "female_employees_total" : "Total Employees - Female",
-    "male_employees_total" : "Total Employees - Male",
-    "total_employees_total" : "Total Employees - Total",
+    "employees_total" : "Total Employees",
+  //  "male_employees_total" : "Total Employees - Male",
+  //  "total_employees_total" : "Total Employees - Total",
   }
 ];
 

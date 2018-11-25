@@ -98,9 +98,11 @@ function leoka_agencyChangeFun() {
   $('.main').prepend('<canvas id="leoka_graph" style="width:95%;height:500px;"></canvas>');
   ctx_leoka = document.getElementById("leoka_graph").getContext('2d');
   leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
-  arrests_table.destroy();
-  arrests_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka");
-  change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_agencies, leoka_values);
+  leoka_table.destroy();
+  $('#leoka_table').empty();
+  leoka_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka");
+
+//  change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_agencies, leoka_values);
 }
 
 function leoka_stateChangeFun() {
@@ -113,8 +115,22 @@ function leoka_categoryChangeFun() {
   leoka_subcatergory_values = leoka_subcatergory_keys[1];
   leoka_subcatergory_keys = leoka_subcatergory_keys[0];
   $('.simple-select').trigger('chosen:updated');
-  leoka_agencyChangeFun();
   toggle_leoka_weapon_display();
+  toggle_leoka_employee_sex_display();
+  leoka_agencyChangeFun();
+}
+
+function policeSexBoxesUpdate() {
+  if (!$("#police_female_sex").is(':checked') &&
+    !$("#police_male_sex").is(':checked') &&
+    !$("#police_total_sex").is(':checked')) {
+    $("#police_total_sex").prop("checked", true);
+  }
+
+  $('#leoka_graph').remove();
+  $('.main').prepend('<canvas id="leoka_graph" style="width:95%;height:500px;"></canvas>');
+  ctx_leoka = document.getElementById("leoka_graph").getContext('2d');
+  leoka_graph = makeGraph(leoka_table_data, ctx_leoka, leoka_graph_headers, "leoka");
 }
 
 
@@ -163,6 +179,7 @@ function prisonerBoxesUpdate() {
   ctx_prisoners = document.getElementById("prisoners_graph").getContext('2d');
   prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
 }
+
 
 
 function prisonerJurisdictionChange() {

@@ -93,6 +93,14 @@ function toggle_leoka_weapon_display() {
   }
 }
 
+function toggle_leoka_employee_sex_display() {
+  if (leoka_categories[$("#leoka_category_dropdown").val()] != "Police Department Employees") {
+    $("#policeSex").hide();
+  } else {
+    $("#policeSex").show();
+  }
+}
+
 function makeStateDropdown(dropdown) {
   $.each(state_values, function(val, text) {
     $(dropdown).append(new Option(text, val));
@@ -124,7 +132,7 @@ function makeLeokaWeaponDropdown() {
 }
 
 function makeLeokaSubcategoriesDropdown() {
-  leoka_subcategory_starts = [12, 1, 5];
+  leoka_subcategory_starts = [12, 1, 1];
 
   $('#leoka_subcategory_dropdown').empty();
   values = leoka_subcategories[$('#leoka_category_dropdown').val()];
