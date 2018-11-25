@@ -212,8 +212,6 @@ function getCrimeColumns(headers, type, output) {
       weapon = _.keys(leoka_weapons)[$("#leoka_weapons").val()];
 
 // The total columns have slightly different names than others so this makes them work.
-
-
       if (crime == "assaults_with_injury" || crime == "assaults_no_injury") {
         weapon = weapon.replace("assault_", "");
         weapon = weapon.replace("_assaults", "");
