@@ -375,15 +375,10 @@ function makeTable(div, data, headers, type) {
   data = subsetColumns(data, headers, "table", type);
 
   data_keys = _.keys(data[0]);
-  console.log(data_keys);
   data_keys = data_keys.filter(function(a) {
     return a !== 'agency' && a !== 'year' &&
       a !== 'state' && a !== 'ORI';
   });
-    console.log(data_keys);
-
-    console.log(data.length);
-    console.log(data_keys.length);
 
   // Adds commas in numbers to make it easier to read!
   for (var m = 0; m < data.length; m++) {

@@ -210,13 +210,16 @@ function getCrimeColumns(headers, type, output) {
 
     if (leoka_categories[$("#leoka_category_dropdown").val()] == "Officers Assaulted") {
       weapon = _.keys(leoka_weapons)[$("#leoka_weapons").val()];
-      crime = crime + "_" + weapon;
 
 // The total columns have slightly different names than others so this makes them work.
-      if (crime == "total_total_assaults") crime = "total_assaults_total";
-      if (crime == "assaults_no_injury_total_assaults") crime = "assaults_no_injury_total";
-      if (crime == "assaults_with_injury_total_assaults") crime = "assaults_with_injury_total";
 
+
+      if (crime == "assaults_with_injury" || crime == "assaults_no_injury") {
+        weapon = weapon.replace("assault_", "");
+        weapon = weapon.replace("_assaults", "");
+      }
+      crime = crime + "_" + weapon;
+      if (crime == "total_total_assaults") crime = "total_assaults_total";
     }
   } else if (type == "prisoners") {
     crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
