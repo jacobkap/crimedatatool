@@ -120,7 +120,7 @@ function makePrisonerCategoriesDropdown() {
   $.each(temp, function(val, text) {
     $('#prisoners_categories').append(new Option(text, val));
   });
-  $('#prisoners_categories').val(4);
+  $('#prisoners_categories').val(1);
 }
 
 function makeLeokaWeaponDropdown() {
@@ -147,6 +147,8 @@ function makeLeokaSubcategoriesDropdown() {
 }
 
 function makePrisonerSubcategoriesDropdown() {
+  prisoner_subcategory_starts = [1, 4, 0, 9, 10, 1, 0, 8, 3];
+
   $('#prisoners_subcategories').empty();
   values = prisoners_subcategory[$('#prisoners_categories').val()];
   keys   = _.keys(values);
@@ -154,7 +156,7 @@ function makePrisonerSubcategoriesDropdown() {
   $.each(values, function(val, text) {
     $('#prisoners_subcategories').append(new Option(text, val));
   });
-  $('#prisoners_subcategories').val(0);
+  $('#prisoners_subcategories').val(prisoner_subcategory_starts[$('#prisoners_categories').val()]);
 
   return(keys);
 }

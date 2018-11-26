@@ -79,8 +79,8 @@ function getGraphDataset(tableData, colsForGraph, type) {
 
     for (var i2 = 0; i2 < data.length; i2++) {
       years.push(data[i2][colsForGraph[0]]);
-      data1.push(data[i2][colsForGraph[2]]);
-      data2.push(data[i2][colsForGraph[1]]);
+      data1.push(data[i2][colsForGraph[1]]);
+      data2.push(data[i2][colsForGraph[2]]);
       data3.push(data[i2][colsForGraph[3]]);
     }
 
@@ -259,12 +259,12 @@ function getTitle(data, type) {
     subtitle = crime_values[$("#crime_dropdown").val()];
   } else if (type == "arrests") {
     subtitle = arrest_values[$("#arrests_crime_dropdown").val()];
-    subtitle += ", " + arrest_categories[$("#arrests_category_dropdown").val()];
+    subtitle += ": " + arrest_categories[$("#arrests_category_dropdown").val()];
     subtitle += " - Arrests";
   } else if (type == "leoka") {
     subtitle = leoka_categories[$("#leoka_category_dropdown").val()];
 
-    subtitle += ", " + leoka_subcatergory_values[$("#leoka_subcategory_dropdown").val()];
+    subtitle += ": " + leoka_subcatergory_values[$("#leoka_subcategory_dropdown").val()];
 
     if (leoka_categories[$("#leoka_category_dropdown").val()] == "Officers Assaulted") {
       weapon = _.values(leoka_weapons)[$("#leoka_weapons").val()];
@@ -274,7 +274,7 @@ function getTitle(data, type) {
   } else if (type == "prisoners") {
     title = data[0].state + ': ';
     subtitle = _.values(prisoner_categories)[$("#prisoners_categories").val()];
-    subtitle += ", ";
+    subtitle += ": ";
     name  = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
     subtitle += prisoners_subcategory[$('#prisoners_categories').val()][name];
 
