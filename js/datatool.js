@@ -32,17 +32,22 @@ function subsetColumns(data, columns, output, type) {
     rate_type = "_rate_per_officer";
   }
 
+
   if (checkIfRateChecked(type)) {
     columns = _.map(columns, function(x) {
       return x + rate_type;
     });
 
-    if (output == "table") {
+    if (output == "table" && type != "prisoners") {
       columns[0] = "agency";
       columns[1] = "year";
       columns[2] = "state";
       columns[3] = "population";
       columns[4] = "ORI";
+    } else if (output == "table" && type == "prisoners") {
+      columns[0] = "state";
+      columns[1] = "year";
+      columns[2] = "population";
     } else {
       columns[0] = "year";
     }
@@ -162,6 +167,8 @@ function main(type) {
   allAgencyData = data_object_fun(stateData, headers);
   allAgencyData.pop();
   allAgencyData.shift();
+
+  console.log(checkIfRateChecked(type))
   if (checkIfRateChecked(type)) {
     allAgencyData = _.map(allAgencyData, function(currentObject) {
       return countToRate(currentObject);
@@ -182,7 +189,7 @@ function main(type) {
     colsForTable.splice(index, 1);
   }
 
-
+console.log(colsForGraph)
   return [tableData, colsForGraph, colsForTable, allAgencyData];
 }
 
@@ -195,7 +202,7 @@ function getCrimeColumns(headers, type, output) {
     columnNames = ["agency", "year", "state", "population", "ORI"];
   }
   if (type == "prisoners" && output == "table") {
-    columnNames = ["state", "year"];
+    columnNames = ["state", "year", "population"];
   }
 
   if (type == "offenses") {

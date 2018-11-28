@@ -5,7 +5,7 @@ function allowSaveGraph() {
 
 
 function getGraphDataset(tableData, colsForGraph, type) {
-
+console.log(colsForGraph)
   rate_type = "_rate";
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
     rate_type = "_rate_per_officer";
@@ -70,7 +70,17 @@ function getGraphDataset(tableData, colsForGraph, type) {
       });
     }
 
-  } else if (type == "leoka" && leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") {
+  } else if ((type == "leoka" & leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") || type == "prisoners") {
+      if (type == "leoka") {
+        female_checkbox = "#police_female_sex";
+        male_checkbox = "#police_male_sex";
+        total_checkbox = "#police_total_sex";
+      } else {
+        female_checkbox = "#prisoners_female_sex";
+        male_checkbox = "#prisoners_male_sex";
+        total_checkbox = "#prisoners_total_sex";
+      }
+
     years = [];
     data1 = [];
     data2 = [];
@@ -93,17 +103,17 @@ function getGraphDataset(tableData, colsForGraph, type) {
     final_data[1].hidden = false;
     final_data[2].hidden = false;
 
-    if (!$("#police_female_sex").is(':checked')) {
+    if (!$(female_checkbox).is(':checked')) {
       final_data = _.filter(final_data, function(x) {
         return x.label != "Female";
       });
     }
-    if (!$("#police_male_sex").is(':checked')) {
+    if (!$(male_checkbox).is(':checked')) {
       final_data = _.filter(final_data, function(x) {
         return x.label != "Male";
       });
     }
-    if (!$("#police_total_sex").is(':checked')) {
+    if (!$(total_checkbox).is(':checked')) {
       final_data = _.filter(final_data, function(x) {
         return x.label != "Total";
       });
@@ -314,7 +324,7 @@ function fixTableName(name, type) {
     if (tot_section == name) {
       tot_section = name.replace(/.*_juv/g, "juv");
     }
-//    console.log(tot_section)
+
     name = name.replace(/_tot.*/g, "");
     name = name.replace(/_adult.*/g, "");
     name = name.replace(/_juv.*/g, "");
@@ -399,7 +409,7 @@ function makeTable(div, data, headers, type) {
       className: "dt-head-left dt-body-left"
     });
   }
-  console.log(table_columns)
+
   temp_table = $(div).DataTable({
     data: data,
     columns: table_columns,

@@ -117,13 +117,9 @@
         prisoners_graph_headers = main_results[1];
         prisoners_table_headers = main_results[2];
         prisoner_all_data = main_results[3];
-        prisoners_graph_headers = prisoners_table_headers.slice(1, 6)
-        prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners")
-
-
         prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
-
-$("#graph").ready($("#loader").hide())
+        $("#graph").ready($("#loader").hide())
+        prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners")
 /*
         if (window.location.hash == "") {
           change_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_agencies, arrest_values)

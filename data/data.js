@@ -105,10 +105,7 @@ var prisoners_subcategory = [{
     "asian": "Asian",
     "black": "Black",
     "hispanic_or_latino": "Hispanic/Latino",
-    "native_hawaiian": "Native Hawaiian",
-    "additional_other_categories_for_race": "Other",
-    "two_or_more_races": "Two or More Races",
-    "unknown_race": "Unknown",
+    "other_or_unknown_race": "Other/Unknown",
     "white": "White"
   },
 
