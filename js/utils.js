@@ -178,10 +178,9 @@ if (per_officer === true) {
   population_column = "total_employees_officers";
 }
 if (type == "prisoners") {
-
-} && $("#prisoners_rate_adult").is(':checked')) {
+ if ($("#prisoners_rate_adult").is(':checked')) {
   population_column = "population_adult";
-} else if (type == "prisoners" && $("#prisoners_rate_18_65").is(':checked')) {
+} else if ($("#prisoners_rate_18_65").is(':checked')) {
     population_column = "population_adult_aged_18_65";
 }
 }
