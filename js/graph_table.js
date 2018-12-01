@@ -5,7 +5,6 @@ function allowSaveGraph() {
 
 
 function getGraphDataset(tableData, colsForGraph, type) {
-console.log(colsForGraph)
   rate_type = "_rate";
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
     rate_type = "_rate_per_officer";
@@ -383,6 +382,7 @@ function fixTableDataName(name, type) {
 
 function makeTable(div, data, headers, type) {
   data = subsetColumns(data, headers, "table", type);
+
 
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {

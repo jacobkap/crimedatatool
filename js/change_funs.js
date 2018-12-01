@@ -24,6 +24,19 @@ function rateChangeFun(type) {
   }
 }
 
+function prisonersPopBoxChange(box_to_check) {
+
+      box_status = $(box_to_check).prop("checked");
+
+      $("#prisoners_rate").prop("checked", false);
+      $("#prisoners_rate_adult").prop("checked", false);
+      $("#prisoners_rate_18_65").prop("checked", false);
+
+      $(box_to_check).prop("checked", box_status);
+
+          prisonerJurisdictionChange();
+}
+
 function leokoRateBoxesPop() {
     $("#leoka_rate_per_officer").prop("checked", false);
     rateChangeFun("leoka");
@@ -148,6 +161,14 @@ function prisonerSubcategoryChange() {
   prisoners_graph_headers = main_results[1];
   prisoners_table_headers = main_results[2];
   prisoner_all_data = main_results[3];
+
+  cols = [];
+      for (var i= 0; i< prisoners_table_headers.length; i++) {
+      if (!prisoners_table_headers[i].includes("population")) {
+          cols.push(prisoners_table_headers[i]);
+      }
+    }
+    prisoners_table_headers = cols;
 
   $('#prisoners_graph').remove();
   $('.main').prepend('<canvas id="prisoners_graph" style="width:95%;height:500px;"></canvas>');

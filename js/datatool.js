@@ -47,7 +47,6 @@ function subsetColumns(data, columns, output, type) {
     } else if (output == "table" && type == "prisoners") {
       columns[0] = "state";
       columns[1] = "year";
-      columns[2] = "population";
     } else {
       columns[0] = "year";
     }
@@ -134,7 +133,7 @@ function getAgencyData(stateData, headers, table_headers, type) {
 
   if (checkIfRateChecked(type)) {
     agencyData = _.map(agencyData, function(currentObject) {
-      return countToRate(currentObject);
+      return countToRate(currentObject, type);
     });
   }
   return agencyData;
@@ -149,7 +148,7 @@ function checkIfRateChecked(type) {
     return ($("#leoka_rate").is(':checked') ||
       $("#leoka_rate_per_officer").is(':checked'));
   } else if (type == "prisoners") {
-    return $("#prisoners_rate").is(':checked');
+    return $("#prisoners_rate").is(':checked') || $("#prisoners_rate_adult").is(':checked') || $("#prisoners_rate_18_65").is(':checked');
   }
 }
 
@@ -168,10 +167,9 @@ function main(type) {
   allAgencyData.pop();
   allAgencyData.shift();
 
-  console.log(checkIfRateChecked(type))
   if (checkIfRateChecked(type)) {
     allAgencyData = _.map(allAgencyData, function(currentObject) {
-      return countToRate(currentObject);
+      return countToRate(currentObject, type);
     });
   }
 
@@ -189,7 +187,6 @@ function main(type) {
     colsForTable.splice(index, 1);
   }
 
-console.log(colsForGraph)
   return [tableData, colsForGraph, colsForTable, allAgencyData];
 }
 
@@ -202,7 +199,13 @@ function getCrimeColumns(headers, type, output) {
     columnNames = ["agency", "year", "state", "population", "ORI"];
   }
   if (type == "prisoners" && output == "table") {
-    columnNames = ["state", "year", "population"];
+    columnNames = ["state", "year", "population", "population_adult", "population_adult_aged_18_65"];
+    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity") {
+    race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    columnNames.push("population_" + race_value);
+    columnNames.push("population_adult_" + race_value);
+    columnNames.push("population_adult_aged_18_65_" + race_value);
+  }
   }
 
   if (type == "offenses") {
@@ -230,14 +233,13 @@ function getCrimeColumns(headers, type, output) {
     crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
 
   }
-  if (type == "leoka") {
-    for (var i = 0; i < headers.length; i++) {
-      if (headers[i].includes(crime)) {
-        columnNames.push(headers[i]);
-      }
-    }
-  } else {
+
     for (var n = 0; n < headers.length; n++) {
+      if (type == "prisoners") {
+      if (headers[n].startsWith(crime)) {
+        columnNames.push(headers[n]);
+      }
+    } else {
       if (headers[n].includes(crime)) {
         columnNames.push(headers[n]);
       }
@@ -245,7 +247,7 @@ function getCrimeColumns(headers, type, output) {
     if (crime === "theft_total") {
       columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
     }
-  }
+}
 
   if (type == "leoka" && leoka_categories[$("#leoka_category_dropdown").val()] != "Police Department Employees") {
     columnNames.push("total_employees_officers");

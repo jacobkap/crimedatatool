@@ -50,7 +50,7 @@
           <li><a href="crime.html">Crime</a></li>
           <li><a href="arrest.html">Arrest</a></li>
           <li><a href="police.html">Police</a></li>
-          <li><a class="on" href="prisons.html">Prisons</a></li>
+          <li><a class="on" href="prisoners.html">Prisons</a></li>
           <li><a href="data.html">Data</a></li>
           <li><a href="research.html">Research</a></li>
           <li><a href="faq.html">FAQ</a></li>
@@ -73,8 +73,18 @@
     <br>
     <select class="simple-select" id="prisoners_subcategories" onchange = "prisonerSubcategoryChange()"></select>
   <br><br>
-  <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="rateChangeFun('prisoners')">
+  <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="prisonersPopBoxChange('#prisoners_rate')">
   <label for="prisoners_rate">Rate per 100,000 Population</label>
+  <br><br>
+
+  <input type="checkbox" id="prisoners_rate_adult" name="prisoners_rate_adult" value="prisoners_rate_adult" onchange="prisonersPopBoxChange('#prisoners_rate_adult')">
+  <label for="prisoners_rate_adult">Rate per 100,000 Adults</label>
+  <br><br>
+  <input type="checkbox" id="prisoners_rate_18_65" name="prisoners_rate_18_65" value="prisoners_rate_18_65" onchange="prisonersPopBoxChange('#prisoners_rate_18_65')">
+  <label for="prisoners_rate_18_65">Rate per 100,000 Pop Aged 18-65</label>
+  <br><br>
+  <input type="checkbox" id="prisoners_rate_race" name="prisoners_rate_race" value="prisoners_rate_race" onchange="prisonersPopBoxChange('prisoners')">
+  <label for="prisoners_rate_race">In racial group</label>
   <br><br>
   <h3>Prisoner Sex:</h3>
 
@@ -119,6 +129,14 @@
         prisoner_all_data = main_results[3];
         prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
         $("#graph").ready($("#loader").hide())
+
+        cols = [];
+            for (var i= 0; i< prisoners_table_headers.length; i++) {
+            if (!prisoners_table_headers[i].includes("population")) {
+                cols.push(prisoners_table_headers[i]);
+            }
+          }
+          prisoners_table_headers = cols;
         prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners")
 /*
         if (window.location.hash == "") {

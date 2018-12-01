@@ -169,25 +169,32 @@ function makeArrestCategoriesDropdown() {
   $('#arrests_category_dropdown').val("tot_arrests");
 }
 
-function countToRate(data, per_officer = false) {
+function countToRate(data, type, per_officer = false) {
 
   per_officer = $("#leoka_rate_per_officer").is(':checked');
   data_keys = _.keys(data);
+population_column = "population";
 if (per_officer === true) {
-officer_count = data.total_employees_officers;
+  population_column = "total_employees_officers";
 }
+if (type == "prisoners") {
 
+} && $("#prisoners_rate_adult").is(':checked')) {
+  population_column = "population_adult";
+} else if (type == "prisoners" && $("#prisoners_rate_18_65").is(':checked')) {
+    population_column = "population_adult_aged_18_65";
+}
+}
   for (var i = 0; i < data_keys.length; i++) {
     if (!data_keys[i].includes("agency") &&
       !data_keys[i].includes("year") &&
       !data_keys[i].includes("state") &&
       !data_keys[i].includes("population") &&
       !data_keys[i].includes("ORI")) {
-      rate_val = data[data_keys[i]] / data.population * 100000;
-      if (per_officer === true) {
-       rate_val = data[data_keys[i]] / officer_count;
-     }
+      rate_val = data[data_keys[i]] / data[population_column] * 100000;
+
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
+
       if (!isFinite(rate_val)) {
         rate_val = NaN;
       }
