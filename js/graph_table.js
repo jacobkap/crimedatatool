@@ -183,7 +183,12 @@ function makeGraph(data, graph_div, colsForGraph, type) {
   }  else if (type == "prisoners") {
     yaxis_label = "# of Prisoners";
     if (checkIfRateChecked(type)) {
-      yaxis_label = 'Rate per 100,000 Population';
+      yaxis_label = '% of Population';
+      if ($("#prisoners_rate_adult").is(':checked')) {
+        yaxis_label = '% of Adult Population';
+      } else if ($("#prisoners_rate_18_65").is(':checked')) {
+        yaxis_label = '% of Population Aged 18-65';
+      }
     }
     legend_display = true;
   }
@@ -291,6 +296,12 @@ function getTitle(data, type) {
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
     subtitle += ", Rate per Officer";
+  } else if (type == "prisoners" && $("#prisoners_rate").is(':checked')) {
+    subtitle += ", % of Population";
+  } else if (type == "prisoners" && $("#prisoners_rate_adult").is(':checked')) {
+    subtitle += ", % of Adult Population";
+  } else if (type == "prisoners" && $("#prisoners_rate_18_65").is(':checked')) {
+    subtitle += ", % of Population Aged 18-65";
   } else if (checkIfRateChecked(type)) {
       subtitle += ", Rate per 100,000 Population";
     }
@@ -350,7 +361,7 @@ if (name === undefined) {
 
   if (checkIfRateChecked(type) &&
     !name.includes("Agency") &&
-    !name.includes("Year") &&
+    !name.startsWith("Year") &&
     !name.includes("State") &&
     !name.includes("Population") &&
     !name.includes("ORI")) {
@@ -369,7 +380,7 @@ function fixTableDataName(name, type) {
   }
 
   if (!name.includes("agency") &&
-    !name.includes("year") &&
+    !name.startsWith("year") &&
     !name.includes("state") &&
     !name.includes("population") &&
     !name.includes("ORI")) {

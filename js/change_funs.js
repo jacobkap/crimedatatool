@@ -34,7 +34,7 @@ function prisonersPopBoxChange(box_to_check) {
 
       $(box_to_check).prop("checked", box_status);
 
-          prisonerJurisdictionChange();
+      prisonerJurisdictionChange();
 }
 
 function leokoRateBoxesPop() {

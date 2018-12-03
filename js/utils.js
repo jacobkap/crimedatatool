@@ -17,17 +17,17 @@ function exportToCsv(tableData, type) {
   data = tableData.reverse();
 
   if (checkIfRateChecked(type)) {
-      rate_or_count = "rate_";
-    } else {
-      rate_or_count = "count_";
-    }
-     if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
-      rate_or_count = "rate_per_officer_";
-    }
+    rate_or_count = "rate_";
+  } else {
+    rate_or_count = "count_";
+  }
+  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+    rate_or_count = "rate_per_officer_";
+  }
 
-    data = data.map(objToString);
-    data = data.join("\n");
-    data = objToString(_.keys(tableData[0])) + '\n' + data;
+  data = data.map(objToString);
+  data = data.join("\n");
+  data = objToString(_.keys(tableData[0])) + '\n' + data;
 
 
   if (type == "offenses") {
@@ -136,14 +136,14 @@ function makeLeokaSubcategoriesDropdown() {
 
   $('#leoka_subcategory_dropdown').empty();
   values = leoka_subcategories[$('#leoka_category_dropdown').val()];
-  keys   = _.keys(values);
+  keys = _.keys(values);
   values = _.values(values);
   $.each(values, function(val, text) {
     $('#leoka_subcategory_dropdown').append(new Option(text, val));
   });
   $('#leoka_subcategory_dropdown').val(leoka_subcategory_starts[$('#leoka_category_dropdown').val()]);
 
-  return([keys, values]);
+  return ([keys, values]);
 }
 
 function makePrisonerSubcategoriesDropdown() {
@@ -151,14 +151,14 @@ function makePrisonerSubcategoriesDropdown() {
 
   $('#prisoners_subcategories').empty();
   values = prisoners_subcategory[$('#prisoners_categories').val()];
-  keys   = _.keys(values);
+  keys = _.keys(values);
   values = _.values(values);
   $.each(values, function(val, text) {
     $('#prisoners_subcategories').append(new Option(text, val));
   });
   $('#prisoners_subcategories').val(prisoner_subcategory_starts[$('#prisoners_categories').val()]);
 
-  return(keys);
+  return (keys);
 }
 
 
@@ -173,27 +173,54 @@ function countToRate(data, type, per_officer = false) {
 
   per_officer = $("#leoka_rate_per_officer").is(':checked');
   data_keys = _.keys(data);
-population_column = "population";
-if (per_officer === true) {
-  population_column = "total_employees_officers";
-}
-if (type == "prisoners") {
- if ($("#prisoners_rate_adult").is(':checked')) {
-  population_column = "population_adult";
-} else if ($("#prisoners_rate_18_65").is(':checked')) {
-    population_column = "population_adult_aged_18_65";
-}
-}
+  population_column = "population";
+  if (per_officer === true) {
+    population_column = "total_employees_officers";
+  }
+  if (type == "prisoners") {
+    total_population_column = "population";
+    female_population_column = "population_female";
+    male_population_column = "population_male";
+    if ($("#prisoners_rate_adult").is(':checked')) {
+      total_population_column = "population_adult";
+      female_population_column = "population_female_adult";
+      male_population_column = "population_male_adult";
+    } else if ($("#prisoners_rate_18_65").is(':checked')) {
+      total_population_column = "population_aged_18_65";
+      female_population_column = "population_female_aged_18_65";
+      male_population_column = "population_male_aged_18_65";
+    }
+
+    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity") {
+      race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+      total_population_column  += "_" + race_value;
+      female_population_column += "_" + race_value;
+      male_population_column   += "_" + race_value;
+    }
+  }
+
   for (var i = 0; i < data_keys.length; i++) {
     if (!data_keys[i].includes("agency") &&
-      !data_keys[i].includes("year") &&
+      data_keys[i] !== "year" &&
       !data_keys[i].includes("state") &&
       !data_keys[i].includes("population") &&
       !data_keys[i].includes("ORI")) {
+
+          if (type == "prisoners") {
+            if (data_keys[i].includes("_female")) {
+              population_column = female_population_column;
+            } else if (data_keys[i].includes("_male")) {
+              population_column = male_population_column;
+            } else {
+              population_column = total_population_column;
+            }
+            rate_val = data[data_keys[i]] / data[population_column] * 100;
+            rate_val = parseFloat(rate_val).toFixed(2);
+          } else {
+
       rate_val = data[data_keys[i]] / data[population_column] * 100000;
-
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
-
+}
       if (!isFinite(rate_val)) {
         rate_val = NaN;
       }

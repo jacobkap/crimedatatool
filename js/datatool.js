@@ -199,12 +199,21 @@ function getCrimeColumns(headers, type, output) {
     columnNames = ["agency", "year", "state", "population", "ORI"];
   }
   if (type == "prisoners" && output == "table") {
-    columnNames = ["state", "year", "population", "population_adult", "population_adult_aged_18_65"];
+    columnNames = ["state", "year", "population", "population_male", "population_female",
+     "population_adult", "population_female_adult", "population_male_adult",
+     "population_aged_18_65", "population_female_aged_18_65", "population_male_aged_18_65"];
     if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity") {
     race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    columnNames = ["state", "year"];
     columnNames.push("population_" + race_value);
+    columnNames.push("population_female_" + race_value);
+    columnNames.push("population_male_" + race_value);
     columnNames.push("population_adult_" + race_value);
-    columnNames.push("population_adult_aged_18_65_" + race_value);
+    columnNames.push("population_female_adult_" + race_value);
+    columnNames.push("population_male_adult_" + race_value);
+    columnNames.push("population_aged_18_65_" + race_value);
+    columnNames.push("population_female_aged_18_65_" + race_value);
+    columnNames.push("population_male_aged_18_65_" + race_value);
   }
   }
 
