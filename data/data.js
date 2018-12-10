@@ -72,15 +72,44 @@ prisoners_state_values = ["US Prison Total", "Federal Prison Total", "State Pris
 prisoners_state_values = prisoners_state_values.concat(state_values);
 
 var prisoner_categories = {
-  "custody" : "Prisoners in Custody",
-  "jurisdiction" : "Prisoners in Jurisdiction",
-  "race_ethnicity" : "Race/Ethnicity",
-  "admission" :  "Admissions",
-  "release" : "Releases",
-  "capacity" : "Prison Capacity",
+  "custody"             : "Prisoners in Custody",
+  "custody_crime"       : "Prisoners in Custody - By Offense",
+  "jurisdiction"        : "Prisoners in Jurisdiction",
+  "race_ethnicity"      : "Race/Ethnicity",
+  "admission"           : "Admissions",
+  "admissions_crime"    : "Admissions - By Offense",
+  "release"             : "Releases",
+  "releases_crime"       : "Releases - By Offense",
+  "capacity"            : "Prison Capacity",
   "noncitizen_juvenile" : "Non-Citizen/Juvenile Prisoners",
-  "death" : "Prisoner Deaths",
-  "aids" : "Prisoners with HIV/AIDS"
+  "death"               : "Prisoner Deaths",
+  "aids"                : "Prisoners with HIV/AIDS"
+};
+
+prison_crimes = {
+  "aggravated_or_simple_assault" : "Assault - Aggravated or Simple",
+  "burglary" : "Burglary",
+  "drugs" : "Drugs - Possession, Distribution, Trafficking, etc.",
+  "fraud" : "Fraud",
+  "motor_vehicle_theft" : "Motor Vehicle Theft",
+  "murder" : "Murder",
+  "negligent_manslaughter" : "Negligent Manslaughter",
+  "other_property_offenses" : "Other Property Offenses",
+  "other_unknown" : "Other or Unknown",
+  "other_violent_offenses" : "Other Violent Offenses",
+  "public_order" : "Public Order",
+  "rape_or_sexual_assault" : "Rape or Sexual Assault",
+  "robbery" : "Robbery",
+  "theft" : "Theft",
+  "total" : "Total Offenses",
+};
+
+prisoners_race = {
+    "black": "Black",
+    "hispanic": "Hispanic/Latino",
+    "other_or_unknown": "Other/Unknown",
+    "white": "White",
+    "total" : "Total"
 };
 
 var prisoners_subcategory = [{
@@ -89,6 +118,7 @@ var prisoners_subcategory = [{
     "custody_public_prisons": "In Public Prison",
     "custody_private_prison": "In Private Prison"
   },
+  prison_crimes,
 
   {
     "jurisdiction_housed_in_local_facility": "In Local Facility",
@@ -123,6 +153,7 @@ var prisoners_subcategory = [{
     "total_admissions": "Total Admissions",
     "transfers_admitted_from_other_jurisdictions": "Transfers From Other Jurisdiction"
   },
+  prison_crimes,
 
   // Releases
   {
@@ -139,6 +170,8 @@ var prisoners_subcategory = [{
     "total_releases": "Total Released",
     "transfers_to_other_jurisdictions": "Transferred to Other Jurisdiction"
   },
+
+  prison_crimes,
 
   // Capacity
   {

@@ -202,8 +202,13 @@ function getCrimeColumns(headers, type, output) {
     columnNames = ["state", "year", "population", "population_male", "population_female",
      "population_adult", "population_female_adult", "population_male_adult",
      "population_aged_18_65", "population_female_aged_18_65", "population_male_aged_18_65"];
-    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity") {
+    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity" |
+  _.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
     race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+
+    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
+      race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
+    }
     columnNames = ["state", "year"];
     columnNames.push("population_" + race_value);
     columnNames.push("population_female_" + race_value);
@@ -240,6 +245,11 @@ function getCrimeColumns(headers, type, output) {
     }
   } else if (type == "prisoners") {
     crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    category = _.keys(prisoner_categories)[$("#prisoners_categories").val()];
+    if (category.includes("_crime")) {
+      race = _.keys(prisoners_race)[$("#prisoners_race").val()];
+      crime += "_" + race;
+    }
 
   }
 

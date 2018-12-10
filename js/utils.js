@@ -120,7 +120,7 @@ function makePrisonerCategoriesDropdown() {
   $.each(temp, function(val, text) {
     $('#prisoners_categories').append(new Option(text, val));
   });
-  $('#prisoners_categories').val(1);
+  $('#prisoners_categories').val(2);
 }
 
 function makeLeokaWeaponDropdown() {
@@ -146,8 +146,16 @@ function makeLeokaSubcategoriesDropdown() {
   return ([keys, values]);
 }
 
+function makePrisonersRaceDropdown() {
+  temp = _.values(prisoners_race);
+  $.each(temp, function(val, text) {
+    $('#prisoners_race').append(new Option(text, val));
+  });
+  $('#prisoners_race').val(3);
+}
+
 function makePrisonerSubcategoriesDropdown() {
-  prisoner_subcategory_starts = [1, 4, 0, 9, 10, 1, 0, 8, 3];
+  prisoner_subcategory_starts = [1, 5, 4, 0, 9, 5, 10, 5, 1, 0, 8, 3];
 
   $('#prisoners_subcategories').empty();
   values = prisoners_subcategory[$('#prisoners_categories').val()];
@@ -191,13 +199,19 @@ function countToRate(data, type, per_officer = false) {
       male_population_column = "population_male_aged_18_65";
     }
 
-    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity") {
+    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity" |
+  _.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
       race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+
+      if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
+        race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
+      }
       total_population_column  += "_" + race_value;
       female_population_column += "_" + race_value;
       male_population_column   += "_" + race_value;
     }
   }
+
 
   for (var i = 0; i < data_keys.length; i++) {
     if (!data_keys[i].includes("agency") &&
