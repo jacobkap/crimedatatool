@@ -287,10 +287,14 @@ function getTitle(data, type) {
 
   } else if (type == "prisoners") {
     title = data[0].state + ': ';
-    subtitle = _.values(prisoner_categories)[$("#prisoners_categories").val()];
-    subtitle += ": ";
+    subtitle = _.values(prisoner_categories)[$("#prisoners_categories").val()] + ": ";
     name  = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
     subtitle += prisoners_subcategory[$('#prisoners_categories').val()][name];
+
+    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
+      title = data[0].state + ' Prisons: ';
+      subtitle += ", Race: " + _.values(prisoners_race)[$("#prisoners_race").val()];
+    }
 
   }
 

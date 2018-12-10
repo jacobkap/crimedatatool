@@ -73,13 +73,13 @@ prisoners_state_values = prisoners_state_values.concat(state_values);
 
 var prisoner_categories = {
   "custody"             : "Prisoners in Custody",
-  "custody_crime"       : "Prisoners in Custody - By Offense",
+  "custody_crime"       : "Prisoners in Custody - Most Serious Charge",
   "jurisdiction"        : "Prisoners in Jurisdiction",
   "race_ethnicity"      : "Race/Ethnicity",
   "admission"           : "Admissions",
-  "admissions_crime"    : "Admissions - By Offense",
+  "admissions_crime"    : "Admissions - Most Serious Charge",
   "release"             : "Releases",
-  "releases_crime"       : "Releases - By Offense",
+  "releases_crime"       : "Releases - Most Serious Charge",
   "capacity"            : "Prison Capacity",
   "noncitizen_juvenile" : "Non-Citizen/Juvenile Prisoners",
   "death"               : "Prisoner Deaths",

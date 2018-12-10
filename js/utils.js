@@ -151,7 +151,7 @@ function makePrisonersRaceDropdown() {
   $.each(temp, function(val, text) {
     $('#prisoners_race').append(new Option(text, val));
   });
-  $('#prisoners_race').val(3);
+  $('#prisoners_race').val(4);
 }
 
 function makePrisonerSubcategoriesDropdown() {
@@ -232,7 +232,10 @@ function countToRate(data, type, per_officer = false) {
             rate_val = parseFloat(rate_val).toFixed(2);
           } else {
 
-      rate_val = data[data_keys[i]] / data[population_column] * 100000;
+      rate_val = data[data_keys[i]] / data[population_column];
+      if (population_column !== "total_employees_officers") {
+      rate_val = rate_val * 100000;
+    }
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
 }
       if (!isFinite(rate_val)) {
