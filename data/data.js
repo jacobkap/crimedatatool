@@ -238,7 +238,7 @@ var crime_values = {
   "robbery_with_a_gun": "Robbery -  Gun",
   "robbery_with_a_knife": "Robbery - Knife",
   "robbery_other_weapon": "Robbery - Other Weapon",
-  "robbery_unarmed": "Robbery - Strong Arm",
+  "robbery_strong_arm": "Robbery - Strong Arm",
   "theft_total": "Theft - Total"
 };
 
