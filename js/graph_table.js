@@ -299,7 +299,7 @@ function getTitle(data, type) {
   }
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
-    subtitle += ", Rate per Officer";
+    subtitle += ", Rate per 100 Officers";
   } else if (type == "prisoners" && $("#prisoners_rate").is(':checked')) {
     subtitle += ", % of Population";
   } else if (type == "prisoners" && $("#prisoners_rate_adult").is(':checked')) {
