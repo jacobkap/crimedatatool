@@ -252,8 +252,10 @@ function makeGraph(data, graph_div, colsForGraph, type) {
         intersect: false,
         callbacks: {
           label: function(tooltipItems, data) {
+      //      console.log(data[0].label)
             value = tooltipItems.yLabel;
             value = value.toLocaleString();
+            value = data.datasets[tooltipItems.datasetIndex].label + ": " + value;
             return value;
           }
         }
