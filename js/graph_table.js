@@ -138,12 +138,13 @@ function getGraphDataset(tableData, colsForGraph, type) {
 function makeGraphObjects(data, color, label) {
   obj = {
     borderColor: color,
+    backgroundColor: color,
     fill: false,
     label: label,
     data: data,
     onAnimationComplete: allowSaveGraph,
-    hidden: true,
-    radius: 0 // Removes dots
+    hidden: true
+  //  radius: 0 // Removes dots
   };
   return obj;
 }
@@ -245,7 +246,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
           }
         }]
       },
-      responsive: true,
+    //  responsive: true,
       tooltips: {
         mode: 'index',
         intersect: false,
