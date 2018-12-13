@@ -264,7 +264,7 @@ function getCrimeColumns(headers, type, output) {
       }
     }
     if (crime === "theft_total") {
-      columnNames = columnNames.filter(a => !a.includes('mtr_vhc'));
+      columnNames = columnNames.filter(a => !a.includes('mtr_veh'));
     }
 }
 
