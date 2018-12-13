@@ -235,8 +235,6 @@ function countToRate(data, type, per_officer = false) {
       rate_val = data[data_keys[i]] / data[population_column];
       if (population_column !== "total_employees_officers") {
       rate_val = rate_val * 100000;
-    } else {
-      rate_val = rate_val * 100;
     }
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
 }
