@@ -85,7 +85,7 @@ function arrests_agencyChangeFun() {
   arrests_graph = makeGraph(arrests_table_data, ctx_arrests, arrests_graph_headers, "arrests");
   arrests_table.destroy();
   arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers, "arrests");
-  change_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_agencies, arrest_values);
+  change_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_agencies, arrest_values,  "#arrests_category_dropdown", arrest_categories);
 }
 
 function arrests_categoryChangeFun() {

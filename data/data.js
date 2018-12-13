@@ -234,7 +234,7 @@ var crime_values = {
   "rape_total": "Rape - Total",
   "rape_attempted": "Rape - Attempted",
   "rape_by_force": "Rape - Forcible",
-  "robbery_total": "Robbery Total",
+  "robbery_total": "Robbery - Total",
   "robbery_with_a_gun": "Robbery -  Gun",
   "robbery_with_a_knife": "Robbery - Knife",
   "robbery_other_weapon": "Robbery - Other Weapon",
