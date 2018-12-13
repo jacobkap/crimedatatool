@@ -31,7 +31,7 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
 
   state_val    = _.indexOf(state_values, state_val);
   category_val = _.indexOf(_.values(category_values), category_val);
-  category_val = _.keys(category_values)[category_val];
+//  category_val = _.keys(category_values)[category_val];
 
   $(state_dropdown).val(state_val);
   $(state_dropdown).trigger("chosen:updated");
