@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-99359926-4');
+  </script>
+-->
+
+  <title>Prisoners in the United States</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jacob Kaplan">
+  <meta name="description" content="Explore data on people incarcerated in state and federal prisons in the United States.">
+
+  <script src="data/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/change_funs.js"></script>
+  <script src="js/graph_table.js"></script>
+  <script src="js/datatool.js"></script>
+  <script src="js/dynamic_url.js"></script>
+  <link rel="stylesheet" href="css/test.css" />
+  <link rel="stylesheet" href="css/misc.min.css" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="js/chosen.jquery.js"></script>
+  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="navigation-wrapper">
+    <div class="top-navigation">
+      <nav role="navigation" id="site-nav" class="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="crime.html">Crime</a></li>
+          <li><a href="arrest.html">Arrest</a></li>
+          <li><a href="police.html">Police</a></li>
+          <li><a class="on" href="prisons.html">Prisons</a></li>
+          <li><a href="data.html">Data</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="column sidebar">
+    <p>Enter a jurisdiction to see its prisoner data.</p>
+    <h3>Jurisdiction:</h3>
+    <br>
+    <select class="simple-select" id="prisoners_jurisdictions" onchange = "prisonerJurisdictionChange()"></select>
+    <br><br>
+    <h3>Category:</h3>
+    <br>
+    <select class="simple-select" id="prisoners_categories" onchange="prisonerCategoryChange()" ></select>
+    <br><br>
+    <h3>Subcategory:</h3>
+    <br>
+    <select class="simple-select" id="prisoners_subcategories" onchange = "prisonerSubcategoryChange()"></select>
+  <br><br>
+
+  <div id = "prisoners_race_div">
+  <h3>Offender Race:</h3>
+  <br>
+  <select class="simple-select" id="prisoners_race" onchange="prisonerSubcategoryChange()"></select>
+</div>
+
+  <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="prisonersPopBoxChange('#prisoners_rate')">
+  <label for="prisoners_rate">% of Population</label>
+  <br><br>
+
+  <input type="checkbox" id="prisoners_rate_adult" name="prisoners_rate_adult" value="prisoners_rate_adult" onchange="prisonersPopBoxChange('#prisoners_rate_adult')">
+  <label for="prisoners_rate_adult">% of Adult Population</label>
+  <br><br>
+  <input type="checkbox" id="prisoners_rate_18_65" name="prisoners_rate_18_65" value="prisoners_rate_18_65" onchange="prisonersPopBoxChange('#prisoners_rate_18_65')">
+  <label for="prisoners_rate_18_65">% of Population Aged 18-65</label>
+  <br><br>
+
+  <h3>Prisoner Sex:</h3>
+
+  <br>
+
+  <input type="checkbox" id="prisoners_female_sex"   onchange="prisonerBoxesUpdate()"></input>
+  <label class="label-text fa" for="prisoners_female_sex">Female</label>
+  <br>
+  <input type="checkbox" id="prisoners_male_sex" onchange="prisonerBoxesUpdate()"></input>
+  <label class="label-text fa" for="prisoners_male_sex">Male</label>
+  <br>
+  <input type="checkbox" id="prisoners_total_sex"checked onchange="prisonerBoxesUpdate()"></input>
+  <label class="label-text fa" for="prisoners_total_sex">Total</label>
+    <br><br>
+    <hr>
+    <button type="button" onclick="exportToCsv(prisoner_all_data, 'prisoners')">Download Data as CSV</button>
+  </div>
+  <div class="column main">
+    <div id="loader"></div>
+    <canvas id="prisoners_graph" style="width:95%;height:500px"></canvas>
+    <div>
+      <table id="prisoners_table" class="display cell-border"></table>
+    </div>
+
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        $('.simple-select').chosen();
+        resizeChosen();
+        ctx_prisoners = document.getElementById("prisoners_graph").getContext('2d');
+        makeJurisdictionDropdown();
+        makePrisonerCategoriesDropdown();
+        prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
+
+        makePrisonersRaceDropdown();
+        $('.simple-select').trigger('chosen:updated');
+
+
+        main_results = main("prisoners")
+        prisoners_table_data = main_results[0];
+        prisoners_graph_headers = main_results[1];
+        prisoners_table_headers = main_results[2];
+        prisoner_all_data = main_results[3];
+        prisoners_graph = makeGraph(prisoners_table_data, ctx_prisoners, prisoners_graph_headers, "prisoners");
+        $("#graph").ready($("#loader").hide())
+
+        cols = [];
+            for (var i= 0; i< prisoners_table_headers.length; i++) {
+            if (!prisoners_table_headers[i].includes("population")) {
+                cols.push(prisoners_table_headers[i]);
+            }
+          }
+          prisoners_table_headers = cols;
+        prisoners_table = makeTable("#prisoners_table", prisoners_table_data, prisoners_table_headers, "prisoners")
+/*
+        if (window.location.hash == "") {
+          change_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_agencies, arrest_values)
+        } else {
+        arrest_agencies = change_data_from_url("#arrests_state_dropdown", "#arrests_agency_dropdown", "#arrests_crime_dropdown", "#arrests_rate", arrest_values, arrests_largest_agency, "arrests");
+        arrests_agencyChangeFun();
+      }
+      */
+      jQuery(window).on('resize', resizeChosen);
+      });
+    </script>
+
+  </div>
+
+  <div class="footer-wrap">
+    <footer>
+      <span>&copy; 2019 Jacob Kaplan.</span>
+    </footer>
+</body>
+
+</html>
