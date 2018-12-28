@@ -89,6 +89,10 @@ function getGraphDataset(tableData, colsForGraph, type) {
         name_1 = "Adult";
         name_2 = "Juvenile";
         name_3 = "Total";
+      } else if ($("#arrests_category_dropdown").val() == "tot_arrests"){
+        name_1 = "Adult";
+        name_2 = "Total";
+        name_3 = "Juvenile";
       } else {
         name_1 = "Total";
         name_2 = "Adult";
