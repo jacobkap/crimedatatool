@@ -264,7 +264,7 @@ function getCrimeColumns(headers, type, output) {
         columnNames.push(headers[n]);
       }
       if (arrest_category == "tot_arrests") {
-        if (headers[n] == crime + "_tot_female" || headers[n] == crime + "_tot_male") {
+        if (headers[n] == crime + "_tot_adult" || headers[n] == crime + "_tot_juv") {
           columnNames.push(headers[n]);
         }
       }
