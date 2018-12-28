@@ -85,19 +85,9 @@ function getGraphDataset(tableData, colsForGraph, type) {
       male_checkbox = "#prisoners_male_sex";
       total_checkbox = "#prisoners_total_sex";
     } else if (type == "arrests") {
-      if (["amer_ind", "asian", "black", "white"].includes($("#arrests_category_dropdown").val())) {
         name_1 = "Adult";
         name_2 = "Juvenile";
         name_3 = "Total";
-      } else if ($("#arrests_category_dropdown").val() == "tot_arrests"){
-        name_1 = "Adult";
-        name_2 = "Total";
-        name_3 = "Juvenile";
-      } else {
-        name_1 = "Total";
-        name_2 = "Adult";
-        name_3 = "Juvenile";
-      }
 
       female_checkbox = "#adult_arrest_box";
       male_checkbox = "#juvenile_arrest_box";
