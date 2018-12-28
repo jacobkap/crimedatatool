@@ -200,26 +200,27 @@ function getCrimeColumns(headers, type, output) {
   }
   if (type == "prisoners" && output == "table") {
     columnNames = ["state", "year", "population", "population_male", "population_female",
-     "population_adult", "population_female_adult", "population_male_adult",
-     "population_aged_18_65", "population_female_aged_18_65", "population_male_aged_18_65"];
+      "population_adult", "population_female_adult", "population_male_adult",
+      "population_aged_18_65", "population_female_aged_18_65", "population_male_aged_18_65"
+    ];
     if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity" |
-  _.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
-    race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+      _.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
+      race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
 
-    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
-      race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
+      if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
+        race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
+      }
+      columnNames = ["state", "year"];
+      columnNames.push("population_" + race_value);
+      columnNames.push("population_female_" + race_value);
+      columnNames.push("population_male_" + race_value);
+      columnNames.push("population_adult_" + race_value);
+      columnNames.push("population_female_adult_" + race_value);
+      columnNames.push("population_male_adult_" + race_value);
+      columnNames.push("population_aged_18_65_" + race_value);
+      columnNames.push("population_female_aged_18_65_" + race_value);
+      columnNames.push("population_male_aged_18_65_" + race_value);
     }
-    columnNames = ["state", "year"];
-    columnNames.push("population_" + race_value);
-    columnNames.push("population_female_" + race_value);
-    columnNames.push("population_male_" + race_value);
-    columnNames.push("population_adult_" + race_value);
-    columnNames.push("population_female_adult_" + race_value);
-    columnNames.push("population_male_adult_" + race_value);
-    columnNames.push("population_aged_18_65_" + race_value);
-    columnNames.push("population_female_aged_18_65_" + race_value);
-    columnNames.push("population_male_aged_18_65_" + race_value);
-  }
   }
 
   if (type == "offenses") {
@@ -227,7 +228,8 @@ function getCrimeColumns(headers, type, output) {
   } else if (type == "arrests") {
     crime = $("#arrests_crime_dropdown").val();
     if (output == "graph") {
-      crime += "_" + $("#arrests_category_dropdown").val();
+    //  crime += "_" + $("#arrests_category_dropdown").val();
+    arrest_category = $("#arrests_category_dropdown").val();
     }
   } else if (type == "leoka") {
     crime = leoka_subcatergory_keys[$("#leoka_subcategory_dropdown").val()];
@@ -235,7 +237,7 @@ function getCrimeColumns(headers, type, output) {
     if (leoka_categories[$("#leoka_category_dropdown").val()] == "Officers Assaulted") {
       weapon = _.keys(leoka_weapons)[$("#leoka_weapons").val()];
 
-// The total columns have slightly different names than others so this makes them work.
+      // The total columns have slightly different names than others so this makes them work.
       if (crime == "assaults_with_injury" || crime == "assaults_no_injury") {
         weapon = weapon.replace("assault_", "");
         weapon = weapon.replace("_assaults", "");
@@ -250,15 +252,23 @@ function getCrimeColumns(headers, type, output) {
       race = _.keys(prisoners_race)[$("#prisoners_race").val()];
       crime += "_" + race;
     }
-
   }
 
-    for (var n = 0; n < headers.length; n++) {
-      if (type == "prisoners") {
+  for (var n = 0; n < headers.length; n++) {
+    if (type == "prisoners") {
       if (headers[n].startsWith(crime)) {
         columnNames.push(headers[n]);
       }
-    } else {
+    } else if (type == "arrests") {
+      if (headers[n].match(crime + ".*" + arrest_category) !== null) {
+        columnNames.push(headers[n]);
+      }
+      if (arrest_category == "tot_arrests") {
+        if (headers[n] == crime + "_tot_female" || headers[n] == crime + "_tot_male") {
+          columnNames.push(headers[n]);
+        }
+      }
+  } else {
       if (headers[n].includes(crime)) {
         columnNames.push(headers[n]);
       }
@@ -266,7 +276,7 @@ function getCrimeColumns(headers, type, output) {
     if (crime === "theft_total") {
       columnNames = columnNames.filter(a => !a.includes('mtr_veh'));
     }
-}
+  }
 
   if (type == "leoka" && leoka_categories[$("#leoka_category_dropdown").val()] != "Police Department Employees") {
     columnNames.push("total_employees_officers");

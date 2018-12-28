@@ -82,6 +82,17 @@
   <br><br>
   <input type="checkbox" id="arrests_rate" name="arrests_rate" value="arrests_rate" onchange="rateChangeFun('arrests')">
   <label for="arrests_rate">Rate per 100,000 Population</label>
+  <br><br>
+    <h3>Arrest Subcategory:</h3>
+    <br>
+  <input type="checkbox" id="adult_arrest_box" onchange="arrestsBoxesUpdate()"></input>
+  <label class="label-text fa" for="adult_arrest_box">Adult</label>
+  <br>
+  <input type="checkbox" id="juvenile_arrest_box" onchange="arrestsBoxesUpdate()"></input>
+  <label class="label-text fa" for="juvenile_arrest_box">Juvenile</label>
+  <br>
+  <input type="checkbox" id="total_arrest_box"checked  onchange="arrestsBoxesUpdate()"></input>
+  <label class="label-text fa" for="total_arrest_box">Total</label>
 
     <br><br>
     <hr>
@@ -109,16 +120,17 @@
         makeCrimeDropdown("arrests", "#arrests_crime_dropdown");
         makeArrestCategoriesDropdown();
         arrests_largest_agency = getStateAgencies("arrests", largest_agencies = true);
-        arrest_agencies = updateAgencies("arrests", arrests_largest_agency,
+        arrest_agencies = updateAgencies("arrests",
+         arrests_largest_agency,
           "#arrests_agency_dropdown",
           "#arrests_state_dropdown");
 
         main_results = main("arrests", "#arrests_state_dropdown", "#arrests_crime_dropdown");
-        arrests_table_data = main_results[0];
+        arrests_table_data    = main_results[0];
         arrests_graph_headers = main_results[1];
         arrests_table_headers = main_results[2];
-        arrests_all_data = main_results[3];
-        arrests_graph = makeGraph(arrests_table_data, ctx_arrests, arrests_graph_headers, "arrests");
+        arrests_all_data      = main_results[3];
+        arrests_graph         = makeGraph(arrests_table_data, ctx_arrests, arrests_graph_headers, "arrests");
 
         $("#graph").ready($("#loader").hide())
         arrests_table = makeTable("#arrests_table", arrests_table_data, arrests_table_headers, "arrests")

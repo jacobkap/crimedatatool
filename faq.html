@@ -67,11 +67,6 @@
     <article class="post">
 
       <h1>General</h1>
-      <button class="accordion">Where is the data from?</button>
-      <div class="panel">
-        <p>The data comes from either <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/index.html">NACJD</a> or the FBI (if you email them at 	cjis_comm@leo.gov they'll mail you a DVD with data). I get the data as fixed-width text files and use an SPSS setup file (with NACJD this comes with the data, with the FBI I make it myself using their Record Description PDFs) using my R package asciiSetupReader. I then minorly clean and combine the files in R. All the setup files I made, the FBI Record Descriptions, and my R code is available in my <a href="https://github.com/jacobkap/crime_data">GitHub Repo here.</a> For any specific questions, please email me.</p>
-      </div>
-
       <button class="accordion">Why are there negative numbers? Is that a mistake?</button>
       <div class="panel">
         <p>Negative values reflect adjustments of previous returns. So if the agency reports, for example, a burglary in January then in February discovers that it wasn't actually a burglary, they will record that both as 1 unfounded burglary and -1 actual burglary in February. This is so it "deletes" the erroneously recorded burglary from January. See more on pages 82-83 of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's Manual for UCR data</a>. </p>
@@ -79,6 +74,10 @@
 
       <h1>Crime - Offenses Known and Clearances by Arrest</h1>
 
+      <button class="accordion">Where is the data from?</button>
+      <div class="panel">
+        <p>The data comes from either <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/index.html">NACJD</a> or the FBI (if you email them at 	cjis_comm@leo.gov they'll mail you a DVD with data). I get the data as fixed-width text files and use an SPSS setup file (with NACJD this comes with the data, with the FBI I make it myself using their Record Description PDFs) using my R package asciiSetupReader. I then minorly clean and combine the files in R. All the setup files I made, the FBI Record Descriptions, and my R code is available in my <a href="https://github.com/jacobkap/crime_data">GitHub Repo here.</a> For any specific questions, please email me.</p>
+      </div>
 
       <button class="accordion">The data says there were 0 crimes but I know that a crime happened. Why does it say 0?</button>
       <div class="panel">
@@ -102,7 +101,7 @@
 
       <button class="accordion">Should I use the crime count or crime rate?</button>
       <div class="panel">
-        <p>Using the rate helps deal with population changes that could lead to changes in crime merely because of that change but it isn't without its drawbacks. The main drawback with using a rate is that it assumes equal risk of victimization, which we know isn't correct. For example, when looking at rape, a crime that affects 6 times as many women as men (according to the <a href="https://www.bjs.gov/content/pub/pdf/cv16re.pdf">2016 National Crime Victimation Survey Table 6, page 9</a>), yet the rate is based on total population in that city (the UCR does not differentiate victims by gender but other data sets, such as NIBRS do, allowing for better rates.). Other crimes require even more granular rates. Murder victims are predominantly young men, but this differs by type of murder - domestic violence victims are mostly women. So while rates are probably better than counts as it lets you control for population, consider exactly who that population is, and how risk changes within that population.</p>
+        <p>Using the rate helps deal with population changes that could lead to changes in crime merely because of that change but it isn't without its drawbacks. The main drawback with using a rate is that it assumes equal risk of victimization, which we know isn't correct. For example, when looking at rape, a crime that affects 6 times as many women as men (according to the <a href="https://www.bjs.gov/content/pub/pdf/cv16re.pdf">2016 National Crime Victimation Survey Table 6, page 9</a>), yet the rate is based on total population in that city (the UCR does not differentiate victims by gender but other data sets, such as NIBRS do, allowing for better rates.). Other crimes require even more granular rates. Murder victims are predominantly young men, but this differs by type of murder - domestic violence victims are mostly women. Also, consider that population comes from those who live in the city and doesn't include people like tourists or people who work in that city but live elsewhere yet can still be victimized in the city. So while rates are probably better than counts as it lets you control for population, consider exactly who that population is, and how risk changes within that population.</p>
       </div>
 
 

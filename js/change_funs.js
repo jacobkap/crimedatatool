@@ -72,6 +72,19 @@ function offenses_crimeChangeFun() {
   offenses_agencyChangeFun();
 }
 
+function arrestsBoxesUpdate() {
+  if (!$("#total_arrest_box").is(':checked') &&
+    !$("#adult_arrest_box").is(':checked') &&
+    !$("#juvenile_arrest_box").is(':checked')) {
+    $("#total_arrest_box").prop("checked", true);
+  }
+
+  $('#arrests_graph').remove();
+  $('.main').prepend('<canvas id="arrests_graph" style="width:95%;height:500px;"></canvas>');
+  ctx_arrests = document.getElementById("arrests_graph").getContext('2d');
+  arrests_graph = makeGraph(arrests_table_data, ctx_arrests, arrests_graph_headers, "arrests");
+}
+
 function arrests_agencyChangeFun() {
   main_results = main("arrests", "#arrests_state_dropdown", "#arrests_crime_dropdown");
   arrests_table_data = main_results[0];
@@ -117,7 +130,7 @@ function leoka_agencyChangeFun() {
   $('#leoka_table').empty();
   leoka_table = makeTable("#leoka_table", leoka_table_data, leoka_table_headers, "leoka");
 
-//  change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_agencies, leoka_values);
+  change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_agencies, leoka_categories, "#leoka_subcategory_dropdown", leoka_subcatergory_values);
 } //
 
 function leoka_stateChangeFun() {

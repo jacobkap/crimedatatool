@@ -37,7 +37,7 @@ function getGraphDataset(tableData, colsForGraph, type) {
     }
 
     final_data = [
-      makeGraphObjects(data1, "#b2182b", "Actual Offenses"),
+      makeGraphObjects(data1, "#7570b3", "Actual Offenses"),
       makeGraphObjects(data2, "#ef8a62", "Total Offenses Cleared"),
       makeGraphObjects(data3, "#67a9cf", "Offenses Cleared Involving Only Persons Under age 18"),
       makeGraphObjects(data4, "#2166ac", "Unfounded Offenses")
@@ -69,15 +69,35 @@ function getGraphDataset(tableData, colsForGraph, type) {
       });
     }
 
-  } else if ((type == "leoka" & leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") || type == "prisoners") {
+  } else if ((type == "leoka" &
+  leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") ||
+  type == "prisoners" ||
+   type == "arrests") {
+    name_1 = "Female";
+    name_2 = "Male";
+    name_3 = "Total";
       if (type == "leoka") {
         female_checkbox = "#police_female_sex";
-        male_checkbox = "#police_male_sex";
-        total_checkbox = "#police_total_sex";
-      } else {
+        male_checkbox   = "#police_male_sex";
+        total_checkbox  = "#police_total_sex";
+      } else if (type == "prisoners" ) {
         female_checkbox = "#prisoners_female_sex";
-        male_checkbox = "#prisoners_male_sex";
-        total_checkbox = "#prisoners_total_sex";
+        male_checkbox   = "#prisoners_male_sex";
+        total_checkbox  = "#prisoners_total_sex";
+      } else if (type == "arrests" ) {
+        if (["amer_indian", "asian", "black", "white"].includes($("#arrests_category_dropdown").val())) {
+        name_1 = "Adult";
+        name_2 = "Juvenile";
+        name_3 = "Total";
+      } else {
+        name_1 = "Total";
+        name_2 = "Adult";
+        name_3 = "Juvenile";
+      }
+
+        female_checkbox = "#adult_arrest_box";
+        male_checkbox   = "#juvenile_arrest_box";
+        total_checkbox  = "#total_arrest_box";
       }
 
     years = [];
@@ -94,9 +114,9 @@ function getGraphDataset(tableData, colsForGraph, type) {
     }
 
     final_data = [
-      makeGraphObjects(data1, "#1b9e77", "Female"),
-      makeGraphObjects(data2, "#d95f02", "Male"),
-      makeGraphObjects(data3, "#7570b3", "Total"),
+      makeGraphObjects(data1, "#1b9e77", name_1),
+      makeGraphObjects(data2, "#d95f02", name_2),
+      makeGraphObjects(data3, "#7570b3", name_3),
     ];
     final_data[0].hidden = false;
     final_data[1].hidden = false;
@@ -104,12 +124,12 @@ function getGraphDataset(tableData, colsForGraph, type) {
 
     if (!$(female_checkbox).is(':checked')) {
       final_data = _.filter(final_data, function(x) {
-        return x.label != "Female";
+        return x.label != "Female" && x.label != "Adult";
       });
     }
     if (!$(male_checkbox).is(':checked')) {
       final_data = _.filter(final_data, function(x) {
-        return x.label != "Male";
+        return x.label != "Male" && x.label != "Juvenile";
       });
     }
     if (!$(total_checkbox).is(':checked')) {
@@ -127,7 +147,7 @@ function getGraphDataset(tableData, colsForGraph, type) {
       data1.push(data[n][colsForGraph[1]]);
     }
 
-    final_data = [makeGraphObjects(data1, "#ca0020", colsForGraph[1])];
+    final_data = [makeGraphObjects(data1, "#7570b3", colsForGraph[1])];
     final_data[0].hidden = false;
   }
   return final_data;
@@ -163,7 +183,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     if (checkIfRateChecked(type)) {
       yaxis_label = 'Rate per 100,000 Population';
     }
-    legend_display = false;
+    legend_display = true;
   } else if (type == "leoka") {
     yaxis_label = "# of People";
     if (colsForGraph[1].includes("killed")) {
@@ -449,9 +469,3 @@ function makeTable(div, data, headers, type) {
   });
   return temp_table;
 }
-
-/*
-function formatNumber(n) {
-  return n.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-}
-*/

@@ -52,6 +52,13 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
   $(category_dropdown).val(category_val);
   $(category_dropdown).trigger("chosen:updated");
 
+  if (type == "leoka") {
+    leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
+    leoka_subcatergory_values = leoka_subcatergory_keys[1];
+    leoka_subcatergory_keys = leoka_subcatergory_keys[0];
+    subcategory_values = leoka_subcatergory_values;
+  }
+
   if (subcategory_dropdown !== "") {
   subcategory_val = split_url[4].replace("subcategory=", "");
   subcategory_val = subcategory_val.replace(/%20/g, " ");

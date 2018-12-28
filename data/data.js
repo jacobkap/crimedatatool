@@ -217,7 +217,7 @@ var crime_values = {
   "assault_with_a_knife": "Assault - Knife",
   "assault_other_weapon": "Assault - Other Weapon",
   "assault_simple": "Assault - Simple Assault",
-  "assault_unarmed": "Assault - Strong Arm",
+  "assault_unarmed": "Assault - Unarmed",
   "burg_total": "Burglary - Total",
   "burg_attempted": "Burglary - Attempted",
   "burg_force_entry": "Burglary - Forcible Entry",
@@ -238,7 +238,7 @@ var crime_values = {
   "robbery_with_a_gun": "Robbery -  Gun",
   "robbery_with_a_knife": "Robbery - Knife",
   "robbery_other_weapon": "Robbery - Other Weapon",
-  "robbery_unarmed": "Robbery - Strong Arm",
+  "robbery_unarmed": "Robbery - Unarmed",
   "theft_total": "Theft - Total"
 };
 
@@ -382,26 +382,26 @@ var leoka_values = {
 };
 
 var arrest_categories = {
-  "tot_arrests": "Total Arrests",
-  "tot_adult": "Total Adult",
-  "tot_juv": "Total Juvenile",
+  "tot_arrests": "Total",
+//  "tot_adult": "Adult",
+//  "tot_juv": "Juvenile",
   "tot_male": "Total Male",
   "tot_female": "Total Female",
-  "tot_male_adult": "Male Adult",
-  "tot_male_juv": "Male Juvenile",
-  "tot_female_adult": "Female Adult",
-  "tot_female_juv": "Female Juvenile",
+//  "tot_male_adult": "Male Adult",
+//  "tot_male_juv": "Male Juvenile",
+//  "tot_female_adult": "Female Adult",
+//  "tot_female_juv": "Female Juvenile",
 
   // Race
-  "adult_amer_indian": "American Indian Adult",
-  "adult_asian": "Asian Adult",
-  "adult_black": "Black Adult",
-  "adult_white": "White Adult",
+  "amer_indian": "American Indian",
+  "asian": "Asian",
+  "black": "Black",
+  "white": "White",
 
-  "juv_amer_indian": "American Indian Juvenile",
-  "juv_asian": "Asian Juvenile",
-  "juv_white": "White Juvenile",
-  "juv_black": "Black Juvenile"
+  //"juv_amer_indian": "American Indian Juvenile",
+  //"juv_asian": "Asian Juvenile",
+  //"juv_white": "White Juvenile",
+  //"juv_black": "Black Juvenile"
   /*
    "male_under_10": "Male under age 10",
    "male_10_12": "Male aged 10-12",

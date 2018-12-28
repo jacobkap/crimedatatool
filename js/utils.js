@@ -200,15 +200,15 @@ function countToRate(data, type, per_officer = false) {
     }
 
     if (_.keys(prisoner_categories)[$("#prisoners_categories").val()] == "race_ethnicity" |
-  _.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
+      _.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
       race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
 
       if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
         race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
       }
-      total_population_column  += "_" + race_value;
+      total_population_column += "_" + race_value;
       female_population_column += "_" + race_value;
-      male_population_column   += "_" + race_value;
+      male_population_column += "_" + race_value;
     }
   }
 
@@ -220,24 +220,24 @@ function countToRate(data, type, per_officer = false) {
       !data_keys[i].includes("population") &&
       !data_keys[i].includes("ORI")) {
 
-          if (type == "prisoners") {
-            if (data_keys[i].includes("_female")) {
-              population_column = female_population_column;
-            } else if (data_keys[i].includes("_male")) {
-              population_column = male_population_column;
-            } else {
-              population_column = total_population_column;
-            }
-            rate_val = data[data_keys[i]] / data[population_column] * 100;
-            rate_val = parseFloat(rate_val).toFixed(2);
-          } else {
+      if (type == "prisoners") {
+        if (data_keys[i].includes("_female")) {
+          population_column = female_population_column;
+        } else if (data_keys[i].includes("_male")) {
+          population_column = male_population_column;
+        } else {
+          population_column = total_population_column;
+        }
+        rate_val = data[data_keys[i]] / data[population_column] * 100;
+        rate_val = parseFloat(rate_val).toFixed(2);
+      } else {
 
-      rate_val = data[data_keys[i]] / data[population_column];
-      if (population_column !== "total_employees_officers") {
-      rate_val = rate_val * 100000;
-    }
-      rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
-}
+        rate_val = data[data_keys[i]] / data[population_column];
+        if (population_column !== "total_employees_officers") {
+          rate_val = rate_val * 100000;
+        }
+        rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
+      }
       if (!isFinite(rate_val)) {
         rate_val = NaN;
       }
