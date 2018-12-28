@@ -70,22 +70,22 @@ function getGraphDataset(tableData, colsForGraph, type) {
     }
 
   } else if ((type == "leoka" &
-  leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") ||
-  type == "prisoners" ||
-   type == "arrests") {
+      leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") ||
+    type == "prisoners" ||
+    type == "arrests") {
     name_1 = "Female";
     name_2 = "Male";
     name_3 = "Total";
-      if (type == "leoka") {
-        female_checkbox = "#police_female_sex";
-        male_checkbox   = "#police_male_sex";
-        total_checkbox  = "#police_total_sex";
-      } else if (type == "prisoners" ) {
-        female_checkbox = "#prisoners_female_sex";
-        male_checkbox   = "#prisoners_male_sex";
-        total_checkbox  = "#prisoners_total_sex";
-      } else if (type == "arrests" ) {
-        if (["amer_indian", "asian", "black", "white"].includes($("#arrests_category_dropdown").val())) {
+    if (type == "leoka") {
+      female_checkbox = "#police_female_sex";
+      male_checkbox = "#police_male_sex";
+      total_checkbox = "#police_total_sex";
+    } else if (type == "prisoners") {
+      female_checkbox = "#prisoners_female_sex";
+      male_checkbox = "#prisoners_male_sex";
+      total_checkbox = "#prisoners_total_sex";
+    } else if (type == "arrests") {
+      if (["amer_indian", "asian", "black", "white"].includes($("#arrests_category_dropdown").val())) {
         name_1 = "Adult";
         name_2 = "Juvenile";
         name_3 = "Total";
@@ -95,10 +95,10 @@ function getGraphDataset(tableData, colsForGraph, type) {
         name_3 = "Juvenile";
       }
 
-        female_checkbox = "#adult_arrest_box";
-        male_checkbox   = "#juvenile_arrest_box";
-        total_checkbox  = "#total_arrest_box";
-      }
+      female_checkbox = "#adult_arrest_box";
+      male_checkbox = "#juvenile_arrest_box";
+      total_checkbox = "#total_arrest_box";
+    }
 
     years = [];
     data1 = [];
@@ -164,7 +164,7 @@ function makeGraphObjects(data, color, label) {
     data: data,
     onAnimationComplete: allowSaveGraph,
     hidden: true
-  //  radius: 0 // Removes dots
+    //  radius: 0 // Removes dots
   };
   return obj;
 }
@@ -201,7 +201,7 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     if (leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") {
       legend_display = true;
     }
-  }  else if (type == "prisoners") {
+  } else if (type == "prisoners") {
     yaxis_label = "# of Prisoners";
     if (checkIfRateChecked(type)) {
       yaxis_label = '% of Population';
@@ -266,13 +266,13 @@ function makeGraph(data, graph_div, colsForGraph, type) {
           }
         }]
       },
-    //  responsive: true,
+      //  responsive: true,
       tooltips: {
         mode: 'index',
         intersect: false,
         callbacks: {
           label: function(tooltipItems, data) {
-      //      console.log(data[0].label)
+            //      console.log(data[0].label)
             value = tooltipItems.yLabel;
             value = value.toLocaleString();
             value = data.datasets[tooltipItems.datasetIndex].label + ": " + value;
@@ -311,11 +311,11 @@ function getTitle(data, type) {
   } else if (type == "prisoners") {
     title = data[0].state + ' Prisons: ';
     subtitle = _.values(prisoner_categories)[$("#prisoners_categories").val()] + ": ";
-    name  = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    name = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
     subtitle += prisoners_subcategory[$('#prisoners_categories').val()][name];
 
     if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
-  //    title = data[0].state + ' Prisons: ';
+      //    title = data[0].state + ' Prisons: ';
       subtitle += ", Race: " + _.values(prisoners_race)[$("#prisoners_race").val()];
     }
 
@@ -330,16 +330,17 @@ function getTitle(data, type) {
   } else if (type == "prisoners" && $("#prisoners_rate_18_65").is(':checked')) {
     subtitle += ", % of Population Aged 18-65";
   } else if (checkIfRateChecked(type)) {
-      subtitle += ", Rate per 100,000 Population";
-    }
+    subtitle += ", Rate per 100,000 Population";
+  }
 
   title = [title, subtitle];
   return title;
 }
 
 function fixTableName(name, type) {
-    temp_name = name;
-    name = name.replace(/_rate/g, "");
+  if (type != "arrests") {
+  temp_name = name;
+  name = name.replace(/_rate/g, "");
   if (type == "offenses") {
     temp1 = name.replace(/act_.*/, "Actual ");
     temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
@@ -372,19 +373,19 @@ function fixTableName(name, type) {
   } else if (type == "leoka") {
     name = leoka_values[name];
   } else if (type == "prisoners") {
-     temp1 = name.replace(/.*_female/, " Female");
-     temp2 = name.replace(/.*_male/, " Male");
-     temp3 = name.replace(/.*_total/, " Total");
-     name = name.replace(/_total|_female|_male/, "");
-     name = prisoners_subcategory[$('#prisoners_categories').val()][name];
-     if (temp1 != temp_name) name += temp1;
-     if (temp2 != temp_name) name += temp2;
-     if (temp3 != temp_name) name += temp3;
+    temp1 = name.replace(/.*_female/, " Female");
+    temp2 = name.replace(/.*_male/, " Male");
+    temp3 = name.replace(/.*_total/, " Total");
+    name = name.replace(/_total|_female|_male/, "");
+    name = prisoners_subcategory[$('#prisoners_categories').val()][name];
+    if (temp1 != temp_name) name += temp1;
+    if (temp2 != temp_name) name += temp2;
+    if (temp3 != temp_name) name += temp3;
   }
 
-if (name === undefined) {
-  name = temp_name.replace(/^\w/, c => c.toUpperCase());
-}
+  if (name === undefined) {
+    name = temp_name.replace(/^\w/, c => c.toUpperCase());
+  }
 
   if (checkIfRateChecked(type) &&
     !name.includes("Agency") &&
@@ -397,6 +398,7 @@ if (name === undefined) {
       name += " per Officer";
     }
   }
+}
   return name;
 }
 
@@ -435,8 +437,8 @@ function makeTable(div, data, headers, type) {
     }
   }
 
- // Makes real (as they appear in the data) names and pretty names
- // as they will appear in the table.
+  // Makes real (as they appear in the data) names and pretty names
+  // as they will appear in the table.
   table_columns = [];
   for (var i = 0; i < headers.length; i++) {
     label_name = fixTableName(headers[i], type);
