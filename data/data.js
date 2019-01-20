@@ -222,6 +222,9 @@ var crime_values = {
   "burg_attempted": "Burglary - Attempted",
   "burg_force_entry": "Burglary - Forcible Entry",
   "burg_nonforce_entry": "Burglary - Nonforcible Entry",
+  "index_property" : "Index - Property",
+  "index_violent" : "Index - Violent",
+  "index_total" : "Index - Total",
   "mtr_veh_theft_total": "Motor Vehicle Theft - Total",
   "mtr_veh_theft_car": "Motor Vehicle Theft - Auto",
   "mtr_veh_theft_other": "Motor Vehicle Theft - Other Vehicle",
@@ -243,6 +246,7 @@ var crime_values = {
 };
 
 var arrest_values = {
+  "all_other": "All Other Non-Traffic",
   "agg_assault": "Aggravated Assault",
   "oth_assault": "Assault - Other",
   "arson": "Arson",
@@ -274,7 +278,6 @@ var arrest_values = {
   "manslaught_neg": "Manslaughter by Negligence",
   "mtr_veh_theft": "Motor Vehicle Theft",
   "murder": "Murder",
-  "all_other": "All Other Non-Traffic",
   "prostitution": "Prostitution",
   "rape": "Rape",
   "robbery": "Robbery",
