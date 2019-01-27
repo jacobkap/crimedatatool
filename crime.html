@@ -2,9 +2,16 @@
 <html lang="en">
 
 <head>
-
-
-
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-99359926-4');
+  </script>
 
   <title>Offenses Known and Cleared</title>
   <meta charset="UTF-8">
@@ -15,89 +22,80 @@
       FBI's Uniform Crime Reporting (UCR) Program Data: Offenses Known and
       Clearances by Arrest.">
 
-  <script src="data/data.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/change_funs.js"></script>
-  <script src="js/graph_table.js"></script>
-  <script src="js/datatool.js"></script>
-  <script src="js/dynamic_url.js"></script>
+<script src="data/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/change_funs.js"></script>
+<script src="js/graph_table.js"></script>
+<script src="js/datatool.js"></script>
+<script src="js/dynamic_url.js"></script>
 
-  <link rel="stylesheet" href="css/test.css" />
-  <link rel="stylesheet" href="css/misc.css" />
+<link rel="stylesheet" href="css/test.css" />
+<link rel="stylesheet" href="css/misc.css" />
+<link rel="stylesheet" href="css/hint.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="js/chosen.jquery.js"></script>
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/style.css" />
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="js/chosen.jquery.js"></script>
-  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 
-  <div class="navigation-wrapper">
-    <div class="top-navigation">
-      <nav role="navigation" id="site-nav" class="nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a class="on" href="crime.html">Crime</a></li>
-          <li><a href="arrest.html">Arrest</a></li>
-          <li><a href="police.html">Police</a></li>
-          <li><a href="data.html">Data</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+  <div class="navigation-wrapper"></div>
+
+  <script>
+    $(function() {
+      $('.footer-wrap').load("reusable_js.html .foot");
+      $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
+    })
+  </script>
 
 
     <div class="column sidebar">
       <p>Enter a police agency to see its crime over time.</p>
       <h3>State:</h3>
       <br>
-      <select class="simple-select" id="state_dropdown" onchange="offenses_stateChangeFun()">
+      <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('crime', state_values)">
           </select>
       <br><br>
-
       <h3>Agency:</h3>
       <br>
-      <select class="simple-select" id="agency_dropdown" onchange="offenses_agencyChangeFun()">
+      <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('crime', state_values)">
         </select>
       <br><br>
       <h3>Crime:</h3>
       <br>
-      <select class="simple-select" id="crime_dropdown" onchange="offenses_crimeChangeFun()">
+      <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('crime', state_values)">
       </select>
 
         <br><br>
-        <input type="checkbox" id="offenses_rate" name="offenses_rate" value="offenses_rate" onchange="rateChangeFun('offenses')">
-        <label for="offenses_rate">Rate per 100,000 Population</label>
+        <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('crime', state_values)">
+        <label for="rate">Rate per 100,000 Population</label>
 
       <br><br>
       <h3>Type of Crime:</h3>
 
       <br>
 
-      <input type="checkbox" id="actual"checked  onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="actual">Actual Offenses</label>
+      <input type="checkbox" id="checkbox_1" checked  onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
+      <span class="hint--right" aria-label="Number of crimes committed and found by investigation to have actually occurred. ">Actual Offenses</span>
       <br>
-      <input type="checkbox" id="clearance" onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="clearance">Total Offenses Cleared</label>
+      <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
+      <span class="hint--right" aria-label="Number of offenses where at least one person (even if there are multiple offenders) is arrested, charged, or when the police have a suspect but cannot make an arrest ('cleared by exceptional means'). Includes juveniles cited to juvenile court.">Total Offenses Cleared</span>
       <br>
-      <input type="checkbox" id="clearance_under18" onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="clearance_under18">Offenses Cleared Involving<br>Only Persons Under age 18</label>
+      <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
+      <span class="hint--right" aria-label="Number of crimes cleared where all offenders arrested or cleared by exceptional means are under age 18.">Offenses Cleared Only Involving Minors</span>
       <br>
-      <input type="checkbox" id="unfounded" onchange="crimeBoxesUpdate()"></input>
-      <label class="label-text fa" for="unfounded">Unfounded Offenses</label>
+      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
+      <span class="hint--right" aria-label="Crimes reported which investigation determined did not actually occur.">Unfounded Offenses</span>
 
       <hr>
-      <button type="button" onclick="exportToCsv(crime_all_data, 'offenses')">Download All Agency Data as CSV</button>
+      <button type="button" onclick="exportToCsv(all_data, 'crime', state_values)">Download All Agency Data as CSV</button>
       <br>
       <p>Please note that data are only available for agencies that report all 12 months of the year.
     </div>
@@ -106,53 +104,14 @@
     <div class="column main">
       <div id="loader"></div>
       <canvas id="graph" style="width:95%;height:500px;"></canvas>
-      <div>
-        <table id="table" class="display cell-border"></table>
-      </div>
+      <div><table id="table" class="display cell-border"></table></div>
 
-      <script type="text/javascript">
-        $(document).ready(function() {
-
-          $('.simple-select').chosen();
-          resizeChosen();
-          ctx_results = document.getElementById("graph").getContext('2d');
-          makeStateDropdown("#state_dropdown")
-          makeCrimeDropdown("crime", '#crime_dropdown');
-          offenses_largest_agency = getStateAgencies("crime", true);
-          offense_agencies = updateAgencies("crime", offenses_largest_agency, "#agency_dropdown", "#state_dropdown");
-
-          main_results = main("offenses", "#state_dropdown", "#crime_dropdown");
-          table_data = main_results[0];
-          graph_headers = main_results[1];
-          table_headers = main_results[2];
-          crime_all_data = main_results[3];
-
-          offenses_graph = makeGraph(table_data, ctx_results, graph_headers, "offenses");
-          $("#graph").ready($("#loader").hide())
-          table = makeTable("#table", table_data, table_headers, "offenses")
-
-
-          if (window.location.hash == "") {
-            change_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", "#offenses_rate", offense_agencies, crime_values)
-          } else {
-          offense_agencies = change_data_from_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", "#offenses_rate", crime_values, offenses_largest_agency, "offenses");
-          offenses_agencyChangeFun();
-        }
-          jQuery(window).on('resize', resizeChosen);
-
-
-        });
-
-
-
-
+      <script>
+          main("crime", state_values, 4, crime_values, "murder");
       </script>
     </div>
 
-  <div class="footer-wrap">
-    <footer>
-      <span>&copy; 2019 Jacob Kaplan.</span>
-    </footer>
+<div class="footer-wrap"></div>
 </body>
 
 </html>

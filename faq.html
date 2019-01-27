@@ -2,7 +2,16 @@
 <html lang="en">
 
 <head>
-
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-99359926-4');
+  </script>
 
   <title>FAQ - Crime Data Tool</title>
   <meta charset="UTF-8">
@@ -24,29 +33,15 @@
 <body class="page">
 
 
-  <div class="navigation-wrapper">
-    <div class="top-navigation">
-      <nav role="navigation" id="site-nav" class="nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="crime.html">Crime</a></li>
-          <li><a href="arrest.html">Arrest</a></li>
-          <li><a href="police.html">Police</a></li>
-          <li><a href="data.html">Data</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a class="on" href="faq.html">FAQ</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-
+  <div class="navigation-wrapper"></div>
 
   <div id="main" role="main">
     <!-- Adds in the about me stuff and links -->
       <script>
         $(function() {
           $('#header').load("reusable_js.html .about_me_info");
+          $('.footer-wrap').load("reusable_js.html .foot");
+          $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
         })
       </script>
   <div class = "article-author-side">
@@ -61,11 +56,11 @@
         <p>Negative values reflect adjustments of previous returns. So if the agency reports, for example, a burglary in January then in February discovers that it wasn't actually a burglary, they will record that both as 1 unfounded burglary and -1 actual burglary in February. This is so it "deletes" the erroneously recorded burglary from January. See more on pages 82-83 of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's Manual for UCR data</a>. </p>
       </div>
 
-      <h1>Crime - Offenses Known and Clearances by Arrest</h1>
+      <h1>Crime</h1>
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>The data comes from either <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/index.html">NACJD</a> or the FBI (if you email them at 	cjis_comm@leo.gov they'll mail you a DVD with data). I get the data as fixed-width text files and use an SPSS setup file (with NACJD this comes with the data, with the FBI I make it myself using their Record Description PDFs) using my R package asciiSetupReader. I then minorly clean and combine the files in R. All the setup files I made, the FBI Record Descriptions, and my R code is available in my <a href="https://github.com/jacobkap/crime_data">GitHub Repo here.</a> For any specific questions, please email me.</p>
+        <p>This data is from the FBI's Offenses Known and Clearances by Arrest data which is part of the Uniform Crime Reporting (UCR) Program. This data provides the number of crimes that occurred in a city in any given year and how many of those crimes were cleared.</a></p>
       </div>
 
       <button class="accordion">The data says there were 0 crimes but I know that a crime happened. Why does it say 0?</button>
@@ -93,6 +88,94 @@
         <p>Using the rate helps deal with population changes that could lead to changes in crime merely because of that change but it isn't without its drawbacks. The main drawback with using a rate is that it assumes equal risk of victimization, which we know isn't correct. For example, when looking at rape, a crime that affects 6 times as many women as men (according to the <a href="https://www.bjs.gov/content/pub/pdf/cv16re.pdf">2016 National Crime Victimation Survey Table 6, page 9</a>), yet the rate is based on total population in that city (the UCR does not differentiate victims by gender but other data sets, such as NIBRS do, allowing for better rates.). Other crimes require even more granular rates. Murder victims are predominantly young men, but this differs by type of murder - domestic violence victims are mostly women. Also, consider that population comes from those who live in the city and doesn't include people like tourists or people who work in that city but live elsewhere yet can still be victimized in the city. So while rates are probably better than counts as it lets you control for population, consider exactly who that population is, and how risk changes within that population.</p>
       </div>
 
+      <button class="accordion">What are index crimes?</button>
+      <div class="panel">
+        <p>Index crimes (sometimes called Part I crimes) are a collection of eight crimes often divided between Violent Index Crimes (murder, rape, robbery, and aggravated assault (assault with a weapon or causing serious bodily injury)) and Property Index Crimes (burglary, theft, motor vehicle theft, and arson (however arson is not available in this data set)). When people discuss "crime" they are often referring to this collection of crimes. One major drawback of this is that it gives equal weight to each crimes. For example, consider if New York City has 100 fewer murders and 100 more thefts this year than last year (and all other crimes didn't change). Their total index crimes would be the same but this year would be far safer than last year. For complete definitions of each crime, please see the FBI's <a href="https://www.ucrdatatool.gov/offenses.cfm">definitions page.</a></p>
+      </div>
+
+      <h1>Arrest</h1>
+
+      <button class="accordion">Where is the data from?</button>
+      <div class="panel">
+        <p>This data is from the FBI's Arrests by Age, Sex, and Race data which is part of the Uniform Crime Reporting (UCR) Program. This data provides the number of arrests that occurred in a city in any given year and breaks that down by age (adult or juvenile), race, and gender. </a></p>
+      </div>
+
+      <h1>Police</h1>
+
+      <button class="accordion">Where is the data from?</button>
+      <div class="panel">
+        <p>This data is from the FBI's Law Enforcement Officers Killed and Assaulted (LEOKA) data which is part of the Uniform Crime Reporting (UCR) Program. This data provides information about how many employees (civilian and officers) are at a given agency. It also says how many officers were assaulted for a number of different categories of assault.</a></p>
+      </div>
+
+      <h1>Prison</h1>
+
+      <button class="accordion">Where is the prison data from?</button>
+      <div class="panel">
+        <p>The three categories that say the inmate's Most Serious Charge come from the <a href = "https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37021/datadocumentation">National Corrections Reporting Program (NCRP)</a> which provides data on how many people are incarcerated, admitted, or released from prison that year. This is divided by the most serious crime they are convicted of, race/ethnicity, and gender. All other categories are from the  <a href = "https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37003">National Prisoner Statistics (NPS)</a> data which has different information than the NCRP and more years available. Unlike the NCRP, the NPS has totals for the federal prison system, the state prison system, and the combined US as a whole. Some states and some years do not have information for some variables so you will likely see many missing values in this data.</p>
+      </div>
+
+      <button class="accordion">Where is the population data from?</button>
+      <div class="panel">
+        <p>All of the population data comes from the United States Census. For the years 2001-2016, I use the annual American Community Survey which is a census data set that samples 1% of the population. For the other years I use the decennial census and linearly impute for the years between the censuses. As such, please be aware that these population values are only estimates. </p>
+      </div>
+
+      <button class="accordion">What is wrong with the % of population aged 18-65 data?</button>
+      <div class="panel">
+        <p>I included this because most people incarcerated in prison are between these ages. However, not all are in these age groups meaning that this is almost certainly an over estimate. As such you should use the rates as estimates, NOT precise rates.</p>
+      </div>
+
+      <button class="accordion">What is the difference between custody and jurisdiction?</button>
+      <div class="panel">
+        <p>As per the National Prisoner Statistics codebook, available to download <a href = "https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37003">here</a></p>
+        <blockquote>As states and the Federal Bureau of Prisons increased their use of local jails and interstate compacts to house inmates, NPS began
+asking states to report a count of inmates under the jurisdiction or legal authority of state and federal adult correctional officials in
+addition to their custody counts.
+Since 1977, the jurisdiction count has been the preferred measure. This count includes all state and federal inmates held in a public or
+private prison (custody) and those held in jail facilities either physically located inside or outside of the state of legal responsibility, and
+other inmates who may be temporarily out to court or in transit from the jurisdiction of legal authority to the custody of a confinement
+facility outside that jurisdiction.
+The difference between the total custody count and the jurisdiction count was small (approximately 7,000) when both were first
+collected in 1977. As more states began to report jurisdiction counts and more states began to rely on local and privately operated
+facilities to house inmates, the difference increased. At yearend 2016 the jurisdiction population totaled 1,506,800 while the custody
+population totaled 1,293,887.</blockquote>
+      </div>
+
+
+
+      <h1>Alcohol</h1>
+
+      <button class="accordion">Where is the data from?</button>
+      <div class="panel">
+        <p>This data is from the Apparent Per Capita Alcohol Consumption: National, State, and Regional Trends 1977-2016 report produced by Sarah P. Haughwout and Dr. Megan E. Slater at the National Institute on Alcohol Abuse and Alcoholism. The Data page of this site has a link to download he data. For the original report, click <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here</a></p>
+      </div>
+
+      <button class="accordion">How was per capita alcohol consumption determined?</button>
+      <div class="panel">
+        <p>For a complete methodology please see the actual report <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here.</a> The authors determined the amount of alcohol consumed (originally measured in gallons of ethanol - pure alcohol) through sales data or tax information for each state-year. Population data for how many people age 14 and up live in each state was acquired from the CDC' WONDER data. Ethanol was divided by population to determine per capita consumption. </p>
+      </div>
+
+      <button class="accordion">Why is the "Total Drinks" column not equal the sum of the individul drink categories?</button>
+      <div class="panel">
+        <p>The original report provides an equation to convert the amount of total ethanol consumed into a "total drinks" variable so I used that to make that variable. For the individual drink categories (beer, shots of liquor, and glasses of wine), it provides an equation to convert the amount of ethanol consumed into the amount of alcohol. I then converted this to number of drinks for each category based on the National Institute of Health's <a href="https://www.niaaa.nih.gov/alcohol-health/overview-alcohol-consumption/what-standard-drink">page</a> saying how many ounces of alcohol make up a drink for those categories. Therefore, the sum of the categories is slightly different than the "total drinks" column.</p>
+      </div>
+
+      <h1>Death</h1>
+
+      <button class="accordion">Where is the data from?</button>
+      <div class="panel">
+        <p>This data comes from the Center for Disease Control and Prevention's (CDC) WONDER data and provides the number of deaths for several cause of death categories for each state.</p>
+      </div>
+
+      <button class="accordion">What are age-adjusted rates?</button>
+      <div class="panel">
+        <p>The following is the CDC's definition of age-adjusted rates from <a href="https://wonder.cdc.gov/wonder/help/faq.html#6">this page.</a></p>
+        <blockquote>The rates of almost all causes of disease, injury, and death vary by age. Age adjustment is a technique for "removing" the effects of age from crude rates so as to allow meaningful comparisons across populations with different underlying age structures. For example, comparing the crude rate of heart disease in Florida with that of California is misleading, because the relatively older population in Florida leads to a higher crude death rate, even if the age-specific rates of heart disease in Florida and California were the same. For such a comparison, age-adjusted rates are preferable. </blockquote>
+      </div>
+
+      <button class="accordion">Why are some values missing?</button>
+      <div class="panel">
+        <p>The CDC does not report death counts when there are fewer than 16 deaths in that category. They do this both for confidentiality of the deceased and to avoid the misuse of rates caused by such a small numerator.</p>
+      </div>
 
 
 
@@ -100,11 +183,7 @@
     </article>
   </div>
 
-
-  <div class="footer-wrap">
-    <footer>
-      <span>&copy; 2019 Jacob Kaplan.</span>
-    </footer>
+<div class="footer-wrap"></div>
 
 
     <script>
@@ -123,6 +202,7 @@
         });
       }
     </script>
+
 </body>
 
 </html>

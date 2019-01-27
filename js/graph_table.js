@@ -6,6 +6,16 @@ function allowSaveGraph() {
 
 function getGraphDataset(tableData, colsForGraph, type) {
   rate_type = "_rate";
+  checkbox_names = ["Actual Offenses", "Total Offenses Cleared", "Offenses Cleared Involving Only Persons Under age 18", "Unfounded Offenses"];
+  if (type == "alcohol") {
+    checkbox_names = _.values(alcohol_categories);
+  }
+  if (["prisoners", "leoka"].includes(type)) {
+    checkbox_names = ["Female", "Male", "Total"];
+  }
+  if (type == "arrests") {
+    checkbox_names = ["Adult", "Juvenile", "Total"];
+  }
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
     rate_type = "_rate_per_officer";
   }
@@ -21,26 +31,28 @@ function getGraphDataset(tableData, colsForGraph, type) {
     return _.pick(currentObject, colsForGraph);
   });
 
-  if (type == "offenses") {
-    years = [];
-    data1 = [];
-    data2 = [];
-    data3 = [];
-    data4 = [];
+  years = [];
+  data1 = [];
+  data2 = [];
+  data3 = [];
+  data4 = [];
 
-    for (var i = 0; i < data.length; i++) {
-      years.push(data[i][colsForGraph[0]]);
-      data1.push(data[i][colsForGraph[1]]);
-      data2.push(data[i][colsForGraph[2]]);
-      data3.push(data[i][colsForGraph[3]]);
-      data4.push(data[i][colsForGraph[4]]);
-    }
+  for (var i = 0; i < data.length; i++) {
+    years.push(data[i][colsForGraph[0]]);
+    data1.push(data[i][colsForGraph[1]]);
+    data2.push(data[i][colsForGraph[2]]);
+    data3.push(data[i][colsForGraph[3]]);
+    data4.push(data[i][colsForGraph[4]]);
+  }
+
+  if (["crime", "alcohol", "prisoners", "arrests"].includes(type) || type == "leoka" &
+    leoka_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
-      makeGraphObjects(data1, "#7570b3", "Actual Offenses"),
-      makeGraphObjects(data2, "#ef8a62", "Total Offenses Cleared"),
-      makeGraphObjects(data3, "#67a9cf", "Offenses Cleared Involving Only Persons Under age 18"),
-      makeGraphObjects(data4, "#2166ac", "Unfounded Offenses")
+      makeGraphObjects(data1, "#7570b3", checkbox_names[0]),
+      makeGraphObjects(data2, "#ef8a62", checkbox_names[1]),
+      makeGraphObjects(data3, "#67a9cf", checkbox_names[2]),
+      makeGraphObjects(data4, "#2166ac", checkbox_names[3])
     ];
     final_data[0].hidden = false;
     final_data[1].hidden = false;
@@ -48,87 +60,24 @@ function getGraphDataset(tableData, colsForGraph, type) {
     final_data[3].hidden = false;
 
 
-    if (!$("#actual").is(':checked')) {
+    if (!$("#checkbox_1").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
-        return x.label != "Actual Offenses";
+        return x.label != checkbox_names[0];
       });
     }
-    if (!$("#clearance").is(':checked')) {
+    if (!$("#checkbox_2").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
-        return x.label != "Total Offenses Cleared";
+        return x.label != checkbox_names[1];
       });
     }
-    if (!$("#clearance_under18").is(':checked')) {
+    if (!$("#checkbox_3").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
-        return x.label != "Offenses Cleared Involving Only Persons Under age 18";
+        return x.label != checkbox_names[2];
       });
     }
-    if (!$("#unfounded").is(':checked')) {
+    if (!$("#checkbox_4").is(':checked')) {
       final_data = _.filter(final_data, function(x) {
-        return x.label != "Unfounded Offenses";
-      });
-    }
-
-  } else if ((type == "leoka" &
-      leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") ||
-    type == "prisoners" ||
-    type == "arrests") {
-    name_1 = "Female";
-    name_2 = "Male";
-    name_3 = "Total";
-    if (type == "leoka") {
-      female_checkbox = "#police_female_sex";
-      male_checkbox = "#police_male_sex";
-      total_checkbox = "#police_total_sex";
-    } else if (type == "prisoners") {
-      female_checkbox = "#prisoners_female_sex";
-      male_checkbox = "#prisoners_male_sex";
-      total_checkbox = "#prisoners_total_sex";
-    } else if (type == "arrests") {
-        name_1 = "Adult";
-        name_2 = "Juvenile";
-        name_3 = "Total";
-
-      female_checkbox = "#adult_arrest_box";
-      male_checkbox = "#juvenile_arrest_box";
-      total_checkbox = "#total_arrest_box";
-    }
-
-    years = [];
-    data1 = [];
-    data2 = [];
-    data3 = [];
-    data4 = [];
-
-    for (var i2 = 0; i2 < data.length; i2++) {
-      years.push(data[i2][colsForGraph[0]]);
-      data1.push(data[i2][colsForGraph[1]]);
-      data2.push(data[i2][colsForGraph[2]]);
-      data3.push(data[i2][colsForGraph[3]]);
-    }
-
-    final_data = [
-      makeGraphObjects(data1, "#1b9e77", name_1),
-      makeGraphObjects(data2, "#d95f02", name_2),
-      makeGraphObjects(data3, "#7570b3", name_3),
-    ];
-    final_data[0].hidden = false;
-    final_data[1].hidden = false;
-    final_data[2].hidden = false;
-
-    if (!$(female_checkbox).is(':checked')) {
-      final_data = _.filter(final_data, function(x) {
-        return x.label != "Female" && x.label != "Adult";
-      });
-    }
-    if (!$(male_checkbox).is(':checked')) {
-      final_data = _.filter(final_data, function(x) {
-        return x.label != "Male" && x.label != "Juvenile";
-      });
-    }
-    if (!$(total_checkbox).is(':checked')) {
-      final_data = _.filter(final_data, function(x) {
-        return x.label != "Total";
+        return x.label != checkbox_names[3];
       });
     }
 
@@ -163,26 +112,24 @@ function makeGraphObjects(data, color, label) {
   return obj;
 }
 
-function makeGraph(data, graph_div, colsForGraph, type) {
-  title = getTitle(data, type);
-
-  if (type == "offenses") {
+function makeGraph(type) {
+  title = getTitle(table_data, type);
+  yaxis_label = "";
+  if (type == "crime") {
     yaxis_label = '# of Crimes';
     if (checkIfRateChecked(type)) {
       yaxis_label = 'Rate per 100,000 Population';
     }
-    legend_display = true;
   } else if (type == "arrests") {
     yaxis_label = "# of Arrests";
     if (checkIfRateChecked(type)) {
       yaxis_label = 'Rate per 100,000 Population';
     }
-    legend_display = true;
   } else if (type == "leoka") {
     yaxis_label = "# of People";
-    if (colsForGraph[1].includes("killed")) {
+    if (graph_headers[1].includes("killed")) {
       yaxis_label = "# of Officer Deaths";
-    } else if (colsForGraph[1].includes("assault")) {
+    } else if (graph_headers[1].includes("assault")) {
       yaxis_label = "# of Assaults";
     }
     if (checkIfRateChecked(type)) {
@@ -190,10 +137,6 @@ function makeGraph(data, graph_div, colsForGraph, type) {
     }
     if ($("#leoka_rate_per_officer").is(':checked')) {
       yaxis_label = "Rate per Officer";
-    }
-    legend_display = false;
-    if (leoka_categories[$("#leoka_category_dropdown").val()] == "Police Department Employees") {
-      legend_display = true;
     }
   } else if (type == "prisoners") {
     yaxis_label = "# of Prisoners";
@@ -205,21 +148,26 @@ function makeGraph(data, graph_div, colsForGraph, type) {
         yaxis_label = '% of Population Aged 18-65';
       }
     }
-    legend_display = true;
+  } else if (type == "alcohol") {
+    yaxis_label = "# of Drinks";
+  } else if (type == "death") {
+    yaxis_label = "# of Deaths";
+    if ($("#checkbox_1").is(':checked')) {
+      yaxis_label = 'Deaths per 100,000 population';
+    } else if ($("#checkbox_2").is(':checked')) {
+      yaxis_label = 'Age-Adjusted Deaths per 100,000 population';
+    }
   }
+  graph_datasets = getGraphDataset(table_data, graph_headers, type);
 
-  graph_datasets = getGraphDataset(data, colsForGraph, type);
 
-  myLineChart = new Chart(graph_div, {
+  myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: years,
       datasets: graph_datasets
     },
     options: {
-      legend: {
-        display: legend_display
-      },
       title: {
         display: true,
         position: 'top',
@@ -265,11 +213,10 @@ function makeGraph(data, graph_div, colsForGraph, type) {
         mode: 'index',
         intersect: false,
         callbacks: {
-          label: function(tooltipItems, data) {
-            //      console.log(data[0].label)
+          label: function(tooltipItems, table_data) {
             value = tooltipItems.yLabel;
             value = value.toLocaleString();
-            value = data.datasets[tooltipItems.datasetIndex].label + ": " + value;
+            value = table_data.datasets[tooltipItems.datasetIndex].label + ": " + value;
             return value;
           }
         }
@@ -286,45 +233,38 @@ function makeGraph(data, graph_div, colsForGraph, type) {
 function getTitle(data, type) {
   title = data[0].agency + ', ';
   title += data[0].state + ': ';
-  if (type == "offenses") {
+  subtitle = "";
+  if (type == "crime") {
     subtitle = crime_values[$("#crime_dropdown").val()];
   } else if (type == "arrests") {
-    subtitle = arrest_values[$("#arrests_crime_dropdown").val()];
+    subtitle = arrest_values[$("#crime_dropdown").val()];
     subtitle += ": " + arrest_categories[$("#arrests_category_dropdown").val()];
     subtitle += " - Arrests";
   } else if (type == "leoka") {
-    subtitle = leoka_categories[$("#leoka_category_dropdown").val()];
+    subtitle = leoka_categories[$("#crime_dropdown").val()];
+    subtitle += ": " + _.values(leoka_subcatergory_values)[$("#leoka_subcategory_dropdown").val()];
 
-    subtitle += ": " + leoka_subcatergory_values[$("#leoka_subcategory_dropdown").val()];
-
-    if (leoka_categories[$("#leoka_category_dropdown").val()] == "Officers Assaulted") {
+    if (leoka_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
       weapon = _.values(leoka_weapons)[$("#leoka_weapons").val()];
       subtitle = subtitle + " - " + weapon;
     }
 
   } else if (type == "prisoners") {
     title = data[0].state + ' Prisons: ';
-    subtitle = _.values(prisoner_categories)[$("#prisoners_categories").val()] + ": ";
+    subtitle = prisoner_categories[$("#crime_dropdown").val()] + ": ";
     name = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
-    subtitle += prisoners_subcategory[$('#prisoners_categories').val()][name];
+    category_index_num = _.indexOf(_.keys(prisoner_categories), $('#crime_dropdown').val());
+    subtitle += prisoners_subcategory[category_index_num][name];
 
-    if (_.keys(prisoner_categories)[$("#prisoners_categories").val()].includes("_crime")) {
-      //    title = data[0].state + ' Prisons: ';
+    if (_.keys(prisoner_categories)[category_index_num].includes("_crime")) {
       subtitle += ", Race: " + _.values(prisoners_race)[$("#prisoners_race").val()];
     }
-
-  }
-
-  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
-    subtitle += ", Rate per 100 Officers";
-  } else if (type == "prisoners" && $("#prisoners_rate").is(':checked')) {
-    subtitle += ", % of Population";
-  } else if (type == "prisoners" && $("#prisoners_rate_adult").is(':checked')) {
-    subtitle += ", % of Adult Population";
-  } else if (type == "prisoners" && $("#prisoners_rate_18_65").is(':checked')) {
-    subtitle += ", % of Population Aged 18-65";
-  } else if (checkIfRateChecked(type)) {
-    subtitle += ", Rate per 100,000 Population";
+  } else if (type == "alcohol") {
+    title = data[0].state + ' Alcohol Consumption: ';
+    subtitle = "Annual per capita (population aged 14+) ";
+  } else if (type == "death") {
+    title = data[0].state;
+    subtitle = "Cause of Death: " + death_categories[$("#crime_dropdown").val()];
   }
 
   title = [title, subtitle];
@@ -332,67 +272,100 @@ function getTitle(data, type) {
 }
 
 function fixTableName(name, type) {
-  if (type != "arrests") {
-  temp_name = name;
-  name = name.replace(/_rate/g, "");
-  if (type == "offenses") {
-    temp1 = name.replace(/act_.*/, "Actual ");
-    temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
-    temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
-    temp4 = name.replace(/unfound_.*/, "Unfounded ");
-    name = name.replace(/act_|clr_18_|tot_clr_|unfound_/, "");
-    name = crime_values[name];
-    if (temp1 != temp_name) name = temp1 + name;
-    if (temp2 != temp_name) name = temp2 + name;
-    if (temp3 != temp_name) name = temp3 + name;
-    if (temp4 != temp_name) name = temp4 + name;
-  } else if (type == "arrests") {
-    tot_section = name.replace(/.*_tot/g, "tot");
-    // Fix adult race name
-    if (tot_section == name) {
-      tot_section = name.replace(/.*_adult/g, "adult");
+    temp_name = name;
+    name = name.replace(/_rate/g, "");
+    if (type == "crime") {
+      temp1 = name.replace(/actual_.*/, "Actual ");
+      temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
+      temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
+      temp4 = name.replace(/unfound_.*/, "Unfounded ");
+      name = name.replace(/actual_|clr_18_|tot_clr_|unfound_/, "");
+      name = crime_values[name];
+      if (temp1 != temp_name) name = temp1 + name;
+      if (temp2 != temp_name) name = temp2 + name;
+      if (temp3 != temp_name) name = temp3 + name;
+      if (temp4 != temp_name) name = temp4 + name;
+    } else if (type == "arrests" && !default_table_headers.includes(name)) {
+
+      temp_name = name;
+      name = arrest_values[$("#crime_dropdown").val()];
+      temp_name = temp_name.replace($("#crime_dropdown").val() + "_", "");
+      temp_name = temp_name.replace(/_/g, " ");
+      temp_name = temp_name.replace("tot", "total");
+      temp_name = temp_name.replace("juv", "juvenile");
+      temp_name = temp_name.replace("amer ind", "American Indian");
+      temp_name = toTitleCase(temp_name);
+      name = name + " " +  temp_name;
+
+    } else if (type == "leoka" && !default_table_headers.includes(name)) {
+      temp_name = name;
+      category_index_num = _.indexOf(_.keys(leoka_categories), $("#crime_dropdown").val());
+      crime_val = _.keys(leoka_subcategories[category_index_num])[$("#leoka_subcategory_dropdown").val()];
+      name = _.values(leoka_subcategories[category_index_num])[_.indexOf(_.keys(leoka_subcategories[category_index_num]), crime_val)];
+
+      temp_name = temp_name.replace(crime_val + "_", "");
+      temp_name = temp_name.replace(/_/g, " ");
+
+      temp_name = toTitleCase(temp_name);
+      if ($("#crime_dropdown").val() === "0") {
+      name = name + " " +  temp_name;
+    } else {
+      name = temp_name;
     }
-    // Fix juvenile race name
-    if (tot_section == name) {
-      tot_section = name.replace(/.*_juv/g, "juv");
+    } else if (type == "prisoners") {
+        if (!["state", "year"].includes(name)) {
+      category_index_num = _.indexOf(_.keys(prisoner_categories), $("#crime_dropdown").val());
+      if ($("#crime_dropdown").val().includes("_crime")) {
+        temp_name = name;
+        crime_val = _.keys(prisoners_subcategory[category_index_num])[$("#prisoners_subcategories").val()];
+        name = _.values(prisoners_subcategory[category_index_num])[_.indexOf(_.keys(prisoners_subcategory[category_index_num]), crime_val)];
+        temp_name = temp_name.replace(crime_val + "_", "");
+        temp_name = temp_name.replace(/_/g, " ");
+        temp_name = temp_name.replace("total total", "total");
+
+        temp_name = toTitleCase(temp_name);
+
+        name = name + " " +  temp_name;
+      } else {
+        temp1 = name.replace(/.*_female/, " Female");
+        temp2 = name.replace(/.*_male/, " Male");
+        temp3 = name.replace(/.*_total/, " Total");
+        name = name.replace(/_total|_female|_male/, "");
+        name = prisoners_subcategory[category_index_num][name];
+        if (temp1 != temp_name) name += temp1;
+        if (temp2 != temp_name) name += temp2;
+        if (temp3 != temp_name) name += temp3;
+      }
+    }
+    } else if (type == "alcohol") {
+      name = alcohol_categories[name];
+    } else if (type == "death") {
+      temp_name = name;
+      temp1 = name.replace(/deaths_.*/, "Deaths ");
+      temp2 = name.replace(/crude.*/, "Crude Rate ");
+      temp3 = name.replace(/age_adjusted.*/, "Age-Adjusted Rate ");
+      name = name.replace(/deaths_|crude_|age_adjusted_/, "");
+      name = death_categories[name];
+      if (temp1 != temp_name) name = temp1 + name;
+      if (temp2 != temp_name) name = temp2 + name;
+      if (temp3 != temp_name) name = temp3 + name;
     }
 
-    name = name.replace(/_tot.*/g, "");
-    name = name.replace(/_adult.*/g, "");
-    name = name.replace(/_juv.*/g, "");
-
-    name = arrest_values[name];
-    tot_section = arrest_categories[tot_section];
-    if (tot_section !== undefined) name = name + " " + tot_section;
-  } else if (type == "leoka") {
-    name = leoka_values[name];
-  } else if (type == "prisoners") {
-    temp1 = name.replace(/.*_female/, " Female");
-    temp2 = name.replace(/.*_male/, " Male");
-    temp3 = name.replace(/.*_total/, " Total");
-    name = name.replace(/_total|_female|_male/, "");
-    name = prisoners_subcategory[$('#prisoners_categories').val()][name];
-    if (temp1 != temp_name) name += temp1;
-    if (temp2 != temp_name) name += temp2;
-    if (temp3 != temp_name) name += temp3;
-  }
-
-  if (name === undefined) {
-    name = temp_name.replace(/^\w/, c => c.toUpperCase());
-  }
-
-  if (checkIfRateChecked(type) &&
-    !name.includes("Agency") &&
-    !name.startsWith("Year") &&
-    !name.includes("State") &&
-    !name.includes("Population") &&
-    !name.includes("ORI")) {
-    name += " Rate";
-    if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
-      name += " per Officer";
+    if (name === undefined | default_table_headers.includes(name)) {
+      name = temp_name.replace(/^\w/, c => c.toUpperCase());
     }
-  }
-}
+
+    if (checkIfRateChecked(type) &&
+      !name.includes("Agency") &&
+      !name.startsWith("Year") &&
+      !name.includes("State") &&
+      !name.includes("Population") &&
+      !name.includes("ORI")) {
+      name += " Rate";
+      if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+        name += " per Officer";
+      }
+    }
   return name;
 }
 
@@ -414,9 +387,8 @@ function fixTableDataName(name, type) {
   return name;
 }
 
-function makeTable(div, data, headers, type) {
-  data = subsetColumns(data, headers, "table", type);
-
+function makeTable(type) {
+  data = subsetColumns(table_data, table_headers, "table", type);
 
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
@@ -434,9 +406,9 @@ function makeTable(div, data, headers, type) {
   // Makes real (as they appear in the data) names and pretty names
   // as they will appear in the table.
   table_columns = [];
-  for (var i = 0; i < headers.length; i++) {
-    label_name = fixTableName(headers[i], type);
-    data_name = fixTableDataName(headers[i], type);
+  for (var i = 0; i < table_headers.length; i++) {
+    label_name = fixTableName(table_headers[i], type);
+    data_name = fixTableDataName(table_headers[i], type);
     table_columns.push({
       data: data_name,
       title: label_name,
@@ -444,7 +416,7 @@ function makeTable(div, data, headers, type) {
     });
   }
 
-  temp_table = $(div).DataTable({
+  temp_table = $("#table").DataTable({
     data: data,
     columns: table_columns,
     "scrollX": true,
@@ -464,4 +436,10 @@ function makeTable(div, data, headers, type) {
     }
   });
   return temp_table;
+}
+
+function toTitleCase(str) {
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }

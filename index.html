@@ -2,9 +2,18 @@
 <html lang="en">
 
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-99359926-4');
+  </script>
   
-
-  <title>Crime Data Tool</title>
+  <title>Martian Protection!</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Jacob Kaplan">
@@ -26,83 +35,56 @@
 <body class="page">
 
 
-  <div class="navigation-wrapper">
-    <div class="top-navigation">
-      <nav role="navigation" id="site-nav" class="nav">
-        <ul>
-          <li><a class="on" href="index.html">Home</a></li>
-          <li><a href="crime.html">Crime</a></li>
-          <li><a href="arrest.html">Arrest</a></li>
-          <li><a href="police.html">Police</a></li>
-          <li><a href="data.html">Data</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-
-
+  <div class="navigation-wrapper"></div>
   <div id="main" role="main">
 
-  <!-- Adds in the about me stuff and links -->
+    <!-- Adds in the about me stuff and links -->
     <script>
       $(function() {
         $('#header').load("reusable_js.html .about_me_info");
+        $('.footer-wrap').load("reusable_js.html .foot");
+        $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
       })
     </script>
-<div class = "article-author-side">
-  <div id = "header"></div>
-</div>
+    <div class="article-author-side">
+      <div id="header"></div>
+    </div>
 
     <article class="post">
       <h1>Using This Site</h1>
-      <p>This site makes it easy for people to analyze crime, arrest, and police death/assault data without having to analyze raw data themselves. Select a page to look at the type of data you're interested in. The data come from the raw data compiled by the FBI as part of the Uniform Crime Reporting (UCR) Program data sets.</p>
+      <p>This site makes it easy for people to analyze crime-related data. Select a page to look at the type of data you're interested in.</p>
 
-      <br><br>      <br>
+      <br><br> <br>
       <h1>About Me</h1>
-      <p>I am a PhD candidate in Criminology at the University of Pennsylvania. My research focuses on
-        Crime Prevention Through Environmental Design (CPTED), specifically on the effect of door locks
-        and outdoor lighting on crime. My other interests include making crime data more accessible to the public
-        and the role of private action in crime prevention.
-
-
-      </p>
+      <p>I am a PhD candidate in Criminology at the University of Pennsylvania. My research focuses on Crime Prevention Through Environmental Design (CPTED), specifically on the effect of door locks and outdoor lighting on crime. My other interests include
+        making crime data more accessible to the public and the role of private action in crime prevention.</p>
       <br>
       <br>
       <h1>Software</h1>
-<ul>
-  <li><a href="https://jacobkap.github.io/asciiSetupReader/">asciiSetupReader:</a>
-    R package for reading fixed-width ASCII files that have an.sps or .sas setup file. It also allows users to quickly generate setup files. </li>
-  <li><a href="https://jacobkap.github.io/fastDummies/">fastDummies:</a>
-    R package for quickly and efficiently making binary columns out of categorical columns. It also fills in "dummy rows" for data sets missing rows of data based on all combinations of categorical and date columns. </li>
-  <li><a href="https://jacobkap.github.io/boxoffice/">boxoffice:</a>
-  Download daily box office information (how much each movie earned in theaters). </li>
-  <li><a href="https://jacobkap.github.io/caesar/">caesar:</a>
-  Encrypt and decrypt strings using a simple Caesar cypher or a pseduorandom number generation. </li>
-</ul>
+      <ul>
+        <li><a href="https://jacobkap.github.io/asciiSetupReader/">asciiSetupReader:</a> R package for reading fixed-width ASCII files that have an.sps or .sas setup file. It also allows users to quickly generate setup files. </li>
+        <li><a href="https://jacobkap.github.io/fastDummies/">fastDummies:</a> R package for quickly and efficiently making binary columns out of categorical columns. It also fills in "dummy rows" for data sets missing rows of data based on all combinations
+          of categorical and date columns. </li>
+        <li><a href="https://jacobkap.github.io/boxoffice/">boxoffice:</a> Download daily box office information (how much each movie earned in theaters). </li>
+        <li><a href="https://jacobkap.github.io/caesar/">caesar:</a> Encrypt and decrypt strings using a simple Caesar cypher or a pseduorandom number generation. </li>
+      </ul>
 
       <br>
-            <br>
+      <br>
       <h1>Past Projects</h1>
-          <ul>
-            <li>I worked with the NACJD team to produce their second ever Justice Data Learning Guide. This guide explained     how to use the Law Enforcement Agencies Identfiers Crosswalk (LEAIC). The guide can be found
+      <ul>
+        <li>I worked with the NACJD team to produce their second ever Justice Data Learning Guide. This guide explained how to use the Law Enforcement Agencies Identifiers Crosswalk (LEAIC). The guide can be found
           <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/guides/leaic/index.html">here.</a></li>
-            </ul>
-      <br>      <br>
+      </ul>
+      <br> <br>
       <h1>Links</h1>
       <ul>
-        <li>My website <a href="https://crimebythenumbers.com/">Crime by the Numbers</a> provides analysis of crime data
-        as well as advice on how to work with certain crime data sets.</li>
+        <li>My website <a href="https://crimebythenumbers.com/">Crime by the Numbers</a> provides analysis of crime data as well as advice on how to work with certain crime data sets.</li>
       </ul>
     </article>
   </div>
 
-
-  <div class="footer-wrap">
-    <footer>
-      <span>&copy; 2019 Jacob Kaplan.</span>
-    </footer>
+  <div class="footer-wrap"></div>
 </body>
 
 </html>

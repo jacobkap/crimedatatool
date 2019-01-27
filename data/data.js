@@ -68,48 +68,75 @@ agency_desc_vals = {
   "population": "Population"
 };
 
+alcohol_categories = {
+  "number_of_beers": "Beers",
+  "number_of_shots_liquor": "Shots of Liquor",
+  "number_of_glasses_wine": "Glasses of Wine",
+  "number_of_drinks_total": "Total Drinks"
+};
+
+death_categories = {
+  "alcohol_all_other": "Alcohol All Other",
+  "alcohol_overdose": "Alcohol Overdose",
+  "alcohol_total": "Alcohol Total",
+  "drugs_all_other": "Drugs All Other",
+  "drugs_and_alcohol_total": "Drugs and Alcohol Total",
+  "drugs_overdose_homicide": "Drug Overdose Homicide",
+  "drugs_overdose_suicide": "Drug Overdose Suicide",
+  "drugs_overdose_undetermined": "Drug Overdose Undetermined",
+  "drugs_overdose_unintentional": "Drug Overdose Unintentional",
+  "drugs_total": "Drugs Total",
+  "total_homicide": "Homicide",
+  "total_suicide": "Suicide",
+  "total_undetermined": "Undetermined",
+  "total_unintentional": "Unintentional"
+};
+
 prisoners_state_values = ["US Prison Total", "Federal Prison Total", "State Prison Total"];
 prisoners_state_values = prisoners_state_values.concat(state_values);
 
+alcohol_state_values = ["US Total", "West Region", "South Region",  "Midwest Region", "Northeast Region"];
+alcohol_state_values = alcohol_state_values.concat(state_values);
+
 var prisoner_categories = {
-  "custody"             : "Prisoners in Custody",
-  "custody_crime"       : "Prisoners in Custody - Most Serious Charge",
-  "jurisdiction"        : "Prisoners in Jurisdiction",
-  "race_ethnicity"      : "Race/Ethnicity",
-  "admission"           : "Admissions",
-  "admissions_crime"    : "Admissions - Most Serious Charge",
-  "release"             : "Releases",
-  "releases_crime"       : "Releases - Most Serious Charge",
-  "capacity"            : "Prison Capacity",
-  "noncitizen_juvenile" : "Non-Citizen/Juvenile Prisoners",
-  "death"               : "Prisoner Deaths",
-  "aids"                : "Prisoners with HIV/AIDS"
+  "custody": "Prisoners in Custody",
+  "custody_crime": "Prisoners in Custody - Most Serious Charge",
+  "jurisdiction": "Prisoners in Jurisdiction",
+  "race_ethnicity": "Race/Ethnicity",
+  "admission": "Admissions",
+  "admissions_crime": "Admissions - Most Serious Charge",
+  "release": "Releases",
+  "releases_crime": "Releases - Most Serious Charge",
+  "capacity": "Prison Capacity",
+  "noncitizen_juvenile": "Non-Citizen/Juvenile Prisoners",
+  "death": "Prisoner Deaths",
+  "aids": "Prisoners with HIV/AIDS"
 };
 
 prison_crimes = {
-  "aggravated_or_simple_assault" : "Assault - Aggravated or Simple",
-  "burglary" : "Burglary",
-  "drugs" : "Drugs - Possession, Distribution, Trafficking, etc.",
-  "fraud" : "Fraud",
-  "motor_vehicle_theft" : "Motor Vehicle Theft",
-  "murder" : "Murder",
-  "negligent_manslaughter" : "Negligent Manslaughter",
-  "other_property_offenses" : "Other Property Offenses",
-  "other_unknown" : "Other or Unknown",
-  "other_violent_offenses" : "Other Violent Offenses",
-  "public_order" : "Public Order",
-  "rape_or_sexual_assault" : "Rape or Sexual Assault",
-  "robbery" : "Robbery",
-  "theft" : "Theft",
-  "total" : "Total Offenses",
+  "aggravated_or_simple_assault": "Assault - Aggravated or Simple",
+  "burglary": "Burglary",
+  "drugs": "Drugs - Possession, Distribution, Trafficking, etc.",
+  "fraud": "Fraud",
+  "motor_vehicle_theft": "Motor Vehicle Theft",
+  "murder": "Murder",
+  "negligent_manslaughter": "Negligent Manslaughter",
+  "other_property_offenses": "Other Property Offenses",
+  "other_unknown": "Other or Unknown",
+  "other_violent_offenses": "Other Violent Offenses",
+  "public_order": "Public Order",
+  "rape_or_sexual_assault": "Rape or Sexual Assault",
+  "robbery": "Robbery",
+  "theft": "Theft",
+  "total": "Total Offenses",
 };
 
 prisoners_race = {
-    "black": "Black",
-    "hispanic": "Hispanic/Latino",
-    "other_or_unknown": "Other/Unknown",
-    "white": "White",
-    "total" : "Total"
+  "black": "Black",
+  "hispanic": "Hispanic/Latino",
+  "other_or_unknown": "Other/Unknown",
+  "white": "White",
+  "total": "Total"
 };
 
 var prisoners_subcategory = [{
@@ -119,7 +146,6 @@ var prisoners_subcategory = [{
     "custody_private_prison": "In Private Prison"
   },
   prison_crimes,
-
   {
     "jurisdiction_housed_in_local_facility": "In Local Facility",
     "local_facilities_solely_to_ease_prison_crowding": "In Local Facility to Ease Prison Overcrowding",
@@ -154,7 +180,6 @@ var prisoners_subcategory = [{
     "transfers_admitted_from_other_jurisdictions": "Transfers From Other Jurisdiction"
   },
   prison_crimes,
-
   // Releases
   {
     "awol_release": "AWOL Released",
@@ -172,14 +197,12 @@ var prisoners_subcategory = [{
   },
 
   prison_crimes,
-
   // Capacity
   {
     "design_capacity": "Design Capacity of Prisons",
     "operational_capacity": "Operational Capacity of Prisons",
     "rated_capacity": "Rated Capacity of Prisons"
   },
-
 
   // Minors and non-citizens
   {
@@ -222,9 +245,9 @@ var crime_values = {
   "burg_attempted": "Burglary - Attempted",
   "burg_force_entry": "Burglary - Forcible Entry",
   "burg_nonforce_entry": "Burglary - Nonforcible Entry",
-  "index_property" : "Index - Property",
-  "index_violent" : "Index - Violent",
-  "index_total" : "Index - Total",
+  "index_property": "Index - Property",
+  "index_violent": "Index - Violent",
+  "index_total": "Index - Total",
   "mtr_veh_theft_total": "Motor Vehicle Theft - Total",
   "mtr_veh_theft_car": "Motor Vehicle Theft - Auto",
   "mtr_veh_theft_other": "Motor Vehicle Theft - Other Vehicle",
@@ -292,11 +315,11 @@ var arrest_values = {
 };
 
 var leoka_weapons = {
-  "assault_gun" : "Gun",
-  "assault_knife" : "Knife",
-  "assault_oth_weap" : "Other Weapon",
-  "assault_unarmed" : "Unarmed",
-  "total_assaults" : "Total"
+  "assault_gun": "Gun",
+  "assault_knife": "Knife",
+  "assault_oth_weap": "Other Weapon",
+  "assault_unarmed": "Unarmed",
+  "total_assaults": "Total"
 };
 
 var leoka_categories = [
@@ -305,84 +328,32 @@ var leoka_categories = [
   "Police Department Employees"
 ];
 
-leoka_subcategories = [
-  {
-    "ambush" : "Ambush",
-    "burglary" : "Burglary",
-    "deranged" : "Handling Person with Mental Illness",
-    "disturbance" : "Disturbance (fight, domestic violence, etc.)",
-    "oth_arrest" : "Attempt to Make Other Arrest",
-    "prisoner" : "Custody of Prisoner",
-    "riot" : "Civil Disorder (riot)",
-    "robbery" : "Robbery",
-    "susp_pers" : "Suspicious Person",
-    "traffic" : "Traffic Stop",
-    "assaults_with_injury" : "Total Assaults - With Injury",
-    "assaults_no_injury" : "Total Assaults - Without Injury",
-    "total" : "Total Assaults",
+leoka_subcategories = [{
+    "ambush": "Ambush",
+    "burglary": "Burglary",
+    "deranged": "Handling Person with Mental Illness",
+    "disturbance": "Disturbance (fight, domestic violence, etc.)",
+    "oth_arrest": "Attempt to Make Other Arrest",
+    "prisoner": "Custody of Prisoner",
+    "riot": "Civil Disorder (riot)",
+    "robbery": "Robbery",
+    "susp_pers": "Suspicious Person",
+    "traffic": "Traffic Stop",
+    "assaults_with_injury": "Total Assaults - With Injury",
+    "assaults_no_injury": "Total Assaults - Without Injury",
+    "total": "Total Assaults",
   },
   {
-    "officers_killed_by_accident" : "Killed by Accident",
-    "officers_killed_by_felony" : "Killed by Felony"
+    "officers_killed_by_accident": "Killed by Accident",
+    "officers_killed_by_felony": "Killed by Felony"
   },
   {
-    "employees_civilians" : "Civilians",
-  //  "male_employees_civilians" : "Civilians - Male",
-  //  "total_employees_civilians" : "Civilians - Total",
-
-    "employees_officers" : "Officers",
-//    "male_employees_officers" : "Officers - Male",
-//    "total_employees_officers" : "Officers - Total",
-
-    "employees_total" : "Total Employees",
-  //  "male_employees_total" : "Total Employees - Male",
-  //  "total_employees_total" : "Total Employees - Total",
+    "employees_civilians": "Civilians",
+    "employees_officers": "Officers",
+    "employees_total": "Total Employees",
   }
 ];
 
-
-var leoka_values = {
-  "ambush_total_assault": "Assault - Ambush",
-  "att_oth_arrest_total_assault": "Assault - Attempted Other Arrest",
-  "burglary_total_assault": "Assault - Burglary",
-  "civil_disorder_total_assault": "Assault - Civil Disorder",
-  "cust_prisoners_total_assault": "Assault - Custody of Prisoner",
-  "deranged_total_assault": "Assault - Deranged Offender",
-  "disturbance_total_assault": "Assault - Disturbance",
-  "all_oth_total_assault": "Assault - Other Scenario",
-  "robbery_total_assault": "Assault - Robbery",
-  "susp_pers_total_assault": "Assault - Suspicious Person",
-  "traffic_total_assault": "Assault - Traffic",
-
-  "total_civilians": "Civilians - Total",
-  "female_employees_civilians": "Civilians - Female",
-  "male_employees_civilians": "Civilians - Male",
-
-  "assault_injury_total": "Assault With Injury - Total",
-  "assault_injury_gun": "Assault With Injury - Gun Used",
-  "assault_injury_knife": "Assault With Injury - Knife Used",
-  "assault_injury_hand_feet": "Assault With Injury - Unarmed Offender",
-  "assault_injury_other": "Assault With Injury - Other Weapon",
-
-  "assault_no_injury_total": "Assault Without Injury - Total",
-  "assault_no_injury_gun": "Assault Without Injury - Gun Used",
-  "assault_no_injury_knife": "Assault Without Injury - Knife Used",
-  "assault_no_injury_hand_feet": "Assault Without Injury - Unarmed Offender",
-  "assault_no_injury_other": "Assault Without Injury - Other Weapon",
-
-  "officers_killed_accident": "Officers Killed by Accident",
-  "officers_killed_felony": "Officers Killed by Felony",
-  "total_officers": "Police Officers - Total",
-  "female_employees_officers": "Police Officers - Female",
-  "male_employees_officers": "Police Officers - Male",
-
-  "total_assault_total": "Total Assault - Total",
-  "total_assault_gun": "Total Assault - Gun Used",
-  "total_assault_knife": "Total Assault - Knife Used",
-  "total_assault_hand_feet": "Total Assault - Unarmed Offender",
-  "total_assault_other": "Total Assault - Other Weapon",
-
-};
 
 var arrest_categories = {
   "tot_arrests": "Total",
