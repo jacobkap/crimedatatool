@@ -84,7 +84,7 @@ function prisonerCategoryChange(current_category) {
 
 
 function agencyChangeFun(type, states) {
-  if (type == "prisoners" & $("#crime_dropdown").val().includes("_crime")) {
+  if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
       main_results = get_data(type, state_values);
   } else {
   main_results = get_data(type, states);

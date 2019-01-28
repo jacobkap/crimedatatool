@@ -297,7 +297,7 @@ var arrest_values = {
   "gamble_bookmaker": "Gambling - Bookmaking",
   "gamble_lottery": "Gambling - Numbers/Lottery",
   "gamble_other": "Gambling - Other",
-  "liquor": "Liquor",
+  "liquor": "Liquor Laws",
   "manslaught_neg": "Manslaughter by Negligence",
   "mtr_veh_theft": "Motor Vehicle Theft",
   "murder": "Murder",
