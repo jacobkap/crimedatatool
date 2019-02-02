@@ -281,7 +281,7 @@ function addYAxis() {
 
       cleared_data[i].yAxisID = "B";
       cleared_data[i].label = cleared_data[i].label.replace("Total Offenses Cleared", "% Cleared - Total");
-      cleared_data[i].label = cleared_data[i].label.replace("Offenses Cleared Involving Only Persons Under age 18", "% Cleared - Minors Only");
+      cleared_data[i].label = cleared_data[i].label.replace("Offenses Cleared Involving Only Persons Under age 18", "% Cleared - All Under Age 18");
     graph_datasets.push(cleared_data[i]);
 
   }
