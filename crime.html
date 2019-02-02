@@ -13,7 +13,7 @@
     gtag('config', 'UA-99359926-4');
   </script>
 
-  <title>Offenses Known and Cleared</title>
+  <title>Crimes in the United States</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Jacob Kaplan">
@@ -76,6 +76,9 @@
         <br><br>
         <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('crime', state_values)">
         <label for="rate">Rate per 100,000 Population</label>
+        <br><br>
+        <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('crime', state_values)">
+        <label for="clearance_rate">Clearances as % of Crimes Reported</label>
 
       <br><br>
       <h3>Type of Crime:</h3>
@@ -86,10 +89,10 @@
       <span class="hint--right" aria-label="Number of crimes committed and found by investigation to have actually occurred. ">Actual Offenses</span>
       <br>
       <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
-      <span class="hint--right" aria-label="Number of offenses where at least one person (even if there are multiple offenders) is arrested, charged, or when the police have a suspect but cannot make an arrest ('cleared by exceptional means'). Includes juveniles cited to juvenile court.">Total Offenses Cleared</span>
+      <span class="hint--right" aria-label="Crimes where at least one person (even if there are multiple offenders) is arrested, charged, or when the police have a suspect but cannot make an arrest ('cleared by exceptional means'). Includes juveniles cited to juvenile court.">Offenses Cleared - Total</span>
       <br>
-      <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
-      <span class="hint--right" aria-label="Number of crimes cleared where all offenders arrested or cleared by exceptional means are under age 18.">Offenses Cleared Only Involving Minors</span>
+      <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('crime', '#checkbox_1')">
+      <span class="hint--right" aria-label="Crimes cleared where all offenders arrested or cleared by exceptional means are under age 18.">Offenses Cleared - All Under Age 18</span></input>
       <br>
       <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
       <span class="hint--right" aria-label="Crimes reported which investigation determined did not actually occur.">Unfounded Offenses</span>

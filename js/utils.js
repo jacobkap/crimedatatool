@@ -251,6 +251,39 @@ function countToRate(data, type, per_officer = false) {
 }
 
 
+function makeCrimeClearanceRates(data) {
+
+  data_keys = _.keys(data);
+  clearance_starters = ["tot_clr", "clr_18"];
+
+  crime_column = data_keys.filter(function(element) {
+    return element.includes("actual");
+  });
+
+  for (var i = 0; i < crime_column.length; i++) {
+    for (var n = 0; n < clearance_starters.length; n++) {
+        rate_val = data[crime_column[i].replace("actual", clearance_starters[n])] / data[crime_column[i]];
+        rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
+
+      if (!isFinite(rate_val)) {
+        rate_val = NaN;
+      }
+      data[crime_column[i].replace("actual", clearance_starters[n])] = rate_val * 100;
+      rate_type = "_clearance_rate";
+
+      new_key = crime_column[i].replace("actual", clearance_starters[n]) + rate_type;
+      new_key = new_key.replace("_rate_clearance", "_clearance");
+      Object.defineProperty(data, new_key,
+        Object.getOwnPropertyDescriptor(data,crime_column[i].replace("actual", clearance_starters[n])));
+      delete data[crime_column[i].replace("actual", clearance_starters[n])];
+
+//    }
+  }
+}
+  return data;
+}
+
+
 function getStateAgencies(type, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
   if (type == "arrests") {

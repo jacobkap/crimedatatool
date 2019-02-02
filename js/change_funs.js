@@ -5,8 +5,8 @@ function checkboxesUpdate(type, always_on_box) {
     !$("#checkbox_4").is(':checked')) {
     $(always_on_box).prop("checked", true);
   }
-  if (type == "death") {
-    agencyChangeFun('death', state_values);
+  if (["death", "crime"].includes(type)) {
+    agencyChangeFun(type, state_values);
   } else {
   remake_graph(type);
 }
@@ -84,6 +84,16 @@ function prisonerCategoryChange(current_category) {
 
 
 function agencyChangeFun(type, states) {
+  if (type == "crime") {
+    if ($("#clearance_rate").is(":checked")) {
+      $("#checkbox_2+span").text("% Cleared - Total");
+      $("#checkbox_3+span").text("% Cleared - All Under Age 18");
+    } else {
+      $("#checkbox_2+span").text("Offenses Cleared - Total");
+      $("#checkbox_3+span").text("Offenses Cleared - All Under Age 18");
+    }
+  }
+
   if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
       main_results = get_data(type, state_values);
   } else {
@@ -95,6 +105,11 @@ function agencyChangeFun(type, states) {
   all_data = main_results[3];
 
   remake_graph(type);
+
+  if (type == "crime" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {
+    addYAxis();
+  }
+
   table.destroy();
   $('#table').empty();
   table = makeTable(type);

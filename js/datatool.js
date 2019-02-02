@@ -31,11 +31,18 @@ function subsetColumns(data, columns, output, type) {
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
     rate_type = "_rate_per_officer";
   }
+  if (!checkIfRateChecked(type)) {
+    rate_type = "";
+  }
 
 
-  if (checkIfRateChecked(type)) {
+  if (checkIfRateChecked(type) || (type == "crime" && $("#clearance_rate").is(":checked"))) {
     columns = _.map(columns, function(x) {
+      if (type == "crime" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
+        return x + "_clearance_rate";
+      } else {
       return x + rate_type;
+    }
     });
 
     if (output == "table" && type != "prisoners") {
@@ -124,6 +131,11 @@ function getAgencyData(stateData, headers, table_headers, type) {
       return countToRate(currentObject, type);
     });
   }
+  if (type == "crime" && $("#clearance_rate").is(":checked")) {
+    agencyData = _.map(agencyData, function(currentObject) {
+      return makeCrimeClearanceRates(currentObject, type);
+    });
+  }
   return agencyData;
 }
 
@@ -156,6 +168,11 @@ function get_data(type, states) {
   if (checkIfRateChecked(type)) {
     allAgencyData = _.map(allAgencyData, function(currentObject) {
       return countToRate(currentObject, type);
+    });
+  }
+  if (type == "crime" && $("#clearance_rate").is(":checked")) {
+    allAgencyData = _.map(allAgencyData, function(currentObject) {
+      return makeCrimeClearanceRates(currentObject, type);
     });
   }
 
