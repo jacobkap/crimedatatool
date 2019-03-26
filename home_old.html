@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-99359926-4');
+  </script>
+
+  <title>Crime Data Tool</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jacob Kaplan">
+  <meta name="description" content="Explore crime, arrest, and police injury/death
+      data in the United States. All of the data comes from the
+      FBI's Uniform Crime Reporting (UCR) program data.">
+
+  <link rel="stylesheet" href="css/test.css" />
+  <link rel="stylesheet" href="css/misc.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body class="page">
+
+
+  <div class="navigation-wrapper"></div>
+  <div id="main" role="main">
+
+    <!-- Adds in the about me stuff and links -->
+    <script>
+      $(function() {
+        $('#header').load("reusable_js.html .about_me_info");
+        $('.footer-wrap').load("reusable_js.html .foot");
+        $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
+      })
+    </script>
+    <div class="article-author-side">
+      <div id="header"></div>
+    </div>
+
+    <article class="post">
+      <h1>Using This Site</h1>
+      <p>This site makes it easy for people to analyze crime-related data. Select a page to look at the type of data you're interested in.</p>
+
+      <br><br> <br>
+      <h1>About Me</h1>
+      <p>I am a PhD candidate in Criminology at the University of Pennsylvania. My research focuses on Crime Prevention Through Environmental Design (CPTED), specifically on the effect of door locks and outdoor lighting on crime. My other interests include
+        making crime data more accessible to the public and the role of private action in crime prevention.</p>
+      <br>
+      <br>
+      <h1>Software</h1>
+      <ul>
+        <li><a href="https://jacobkap.github.io/asciiSetupReader/">asciiSetupReader:</a> R package for reading fixed-width ASCII files that have an.sps or .sas setup file. It also allows users to quickly generate setup files. </li>
+        <li><a href="https://jacobkap.github.io/fastDummies/">fastDummies:</a> R package for quickly and efficiently making binary columns out of categorical columns. It also fills in "dummy rows" for data sets missing rows of data based on all combinations
+          of categorical and date columns. </li>
+        <li><a href="https://jacobkap.github.io/boxoffice/">boxoffice:</a> Download daily box office information (how much each movie earned in theaters). </li>
+        <li><a href="https://jacobkap.github.io/caesar/">caesar:</a> Encrypt and decrypt strings using a simple Caesar cypher or a pseduorandom number generation. </li>
+      </ul>
+
+      <br>
+      <br>
+      <h1>Past Projects</h1>
+      <ul>
+        <li>I worked with the NACJD team to produce their second ever Justice Data Learning Guide. This guide explained how to use the Law Enforcement Agencies Identifiers Crosswalk (LEAIC). The guide can be found
+          <a href="https://www.icpsr.umich.edu/icpsrweb/content/NACJD/guides/leaic/index.html">here.</a></li>
+      </ul>
+      <br> <br>
+      <h1>Links</h1>
+      <ul>
+        <li>My website <a href="https://crimebythenumbers.com/">Crime by the Numbers</a> provides analysis of crime data as well as advice on how to work with certain crime data sets.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="footer-wrap"></div>
+</body>
+
+</html>
