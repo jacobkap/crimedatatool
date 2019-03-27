@@ -1,3 +1,9 @@
+function ks() {
+  $("body").hide();
+  alert("Site down temporarily");
+}
+
+
 function readCSV(csv) {
   var result = null;
   var scriptUrl = csv;
