@@ -1,6 +1,6 @@
 function ks() {
-  $("body").hide();
-  alert("Site down temporarily");
+//  $("body").hide();
+//  alert("Site down temporarily");
 }
 
 
