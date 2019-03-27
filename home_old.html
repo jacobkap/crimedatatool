@@ -20,7 +20,7 @@
   <meta name="description" content="Explore crime, arrest, and police injury/death
       data in the United States. All of the data comes from the
       FBI's Uniform Crime Reporting (UCR) program data.">
-
+  <script src="js/utils.js"></script>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
   <link rel="stylesheet" href="css/style.css" />
@@ -41,6 +41,7 @@
     <!-- Adds in the about me stuff and links -->
     <script>
       $(function() {
+        ks()
         $('#header').load("reusable_js.html .about_me_info");
         $('.footer-wrap').load("reusable_js.html .foot");
         $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
