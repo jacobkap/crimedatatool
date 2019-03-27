@@ -38,6 +38,8 @@
   <div id="main" role="main">
     <!-- Adds in the about me stuff and links -->
       <script>
+      $("body").hide();
+      alert("Site down for maintenance");
         $(function() {
           $('#header').load("reusable_js.html .about_me_info");
           $('.footer-wrap').load("reusable_js.html .foot");
@@ -51,7 +53,7 @@
     <article class="post">
 
       <h1>General</h1>
-      <button class="accordion">Why are there negative numbers? Is that a mistake?</button>
+      <button class="accordion">Why are there negative numbers? Is that a mistake? (UCR data)</button>
       <div class="panel">
         <p>Negative values reflect adjustments of previous returns. So if the agency reports, for example, a burglary in January then in February discovers that it wasn't actually a burglary, they will record that both as 1 unfounded burglary and -1 actual burglary in February. This is so it "deletes" the erroneously recorded burglary from January. See more on pages 82-83 of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's Manual for UCR data</a>. </p>
       </div>
