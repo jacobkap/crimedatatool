@@ -13,6 +13,7 @@
     gtag('config', 'UA-99359926-4');
   </script>
 
+
   <title>FAQ - Crime Data Tool</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,6 +63,58 @@
       <div class="panel">
         <p>I have no plans to do so at this time.</p>
       </div>
+
+
+      <h1>Alcohol</h1>
+
+      <button class="accordion">Where is the data from?</button>
+      <div class="panel">
+        <p>This data is from the Apparent Per Capita Alcohol Consumption: National, State, and Regional Trends
+           1977-2016 report produced by Sarah P. Haughwout and Dr. Megan E. Slater at the National Institute
+           on Alcohol Abuse and Alcoholism. The Data page of this site has a link to download he data. For the
+            original report, click <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here</a></p>
+      </div>
+
+      <button class="accordion">How was per capita alcohol consumption determined?</button>
+      <div class="panel">
+        <p>For a complete methodology please see the actual report
+          <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here.</a> The
+          authors determined the amount of alcohol consumed (originally measured in gallons of ethanol
+           - pure alcohol) through sales data or tax information for each state-year. Population data
+           for how many people age 14 and up live in each state was acquired from the CDC' WONDER data.
+            Ethanol was divided by population to determine per capita consumption. </p>
+      </div>
+
+      <button class="accordion">Why is the "Total Drinks" column not equal the sum of the individul drink categories?</button>
+      <div class="panel">
+        <p>The original report provides an equation to convert the amount of total ethanol consumed into a
+          "total drinks" variable so I used that to make that variable. For the individual drink categories
+           (beer, shots of liquor, and glasses of wine), it provides an equation to convert the amount of
+           ethanol consumed into the amount of alcohol. I then converted this to number of drinks for each
+           category based on the National Institute of Health's
+           <a href="https://www.niaaa.nih.gov/alcohol-health/overview-alcohol-consumption/what-standard-drink">page</a>
+           saying how many ounces of alcohol make up a drink for those categories. Therefore, the sum of the categories
+            is slightly different than the "total drinks" column.</p>
+      </div>
+
+      <h1>Arrest</h1>
+
+      <button class="accordion">Where is the data from?</button>
+      <div class="panel">
+        <p>This data is from the FBI's Arrests by Age, Sex, and Race data which is part of the Uniform Crime Reporting (UCR) Program.
+           This data provides the number of arrests that occurred in a city in any given year and breaks that down by age
+           (adult or juvenile), race, and gender. </a></p>
+      </div>
+
+
+
+            <h1>Border Patrol</h1>
+
+            <button class="accordion">Where is the data from?</button>
+            <div class="panel">
+              <p>See <a href="http://doi.org/10.3886/E109522V2">here.</a></p>
+            </div>
+
 
 
       <h1>Crime</h1>
@@ -198,13 +251,33 @@
         </p>
       </div>
 
-      <h1>Arrest</h1>
+
+      <h1>Death</h1>
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>This data is from the FBI's Arrests by Age, Sex, and Race data which is part of the Uniform Crime Reporting (UCR) Program.
-           This data provides the number of arrests that occurred in a city in any given year and breaks that down by age
-           (adult or juvenile), race, and gender. </a></p>
+        <p>This data comes from the Center for Disease Control and Prevention's (CDC) WONDER data and provides
+          the number of deaths for several cause of death categories for each state.</p>
+      </div>
+
+      <button class="accordion">What are age-adjusted rates?</button>
+      <div class="panel">
+        <p>The following is the CDC's definition of age-adjusted rates from
+          <a href="https://wonder.cdc.gov/wonder/help/faq.html#6">this page.</a></p>
+        <blockquote>The rates of almost all causes of disease, injury, and death vary by age. Age
+          adjustment is a technique for "removing" the effects of age from crude rates so as to
+           allow meaningful comparisons across populations with different underlying age structures.
+            For example, comparing the crude rate of heart disease in Florida with that of California
+             is misleading, because the relatively older population in Florida leads to a higher crude
+              death rate, even if the age-specific rates of heart disease in Florida and California were
+               the same. For such a comparison, age-adjusted rates are preferable. </blockquote>
+      </div>
+
+      <button class="accordion">Why are some values missing?</button>
+      <div class="panel">
+        <p>The CDC does not report death counts when there are fewer than 16 deaths in that category.
+          They do this both for confidentiality of the deceased and to avoid the misuse of rates caused
+          by such a small numerator.</p>
       </div>
 
       <h1>Police</h1>
@@ -270,66 +343,6 @@ population totaled 1,293,887.</blockquote>
       </div>
 
 
-
-      <h1>Alcohol</h1>
-
-      <button class="accordion">Where is the data from?</button>
-      <div class="panel">
-        <p>This data is from the Apparent Per Capita Alcohol Consumption: National, State, and Regional Trends
-           1977-2016 report produced by Sarah P. Haughwout and Dr. Megan E. Slater at the National Institute
-           on Alcohol Abuse and Alcoholism. The Data page of this site has a link to download he data. For the
-            original report, click <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here</a></p>
-      </div>
-
-      <button class="accordion">How was per capita alcohol consumption determined?</button>
-      <div class="panel">
-        <p>For a complete methodology please see the actual report
-          <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here.</a> The
-          authors determined the amount of alcohol consumed (originally measured in gallons of ethanol
-           - pure alcohol) through sales data or tax information for each state-year. Population data
-           for how many people age 14 and up live in each state was acquired from the CDC' WONDER data.
-            Ethanol was divided by population to determine per capita consumption. </p>
-      </div>
-
-      <button class="accordion">Why is the "Total Drinks" column not equal the sum of the individul drink categories?</button>
-      <div class="panel">
-        <p>The original report provides an equation to convert the amount of total ethanol consumed into a
-          "total drinks" variable so I used that to make that variable. For the individual drink categories
-           (beer, shots of liquor, and glasses of wine), it provides an equation to convert the amount of
-           ethanol consumed into the amount of alcohol. I then converted this to number of drinks for each
-           category based on the National Institute of Health's
-           <a href="https://www.niaaa.nih.gov/alcohol-health/overview-alcohol-consumption/what-standard-drink">page</a>
-           saying how many ounces of alcohol make up a drink for those categories. Therefore, the sum of the categories
-            is slightly different than the "total drinks" column.</p>
-      </div>
-
-      <h1>Death</h1>
-
-      <button class="accordion">Where is the data from?</button>
-      <div class="panel">
-        <p>This data comes from the Center for Disease Control and Prevention's (CDC) WONDER data and provides
-          the number of deaths for several cause of death categories for each state.</p>
-      </div>
-
-      <button class="accordion">What are age-adjusted rates?</button>
-      <div class="panel">
-        <p>The following is the CDC's definition of age-adjusted rates from
-          <a href="https://wonder.cdc.gov/wonder/help/faq.html#6">this page.</a></p>
-        <blockquote>The rates of almost all causes of disease, injury, and death vary by age. Age
-          adjustment is a technique for "removing" the effects of age from crude rates so as to
-           allow meaningful comparisons across populations with different underlying age structures.
-            For example, comparing the crude rate of heart disease in Florida with that of California
-             is misleading, because the relatively older population in Florida leads to a higher crude
-              death rate, even if the age-specific rates of heart disease in Florida and California were
-               the same. For such a comparison, age-adjusted rates are preferable. </blockquote>
-      </div>
-
-      <button class="accordion">Why are some values missing?</button>
-      <div class="panel">
-        <p>The CDC does not report death counts when there are fewer than 16 deaths in that category.
-          They do this both for confidentiality of the deceased and to avoid the misuse of rates caused
-          by such a small numerator.</p>
-      </div>
 
 
 

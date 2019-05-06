@@ -4,7 +4,11 @@ function allowSaveGraph() {
 
 
 
-function getGraphDataset(tableData, colsForGraph, type) {
+function getGraphDataset(tableData, colsForGraph, type, crimes) {
+  if (type == "borderpatrol") {
+    colsForGraph[0] = "fiscal_year"
+  }
+
   rate_type = "_rate";
   if (!checkIfRateChecked(type)) {
     rate_type = "";
@@ -97,7 +101,19 @@ function getGraphDataset(tableData, colsForGraph, type) {
       data1.push(data[n][colsForGraph[1]]);
     }
 
-    final_data = [makeGraphObjects(data1, "#7570b3", colsForGraph[1])];
+    label = colsForGraph[1]
+    label = label.replace(/deaths_/g, "");
+    if (type == "borderpatrol") {
+      label = values[$("#subcategories").val()]
+    } else if (type == "crime_nibrs" && $("#rate").is(':checked')) {
+          label = label.replace(/_rate/g, "");
+          label = crimes[label]
+          label += " Rate"
+    }  else {
+      label = crimes[label]
+  }
+
+    final_data = [makeGraphObjects(data1, "#7570b3", label)];
     final_data[0].hidden = false;
   }
   return final_data;
@@ -121,10 +137,10 @@ function makeGraphObjects(data, color, label) {
   return obj;
 }
 
-function makeGraph(type) {
+function makeGraph(type, crimes) {
   title = getTitle(table_data, type);
   yaxis_label = "";
-  if (type == "crime") {
+  if (["crime", "crime_nibrs"].includes(type)) {
     yaxis_label = '# of Crimes';
     if (checkIfRateChecked(type)) {
       yaxis_label = 'Rate per 100,000 Population';
@@ -167,7 +183,7 @@ function makeGraph(type) {
       yaxis_label = 'Age-Adjusted Deaths per 100,000 population';
     }
   }
-  graph_datasets = getGraphDataset(table_data, graph_headers, type);
+  graph_datasets = getGraphDataset(table_data, graph_headers, type, crimes);
   if (type == "crime" && $("#clearance_rate").is(":checked")) {
     cleared_data = [];
     _.each(graph_datasets, function(x) {
@@ -183,6 +199,11 @@ function makeGraph(type) {
     });
     graph_datasets = not_cleared_data;
 
+  }
+
+  xaxis_label = "Year";
+  if (type == "borderpatrol") {
+    xaxis_label = "Fiscal Year";
   }
 
   opts = {
@@ -206,7 +227,7 @@ function makeGraph(type) {
           fontSize: 22,
           fontColor: "#000000",
           display: true,
-          labelString: "Year"
+          labelString: xaxis_label
         }
       }],
       yAxes: [{
@@ -311,6 +332,10 @@ function getTitle(data, type) {
     subtitle = arrest_values[$("#crime_dropdown").val()];
     subtitle += ": " + arrest_categories[$("#arrests_category_dropdown").val()];
     subtitle += " - Arrests";
+  }  else if (type == "borderpatrol") {
+    title = border_states[$("#state_dropdown").val()];
+    subtitle = border_categories[$("#crime_dropdown").val()];
+    subtitle = subtitle + ", " + values[$("#subcategories").val()]
   } else if (type == "leoka") {
     subtitle = leoka_categories[$("#crime_dropdown").val()];
     subtitle += ": " + _.values(leoka_subcatergory_values)[$("#leoka_subcategory_dropdown").val()];
@@ -417,6 +442,11 @@ function fixTableName(name, type) {
     }
   } else if (type == "alcohol") {
     name = alcohol_categories[name];
+  } else if (type == "crime_nibrs") {
+    if ($("#rate").is(':checked')) {
+    name = name.replace(/_rate/g, "");
+  }
+    name = nibrs_crime_values[name];
   } else if (type == "death") {
     temp_name = name;
     temp1 = name.replace(/deaths_.*/, "Deaths ");
@@ -427,7 +457,18 @@ function fixTableName(name, type) {
     if (temp1 != temp_name) name = temp1 + name;
     if (temp2 != temp_name) name = temp2 + name;
     if (temp3 != temp_name) name = temp3 + name;
-  }
+  } else if (type == "borderpatrol") {
+    if (name == "sector") {
+      name = "Sector";
+    } else if (name == "fiscal_year") {
+      name = "Fiscal Year";
+    } else {
+      index_val = keys.findIndex(function(element) {
+  return element == name;
+});
+        name = values[index_val]
+      }
+}
 
   if (name === undefined || default_table_headers.includes(name)) {
     name = temp_name.replace(/^\w/, c => c.toUpperCase());
@@ -439,12 +480,10 @@ function fixTableName(name, type) {
     !name.includes("State") &&
     !name.includes("Population") &&
     !name.includes("ORI")) {
-      console.log(name)
     if (type == "crime" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {
     } else {
     name += " Rate";
   }
-  console.log(name)
     if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked')) {
       name += " per Officer";
     }
@@ -481,7 +520,7 @@ function makeTable(type) {
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
     return a !== 'agency' && a !== 'year' &&
-      a !== 'state' && a !== 'ORI';
+      a !== 'state' && a !== 'ORI' && a !== 'sector' && a !== 'fiscal_year';
   });
 
   // Adds commas in numbers to make it easier to read!

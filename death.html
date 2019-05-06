@@ -13,6 +13,7 @@
     gtag('config', 'UA-99359926-4');
   </script>
 
+
   <title>Deaths in the United States</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,17 +60,17 @@
     <p>Enter a state to see death information over time.</p>
     <h3>State:</h3>
     <br><br>
-    <select class="simple-select" id="state_dropdown" onchange="agencyChangeFun('death', state_values)"></select>
+    <select class="simple-select" id="state_dropdown" onchange="agencyChangeFun('death', state_values, death_categories)"></select>
     <br><br>
     <h3>Cause of Death:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('death', state_values)">
+    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('death', state_values, death_categories)">
     </select>
     <br>
-    <input type="checkbox" id="checkbox_1" onchange="rateBoxesChange('#checkbox_2', 'death', state_values)"></input>
+    <input type="checkbox" id="checkbox_1" onchange="rateBoxesChange('#checkbox_2', 'death', state_values, death_categories)"></input>
     <span>Rate per 100,000 Population</span>
     <br>
-    <input type="checkbox" id="checkbox_2" onchange="rateBoxesChange('#checkbox_1', 'death', state_values)"></input>
+    <input type="checkbox" id="checkbox_2" onchange="rateBoxesChange('#checkbox_1', 'death', state_values, death_categories)"></input>
     <span>Age-Adjusted Rate per 100,000 Population</span>
 
     <hr>

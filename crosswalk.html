@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="robots" content="noindex" />
+  <!-- Global site tag (gtag.js) - Google Analytics
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-99359926-4');
+  </script>
+-->
+
+
+  <title>Crosswalk</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jacob Kaplan">
+  <meta name="description" content="The Crosswalk! Look out for cars!">
+
+  <script type="text/javascript" src="data/data.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/graph_table.js"></script>
+  <script src="js/datatool.js"></script>
+
+  <link rel="stylesheet" href="css/test.css" />
+  <link rel="stylesheet" href="css/misc.css" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <div class="navigation-wrapper"></div>
+
+  <script>
+      ks()
+    $(function() {
+      $('.footer-wrap').load("reusable_js.html .foot");
+      $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
+    })
+  </script>
+
+
+
+    <div class="crosswalk">
+      <div id="loader"></div>
+      <div>
+        <table id="crosswalk_table" class="display cell-border"></table>
+      </div>
+
+      <script type="text/javascript">
+        $(document).ready(function() {
+
+          url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/crosswalk.csv"
+          data = readCSV(url);
+          data = data.split("\n");
+          headers = data[0];
+          data.pop()
+          data.shift()
+          data = data_object_fun(data, headers);
+          headers = headers.split(",");
+          $("#crosswalk_table").ready($("#loader").hide())
+
+          z = [];
+          real_names = ["ORI", "ORI9", "FIPS State County", "Crosswalk Name", "Census Name", "2016 Population"]
+
+          for (var i = 0; i < headers.length; i++) {
+            z.push({
+              data: headers[i],
+              title: real_names[i],
+              className: "dt-head-left dt-body-left"
+            });
+          }
+
+          for (var m = 0; m < data.length; m++) {
+              data[m].population = parseFloat(data[m].population).toLocaleString();
+            }
+
+
+          crosswalk = $("#crosswalk_table").DataTable({
+            data: data,
+            columns: z,
+            "scrollX": true,
+            "sScrollXInner": "100%",
+            "sScrollX": "100%",
+            "stripe": true,
+            "hover": true,
+            "lengthChange": true,
+            "paging": true,
+            "searching": true,
+            "pageLength": 25,
+            "ordering": true,
+            "order": [],
+          });
+        });
+      </script>
+    </div>
+
+<div class="footer-wrap"></div>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-function checkboxesUpdate(type, always_on_box) {
+function checkboxesUpdate(type, always_on_box, crimes) {
   if (!$("#checkbox_1").is(':checked') &&
     !$("#checkbox_2").is(':checked') &&
     !$("#checkbox_3").is(':checked') &&
@@ -8,15 +8,15 @@ function checkboxesUpdate(type, always_on_box) {
   if (["death", "crime"].includes(type)) {
     agencyChangeFun(type, state_values);
   } else {
-  remake_graph(type);
+  remake_graph(type, crimes);
 }
 }
 
-function remake_graph(type) {
+function remake_graph(type, crimes) {
   $('#graph').remove();
   $('.main').prepend('<canvas id="graph" style="width:95%;height:500px;"></canvas>');
   ctx = document.getElementById("graph").getContext('2d');
-  graph = makeGraph(type);
+  graph = makeGraph(type, crimes);
 }
 
 function prisonersPopBoxChange(box_to_check) {
@@ -30,15 +30,15 @@ function prisonersPopBoxChange(box_to_check) {
 }
 
 
-function rateBoxesChange(dropdown_to_turnoff, type, states) {
+function rateBoxesChange(dropdown_to_turnoff, type, states, crimes) {
   $(dropdown_to_turnoff).prop("checked", false);
-    agencyChangeFun(type, states);
+    agencyChangeFun(type, states, crimes);
 }
 
-function stateChangeFun(type, states) {
-  agencies = updateAgencies(type);
+function stateChangeFun(type, states, crimes) {
+  agencies = updateAgencies(type, states);
   $('.simple-select').trigger('chosen:updated');
-  agencyChangeFun(type, states);
+  agencyChangeFun(type, states, crimes);
 }
 
 function leoka_categoryChangeFun() {
@@ -49,6 +49,21 @@ function leoka_categoryChangeFun() {
   agencyChangeFun('leoka', state_values);
 }
 
+function borderCategoryChange(type, states, crimes) {
+  subcatergory_keys = makeBorderSubcategoriesDropdown();
+  if (["sector_profile", "family", "staffing"].includes($("#crime_dropdown").val())) {
+      border_states = border_sectors;
+  } else if (["southwest_apprehensions", "southwest_deaths"].includes($("#crime_dropdown").val())) {
+    border_states = southwest_border_sectors;
+  } else if (["seizures"].includes($("#crime_dropdown").val())) {
+    border_states = border_regions;
+  } else if (["nationwide"].includes($("#crime_dropdown").val())) {
+    border_states = nationwide_only;
+  }
+  makeStateDropdown(border_states, 0);
+  $('.simple-select').trigger('chosen:updated');
+  agencyChangeFun('borderpatrol', border_states, border_categories);
+}
 
 function prisonerCategoryChange(current_category) {
   toggle_prisoners_race_display();
@@ -83,7 +98,7 @@ function prisonerCategoryChange(current_category) {
 }
 
 
-function agencyChangeFun(type, states) {
+function agencyChangeFun(type, states, crimes) {
   if (type == "crime") {
     if ($("#clearance_rate").is(":checked")) {
       $("#checkbox_2+span").text("% Cleared - Total");
@@ -99,12 +114,12 @@ function agencyChangeFun(type, states) {
   } else {
   main_results = get_data(type, states);
 }
-  table_data = main_results[0];
+  table_data    = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
-  all_data = main_results[3];
+  all_data      = main_results[3];
 
-  remake_graph(type);
+  remake_graph(type, crimes);
 
   if (type == "crime" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {
     addYAxis();

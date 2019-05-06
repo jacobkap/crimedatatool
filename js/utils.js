@@ -1,7 +1,30 @@
 function ks() {
-  $("body").hide();
-  alert("Site temporarily down for maintenance.");
+
+
+// $("body").hide();
+//  var password_given = localStorage.getItem("password_given");
+//  if (password_given === false | password_given === null) {
+//        var testPassword = window.prompt("Luxembourg");
+//        if (testPassword === "houdini") {
+//            $("body").show();
+//            localStorage.setItem("password_given", true);
+//        } else {
+//            location.reload();
+//        }
+//      } else {
+//        $("body").show();
+//      }
 }
+
+function highlight_current_page() {
+  page = window.location.pathname
+  page = page.replace(/.html/g, "");
+  page = page.replace(/\//g, "");
+  console.log(page)
+  $('a[href*=' + page + ']').css({'color' : 'red'});
+  $('a[href*=' + page + ']').text(page);
+}
+
 
 
 function readCSV(csv) {
@@ -51,14 +74,18 @@ function exportToCsv(tableData, type, states) {
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
   filename = "crimedatatool_" + type + "_" + rate_or_count;
-  if (!["prisoners", "death", "alcohol"].includes(type)) {
+  if (!["prisoners", "death", "alcohol", "borderpatrol"].includes(type)) {
     filename += agencies[$("#agency_dropdown").val()] + "_";
   }
 
   filename += states[$("#state_dropdown").val()];
 
   if (type == "prisoners") {
-    filename += "_" + prisoner_categories[$("#crime_dropdown").val()] + ".csv";
+    filename += "_" + prisoner_categories[$("#crime_dropdown").val()];
+  }
+
+  if (type == "borderpatrol") {
+    filename += "_" + border_categories[$("#crime_dropdown").val()];
   }
 
   filename += ".csv";
@@ -164,6 +191,21 @@ function makePrisonerSubcategoriesDropdown() {
     $('#prisoners_subcategories').append(new Option(text, val));
   });
   $('#prisoners_subcategories').val(prisoner_subcategory_starts[category_index_num]);
+
+  return (keys);
+}
+
+function makeBorderSubcategoriesDropdown() {
+  subcategory_starts = [7, 0, 2, 0, 9, 0, 0];
+  category_index_num = _.indexOf(_.keys(border_categories), $('#crime_dropdown').val());
+  $('#subcategories').empty();
+  values = border_subcategories[category_index_num];
+  keys = _.keys(values);
+  values = _.values(values);
+  $.each(values, function(val, text) {
+    $('#subcategories').append(new Option(text, val));
+  });
+  $('#subcategories').val(subcategory_starts[category_index_num]);
 
   return (keys);
 }
@@ -290,16 +332,17 @@ function makeCrimeClearanceRates(data) {
 }
 
 
-function getStateAgencies(type, largest_agencies = false) {
+function getStateAgencies(type, states = state_values, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
-  if (type == "arrests") {
-    url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_data/master/data/";
-  }
+
   if (type == "crime") {
     type = "offenses";
   }
+  if (type == "crime_nibrs") {
+    type = "nibrs";
+  }
   url += type + "/";
-  final_url = url + state_values[$("#state_dropdown").val()] + "_agency_choices.json";
+  final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
   if (largest_agencies === true) {
     final_url = url + "largest_agency_choices.json";
   }
@@ -316,14 +359,14 @@ function getStateAgencies(type, largest_agencies = false) {
   return (state_agencies);
 }
 
-function updateAgencies(type) {
-  agencies = getStateAgencies(type);
+function updateAgencies(type, states) {
+  agencies = getStateAgencies(type, states);
   agencies.sort();
   $("#agency_dropdown").empty();
   $.each(agencies, function(val, text) {
     $("#agency_dropdown").append(new Option(text, val));
   });
-  largest_agency_temp = state_values[$("#state_dropdown").val()];
+  largest_agency_temp = states[$("#state_dropdown").val()];
   largest_agency_temp = _.filter(largest_agency, function(x) {
     return x.state == largest_agency_temp;
   });
@@ -342,12 +385,12 @@ function main(type, states, state_default, crimes, crime_starter) {
   if (type == "arrests") {
     makeArrestCategoriesDropdown();
   }
-  if (!["alcohol", "prisoners", "death"].includes(type)) {
+  if (!["alcohol", "prisoners", "death", "borderpatrol"].includes(type)) {
     makeCrimeDropdown(crimes, crime_starter);
-    largest_agency = getStateAgencies(type, true);
-    agencies = updateAgencies(type);
+    largest_agency = getStateAgencies(type, states, true);
+    agencies = updateAgencies(type, states);
   }
-  if (type == "death") {
+  if (["death"].includes(type)) {
     makeCrimeDropdown(crimes, crime_starter);
   }
   if (type == "prisoners") {
@@ -355,6 +398,10 @@ function main(type, states, state_default, crimes, crime_starter) {
     prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
     makePrisonersRaceDropdown();
     toggle_prisoners_race_display();
+  }
+  if (type == "borderpatrol") {
+    makeCrimeDropdown(crimes, crime_starter);
+    subcatergory_keys = makeBorderSubcategoriesDropdown();
   }
   if (type == "leoka") {
     makeLeokaWeaponDropdown();
@@ -371,7 +418,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   table_headers = main_results[2];
   all_data = main_results[3];
 
-  graph = makeGraph(type);
+  graph = makeGraph(type, crimes);
   $("#graph").ready($("#loader").hide());
   table = makeTable(type);
 
@@ -384,4 +431,5 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
   */
   jQuery(window).on('resize', resizeChosen);
+
 }

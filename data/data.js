@@ -6,6 +6,60 @@ default_table_headers = [
   "ORI"
 ];
 
+var border_sectors = [
+"Nationwide - Total",
+"Coastal Border - Total",
+"Miami",
+"New Orleans",
+"Ramey",
+"Northern Border - Total",
+"Blaine",
+"Buffalo",
+"Detroit",
+"Grand Forks",
+"Havre",
+"Houlton",
+"Spokane",
+"Southwest Border - Total",
+"Big Bend",
+"Del Rio",
+"El Centro",
+"El Paso",
+"Laredo",
+"Rio Grande Valley",
+"San Diego",
+"Swanton",
+"Tucson",
+"Yuma"
+];
+
+
+var southwest_border_sectors = [
+"Southwest Border - Total",
+"Big Bend",
+"Del Rio",
+"El Centro",
+"El Paso",
+"Laredo",
+"Rio Grande Valley",
+"San Diego",
+"Swanton",
+"Tucson",
+"Yuma"
+];
+
+var border_regions = [
+"Nationwide - Total",
+"Coastal Border - Total",
+"Northern Border - Total",
+"Southwest Border - Total",
+];
+
+var nationwide_only = [
+  "Nationwide - Total"
+];
+
+
 var state_values = [
   "Alabama",
   "Alaska",
@@ -60,6 +114,116 @@ var state_values = [
   "Wyoming"
 ];
 
+var nibrs_state_values = [
+  "Alabama",
+"Arizona",
+"Arkansas",
+"Colorado",
+"Connecticut",
+"Delaware",
+"Georgia",
+"Idaho",
+"Illinois",
+"Indiana",
+"Iowa",
+"Kansas",
+"Kentucky",
+"Louisiana",
+"Maine",
+"Massachusetts",
+"Michigan",
+"Mississippi",
+"Missouri",
+"Montana",
+"Nebraska",
+"New Hampshire",
+"North Dakota",
+"Ohio",
+"Oklahoma",
+"Oregon",
+"Pennsylvania",
+"Rhode Island",
+"South Carolina",
+"South Dakota",
+"Tennessee",
+"Texas",
+"Utah",
+"Vermont",
+"Virginia",
+"Washington",
+"West Virginia",
+"Wisconsin"
+];
+
+var border_categories = {
+  "seizures"                : "Apprehensions and Seizures",
+  "staffing"                : "Border Patrol Staffing",
+  "family"                  : "Family and Unaccompanied Children Apprehensions",
+  "nationwide"              : "Nationwide Apprehensions",
+  "sector_profile"          : "Sector Profile",
+  "southwest_apprehensions" : "Southwest Border Apprehensions",
+  "southwest_deaths"        : "Southwest Border Deaths",
+};
+
+var border_subcategories = [
+  seizures = {
+    "ammunition_rounds"                : "Ammunition (Rounds)",
+    "other_than_mexican_apprehensions" : "Apprehensions (Other than Mexicans)",
+    "apprehensions"                    : "Apprehensions - Total",
+    "cocaine_pounds"                   : "Cocaine (in Pounds)",
+    "cocaine_seizures"                 : "Cocaine (# of Seizures)",
+    "ecstasy_pounds"                   : "Ecstasy (in Pounds)",
+    "ecstasy_seizures"                 : "Ecstasy (# of Seizures)",
+    "heroin_ounces"                    : "Heroin (in Ounces)",
+    "heroin_seizures"                  : "Heroin (# of Seizures)",
+    "marijuana_pounds"                 : "Marijuana (in Pounds)",
+    "marijuana_seizures"               : "Marijuana (# of Seizures)",
+    "methamphetamine_pounds"           : "Methamphetamine (in Pounds)",
+    "methamphetamine_seizures"         : "Methamphetamine (# of Seizures)",
+    "other_drugs_pounds"               : "Other Drugs (in Pounds)",
+    "other_drugs_seizures"             : "Other Drugs (# of Seizures)",
+    "firearms"                         : "Firearms",
+    "conveyances"                      : "Conveyances",
+    "currency_in_dollars"              : "Currency (in Dollars)"
+  },
+  staffing = {
+      "number_of_agents" : "Number of Agents"
+  },
+  family = {
+      "total_apprehensions"              : "Apprehensions - Total",
+      "family_apprehensions"             : "Apprehensions - Family",
+      "unaccompanied_child_apprehension" : "Apprehensions - Unaccompanied Juveniles"
+  },
+  nationwide = {
+    "total_apprehensions" : "Total Apprehensions"
+  },
+  sector_profile = {
+    "assaults"                         : "Assaults",
+    "accompanied_juveniles"            : "Apprehensions - Accompanied Juveniles",
+    "unaccompanied_juveniles"          : "Apprehensions - Unaccompanied Juveniles",
+    "female_apprehensions"             : "Apprehensions - Females",
+    "male_apprehensions"               : "Apprehensions - Males",
+    "other_than_mexican_apprehensions" : "Apprehensions - Other than Mexican",
+    "total_juveniles"                  : "Apprehensions - Total Juveniles",
+    "total_adults"                     : "Apprehensions - Total Adults",
+    "total_apprehensions"              : "Apprehensions - Total",
+    "cocaine_pounds"                   : "Cocaine Seizures (in Pounds)",
+    "marijuana_pounds"                 : "Marijuana Seizures (in Pounds)",
+    "deaths"                           : "Deaths (Southwest Border Only)",
+    "accepted_prosecutions"            : "Number of Accepted Prosecutions",
+    "number_of_agents"                 : "Number of CBP Agents",
+    "rescues"                          : "Rescues (Southwest Border Only)"
+},
+
+southwest_apprehensions = {
+  "total_apprehensions" : "Apprehensions - Total"
+},
+southwest_deaths = {
+  "deaths" : "Deaths"
+}
+];
+
+
 agency_desc_vals = {
   "year": "Year",
   "ORI": "ORI",
@@ -97,6 +261,7 @@ prisoners_state_values = prisoners_state_values.concat(state_values);
 
 alcohol_state_values = ["US Total", "West Region", "South Region",  "Midwest Region", "Northeast Region"];
 alcohol_state_values = alcohol_state_values.concat(state_values);
+
 
 var prisoner_categories = {
   "custody": "Prisoners in Custody",
@@ -266,6 +431,62 @@ var crime_values = {
   "robbery_other_weapon": "Robbery - Other Weapon",
   "robbery_unarmed": "Robbery - Unarmed",
   "theft_total": "Theft - Total"
+};
+
+
+var nibrs_crime_values = {
+"animal_cruelty"                             : "Animal Cruelty",
+"arson"                                      : "Arson",
+"aggravated_assault"                         : "Assault - Aggravated",
+"simple_assault"                             : "Assault - Simple",
+"bribery"                                    : "Bribery",
+"burglary_breaking_and_entering"             : "Burglary",
+"drug_equipment_violations"                  : "Drugs - Equipment Violations",
+"drug_narcotic_violations"                   : "Drugs - Narcotic Violations",
+"counterfeiting_forgery"                     : "Fraud - Counterfeiting or Forgery",
+"credit_card_automatic_teller_machine_fraud" : "Fraud - Credit Card or ATM Fraud",
+"false_pretenses_swindle_confidence_game"    : "Fraud - False Pretenses Swindle/Condidence Game",
+"welfare_fraud"                              : "Fraud - Welfare Fraud",
+"wire_fraud"                                 : "Fraud - Wire Fraud",
+"embezzlement"                               : "Embezzlement",
+"extortion_blackmail"                        : "Extortion/Blackmail",
+"betting_wagering"                           : "Gambling - Betting/Wagering",
+"gambling_equipment_violations"              : "Gambling - Gambling Equipment Violation",
+"operating_promoting_assisting_gambling"     : "Gambling - Operating, Promoting, or Assisting Gambling",
+"sports_tampering"                           : "Gambling - Sports Tampering",
+"hacking_computer_invasion"                  : "Hacking/Computer Invation",
+"justifiable_homicide"                       : "Homicide - Justifiable",
+"murder_nonnegligent_manslaughter"           : "Homicide - Murder or Nonnegligent Manslaughter",
+"negligent_manslaughter"                     : "Homicide - Negligent Manslaughter",
+"human_trafficking_commercial_sex_acts"      : "Human Trafficking - Commercial Sex Acts",
+"human_trafficking_involuntary_servitude"    : "Human Trafficking - Involuntary Servitude",
+"identity_theft"                             : "Identity Theft",
+"impersonation"                              : "Impersonation",
+"intimidation"                               : "Intimidation",
+"kidnaping_abduction"                        : "Kidnapping/Abduction",
+"motor_vehicle_theft"                        : "Motor Vehicle Theft",
+"robbery"                                    : "Robbery",
+"assisting_or_promoting_prostitution"        : "Sex Crime - Assisting or Promoting Prostitution",
+"fondling_child_molest"                      : "Sex Crime - Child Molest (Fondling)",
+"incest"                                     : "Sex Crime - Incest",
+"pornography_obscene_material"               : "Sex Crime - Pornography or Obscene Material",
+"prostitution"                               : "Sex Crime - Prostitution",
+"purchasing_prostitution"                    : "Sex Crime - Purchasing Prostitution",
+"rape"                                       : "Sex Crime - Rape",
+"sexual_assault_with_an_object"              : "Sex Crime - Sexual Assault with an Object",
+"sodomy"                                     : "Sex Crime - Sodomy",
+"statutory_rape"                             : "Sex Crime - Statutory Rape",
+"stolen_property_offenses"                   : "Stolen Property Offenses",
+"all_other_larceny"                          : "Theft - All Other",
+"theft_from_building"                        : "Theft - Theft from Building",
+"theft_from_coin_operated_machine_or_device" : "Theft - Theft from Coin Operated Machine",
+"theft_from_motor_vehicle"                   : "Theft - Theft from Motor Vehicle",
+"theft_of_motor_vehicle_parts_accessories"   : "Theft - Theft of Motor Vehicle Parts/Accessories",
+"pocket_picking"                             : "Theft - Pocket Picking",
+"purse_snatching"                            : "Theft - Purse Snatching",
+"shoplifting"                                : "Theft - Shoplifting",
+"destruction_damage_vandalism_of_property"   : "Vandalism/Destruction of Property",
+"weapon_law_violations"                      : "Weapon Law Violations"
 };
 
 var arrest_values = {

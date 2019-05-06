@@ -74,15 +74,18 @@ function subsetColumns(data, columns, output, type) {
 
 function getStateData(type, states) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
-  if (type == "arrests") {
-    url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_data/master/data/";
-  }
+
   if (type == "crime") {
     type = "offenses";
+  }
+  if (type == "crime_nibrs") {
+    type = "nibrs";
   }
 
   state = states[$("#state_dropdown").val()];
   state = state.replace(/ /g, "_");
+  state = state.replace(/-/g, "_");
+  state = state.replace(/___/g, "_");
 
   if (type == "prisoners") {
     category = $("#crime_dropdown").val();
@@ -90,6 +93,10 @@ function getStateData(type, states) {
     url += "prisoners/" + state + "_" + category + "_prisoners";
   } else if (["alcohol", "death"].includes(type)) {
     url += type + "/" + state + "_" + type;
+  } else if (["borderpatrol"].includes(type)) {
+    category = $("#crime_dropdown").val();
+    category = category.replace(/ /g, "_");
+    url += type + "/"  + category + "_" + state;
   } else {
     agency = agencies[$("#agency_dropdown").val()];
     agency = agency.replace(/ /g, "_");
@@ -140,7 +147,7 @@ function getAgencyData(stateData, headers, table_headers, type) {
 }
 
 function checkIfRateChecked(type) {
-  if (["crime", "arrests"].includes(type)) {
+  if (["crime", "arrests", "crime_nibrs"].includes(type)) {
     return $("#rate").is(':checked');
   } else if (type == "leoka") {
     return ($("#leoka_rate").is(':checked') ||
@@ -246,8 +253,10 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (["crime", "death"].includes(type)) {
+  if (["crime", "death", 'crime_nibrs'].includes(type)) {
     crime = $("#crime_dropdown").val();
+  } else if (type == "borderpatrol") {
+        crime = subcatergory_keys[$("#subcategories").val()];
   } else if (type == "arrests") {
     crime = $("#crime_dropdown").val();
     if (output == "graph") {
@@ -290,6 +299,9 @@ function getCrimeColumns(headers, type, output) {
     if (type == "death" & output == "table") {
       columnNames = ["state", "year"];
     }
+    if (type == "borderpatrol" & output == "table") {
+      columnNames = ["sector", "fiscal_year"];
+    }
 
 
 
@@ -310,6 +322,10 @@ function getCrimeColumns(headers, type, output) {
         if (headers[n] == crime + "_tot_adult" || headers[n] == crime + "_tot_juv") {
           columnNames.push(headers[n]);
         }
+      }
+    } else if (type == "borderpatrol") {
+      if (headers[n] === crime) {
+        columnNames.push(headers[n]);
       }
     } else {
       if (headers[n].includes(crime)) {
@@ -337,6 +353,7 @@ function getCrimeColumns(headers, type, output) {
   if (type == "leoka" && leoka_categories[$("#crime_dropdown").val()] != "Police Department Employees") {
     columnNames.push("total_employees_officers");
   }
+
 
 
   return (columnNames);
