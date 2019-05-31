@@ -4,8 +4,8 @@ function allowSaveGraph() {
 
 
 
-function getGraphDataset(tableData, colsForGraph, type, crimes) {
-  console.log(crimes)
+  function getGraphDataset(tableData, colsForGraph, type, crimes) {
+
   if (type == "borderpatrol") {
     colsForGraph[0] = "fiscal_year"
   }
@@ -57,7 +57,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data4.push(data[i][colsForGraph[4]]);
   }
 
-  if (["crime", "alcohol", "prisoners", "arrests", "leoka"].includes(type) || type == "leoka" &
+  if (["crime", "alcohol", "prisoners", "arrests"].includes(type) || type == "leoka" &
     leoka_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
@@ -104,13 +104,15 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
 
     label = colsForGraph[1]
     label = label.replace(/deaths_/g, "");
+    console.log(data1)
     if (type == "borderpatrol") {
       label = values[$("#subcategories").val()]
     } else if (type == "crime_nibrs" && $("#rate").is(':checked')) {
           label = label.replace(/_rate/g, "");
           label = crimes[label]
           label += " Rate"
-    }  else {
+          // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
+    }  else if (type != 'leoka') {
       label = crimes[label]
   }
 
@@ -185,6 +187,7 @@ function makeGraph(type, crimes) {
     }
   }
   graph_datasets = getGraphDataset(table_data, graph_headers, type, crimes);
+
   if (type == "crime" && $("#clearance_rate").is(":checked")) {
     cleared_data = [];
     _.each(graph_datasets, function(x) {
