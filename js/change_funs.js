@@ -12,12 +12,7 @@ function checkboxesUpdate(type, always_on_box, crimes) {
 }
 }
 
-function remake_graph(type, crimes) {
-  $('#graph').remove();
-  $('.main').prepend('<canvas id="graph" style="width:95%;height:500px;"></canvas>');
-  ctx = document.getElementById("graph").getContext('2d');
-  graph = makeGraph(type, crimes);
-}
+
 
 function prisonersPopBoxChange(box_to_check) {
   box_status = $(box_to_check).prop("checked");
@@ -99,6 +94,7 @@ function prisonerCategoryChange(current_category) {
 
 
 function agencyChangeFun(type, states, crimes) {
+  console.log(crimes)
   if (type == "crime") {
     if ($("#clearance_rate").is(":checked")) {
       $("#checkbox_2+span").text("% Cleared - Total");
@@ -130,4 +126,11 @@ function agencyChangeFun(type, states, crimes) {
   table = makeTable(type);
 
   //  change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_agencies, leoka_categories, "#leoka_subcategory_dropdown", leoka_subcatergory_values);
+}
+
+function remake_graph(type, crimes) {
+  $('#graph').remove();
+  $('.main').prepend('<canvas id="graph" style="width:95%;height:500px;"></canvas>');
+  ctx = document.getElementById("graph").getContext('2d');
+  graph = makeGraph(type, crimes);
 }

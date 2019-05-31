@@ -5,6 +5,7 @@ function allowSaveGraph() {
 
 
 function getGraphDataset(tableData, colsForGraph, type, crimes) {
+  console.log(crimes)
   if (type == "borderpatrol") {
     colsForGraph[0] = "fiscal_year"
   }
@@ -56,7 +57,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data4.push(data[i][colsForGraph[4]]);
   }
 
-  if (["crime", "alcohol", "prisoners", "arrests"].includes(type) || type == "leoka" &
+  if (["crime", "alcohol", "prisoners", "arrests", "leoka"].includes(type) || type == "leoka" &
     leoka_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
