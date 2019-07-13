@@ -1,10 +1,9 @@
 function ks() {
-
 /*
- $("body").hide();
+$("body").hide();
   var password_given = localStorage.getItem("password_given");
   if (password_given === false | password_given === null) {
-        var testPassword = window.prompt("Site down for maintenance");
+        var testPassword = window.prompt("Luxembourg");
         if (testPassword === "houdini") {
             $("body").show();
             localStorage.setItem("password_given", true);
@@ -337,8 +336,16 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
   if (type == "crime") {
-    type = "offenses";
+      type = "offenses";
   }
+
+  if(["offenses", "arrests", "leoka"].includes(type)) {
+    if ($("#monthly").is(':checked')) {
+      type += "_monthly";
+    }
+  }
+
+
   if (type == "crime_nibrs") {
     type = "nibrs";
   }
@@ -413,11 +420,11 @@ function main(type, states, state_default, crimes, crime_starter) {
 
   $('.simple-select').trigger('chosen:updated');
 
-  main_results = get_data(type, states);
-  table_data = main_results[0];
+  main_results  = get_data(type, states);
+  table_data    = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
-  all_data = main_results[3];
+  all_data      = main_results[3];
 
   graph = makeGraph(type, crimes);
   $("#graph").ready($("#loader").hide());

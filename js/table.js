@@ -158,6 +158,10 @@ function makeTable(type) {
   for (var m = 0; m < data.length; m++) {
     for (n = 0; n < data_keys.length; n++) {
       data[m][data_keys[n]] = parseFloat(data[m][data_keys[n]]).toLocaleString();
+
+      if (data[m][data_keys[n]] == "NaN") {
+        data[m][data_keys[n]] = ""
+      }
     }
   }
 
@@ -189,6 +193,7 @@ function makeTable(type) {
     "ordering": true,
     "order": [1, "desc"],
     "fixedHeader": true,
+    "render":function(data){if(typeof(data) == "undefined") {return "tbd"} else {return data}},
     fixedColumns: {
       leftColumns: 2
     }

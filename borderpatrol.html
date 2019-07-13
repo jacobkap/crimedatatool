@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <meta name="robots" content="noindex" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
@@ -19,10 +20,16 @@
   <meta name="author" content="Jacob Kaplan">
   <meta name="description" content="Explore data from the U.S. Customs and Border Protection.">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0"></script>
+
 <script src="data/data.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/change_funs.js"></script>
-<script src="js/graph_table.js"></script>
+<script src="js/graph.js"></script>
+<script src="js/table.js"></script>
 <script src="js/datatool.js"></script>
 <script src="js/dynamic_url.js"></script>
 
@@ -33,7 +40,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="js/chosen.jquery.js"></script>
 <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>

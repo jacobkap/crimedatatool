@@ -41,7 +41,7 @@ function leoka_categoryChangeFun() {
   $('.simple-select').trigger('chosen:updated');
   toggle_leoka_weapon_display();
   toggle_leoka_employee_sex_display();
-  agencyChangeFun('leoka', state_values);
+  agencyChangeFun('leoka', state_values, leoka_categories);
 }
 
 function borderCategoryChange(type, states, crimes) {
@@ -94,7 +94,7 @@ function prisonerCategoryChange(current_category) {
 
 
 function agencyChangeFun(type, states, crimes) {
-  console.log(crimes)
+
   if (type == "crime") {
     if ($("#clearance_rate").is(":checked")) {
       $("#checkbox_2+span").text("% Cleared - Total");

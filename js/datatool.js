@@ -78,6 +78,14 @@ function getStateData(type, states) {
   if (type == "crime") {
     type = "offenses";
   }
+
+if(["offenses", "arrests", "leoka"].includes(type)) {
+  if ($("#monthly").is(':checked')) {
+    type += "_monthly";
+  }
+}
+
+
   if (type == "crime_nibrs") {
     type = "nibrs";
   }

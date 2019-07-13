@@ -1,6 +1,6 @@
-change_url = function(state_dropdown, agency_dropdown, category_dropdown, rate_checkbox, agencies, category_values, subcategory_dropdown = "", subcategory_values = "") {
-  state_val    = state_values[$(state_dropdown).val()];
-  agency_val   = agencies[$(agency_dropdown).val()];
+change_url = function(category_dropdown, rate_checkbox, states, agencies, category_values, subcategory_dropdown = "", subcategory_values = "") {
+  state_val    = state_values[$("#state_dropdown").val()];
+  agency_val   = agencies[$("#agency_dropdown").val()];
   category_val = category_values[$(category_dropdown).val()];
   rate_checked = $(rate_checkbox).prop("checked");
 
