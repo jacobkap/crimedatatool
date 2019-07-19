@@ -61,10 +61,10 @@ function allowSaveGraph() {
     leoka_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
-      makeGraphObjects(data1, "#7570b3", checkbox_names[0]),
-      makeGraphObjects(data2, "#ef8a62", checkbox_names[1]),
-      makeGraphObjects(data3, "#67a9cf", checkbox_names[2]),
-      makeGraphObjects(data4, "#2166ac", checkbox_names[3])
+      makeGraphObjects(data1, "#ca0020", checkbox_names[0]),
+      makeGraphObjects(data2, "#f4a582", checkbox_names[1]),
+      makeGraphObjects(data3, "#92c5de", checkbox_names[2]),
+      makeGraphObjects(data4, "#0571b0", checkbox_names[3])
     ];
     final_data[0].hidden = false;
     final_data[1].hidden = false;
@@ -116,7 +116,7 @@ function allowSaveGraph() {
       label = crimes[label]
   }
 
-    final_data = [makeGraphObjects(data1, "#7570b3", label)];
+    final_data = [makeGraphObjects(data1, "#ca0020", label)];
     final_data[0].hidden = false;
   }
   return final_data;
@@ -134,7 +134,7 @@ function makeGraphObjects(data, color, label) {
 
   obj = {
     borderColor: color,
-    borderWidth: 1,
+    borderWidth: 1.6,
     backgroundColor: color,
     fill: false,
     label: label,
