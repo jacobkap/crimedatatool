@@ -397,6 +397,44 @@ var prisoners_subcategory = [{
   }
 ];
 
+var hate_bias_motivations = {
+  "anti_american_indian_or_native_alaskan"   : "Anti-American Indian or Native Alaskan",
+  "anti_arab"                                : "Anti-Arab",
+  "anti_asian"                               : "Anti-Asian",
+  "anti_atheism/agnosticism"                 : "Anti-Atheism/Agnosticism",
+  "anti_bisexual"                            : "Anti-Bisexual",
+  "anti_black"                               : "Anti-Black",
+  "anti_buddhist"                            : "Anti-Buddhist",
+  "anti_catholic"                            : "Anti-Catholic",
+  "anti_eastern_orthodox_greek_russian_etc"  : "Anti-Eastern Orthodox (Greek, Russian, etc.)",
+  "anti_ethnicity_other_than_hispanic"       : "Anti-Ethnicity Other Than Hispanic",
+  "anti_female_homosexual_lesbian"           : "Anti-Female Homosexual (Lesbian)",
+  "anti_female"                              : "Anti-Female",
+  "anti_gender_non_conforming"               : "Anti-Gender Non-Conforming",
+  "anti_heterosexual"                        : "Anti-Heterosexual",
+  "anti_hindu"                               : "Anti-Hindu",
+  "anti_hispanic"                            : "Anti-Hispanic",
+  "anti_jehovahs_witness"                    : "Anti-Jevohah's Witness",
+  "anti_jewish"                              : "Anti-Jewish",
+  "anti_lesbian_gay_bisexual_or_transgender_mixed_group_lgbt" : "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group LGBT)",
+  "anti_male_homosexual_gay"                 : "Anti-Male Homosexual (Gay)",
+  "anti_male"                                : "Anti-Male",
+  "anti_mental_disability"                   : "Anti-Mental Disability",
+  "anti_mormon"                              : "Anti-Mormon",
+  "anti_multi_racial_group"                  : "Anti-Multiple Racial Group",
+  "anti_multi_religious_group"               : "Anti-Multiple Religious Group",
+  "anti_muslim"                              : "Anti-Muslim",
+  "anti_native_hawaiian_or_other_pacific_islander" : "Anti-Native Hawaiian or Other Pacific Islander",
+  "anti_other_christian"                     : "Anti-Christian",
+  "anti_other_religion"                      : "Anti-Other Religion",
+  "anti_physical_disability"                 : "Anti-Physical Disability",
+  "anti_protestant"                          : "Anti-Protestant",
+  "anti_sikh"                                : "Anti-Sikh",
+  "anti_transgender"                         : "Anti-Transgender",
+  "anti_white"                               : "Anti-White",
+  "anti_total"                               : "Anti-Total"
+};
+
 var crime_values = {
   "all_crimes": "All Crimes",
   "assault_aggravated": "Aggravated Assault",

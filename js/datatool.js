@@ -78,8 +78,11 @@ function getStateData(type, states) {
   if (type == "crime") {
     type = "offenses";
   }
+  if (type == "hate") {
+    type = "hate_crimes";
+  }
 
-if(["offenses", "arrests", "leoka"].includes(type)) {
+if(["offenses", "arrests", "leoka", "hate_crimes"].includes(type)) {
   if ($("#monthly").is(':checked')) {
     type += "_monthly";
   }
@@ -261,7 +264,7 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (["crime", "death", 'crime_nibrs'].includes(type)) {
+  if (["crime", "death", 'crime_nibrs', "hate"].includes(type)) {
     crime = $("#crime_dropdown").val();
   } else if (type == "borderpatrol") {
         crime = subcatergory_keys[$("#subcategories").val()];

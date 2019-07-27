@@ -1,5 +1,5 @@
 function ks() {
-/*
+
 $("body").hide();
   var password_given = localStorage.getItem("password_given");
   if (password_given === false | password_given === null) {
@@ -13,7 +13,6 @@ $("body").hide();
       } else {
         $("body").show();
       }
-      */
 }
 
 function highlight_current_page() {
@@ -337,6 +336,9 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
 
   if (type == "crime") {
       type = "offenses";
+  }
+  if (type == "hate") {
+      type = "hate_crimes";
   }
 
   if(["offenses", "arrests", "leoka"].includes(type)) {

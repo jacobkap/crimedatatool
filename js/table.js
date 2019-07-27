@@ -73,6 +73,9 @@ function fixTableName(name, type) {
     }
   } else if (type == "alcohol") {
     name = alcohol_categories[name];
+  } else if (type == "hate") {
+    name = name.replace(/_/g, " ");
+    name = toTitleCase(name);
   } else if (type == "crime_nibrs") {
     if ($("#rate").is(':checked')) {
     name = name.replace(/_rate/g, "");

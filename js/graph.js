@@ -24,6 +24,9 @@ function allowSaveGraph() {
   if (type == "arrests") {
     checkbox_names = ["Adult", "Juvenile", "Total"];
   }
+  if (type == "hate") {
+    checkbox_names = ["Violent", "Nonviolent", "Total"];
+  }
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
     rate_type = "_rate_per_officer";
   }
@@ -57,7 +60,7 @@ function allowSaveGraph() {
     data4.push(data[i][colsForGraph[4]]);
   }
 
-  if (["crime", "alcohol", "prisoners", "arrests"].includes(type) || type == "leoka" &
+  if (["crime", "alcohol", "prisoners", "arrests", "hate"].includes(type) || type == "leoka" &
     leoka_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
@@ -407,6 +410,8 @@ function getTitle(data, type) {
   } else if (type == "death") {
     title = data[0].state;
     subtitle = "Cause of Death: " + death_categories[$("#crime_dropdown").val()];
+  } else if (type == "hate") {
+    subtitle = "Hate Crime, Bias Motivation: " + hate_bias_motivations[$("#crime_dropdown").val()];
   }
 
   title = [title, subtitle];
