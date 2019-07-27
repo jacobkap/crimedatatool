@@ -1,5 +1,5 @@
 function ks() {
-
+/*
 $("body").hide();
   var password_given = localStorage.getItem("password_given");
   if (password_given === false | password_given === null) {
@@ -13,6 +13,7 @@ $("body").hide();
       } else {
         $("body").show();
       }
+      */
 }
 
 function highlight_current_page() {
