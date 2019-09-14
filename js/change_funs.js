@@ -36,6 +36,18 @@ function stateChangeFun(type, states, crimes) {
   agencyChangeFun(type, states, crimes);
 }
 
+function jailStateChange(type, states, crimes) {
+  crimes = crimes[$("#state_dropdown").val()]
+  default_starter = ["avg_daily_pop_total_jurisdiction", "total_population"]
+  default_starter = default_starter[$("#state_dropdown").val()]
+  $('#crime_dropdown').empty();
+  makeCrimeDropdown(crimes, default_starter)
+
+  agencies = updateAgencies(type, states);
+  $('.simple-select').trigger('chosen:updated');
+  agencyChangeFun('jail', jail_state_values, jail_categories)
+}
+
 function leoka_categoryChangeFun() {
   leoka_subcatergory_values = makeLeokaSubcategoriesDropdown();
   $('.simple-select').trigger('chosen:updated');

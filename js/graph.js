@@ -110,7 +110,9 @@ function allowSaveGraph() {
 
     if (type == "borderpatrol") {
       label = values[$("#subcategories").val()]
-    } else if (type == "crime_nibrs" && $("#rate").is(':checked')) {
+    }   else if (type == "jail") {
+      label = jail_categories[$("#state_dropdown").val()][label]
+  } else if (type == "crime_nibrs" && $("#rate").is(':checked')) {
           label = label.replace(/_rate/g, "");
           label = crimes[label]
           label += " Rate"
@@ -118,7 +120,6 @@ function allowSaveGraph() {
     }  else if (type != 'leoka') {
       label = crimes[label]
   }
-
     final_data = [makeGraphObjects(data1, "#ca0020", label)];
     final_data[0].hidden = false;
   }
@@ -392,7 +393,7 @@ function getTitle(data, type) {
   } else if (type == "jail") {
     title = jail_state_values[$("#state_dropdown").val()];
     title += ", " + agencies[$("#agency_dropdown").val()] + " County Jail";
-    subtitle = jail_categories[0][$("#crime_dropdown").val()];
+    subtitle = jail_categories[$("#state_dropdown").val()][$("#crime_dropdown").val()];
   } else if (type == "leoka") {
     subtitle = leoka_categories[$("#crime_dropdown").val()];
     subtitle += ": " + _.values(leoka_subcatergory_values)[$("#leoka_subcategory_dropdown").val()];

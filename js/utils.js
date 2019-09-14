@@ -396,6 +396,9 @@ function main(type, states, state_default, crimes, crime_starter) {
   if (type == "arrests") {
     makeArrestCategoriesDropdown();
   }
+  if (type == "jail") {
+    crimes = crimes[$("#state_dropdown").val()]
+  }
   if (!["alcohol", "prisoners", "death", "borderpatrol"].includes(type)) {
     makeCrimeDropdown(crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);

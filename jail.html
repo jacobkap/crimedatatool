@@ -63,15 +63,15 @@
     <p>Enter a county to see jail information over time.</p>
     <h3>State:</h3>
     <br><br>
-    <select class="simple-select" id="state_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories[0])"></select>
+    <select class="simple-select" id="state_dropdown" onchange="jailStateChange('jail', jail_state_values, jail_categories)"></select>
     <br><br>
     <h3>County:</h3>
     <br><br>
-    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories[0])"></select>
+    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories)"></select>
     <br><br>
     <h3>Category:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories[0])">
+    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories)">
     </select>
 
 
@@ -90,7 +90,7 @@
     </div>
 
     <script>
-      main("jail", jail_state_values, 0, jail_categories[0], "total_population");
+      main("jail", jail_state_values, 0, jail_categories, "avg_daily_pop_total_jurisdiction");
     </script>
 
   </div>

@@ -115,6 +115,7 @@ var state_values = [
 ];
 
 var jail_state_values = [
+  "California",
   "Texas"
 ];
 
@@ -170,31 +171,72 @@ var border_categories = {
 };
 
 var jail_categories = [
+  california = {
+    "adp_of_maximum_security_inmates"  : "Average Daily Population - Maximum Security Inmates",
+    "adp_of_medium_security_inmates"   : "Average Daily Population - Medium Security Inmates",
+    "adp_of_minimum_security_inmates"  : "Average Daily Population - Minimum Security Inmates",
+    "avg_daily_pop_sentenced_female"   : "Average Daily Population - Sentenced Female",
+    "avg_daily_pop_sentenced_male"     : "Average Daily Population - Sentenced Male",
+    "avg_daily_pop_unsentenced_female" : "Average Daily Population - Unsentenced Female",
+    "avg_daily_pop_unsentenced_male"   : "Average Daily Population - Unsentenced Male",
+    "avg_daily_pop_total_jurisdiction" : "Average Daily Population - Total Jurisdiction",
+    "avg_fed_inmate_housed_contract"   : "Average Daily Population - Federal Inmate Housed on Contract",
+    "avg_felony_inmate_sentenced"      : "Average Daily Population - Felony Inmate Sentenced",
+    "avg_felony_inmate_total"          : "Average Daily Population - Felony Inmate Total",
+    "avg_felony_inmate_unsentenced"    : "Average Daily Population - Felony Inmate Unsentenced",
+    "avg_inmate_get_sick_bed"          : "Average Daily Population - Inmate Get Sick Bed",
+    "avg_inmate_in_hospital"           : "Average Daily Population - Inmate In Hospital",
+    "avg_inmate_need_reg_med_attent"   : "Average Daily Population - Inmate Need Regular Medical Attention",
+    "avg_inmate_not_assign_housing"    : "Average Daily Population - Inmate Not Assigned Housing",
+    "avg_inmate_wait_transport_prison" : "Average Daily Population - Inmate Wait Transport Prison",
+    "avg_inmates_get_medical_bed"      : "Average Daily Population - Inmates Get Medical Bed",
+    "avg_inmates_get_mental_heath_bed" : "Average Daily Population - Inmates Get Mental Heath Bed",
+    "avg_inmates_need_reg_ment_health" : "Average Daily Population - Inmates Need Regular Mental Health Attention",
+    "avg_local_inmate_housed_contract" : "Average Daily Population - Local Inmate Housed Contract",
+    "avg_misdemean_inmate_sentenced"   : "Average Daily Population - Misdemeanant Inmate Sentenced",
+    "avg_misdemean_inmate_unsentenced" : "Average Daily Population - Misdemeanant Inmate Unsentenced",
+    "avg_misdemean_inmate_total"       : "Average Daily Population - Misdemeanant Inmate Total",
+    "avg_own_inmate_housed_elsewhere"  : "Average Daily Population - Own Inmate Housed Elsewhere",
+    "avg_state_inmate_housed_contract" : "Average Daily Population - State Inmate Housed Contract",
+    "highest_inmate_count"             : "Highest Inmate Count",
+    "mental_heath_case_open_end_month" : "Number of Mental Heath Case Open End Month",
+    "num_dental_encounters"            : "Number of Dental Encounters",
+    "num_doctor_occurrences"           : "Number of Doctor Occurrences",
+    "num_inmate_get_mental_heath_bed"  : "Number of Inmate Get Mental Heath Bed",
+    "num_inmate_get_psych_meds"        : "Number of Inmate Get Psych Meds",
+    "num_inmates_seen_sick_call"       : "Number of Inmates Seen Sick Call",
+    "num_new_mental_health_cases"      : "Number of New Mental Health Cases",
+    "num_offsite_medical_appointment"  : "Number of Offsite Medical Appointment",
+    "tot_pretrial_release_lack_bed"    : "Total Pretrial Release Lack Bed",
+    "tot_sentenced_release_lack_bed"   : "Total Sentenced Release Lack Bed",
+    "total_juv_in_custody"             : "Total Juveniles In Custody",
+    "total_num_persons_booked"         : "Total Number of Persons Booked into Jail"
+  },
   texas = {
-    "available_beds" : "Available Beds",
-    "immigrant_detainer_cost_in_dollars" : "Immigrant Detainer Cost In Dollars",
-    "num_bench_warrants" : "Number of Bench Warrants",
-    "num_convicted_felons" : "Number of Convicted Felons",
-    "num_convicted_felony_sentenced_jail" : "Number of Convicted - Felony Sentenced to Jail",
-    "num_convicted_misdemeanor" : "Number of Convicted - Misdemeanor",
+    "available_beds"                                      : "Available Beds",
+    "immigrant_detainer_cost_in_dollars"                  : "Immigrant Detainer Cost In Dollars",
+    "num_bench_warrants"                                  : "Number of Bench Warrants",
+    "num_convicted_felons"                                : "Number of Convicted Felons",
+    "num_convicted_felony_sentenced_jail"                 : "Number of Convicted - Felony Sentenced to Jail",
+    "num_convicted_misdemeanor"                           : "Number of Convicted - Misdemeanor",
     "num_convicted_state_jail_felons_to_county_jail_time" : "Number of Convicted - State Jail Felons to County Jail Time",
-    "num_convicted_state_jail_felons_to_state_jail_time" : "Number of Convicted - State Jail Felons to State Jail Time",
-    "num_federal" : "Number of Federal Inmates",
-    "num_of_immigrant_detainer_inmate_days" : "Number of Immigrant Detainer Inmate Days",
-    "num_of_immigrant_detainer_inmates" : "Number of Immigrant Detainer Inmates",
-    "num_parole_violators" : "Number of Parole Violators",
-    "num_parole_violators_new_charge" : "Number of Parole Violators With a New Charge",
-    "num_pregnant_women" : "Number of Pregnant Women",
-    "num_pretrial_felons" : "Number of Pretrial Felons",
-    "num_pretrial_misdemeanor" : "Number of Pretrial Misdemeanants",
-    "num_pretrial_state_jail_felons" : "Number of Pretrial State Jail Felons",
-    "percent_of_capacity" : "Percent of Capacity",
-    "total_capacity" : "Total Capacity",
-    "total_contract" : "Total Contract",
-    "total_local" : "Total Local",
-    "total_others" : "Total Others",
-    "total_population" : "Total Inmate Population"
-  }
+    "num_convicted_state_jail_felons_to_state_jail_time"  : "Number of Convicted - State Jail Felons to State Jail Time",
+    "num_federal"                                         : "Number of Federal Inmates",
+    "num_of_immigrant_detainer_inmate_days"               : "Number of Immigrant Detainer Inmate Days",
+    "num_of_immigrant_detainer_inmates"                   : "Number of Immigrant Detainer Inmates",
+    "num_parole_violators"                                : "Number of Parole Violators",
+    "num_parole_violators_new_charge"                     : "Number of Parole Violators With a New Charge",
+    "num_pregnant_women"                                  : "Number of Pregnant Women",
+    "num_pretrial_felons"                                 : "Number of Pretrial Felons",
+    "num_pretrial_misdemeanor"                            : "Number of Pretrial Misdemeanants",
+    "num_pretrial_state_jail_felons"                      : "Number of Pretrial State Jail Felons",
+    "percent_of_capacity"                                 : "Percent of Capacity",
+    "total_capacity"                                      : "Total Capacity",
+    "total_contract"                                      : "Total Contract",
+    "total_local"                                         : "Total Local",
+    "total_others"                                        : "Total Others",
+    "total_population"                                    : "Total Inmate Population"
+  },
 ];
 
 var border_subcategories = [
@@ -246,7 +288,6 @@ var border_subcategories = [
     "number_of_agents"                 : "Number of CBP Agents",
     "rescues"                          : "Rescues (Southwest Border Only)"
 },
-
 southwest_apprehensions = {
   "total_apprehensions" : "Apprehensions - Total"
 },

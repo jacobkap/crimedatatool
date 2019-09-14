@@ -74,7 +74,7 @@ function fixTableName(name, type) {
   } else if (type == "alcohol") {
     name = alcohol_categories[name];
   } else if (type == "jail") {
-    name = jail_categories[0][name];
+    name = jail_categories[$("#state_dropdown").val()][name];
 
   } else if (type == "hate") {
     name = name.replace(/_/g, " ");

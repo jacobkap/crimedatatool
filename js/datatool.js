@@ -314,7 +314,7 @@ function getCrimeColumns(headers, type, output) {
       columnNames = ["sector", "fiscal_year"];
     }
     if (type == "jail" & output == "table") {
-      columnNames = ["state", "county", "year"];
+      columnNames = ["state", "year", "county"];
     }
 
 
