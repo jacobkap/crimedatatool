@@ -116,6 +116,7 @@ var state_values = [
 
 var jail_state_values = [
   "California",
+  "Illinois",
   "Texas"
 ];
 
@@ -211,6 +212,10 @@ var jail_categories = [
     "tot_sentenced_release_lack_bed"   : "Total Sentenced Release Lack Bed",
     "total_juv_in_custody"             : "Total Juveniles In Custody",
     "total_num_persons_booked"         : "Total Number of Persons Booked into Jail"
+  },
+  illinois = {
+    "number_of_inmates_booked" : "Total Number of Persons Booked into Jail",
+    "average_daily_population" : "Average Daily Population - Total Jurisdiction"
   },
   texas = {
     "available_beds"                                      : "Available Beds",

@@ -38,7 +38,7 @@ function stateChangeFun(type, states, crimes) {
 
 function jailStateChange(type, states, crimes) {
   crimes = crimes[$("#state_dropdown").val()]
-  default_starter = ["avg_daily_pop_total_jurisdiction", "total_population"]
+  default_starter = ["avg_daily_pop_total_jurisdiction", "average_daily_population", "total_population"]
   default_starter = default_starter[$("#state_dropdown").val()]
   $('#crime_dropdown').empty();
   makeCrimeDropdown(crimes, default_starter)
