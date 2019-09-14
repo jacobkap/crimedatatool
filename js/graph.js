@@ -228,6 +228,10 @@ function makeGraph(type, crimes) {
     }
   }
 
+    if(["jail"].includes(type)) {
+        xaxis_label = "Year-Month"
+  }
+
   opts = {
     spanGaps: false,
     title: {
@@ -385,6 +389,10 @@ function getTitle(data, type) {
     title = border_states[$("#state_dropdown").val()];
     subtitle = border_categories[$("#crime_dropdown").val()];
     subtitle = subtitle + ", " + values[$("#subcategories").val()]
+  } else if (type == "jail") {
+    title = jail_state_values[$("#state_dropdown").val()];
+    title += ", " + agencies[$("#agency_dropdown").val()] + " County Jail";
+    subtitle = jail_categories[0][$("#crime_dropdown").val()];
   } else if (type == "leoka") {
     subtitle = leoka_categories[$("#crime_dropdown").val()];
     subtitle += ": " + _.values(leoka_subcatergory_values)[$("#leoka_subcategory_dropdown").val()];

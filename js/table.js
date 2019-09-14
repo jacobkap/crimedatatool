@@ -73,6 +73,9 @@ function fixTableName(name, type) {
     }
   } else if (type == "alcohol") {
     name = alcohol_categories[name];
+  } else if (type == "jail") {
+    name = jail_categories[0][name];
+
   } else if (type == "hate") {
     name = name.replace(/_/g, " ");
     name = toTitleCase(name);
@@ -133,6 +136,7 @@ function fixTableDataName(name, type) {
 
   if (!name.includes("agency") &&
     !name.startsWith("year") &&
+    !name.startsWith("county") &&
     !name.includes("state") &&
     !name.includes("population") &&
     !name.includes("ORI")) {
@@ -154,7 +158,7 @@ function makeTable(type) {
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
     return a !== 'agency' && a !== 'year' &&
-      a !== 'state' && a !== 'ORI' && a !== 'sector' && a !== 'fiscal_year';
+      a !== 'state' && a !== 'ORI' && a !== 'county' && a !== 'sector' && a !== 'fiscal_year';
   });
 
   // Adds commas in numbers to make it easier to read!

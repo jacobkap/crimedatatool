@@ -114,6 +114,10 @@ var state_values = [
   "Wyoming"
 ];
 
+var jail_state_values = [
+  "Texas"
+];
+
 var nibrs_state_values = [
   "Alabama",
 "Arizona",
@@ -164,6 +168,34 @@ var border_categories = {
   "southwest_apprehensions" : "Southwest Border Apprehensions",
   "southwest_deaths"        : "Southwest Border Deaths",
 };
+
+var jail_categories = [
+  texas = {
+    "available_beds" : "Available Beds",
+    "immigrant_detainer_cost_in_dollars" : "Immigrant Detainer Cost In Dollars",
+    "num_bench_warrants" : "Number of Bench Warrants",
+    "num_convicted_felons" : "Number of Convicted Felons",
+    "num_convicted_felony_sentenced_jail" : "Number of Convicted - Felony Sentenced to Jail",
+    "num_convicted_misdemeanor" : "Number of Convicted - Misdemeanor",
+    "num_convicted_state_jail_felons_to_county_jail_time" : "Number of Convicted - State Jail Felons to County Jail Time",
+    "num_convicted_state_jail_felons_to_state_jail_time" : "Number of Convicted - State Jail Felons to State Jail Time",
+    "num_federal" : "Number of Federal Inmates",
+    "num_of_immigrant_detainer_inmate_days" : "Number of Immigrant Detainer Inmate Days",
+    "num_of_immigrant_detainer_inmates" : "Number of Immigrant Detainer Inmates",
+    "num_parole_violators" : "Number of Parole Violators",
+    "num_parole_violators_new_charge" : "Number of Parole Violators With a New Charge",
+    "num_pregnant_women" : "Number of Pregnant Women",
+    "num_pretrial_felons" : "Number of Pretrial Felons",
+    "num_pretrial_misdemeanor" : "Number of Pretrial Misdemeanants",
+    "num_pretrial_state_jail_felons" : "Number of Pretrial State Jail Felons",
+    "percent_of_capacity" : "Percent of Capacity",
+    "total_capacity" : "Total Capacity",
+    "total_contract" : "Total Contract",
+    "total_local" : "Total Local",
+    "total_others" : "Total Others",
+    "total_population" : "Total Inmate Population"
+  }
+];
 
 var border_subcategories = [
   seizures = {

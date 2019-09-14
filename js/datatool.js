@@ -264,7 +264,7 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (["crime", "death", 'crime_nibrs', "hate"].includes(type)) {
+  if (["crime", "death", 'crime_nibrs', "hate", "jail"].includes(type)) {
     crime = $("#crime_dropdown").val();
   } else if (type == "borderpatrol") {
         crime = subcatergory_keys[$("#subcategories").val()];
@@ -312,6 +312,9 @@ function getCrimeColumns(headers, type, output) {
     }
     if (type == "borderpatrol" & output == "table") {
       columnNames = ["sector", "fiscal_year"];
+    }
+    if (type == "jail" & output == "table") {
+      columnNames = ["state", "county", "year"];
     }
 
 
