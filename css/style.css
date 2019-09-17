@@ -142,7 +142,7 @@ h3 {
   }
 }
 
-#test { 
+#test {
     list-style-type: none;
     display: inline-block;
     margin: 0;
@@ -165,7 +165,6 @@ h3 {
 
 .dropdown-content {
   display: none;
-  position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
