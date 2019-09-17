@@ -1207,7 +1207,23 @@ body {
     font-family: "PT Serif", serif;
     color: #333332;
 }
-
+.navigation-wrapper {
+    margin: 0 auto;
+    width: 100%;
+    padding: 2em 0 1em;
+    font-family: "PT Sans Narrow", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    *zoom: 1;
+}
+.navigation-wrapper:before, .navigation-wrapper:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.navigation-wrapper:after {
+    clear: both;
+}
 .site-name {
     display: inline;
     float: left;
