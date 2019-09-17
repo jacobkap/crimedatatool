@@ -142,7 +142,10 @@ h3 {
   }
 }
 
-
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
 
 .dropdown .dropbtn {
   font-size: 20px;
