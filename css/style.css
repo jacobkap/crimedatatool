@@ -144,9 +144,10 @@ h3 {
 
 
 .dropdown .dropbtn {
-  font-size: 17px;
+  font-size: 20px;
   border: none;
   outline: none;
+  position: float;
   color: black;
   padding: 14px 16px;
   background-color: inherit;
