@@ -143,8 +143,7 @@ h3 {
 }
 
 .dropdown {
-  float: left;
-  overflow: hidden;
+  float: right;
 }
 
 .dropdown .dropbtn {
