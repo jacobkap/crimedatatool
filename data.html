@@ -44,6 +44,7 @@
     <script>
         ks()
       $(function() {
+        myFunction()
         $('#header').load("reusable_js.html .about_me_info");
         $('.footer-wrap').load("reusable_js.html .foot");
         $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
@@ -55,6 +56,18 @@
 
     <article class="post">
 
+      <script>
+      function myFunction() {
+        var ask = confirm("This data is free to use for your own purposes. If you do, \n" +
+         "please cite the data set." +
+         "\n\nThe proper citation is on the 'Project Citation' section on \n" +
+         "the openICPSR page for the data.");
+
+         if (!ask) {
+        window.location.href = "index.html";
+    }
+      }
+      </script>
       <h1>Data Available for Download</h1>
       <br>
       <p>The data available here are the various data sets I have collected and cleaned. Most of these are related to
