@@ -89,7 +89,7 @@ function exportToCsv(tableData, type, states) {
   }
 
   if (type == "jail") {
-    filename = "crimedatatool_" + jail_state_values[$("#state_dropdown").val()] + "_" + agencies[$("#agency_dropdown").val()] + "_jail";
+    filename = "jacobdkaplan.com_" + jail_state_values[$("#state_dropdown").val()] + "_" + agencies[$("#agency_dropdown").val()] + "_jail";
   }
 
   filename += ".csv";
