@@ -107,6 +107,7 @@ body {
 .topnav {
   overflow: hidden;
   position: relative;
+  padding-left: 25%;
   background-color: #333;
 }
 
