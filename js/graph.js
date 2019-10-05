@@ -4,7 +4,7 @@ function allowSaveGraph() {
 
 
 
-  function getGraphDataset(tableData, colsForGraph, type, crimes) {
+function getGraphDataset(tableData, colsForGraph, type, crimes) {
 
   if (type == "borderpatrol") {
     colsForGraph[0] = "fiscal_year"
@@ -14,7 +14,11 @@ function allowSaveGraph() {
   if (!checkIfRateChecked(type)) {
     rate_type = "";
   }
-  checkbox_names = ["Actual Offenses", "Total Offenses Cleared", "Offenses Cleared Involving Only Persons Under age 18", "Unfounded Offenses"];
+  checkbox_names = ["Actual Offenses",
+    "Total Offenses Cleared",
+    "Offenses Cleared Involving Only Persons Under age 18",
+    "Unfounded Offenses"
+  ];
   if (type == "alcohol") {
     checkbox_names = _.values(alcohol_categories);
   }
@@ -110,16 +114,16 @@ function allowSaveGraph() {
 
     if (type == "borderpatrol") {
       label = values[$("#subcategories").val()]
-    }   else if (type == "jail") {
+    } else if (type == "jail") {
       label = jail_categories[$("#state_dropdown").val()][label]
-  } else if (type == "crime_nibrs" && $("#rate").is(':checked')) {
-          label = label.replace(/_rate/g, "");
-          label = crimes[label]
-          label += " Rate"
-          // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
-    }  else if (type != 'leoka') {
+    } else if (type == "crime_nibrs" && $("#rate").is(':checked')) {
+      label = label.replace(/_rate/g, "");
       label = crimes[label]
-  }
+      label += " Rate"
+      // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
+    } else if (type != 'leoka') {
+      label = crimes[label]
+    }
     final_data = [makeGraphObjects(data1, "#ca0020", label)];
     final_data[0].hidden = false;
   }
@@ -131,10 +135,10 @@ function allowSaveGraph() {
 function makeGraphObjects(data, color, label) {
 
   for (var j = 0; j < data.length; j++) {
-        if (data[j] == "") {
-            data[j] = null;
-        }
+    if (data[j] == "") {
+      data[j] = null;
     }
+  }
 
   obj = {
     borderColor: color,
@@ -223,14 +227,14 @@ function makeGraph(type, crimes) {
     xaxis_label = "Fiscal Year";
   }
 
-  if(["crime", "arrests", "leoka"].includes(type)) {
+  if (["crime", "arrests", "leoka"].includes(type)) {
     if ($("#monthly").is(':checked')) {
       xaxis_label = "Year-Month"
     }
   }
 
-    if(["jail"].includes(type)) {
-        xaxis_label = "Year-Month"
+  if (["jail"].includes(type)) {
+    xaxis_label = "Year-Month"
   }
 
   opts = {
@@ -259,10 +263,10 @@ function makeGraph(type, crimes) {
         },
         type: 'time',
         time: {
-                    displayFormats: {
-                        quarter: 'MMM YYYY'
-                    }
-                }
+          displayFormats: {
+            quarter: 'MMM YYYY'
+          }
+        }
       }],
       yAxes: [{
         id: "A",
@@ -350,9 +354,9 @@ function addYAxis() {
   });
   for (var i = 0; i < cleared_data.length; i++) {
 
-      cleared_data[i].yAxisID = "B";
-      cleared_data[i].label = cleared_data[i].label.replace("Total Offenses Cleared", "% Cleared - Total");
-      cleared_data[i].label = cleared_data[i].label.replace("Offenses Cleared Involving Only Persons Under age 18", "% Cleared - All Under Age 18");
+    cleared_data[i].yAxisID = "B";
+    cleared_data[i].label = cleared_data[i].label.replace("Total Offenses Cleared", "% Cleared - Total");
+    cleared_data[i].label = cleared_data[i].label.replace("Offenses Cleared Involving Only Persons Under age 18", "% Cleared - All Under Age 18");
     graph_datasets.push(cleared_data[i]);
 
   }
@@ -366,9 +370,9 @@ function addYAxis() {
       datasets: graph_datasets
     },
     spanGaps: false,
-      tooltips: {
-        enabled: false
-      },
+    tooltips: {
+      enabled: false
+    },
     options: opts
   });
 
@@ -378,7 +382,10 @@ function addYAxis() {
 
 function getTitle(data, type) {
   title = data[0].agency + ', ';
-  title += data[0].state + ': ';
+  if (type != "crime" || !$("#agency_dropdown").children("option:selected").text().includes("Estimate")) {
+    title += data[0].state + ': ';
+
+  }
   subtitle = "";
   if (type == "crime") {
     subtitle = crime_values[$("#crime_dropdown").val()];
@@ -386,7 +393,7 @@ function getTitle(data, type) {
     subtitle = arrest_values[$("#crime_dropdown").val()];
     subtitle += ": " + arrest_categories[$("#arrests_category_dropdown").val()];
     subtitle += " - Arrests";
-  }  else if (type == "borderpatrol") {
+  } else if (type == "borderpatrol") {
     title = border_states[$("#state_dropdown").val()];
     subtitle = border_categories[$("#crime_dropdown").val()];
     subtitle = subtitle + ", " + values[$("#subcategories").val()]
@@ -422,6 +429,7 @@ function getTitle(data, type) {
   } else if (type == "hate") {
     subtitle = "Hate Crime, Bias Motivation: " + hate_bias_motivations[$("#crime_dropdown").val()];
   }
+
 
   title = [title, subtitle];
   return title;

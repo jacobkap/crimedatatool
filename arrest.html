@@ -6,6 +6,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
       dataLayer.push(arguments);
     }
@@ -21,10 +22,10 @@
   <meta name="description" content="Explore arrest data in the United States. All of the data comes from the
       FBI's Uniform Crime Reporting (UCR) Program Data: Arrests by Age, Sex, and Race.">
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-      <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0"></script>
 
 
   <script src="data/data.js"></script>
@@ -36,7 +37,7 @@
   <script src="js/dynamic_url.js"></script>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
-<script src = "js/moment.min.js"></script>
+  <script src="js/moment.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
@@ -51,7 +52,7 @@
   <div class="navigation-wrapper"></div>
 
   <script>
-      ks()
+    ks()
     $(function() {
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
@@ -75,22 +76,22 @@
     <h3>Arrest Category:</h3>
     <br>
     <select class="simple-select" id="arrests_category_dropdown" onchange="agencyChangeFun('arrests', state_values)">
-  </select>
+    </select>
 
-  <br><br>
-  <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('arrests', state_values)">
-  <label for="rate">Rate per 100,000 Population</label>
-  <br><br>
+    <br><br>
+    <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('arrests', state_values)">
+    <label for="rate">Rate per 100,000 Population</label>
+    <br><br>
     <h3>Arrest Subcategory:</h3>
     <br>
-  <input type="checkbox" id="checkbox_1" onchange="checkboxesUpdate('arrests', '#checkbox_3')"></input>
-  <label class="label-text fa" for="checkbox_1">Adult</label>
-  <br>
-  <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('arrests', '#checkbox_3')"></input>
-  <label class="label-text fa" for="checkbox_2">Juvenile</label>
-  <br>
-  <input type="checkbox" id="checkbox_3"checked  onchange="checkboxesUpdate('arrests', '#checkbox_3')"></input>
-  <label class="label-text fa" for="checkbox_3">Total</label>
+    <input type="checkbox" id="checkbox_1" onchange="checkboxesUpdate('arrests', '#checkbox_3')"></input>
+    <label class="label-text fa" for="checkbox_1">Adult</label>
+    <br>
+    <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('arrests', '#checkbox_3')"></input>
+    <label class="label-text fa" for="checkbox_2">Juvenile</label>
+    <br>
+    <input type="checkbox" id="checkbox_3" checked onchange="checkboxesUpdate('arrests', '#checkbox_3')"></input>
+    <label class="label-text fa" for="checkbox_3">Total</label>
 
     <br><br>
     <hr>
@@ -106,16 +107,18 @@
   <div class="column main">
     <div id="loader"></div>
     <canvas id="graph" style="width:95%;height:500px;"></canvas>
-    <div><table id="table" class="display cell-border"></table></div>
+    <div>
+      <table id="table" class="display cell-border"></table>
+    </div>
 
 
     <script>
-          main("arrests", state_values, 4, arrest_values, "murder");
+      main("arrests", state_values, 4, arrest_values, "murder");
     </script>
 
   </div>
 
-<div class="footer-wrap"></div>
+  <div class="footer-wrap"></div>
 </body>
 
 </html>

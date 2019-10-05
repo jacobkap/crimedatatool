@@ -70,24 +70,25 @@
       <p>Enter a police agency to see its crime over time.</p>
       <h3>State:</h3>
       <br>
-      <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('crime', state_values)">
+      <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('crime', crime_state_values)">
           </select>
       <br><br>
       <h3>Agency:</h3>
       <br>
-      <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('crime', state_values)">
+      <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('crime', crime_state_values)">
         </select>
       <br><br>
       <h3>Crime:</h3>
       <br>
-      <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('crime', state_values)">
+      <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('crime', crime_state_values)">
       </select>
 
         <br><br>
-        <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('crime', state_values)">
+        <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('crime', crime_state_values)">
         <label for="rate">Rate per 100,000 Population</label>
         <br><br>
-        <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('crime', state_values)">
+          <div id = "agency_level_boxes">
+        <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('crime', crime_state_values)">
         <label for="clearance_rate">Clearances as % of Crimes Reported</label>
 
       <br><br>
@@ -111,8 +112,9 @@
       <input type="checkbox" id="monthly" onchange="agencyChangeFun('crime', state_values)"></input>
       <label for="monthly">Monthly Data (large file size)</label>
       <hr>
+    </div>
 
-      <button type="button" onclick="exportToCsv(all_data, 'crime', state_values)">Download All Agency Data as CSV</button>
+      <button type="button" onclick="exportToCsv(all_data, 'crime', crime_values)">Download All Agency Data as CSV</button>
       <br>
       <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
     </div>
@@ -125,9 +127,9 @@
       <div><table id="table" class="display cell-border"></table></div>
 
       <script>
-          main("crime", state_values, 4, crime_values, "murder");
+          main("crime", crime_state_values, 4, crime_values, "murder");
 
-          change_url("#crime_dropdown", "# rate", state_values, agencies, crime_values, subcategory_dropdown = "", subcategory_values = "")
+    //      change_url("#crime_dropdown", "#rate", crime_state_values, agencies, crime_values, subcategory_dropdown = "", subcategory_values = "")
       </script>
     </div>
 

@@ -114,6 +114,8 @@ var state_values = [
   "Wyoming"
 ];
 
+var crime_state_values = state_values.concat(["United States"])
+
 var jail_state_values = [
   "California",
   "Illinois",
@@ -546,6 +548,19 @@ var crime_values = {
   "robbery_with_a_knife": "Robbery - Knife",
   "robbery_other_weapon": "Robbery - Other Weapon",
   "robbery_unarmed": "Robbery - Unarmed",
+  "theft_total": "Theft - Total"
+};
+
+var state_level_crime_values = {
+  "assault_aggravated": "Aggravated Assault",
+  "burg_total": "Burglary - Total",
+  "index_property": "Index - Property",
+  "index_violent": "Index - Violent",
+  "index_total": "Index - Total",
+  "mtr_veh_theft_total": "Motor Vehicle Theft - Total",
+  "murder": "Murder",
+  "rape_total": "Rape - Total",
+  "robbery_total": "Robbery - Total",
   "theft_total": "Theft - Total"
 };
 

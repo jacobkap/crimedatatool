@@ -8,11 +8,9 @@ function checkboxesUpdate(type, always_on_box, crimes) {
   if (["death", "crime"].includes(type)) {
     agencyChangeFun(type, state_values);
   } else {
-  remake_graph(type, crimes);
+    remake_graph(type, crimes);
+  }
 }
-}
-
-
 
 function prisonersPopBoxChange(box_to_check) {
   box_status = $(box_to_check).prop("checked");
@@ -27,11 +25,11 @@ function prisonersPopBoxChange(box_to_check) {
 
 function rateBoxesChange(dropdown_to_turnoff, type, states, crimes) {
   $(dropdown_to_turnoff).prop("checked", false);
-    agencyChangeFun(type, states, crimes);
+  agencyChangeFun(type, states, crimes);
 }
 
 function stateChangeFun(type, states, crimes) {
-  agencies = updateAgencies(type, states);
+  updateAgencies(type, states);
   $('.simple-select').trigger('chosen:updated');
   agencyChangeFun(type, states, crimes);
 }
@@ -59,7 +57,7 @@ function leoka_categoryChangeFun() {
 function borderCategoryChange(type, states, crimes) {
   subcatergory_keys = makeBorderSubcategoriesDropdown();
   if (["sector_profile", "family", "staffing"].includes($("#crime_dropdown").val())) {
-      border_states = border_sectors;
+    border_states = border_sectors;
   } else if (["southwest_apprehensions", "southwest_deaths"].includes($("#crime_dropdown").val())) {
     border_states = southwest_border_sectors;
   } else if (["seizures"].includes($("#crime_dropdown").val())) {
@@ -92,8 +90,8 @@ function prisonerCategoryChange(current_category) {
     $('.simple-select').trigger('chosen:updated');
   } else if (!$("#crime_dropdown").val().includes("_crime") & current_category.includes("_crime")) {
     // If possible, keep same state when switching data sets.
-      current_state = state_values[$("#state_dropdown").val()];
-      default_value = _.indexOf(prisoners_state_values, current_state);
+    current_state = state_values[$("#state_dropdown").val()];
+    default_value = _.indexOf(prisoners_state_values, current_state);
     makeStateDropdown(prisoners_state_values, default_value);
     agencyChangeFun('prisoners', prisoners_state_values);
     $('.simple-select').trigger('chosen:updated');
@@ -101,7 +99,7 @@ function prisonerCategoryChange(current_category) {
     agencyChangeFun('prisoners', prisoners_state_values);
   }
   current_category = $("#crime_dropdown").val();
-  return(current_category);
+  return (current_category);
 }
 
 
@@ -115,17 +113,40 @@ function agencyChangeFun(type, states, crimes) {
       $("#checkbox_2+span").text("Offenses Cleared - Total");
       $("#checkbox_3+span").text("Offenses Cleared - All Under Age 18");
     }
+
+
+    agency = $("#agency_dropdown").children("option:selected").text()
+    if (agency.includes("Estimate")) {
+      crimes = state_level_crime_values;
+      $("#checkbox_1").prop("checked", true);
+      $("#checkbox_2").prop("checked", false);
+      $("#checkbox_3").prop("checked", false);
+      $("#checkbox_4").prop("checked", false);
+      $("#monthly").prop("checked", false);
+
+     $("#agency_level_boxes").hide();
+    } else {
+      crimes = crime_values;
+     $("#agency_level_boxes").show();
+    }
+/*
+    $("#crime_dropdown").empty();
+    $.each(crimes, function(val, text) {
+      $("#crime_dropdown").append(new Option(text, val));
+    });
+    $('.simple-select').trigger('chosen:updated');
+    */
   }
 
   if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
-      main_results = get_data(type, state_values);
+    main_results = get_data(type, state_values);
   } else {
-  main_results = get_data(type, states);
-}
-  table_data    = main_results[0];
+    main_results = get_data(type, states);
+  }
+  table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
-  all_data      = main_results[3];
+  all_data = main_results[3];
 
   remake_graph(type, crimes);
 
