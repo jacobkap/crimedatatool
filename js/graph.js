@@ -381,9 +381,9 @@ function addYAxis() {
 }
 
 function getTitle(data, type) {
-  title = data[0].agency + ', ';
+  title = data[0].agency;
   if (type != "crime" || !$("#agency_dropdown").children("option:selected").text().includes("Estimate")) {
-    title += data[0].state + ': ';
+    title += ", " + data[0].state + ': ';
 
   }
   subtitle = "";
