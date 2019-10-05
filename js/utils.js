@@ -73,7 +73,7 @@ function exportToCsv(tableData, type, states) {
   data = data.join("\n");
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
-  filename = "crimedatatool_" + type + "_" + rate_or_count;
+  filename = "jacobdkaplan_" + type + "_" + rate_or_count;
   if (!["prisoners", "death", "alcohol", "borderpatrol"].includes(type)) {
     filename += agencies[$("#agency_dropdown").val()] + "_";
   }
