@@ -440,6 +440,8 @@ function main(type, states, state_default, crimes, crime_starter) {
   $("#graph").ready($("#loader").hide());
   table = makeTable(type);
 
+
+change_url()
   /*
     if (window.location.hash == "") {
       change_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", "#offenses_rate", offense_agencies, crime_values)

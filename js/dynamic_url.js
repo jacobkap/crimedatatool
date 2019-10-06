@@ -1,8 +1,8 @@
 change_url = function(rate = false, subcategory_dropdown = "", subcategory_values = "") {
 
   new_url = window.location.pathname +
-    "#state="    + $("#state_dropdown").children("option:selected").text() +
-    "&agency="   + $("#agency_dropdown").children("option:selected").text() +
+    "#state=" + $("#state_dropdown").children("option:selected").text() +
+    "&agency=" + $("#agency_dropdown").children("option:selected").text() +
     "&category=" + $("#crime_dropdown").children("option:selected").text()
 
   if (rate) {
@@ -18,8 +18,7 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
 };
 
 
-change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdown, rate_checkbox,
-  category_values, largest_agency, type, subcategory_dropdown = "", subcategory_values = "") {
+change_data_from_url = function(category_values, largest_agency, type, subcategory_dropdown = "", subcategory_values = "") {
   url = window.location.hash;
 
   split_url = url.split("&");
@@ -37,15 +36,11 @@ change_data_from_url = function(state_dropdown, agency_dropdown, category_dropdo
   category_val = _.indexOf(_.values(category_values), category_val);
   category_val = _.keys(category_values)[category_val];
 
-
-
   $(state_dropdown).val(state_val);
-  $(state_dropdown).trigger("chosen:updated");
 
   agencies = updateAgencies(type, largest_agency, agency_dropdown, state_dropdown);
   agency_val = _.indexOf(agencies, agency_val);
   $(agency_dropdown).val(agency_val);
-  $(agency_dropdown).trigger("chosen:updated");
 
   $(category_dropdown).val(category_val);
   $(category_dropdown).trigger("chosen:updated");

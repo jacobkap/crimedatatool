@@ -124,18 +124,18 @@ function agencyChangeFun(type, states, crimes) {
       $("#checkbox_4").prop("checked", false);
       $("#monthly").prop("checked", false);
 
-     $("#agency_level_boxes").hide();
+      $("#agency_level_boxes").hide();
     } else {
       crimes = crime_values;
-     $("#agency_level_boxes").show();
+      $("#agency_level_boxes").show();
     }
-/*
-    $("#crime_dropdown").empty();
-    $.each(crimes, function(val, text) {
-      $("#crime_dropdown").append(new Option(text, val));
-    });
-    $('.simple-select').trigger('chosen:updated');
-    */
+    /*
+        $("#crime_dropdown").empty();
+        $.each(crimes, function(val, text) {
+          $("#crime_dropdown").append(new Option(text, val));
+        });
+        $('.simple-select').trigger('chosen:updated');
+        */
   }
 
   if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
@@ -157,8 +157,7 @@ function agencyChangeFun(type, states, crimes) {
   table.destroy();
   $('#table').empty();
   table = makeTable(type);
-
-  //  change_url("#leoka_state_dropdown", "#leoka_agency_dropdown", "#leoka_category_dropdown", "#leoka_rate", leoka_agencies, leoka_categories, "#leoka_subcategory_dropdown", leoka_subcatergory_values);
+  change_url()
 }
 
 function remake_graph(type, crimes) {
