@@ -10,7 +10,7 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
     new_url += "&category=" + $("#crime_dropdown").val()
   }
   if ($("#subcategory_dropdown").length != 0) {
-    new_url += "&subcategory=" + $("#subcategory_dropdown").children("option:selected").text();
+    new_url += "&subcategory=" + $("#subcategory_dropdown").val();
   }
   if ($('#rate').length != 0) {
     new_url += "&rate=" + $("#rate").prop("checked");;
@@ -24,28 +24,36 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
 };
 
 
+find_url_string = function(url, string) {
+  final = split_url[split_url.findIndex(element => element.includes(string))];
+  if (final === undefined) final = "";
+  final = final.replace(string, "");
+  final = final.replace("#", "");
+  final = final.replace(/%20/g, " ");
+  return (final);
+}
+
 change_data_from_url = function(type, subcategory_dropdown = "", subcategory_values = "") {
   url = window.location.hash;
-
   split_url = url.split("&");
-  state_val = split_url[0].replace("#state=", "");
-  agency_val = split_url[1].replace("agency=", "");
-  category_val = split_url[2].replace("category=", "");
-  if (split_url.length > 4) {
-    rate_checked = split_url[4].replace("rate=", "");
-    rate_checked = $.parseJSON(rate_checked);
-    if (rate_checked === true) {
-      $("#rate").prop("checked", rate_checked);
-    }
+
+
+  state_val = find_url_string(split_url, "state=")
+  agency_val = find_url_string(split_url, "agency=")
+  category_val = find_url_string(split_url, "category=")
+  subcategory_val = find_url_string(split_url, "subcategory=")
+  rate_val = find_url_string(split_url, "rate=")
+  monthly_val = find_url_string(split_url, "monthly=")
+
+  if (rate_val != "") {
+    rate_val = $.parseJSON(rate_val);
+    $("#rate").prop("checked", rate_val);
+  }
+  if (monthly_val != "") {
+    monthly_val = $.parseJSON(monthly_val);
+    $("#monthly").prop("checked", monthly_val);
   }
 
-  state_val = state_val.replace(/%20/g, " ");
-  agency_val = agency_val.replace(/%20/g, " ");
-  category_val = category_val.replace(/%20/g, " ");
-
-
-  $('#crime_dropdown').val(category_val);
-  $('#crime_dropdown').trigger("chosen:updated");
 
   state_values = $('#state_dropdown')[0].options;
   state_values = $.map(state_values, function(elem) {
