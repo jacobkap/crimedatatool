@@ -64,15 +64,15 @@ change_data_from_url = function(type) {
   if (type == "borderpatrol") {
     subcatergory_keys = makeBorderSubcategoriesDropdown();
     if (["sector_profile", "family", "staffing"].includes(category_val)) {
-      border_states = border_sectors;
+      states = border_sectors;
     } else if (["southwest_apprehensions", "southwest_deaths"].includes(category_val)) {
-      border_states = southwest_border_sectors;
+      states = southwest_border_sectors;
     } else if (["seizures"].includes(category_val)) {
-      border_states = border_regions;
+      states = border_regions;
     } else if (["nationwide"].includes(category_val)) {
-      border_states = nationwide_only;
+      states = nationwide_only;
     }
-    makeStateDropdown(border_states, 0);
+    makeStateDropdown(states, 0);
   }
   if (type == "prisoners") {
     if (category_val.includes("_crime")) {
