@@ -391,7 +391,7 @@ function getTitle(data, type) {
     subtitle = crime_values[$("#crime_dropdown").val()];
   } else if (type == "arrests") {
     subtitle = arrest_values[$("#crime_dropdown").val()];
-    subtitle += ": " + arrest_categories[$("#arrests_category_dropdown").val()];
+    subtitle += ": " + arrest_categories[$("#subcategory_dropdown").val()];
     subtitle += " - Arrests";
   } else if (type == "borderpatrol") {
     title = border_states[$("#state_dropdown").val()];
@@ -403,7 +403,7 @@ function getTitle(data, type) {
     subtitle = jail_categories[$("#state_dropdown").val()][$("#crime_dropdown").val()];
   } else if (type == "leoka") {
     subtitle = leoka_categories[$("#crime_dropdown").val()];
-    subtitle += ": " + _.values(leoka_subcatergory_values)[$("#leoka_subcategory_dropdown").val()];
+    subtitle += ": " + _.values(leoka_subcatergory_values)[$("#subcategory_dropdown").val()];
 
     if (leoka_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
       weapon = _.values(leoka_weapons)[$("#leoka_weapons").val()];
@@ -413,7 +413,7 @@ function getTitle(data, type) {
   } else if (type == "prisoners") {
     title = data[0].state + ' Prisons: ';
     subtitle = prisoner_categories[$("#crime_dropdown").val()] + ": ";
-    name = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    name = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
     category_index_num = _.indexOf(_.keys(prisoner_categories), $('#crime_dropdown').val());
     subtitle += prisoners_subcategory[category_index_num][name];
 

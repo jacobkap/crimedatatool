@@ -34,7 +34,7 @@ function fixTableName(name, type) {
   } else if (type == "leoka" && !default_table_headers.includes(name)) {
     temp_name = name;
     category_index_num = _.indexOf(_.keys(leoka_categories), $("#crime_dropdown").val());
-    crime_val = _.keys(leoka_subcategories[category_index_num])[$("#leoka_subcategory_dropdown").val()];
+    crime_val = _.keys(leoka_subcategories[category_index_num])[$("#subcategory_dropdown").val()];
     name = _.values(leoka_subcategories[category_index_num])[_.indexOf(_.keys(leoka_subcategories[category_index_num]), crime_val)];
 
     temp_name = temp_name.replace(crime_val + "_", "");
@@ -51,7 +51,7 @@ function fixTableName(name, type) {
       category_index_num = _.indexOf(_.keys(prisoner_categories), $("#crime_dropdown").val());
       if ($("#crime_dropdown").val().includes("_crime")) {
         temp_name = name;
-        crime_val = _.keys(prisoners_subcategory[category_index_num])[$("#prisoners_subcategories").val()];
+        crime_val = _.keys(prisoners_subcategory[category_index_num])[$("#subcategory_dropdown").val()];
         name = _.values(prisoners_subcategory[category_index_num])[_.indexOf(_.keys(prisoners_subcategory[category_index_num]), crime_val)];
         temp_name = temp_name.replace(crime_val + "_", "");
         temp_name = temp_name.replace(/_/g, " ");

@@ -166,12 +166,12 @@ function makeLeokaWeaponDropdown() {
 function makeLeokaSubcategoriesDropdown() {
   leoka_subcategory_starts = [12, 1, 1];
 
-  $('#leoka_subcategory_dropdown').empty();
+  $('#subcategory_dropdown').empty();
   values = leoka_subcategories[$('#crime_dropdown').val()];
   $.each(_.values(values), function(val, text) {
-    $('#leoka_subcategory_dropdown').append(new Option(text, val));
+    $('#subcategory_dropdown').append(new Option(text, val));
   });
-  $('#leoka_subcategory_dropdown').val(leoka_subcategory_starts[$('#crime_dropdown').val()]);
+  $('#subcategory_dropdown').val(leoka_subcategory_starts[$('#crime_dropdown').val()]);
 
   return (values);
 }
@@ -187,14 +187,14 @@ function makePrisonersRaceDropdown() {
 function makePrisonerSubcategoriesDropdown() {
   prisoner_subcategory_starts = [1, 5, 4, 0, 9, 5, 10, 5, 1, 0, 8, 3];
   category_index_num = _.indexOf(_.keys(prisoner_categories), $('#crime_dropdown').val());
-  $('#prisoners_subcategories').empty();
+  $('#subcategory_dropdown').empty();
   values = prisoners_subcategory[category_index_num];
   keys = _.keys(values);
   values = _.values(values);
   $.each(values, function(val, text) {
-    $('#prisoners_subcategories').append(new Option(text, val));
+    $('#subcategory_dropdown').append(new Option(text, val));
   });
-  $('#prisoners_subcategories').val(prisoner_subcategory_starts[category_index_num]);
+  $('#subcategory_dropdown').val(prisoner_subcategory_starts[category_index_num]);
 
   return (keys);
 }
@@ -217,9 +217,9 @@ function makeBorderSubcategoriesDropdown() {
 
 function makeArrestCategoriesDropdown() {
   $.each(arrest_categories, function(val, text) {
-    $('#arrests_category_dropdown').append(new Option(text, val));
+    $('#subcategory_dropdown').append(new Option(text, val));
   });
-  $('#arrests_category_dropdown').val("tot_arrests");
+  $('#subcategory_dropdown').val("tot_arrests");
 }
 
 function countToRate(data, type, per_officer = false) {
@@ -246,7 +246,7 @@ function countToRate(data, type, per_officer = false) {
 
     if (prisoner_categories[$("#crime_dropdown").val()] == "Race/Ethnicity" ||
       prisoner_categories[$("#crime_dropdown").val()].includes("_crime")) {
-      race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+      race_value = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
 
       if (prisoner_categories[$("#crime_dropdown").val()].includes("_crime")) {
         race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];

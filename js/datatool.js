@@ -41,8 +41,8 @@ function subsetColumns(data, columns, output, type) {
       if (type == "crime" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
         return x + "_clearance_rate";
       } else {
-      return x + rate_type;
-    }
+        return x + rate_type;
+      }
     });
 
     if (output == "table" && type != "prisoners") {
@@ -82,11 +82,11 @@ function getStateData(type, states) {
     type = "hate_crimes";
   }
 
-if(["offenses", "arrests", "leoka", "hate_crimes"].includes(type)) {
-  if ($("#monthly").is(':checked')) {
-    type += "_monthly";
+  if (["offenses", "arrests", "leoka", "hate_crimes"].includes(type)) {
+    if ($("#monthly").is(':checked')) {
+      type += "_monthly";
+    }
   }
-}
 
 
   if (type == "crime_nibrs") {
@@ -107,7 +107,7 @@ if(["offenses", "arrests", "leoka", "hate_crimes"].includes(type)) {
   } else if (["borderpatrol"].includes(type)) {
     category = $("#crime_dropdown").val();
     category = category.replace(/ /g, "_");
-    url += type + "/"  + category + "_" + state;
+    url += type + "/" + category + "_" + state;
   } else {
     agency = agencies[$("#agency_dropdown").val()];
     agency = agency.replace(/ /g, "_");
@@ -246,7 +246,7 @@ function getCrimeColumns(headers, type, output) {
     ];
     if ($("#crime_dropdown").val() == "race_ethnicity" |
       $("#crime_dropdown").val().includes("_crime")) {
-      race_value = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+      race_value = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
 
       if (prisoner_categories[$("#crime_dropdown").val()].includes("_crime")) {
         race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
@@ -267,15 +267,14 @@ function getCrimeColumns(headers, type, output) {
   if (["crime", "death", 'crime_nibrs', "hate", "jail"].includes(type)) {
     crime = $("#crime_dropdown").val();
   } else if (type == "borderpatrol") {
-        crime = subcatergory_keys[$("#subcategories").val()];
+    crime = subcatergory_keys[$("#subcategories").val()];
   } else if (type == "arrests") {
     crime = $("#crime_dropdown").val();
     if (output == "graph") {
-      //  crime += "_" + $("#arrests_category_dropdown").val();
-      arrest_category = $("#arrests_category_dropdown").val();
+      arrest_category = $("#subcategory_dropdown").val();
     }
   } else if (type == "leoka") {
-    crime = _.keys(leoka_subcatergory_values)[$("#leoka_subcategory_dropdown").val()];
+    crime = _.keys(leoka_subcatergory_values)[$("#subcategory_dropdown").val()];
 
     if (leoka_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
       weapon = _.keys(leoka_weapons)[$("#leoka_weapons").val()];
@@ -289,7 +288,7 @@ function getCrimeColumns(headers, type, output) {
       if (crime == "total_total_assaults") crime = "total_assaults_total";
     }
   } else if (type == "prisoners") {
-    crime = prisoner_subcatergory_keys[$("#prisoners_subcategories").val()];
+    crime = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
     category = $("#crime_dropdown").val();
     if (category.includes("_crime")) {
       race = _.keys(prisoners_race)[$("#prisoners_race").val()];
@@ -307,15 +306,15 @@ function getCrimeColumns(headers, type, output) {
       crime = "deaths_" + crime;
     }
   }
-    if (type == "death" & output == "table") {
-      columnNames = ["state", "year"];
-    }
-    if (type == "borderpatrol" & output == "table") {
-      columnNames = ["sector", "fiscal_year"];
-    }
-    if (type == "jail" & output == "table") {
-      columnNames = ["state", "year", "county"];
-    }
+  if (type == "death" & output == "table") {
+    columnNames = ["state", "year"];
+  }
+  if (type == "borderpatrol" & output == "table") {
+    columnNames = ["sector", "fiscal_year"];
+  }
+  if (type == "jail" & output == "table") {
+    columnNames = ["state", "year", "county"];
+  }
 
 
 
