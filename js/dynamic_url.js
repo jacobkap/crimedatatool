@@ -54,25 +54,7 @@ change_data_from_url = function(type) {
     $("#monthly").prop("checked", monthly_val);
   }
 
-
-  state_values = $('#state_dropdown')[0].options;
-  state_values = $.map(state_values, function(elem) {
-    return (elem.text);
-  });
-  state_val = _.indexOf(state_values, state_val);
-  $('#state_dropdown').val(state_val);
-//  $('#state_dropdown').trigger("chosen:updated");
-
-  if (agency_val != "") {
-    agencies = updateAgencies(type, state_values);
-    agency_val = _.indexOf(agencies, agency_val);
-    $('#agency_dropdown').val(agency_val);
-  //  $('#agency_dropdown').trigger("chosen:updated");
-  }
-
   $("#crime_dropdown").val(category_val);
-//  $("#crime_dropdown").trigger("chosen:updated");
-
 
   if (type == "leoka") {
     toggle_leoka_weapon_display();
@@ -81,9 +63,41 @@ change_data_from_url = function(type) {
   }
   if (type == "borderpatrol") {
     subcatergory_keys = makeBorderSubcategoriesDropdown();
+    if (["sector_profile", "family", "staffing"].includes(category_val) {
+      border_states = border_sectors;
+    } else if (["southwest_apprehensions", "southwest_deaths"].includes(category_val) {
+      border_states = southwest_border_sectors;
+    } else if (["seizures"].includes(category_val) {
+      border_states = border_regions;
+    } else if (["nationwide"].includes(category_val) {
+      border_states = nationwide_only;
+    }
+makeStateDropdown(border_states, 0);
   }
+  if (type == "prisoners") {
+    if (category_val.includes("_crime")) {
+      makeStateDropdown(state_values, 0);
+    } else {
+      makeStateDropdown(prisoners_state_values, 0);
+    }
+  }
+
+
+  state_values = $('#state_dropdown')[0].options;
+  state_values = $.map(state_values, function(elem) {
+    return (elem.text);
+  });
+  state_val = _.indexOf(state_values, state_val);
+  $('#state_dropdown').val(state_val);
+
+  if (agency_val != "") {
+    agencies = updateAgencies(type, state_values);
+    agency_val = _.indexOf(agencies, agency_val);
+    $('#agency_dropdown').val(agency_val);
+  }
+
+
   $("#subcategory_dropdown").val(subcategory_val);
-  $("#subcategory_dropdown").trigger("chosen:updated");
 
 
   $('.simple-select').trigger('chosen:updated');
