@@ -3,17 +3,15 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   new_url = window.location.pathname +
     "#state=" + $("#state_dropdown").children("option:selected").text()
 
-    if ("#agency_dropdown" !== "") {
-      new_url += "&agency=" + $("#agency_dropdown").children("option:selected").text()
-    }
-
-    if ("#crime_dropdown" !== "") {
-      new_url += "&category=" + $("#crime_dropdown").val()
-    }
-
-    if ("#subcategory_dropdown" !== "") {
-      new_url += "&subcategory=" + $("#subcategory_dropdown").children("option:selected").text();
-    }
+  if ($("#agency_dropdown").length != 0) {
+    new_url += "&agency=" + $("#agency_dropdown").children("option:selected").text()
+  }
+  if ($("#crime_dropdown").length != 0) {
+    new_url += "&category=" + $("#crime_dropdown").val()
+  }
+  if ($("#subcategory_dropdown").length != 0) {
+    new_url += "&subcategory=" + $("#subcategory_dropdown").children("option:selected").text();
+  }
   if ($('#rate').length != 0) {
     new_url += "&rate=" + $("#rate").prop("checked");;
   }
@@ -56,12 +54,12 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   $('#state_dropdown').val(state_val);
   $('#state_dropdown').trigger("chosen:updated");
 
-if (agency_val != "") {
-  agencies = updateAgencies(type, state_values);
-  agency_val = _.indexOf(agencies, agency_val);
-  $('#agency_dropdown').val(agency_val);
-  $('#agency_dropdown').trigger("chosen:updated");
-}
+  if (agency_val != "") {
+    agencies = updateAgencies(type, state_values);
+    agency_val = _.indexOf(agencies, agency_val);
+    $('#agency_dropdown').val(agency_val);
+    $('#agency_dropdown').trigger("chosen:updated");
+  }
 
   $("#crime_dropdown").val(category_val);
   $("#crime_dropdown").trigger("chosen:updated");
