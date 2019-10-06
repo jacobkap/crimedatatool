@@ -33,7 +33,7 @@ find_url_string = function(url, string) {
   return (final);
 }
 
-change_data_from_url = function(type, subcategory_dropdown = "", subcategory_values = "") {
+change_data_from_url = function(type) {
   url = window.location.hash;
   split_url = url.split("&");
 
