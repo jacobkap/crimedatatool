@@ -28,6 +28,9 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   if (split_url.length > 3) {
     rate_checked = split_url[3].replace("rate=", "");
     rate_checked = $.parseJSON(rate_checked);
+    if (rate_checked === true) {
+      $("#rate").prop("checked", rate_checked);
+    }
   }
 
   state_val = state_val.replace(/%20/g, " ");
@@ -54,8 +57,8 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   $(agency_dropdown).val(agency_val);
   $(agency_dropdown).trigger("chosen:updated");
 
-  $(category_dropdown).val(category_val);
-  $(category_dropdown).trigger("chosen:updated");
+  $("#crime_dropdown").val(category_val);
+  $("#crime_dropdown").trigger("chosen:updated");
 
   if (type == "leoka") {
     leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
@@ -73,9 +76,7 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
     $(subcategory_dropdown).trigger("chosen:updated");
   }
 
-  if (rate_checked === true) {
-    $(rate_checkbox).prop("checked", rate_checked);
-  }
+
 
   $('.simple-select').trigger('chosen:updated');
 

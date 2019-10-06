@@ -129,13 +129,7 @@ function agencyChangeFun(type, states, crimes) {
       crimes = crime_values;
       $("#agency_level_boxes").show();
     }
-    /*
-        $("#crime_dropdown").empty();
-        $.each(crimes, function(val, text) {
-          $("#crime_dropdown").append(new Option(text, val));
-        });
-        $('.simple-select').trigger('chosen:updated');
-        */
+
   }
 
   if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
