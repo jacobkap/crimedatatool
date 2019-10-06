@@ -73,16 +73,12 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   $("#crime_dropdown").val(category_val);
   $("#crime_dropdown").trigger("chosen:updated");
 
-  $("#subcategory_dropdown").val(subcategory_val);
-  $("#subcategory_dropdown").trigger("chosen:updated");
 
   if (type == "leoka") {
-    leoka_subcatergory_keys = makeLeokaSubcategoriesDropdown();
-    leoka_subcatergory_values = leoka_subcatergory_keys[1];
-    leoka_subcatergory_keys = leoka_subcatergory_keys[0];
-    subcategory_values = leoka_subcatergory_values;
+    leoka_subcatergory_values = makeLeokaSubcategoriesDropdown();
   }
-
+  $("#subcategory_dropdown").val(subcategory_val);
+  $("#subcategory_dropdown").trigger("chosen:updated");
 
 
   $('.simple-select').trigger('chosen:updated');
