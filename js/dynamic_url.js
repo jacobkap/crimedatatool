@@ -19,6 +19,19 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
     new_url += "&monthly=" + $("#monthly").prop("checked");;
   }
 
+  if ($('#checkbox_1').length != 0) {
+    new_url += "&checkbox_1=" + $("#checkbox_1").prop("checked");;
+  }
+  if ($('#checkbox_2').length != 0) {
+    new_url += "&checkbox_1=" + $("#checkbox_2").prop("checked");;
+  }
+  if ($('#checkbox_3').length != 0) {
+    new_url += "&checkbox_1=" + $("#checkbox_3").prop("checked");;
+  }
+  if ($('#checkbox_4').length != 0) {
+    new_url += "&checkbox_1=" + $("#checkbox_4").prop("checked");;
+  }
+
   window.history.pushState("", 'Title', new_url);
   return (new_url);
 };
@@ -65,6 +78,22 @@ change_data_from_url = function(type) {
   if (monthly_val != "") {
     monthly_val = $.parseJSON(monthly_val);
     $("#monthly").prop("checked", monthly_val);
+  }
+  if (checkbox1_val != "") {
+    checkbox1_val = $.parseJSON(checkbox1_val);
+    $("#checkbox_1").prop("checked", checkbox1_val);
+  }
+  if (checkbox2_val != "") {
+    checkbox2_val = $.parseJSON(checkbox2_val);
+    $("#checkbox_2").prop("checked", checkbox2_val);
+  }
+  if (checkbox3_val != "") {
+    checkbox3_val = $.parseJSON(checkbox3_val);
+    $("#checkbox_3").prop("checked", checkbox3_val);
+  }
+  if (checkbox4_val != "") {
+    checkbox4_val = $.parseJSON(rate_val);
+    $("#checkbox_4").prop("checked", checkbox4_val);
   }
 
   $("#crime_dropdown").val(category_val);
