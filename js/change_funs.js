@@ -10,6 +10,7 @@ function checkboxesUpdate(type, always_on_box, crimes) {
   } else {
     remake_graph(type, crimes);
   }
+  change_url()
 }
 
 function prisonersPopBoxChange(box_to_check) {
