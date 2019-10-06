@@ -56,7 +56,7 @@ get_border_states = function(crime) {
   } else if (["nationwide"].includes(crime)) {
     border_states = nationwide_only;
   }
-  return(border_states)
+  return (border_states)
 }
 
 change_data_from_url = function(type) {
@@ -70,6 +70,10 @@ change_data_from_url = function(type) {
   subcategory_val = find_url_string(split_url, "subcategory=")
   rate_val = find_url_string(split_url, "rate=")
   monthly_val = find_url_string(split_url, "monthly=")
+  checkbox1_val = find_url_string(split_url, "checkbox_1=")
+  checkbox2_val = find_url_string(split_url, "checkbox_2=")
+  checkbox3_val = find_url_string(split_url, "checkbox_3=")
+  checkbox4_val = find_url_string(split_url, "checkbox_4=")
 
   if (rate_val != "") {
     rate_val = $.parseJSON(rate_val);
