@@ -3,7 +3,7 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   new_url = window.location.pathname +
     "#state=" + $("#state_dropdown").children("option:selected").text() +
     "&agency=" + $("#agency_dropdown").children("option:selected").text() +
-    "&category=" + $("#crime_dropdown").children("option:selected").text()
+    "&category=" + $("#crime_dropdown").val()
 
   if ($('#rate').length != 0) {
     new_url += "&rate=" + $("#rate").prop("checked");;
@@ -36,6 +36,7 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   state_val = state_val.replace(/%20/g, " ");
   agency_val = agency_val.replace(/%20/g, " ");
   category_val = category_val.replace(/%20/g, " ");
+
 
   $('#crime_dropdown').val(category_val);
   $('#crime_dropdown').trigger("chosen:updated");
