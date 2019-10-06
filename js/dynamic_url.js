@@ -37,11 +37,6 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   agency_val = agency_val.replace(/%20/g, " ");
   category_val = category_val.replace(/%20/g, " ");
 
-  category_values = $('#crime_dropdown')[0].options;
-  category_values = $.map(category_values, function(elem) {
-    return (elem.value);
-  });
-  category_val = _.indexOf(_.values(category_values), category_val);
   $('#crime_dropdown').val(category_val);
   $('#crime_dropdown').trigger("chosen:updated");
 
