@@ -39,23 +39,24 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
 
   category_values = $('#crime_dropdown')[0].options;
   category_values = $.map(category_values, function(elem) {
-    return (elem.text);
+    return (elem.value);
   });
   category_val = _.indexOf(_.values(category_values), category_val);
-  category_val = _.keys(category_values)[category_val];
+  $('#crime_dropdown').val(category_val);
+  $('#crime_dropdown').trigger("chosen:updated");
 
   state_values = $('#state_dropdown')[0].options;
   state_values = $.map(state_values, function(elem) {
     return (elem.text);
   });
   state_val = _.indexOf(state_values, state_val);
-  $(state_dropdown).val(state_val);
-  $(state_dropdown).trigger("chosen:updated");
+  $('#state_dropdown').val(state_val);
+  $('#state_dropdown').trigger("chosen:updated");
 
   agencies = updateAgencies(type, state_values);
   agency_val = _.indexOf(agencies, agency_val);
-  $(agency_dropdown).val(agency_val);
-  $(agency_dropdown).trigger("chosen:updated");
+  $('#agency_dropdown').val(agency_val);
+  $('#agency_dropdown').trigger("chosen:updated");
 
   $("#crime_dropdown").val(category_val);
   $("#crime_dropdown").trigger("chosen:updated");

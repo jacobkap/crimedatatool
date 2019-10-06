@@ -430,7 +430,7 @@ function main(type, states, state_default, crimes, crime_starter) {
 
   $('.simple-select').trigger('chosen:updated');
 
-  
+
     if (window.location.hash == "") {
       change_url()
     } else {
