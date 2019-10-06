@@ -23,13 +23,13 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
     new_url += "&checkbox_1=" + $("#checkbox_1").prop("checked");;
   }
   if ($('#checkbox_2').length != 0) {
-    new_url += "&checkbox_1=" + $("#checkbox_2").prop("checked");;
+    new_url += "&checkbox_2=" + $("#checkbox_2").prop("checked");;
   }
   if ($('#checkbox_3').length != 0) {
-    new_url += "&checkbox_1=" + $("#checkbox_3").prop("checked");;
+    new_url += "&checkbox_3=" + $("#checkbox_3").prop("checked");;
   }
   if ($('#checkbox_4').length != 0) {
-    new_url += "&checkbox_1=" + $("#checkbox_4").prop("checked");;
+    new_url += "&checkbox_4=" + $("#checkbox_4").prop("checked");;
   }
 
   window.history.pushState("", 'Title', new_url);
