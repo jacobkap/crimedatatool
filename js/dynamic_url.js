@@ -15,8 +15,9 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   if ($('#rate').length != 0) {
     new_url += "&rate=" + $("#rate").prop("checked");;
   }
-
-
+  if ($('#monthly').length != 0) {
+    new_url += "&monthly=" + $("#monthly").prop("checked");;
+  }
 
   window.history.pushState("", 'Title', new_url);
   return (new_url);
