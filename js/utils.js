@@ -440,7 +440,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
 
   if (type == "border_patrol"){
-    states = get_border_states(category_val)
+    states = get_border_states($("#crime_dropdown").val())
   }
 
   main_results = get_data(type, states);
