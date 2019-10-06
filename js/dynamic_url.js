@@ -5,13 +5,14 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
     "&agency=" + $("#agency_dropdown").children("option:selected").text() +
     "&category=" + $("#crime_dropdown").val()
 
+    if ("#subcategory_dropdown" !== "") {
+      new_url += "&subcategory=" + $("#subcategory_dropdown").children("option:selected").text();
+    }
   if ($('#rate').length != 0) {
     new_url += "&rate=" + $("#rate").prop("checked");;
   }
 
-  if (subcategory_dropdown !== "") {
-    new_url += "&subcategory=" + $(subcategory_dropdown).children("option:selected").text();
-  }
+
 
   window.history.pushState("", 'Title', new_url);
   return (new_url);
