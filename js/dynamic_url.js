@@ -1,9 +1,15 @@
 change_url = function(rate = false, subcategory_dropdown = "", subcategory_values = "") {
 
   new_url = window.location.pathname +
-    "#state=" + $("#state_dropdown").children("option:selected").text() +
-    "&agency=" + $("#agency_dropdown").children("option:selected").text() +
-    "&category=" + $("#crime_dropdown").val()
+    "#state=" + $("#state_dropdown").children("option:selected").text() 
+
+    if ("#agency_dropdown" !== "") {
+      new_url += "&agency=" + $("#agency_dropdown").children("option:selected").text() +
+    }
+
+    if ("#crime_dropdown" !== "") {
+      new_url += "&category=" + $("#crime_dropdown").val()
+    }
 
     if ("#subcategory_dropdown" !== "") {
       new_url += "&subcategory=" + $("#subcategory_dropdown").children("option:selected").text();
