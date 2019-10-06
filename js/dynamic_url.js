@@ -49,10 +49,12 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   $('#state_dropdown').val(state_val);
   $('#state_dropdown').trigger("chosen:updated");
 
+if (agency_val != "") {
   agencies = updateAgencies(type, state_values);
   agency_val = _.indexOf(agencies, agency_val);
   $('#agency_dropdown').val(agency_val);
   $('#agency_dropdown').trigger("chosen:updated");
+}
 
   $("#crime_dropdown").val(category_val);
   $("#crime_dropdown").trigger("chosen:updated");
