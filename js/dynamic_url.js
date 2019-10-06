@@ -96,7 +96,7 @@ change_data_from_url = function(type) {
     $("#checkbox_3").prop("checked", checkbox3_val);
   }
   if (checkbox4_val != "") {
-    checkbox4_val = $.parseJSON(rate_val);
+    checkbox4_val = $.parseJSON(checkbox4_val);
     $("#checkbox_4").prop("checked", checkbox4_val);
   }
 
