@@ -111,6 +111,8 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
 
     label = colsForGraph[1]
     label = label.replace(/deaths_/g, "");
+    label = label.replace(/age_adjusted_rate_/g, "");
+    label = label.replace(/crude_rate_/g, "");
 
     if (type == "borderpatrol") {
       label = values[$("#subcategories").val()]
