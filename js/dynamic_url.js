@@ -26,8 +26,8 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
   state_val = split_url[0].replace("#state=", "");
   agency_val = split_url[1].replace("agency=", "");
   category_val = split_url[2].replace("category=", "");
-  if (split_url.length > 3) {
-    rate_checked = split_url[3].replace("rate=", "");
+  if (split_url.length > 4) {
+    rate_checked = split_url[4].replace("rate=", "");
     rate_checked = $.parseJSON(rate_checked);
     if (rate_checked === true) {
       $("#rate").prop("checked", rate_checked);
