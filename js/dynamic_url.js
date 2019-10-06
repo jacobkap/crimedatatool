@@ -61,17 +61,17 @@ change_data_from_url = function(type) {
   });
   state_val = _.indexOf(state_values, state_val);
   $('#state_dropdown').val(state_val);
-  $('#state_dropdown').trigger("chosen:updated");
+//  $('#state_dropdown').trigger("chosen:updated");
 
   if (agency_val != "") {
     agencies = updateAgencies(type, state_values);
     agency_val = _.indexOf(agencies, agency_val);
     $('#agency_dropdown').val(agency_val);
-    $('#agency_dropdown').trigger("chosen:updated");
+  //  $('#agency_dropdown').trigger("chosen:updated");
   }
 
   $("#crime_dropdown").val(category_val);
-  $("#crime_dropdown").trigger("chosen:updated");
+//  $("#crime_dropdown").trigger("chosen:updated");
 
 
   if (type == "leoka") {

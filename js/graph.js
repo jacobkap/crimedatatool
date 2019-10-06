@@ -123,9 +123,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       label = crimes[label]
       label += " Rate"
       // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
-    } else if (type == 'leoka') {
-      label = leoka_subcategories[$("#crime_dropdown").val()][label]
-    } else {
+    } else if (type != 'leoka') {
       label = crimes[label]
     }
     final_data = [makeGraphObjects(data1, "#ca0020", label)];
