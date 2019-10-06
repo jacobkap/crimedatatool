@@ -102,7 +102,6 @@ change_data_from_url = function(type) {
     $('#agency_dropdown').val(agency_val);
   }
 
-
   $("#subcategory_dropdown").val(subcategory_val);
 
 

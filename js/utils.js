@@ -439,7 +439,7 @@ function main(type, states, state_default, crimes, crime_starter) {
     change_data_from_url(type);
   }
 
-  if (type == "border_patrol"){
+  if (type == "borderpatrol"){
     states = get_border_states($("#crime_dropdown").val())
   }
 
