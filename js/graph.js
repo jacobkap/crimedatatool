@@ -197,7 +197,7 @@ function makeGraph(type, crimes) {
     yaxis_label = "# of Drinks";
   } else if (type == "death") {
     yaxis_label = "# of Deaths";
-    if ($("#checkbox_1").is(':checked')) {
+    if ($("#rate").is(':checked')) {
       yaxis_label = 'Deaths per 100,000 population';
     } else if ($("#checkbox_2").is(':checked')) {
       yaxis_label = 'Age-Adjusted Deaths per 100,000 population';

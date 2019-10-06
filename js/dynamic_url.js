@@ -83,15 +83,6 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
     subcategory_values = leoka_subcatergory_values;
   }
 
-  if (subcategory_dropdown !== "") {
-    subcategory_val = split_url[4].replace("subcategory=", "");
-    subcategory_val = subcategory_val.replace(/%20/g, " ");
-    subcategory_val = _.indexOf(_.values(subcategory_values), subcategory_val);
-    subcategory_val = _.keys(subcategory_values)[subcategory_val];
-    $(subcategory_dropdown).val(subcategory_val);
-    $(subcategory_dropdown).trigger("chosen:updated");
-  }
-
 
 
   $('.simple-select').trigger('chosen:updated');

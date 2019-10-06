@@ -298,7 +298,7 @@ function getCrimeColumns(headers, type, output) {
 
 
   if (type == "death" & output == "graph") {
-    if ($("#checkbox_1").is(':checked')) {
+    if ($("#rate").is(':checked')) {
       crime = "crude_rate_" + crime;
     } else if ($("#checkbox_2").is(':checked')) {
       crime = "age_adjusted_rate_" + crime;
