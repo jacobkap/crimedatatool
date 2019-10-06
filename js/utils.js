@@ -408,7 +408,7 @@ function main(type, states, state_default, crimes, crime_starter) {
     largest_agency = getStateAgencies(type, states, true);
     agencies = updateAgencies(type, states);
   }
-  if (["death"].includes(type)) {
+  if (type == "death") {
     makeCrimeDropdown(crimes, crime_starter);
   }
   if (type == "prisoners") {
