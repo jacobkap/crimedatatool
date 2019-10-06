@@ -6,6 +6,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
       dataLayer.push(arguments);
     }
@@ -23,33 +24,33 @@
       FBI's Uniform Crime Reporting (UCR) Program Data: Offenses Known and
       Clearances by Arrest.">
 
-<script src="data/data.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/change_funs.js"></script>
+  <script src="data/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/change_funs.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.0"></script>
 
-<script src="js/graph.js"></script>
-<script src="js/table.js"></script>
-<script src="js/datatool.js"></script>
-<script src="js/dynamic_url.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/table.js"></script>
+  <script src="js/datatool.js"></script>
+  <script src="js/dynamic_url.js"></script>
 
-<script src = "js/moment.min.js"></script>
-<link rel="stylesheet" href="css/test.css" />
-<link rel="stylesheet" href="css/misc.css" />
-<link rel="stylesheet" href="css/hint.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
+  <script src="js/moment.min.js"></script>
+  <link rel="stylesheet" href="css/test.css" />
+  <link rel="stylesheet" href="css/misc.css" />
+  <link rel="stylesheet" href="css/hint.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="js/chosen.jquery.js"></script>
-<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="js/chosen.jquery.js"></script>
+  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/style.css" />
 
 </head>
 
@@ -66,41 +67,43 @@
   </script>
 
 
-    <div class="column sidebar">
-      <p>Enter a police agency to see its crime over time.</p>
-      <h3>State:</h3>
-      <br>
-      <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('crime', crime_state_values)">
-          </select>
-      <br><br>
-      <h3>Agency:</h3>
-      <br>
-      <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('crime', crime_state_values)">
-        </select>
-      <br><br>
-      <h3>Crime:</h3>
-      <br>
-      <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('crime', crime_state_values)">
-      </select>
+  <div class="column sidebar">
+    <p>Enter a police agency to see its crime over time.</p>
+    <h3>State:</h3>
+    <br>
+    <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('crime', crime_state_values)">
+    </select>
+    <br><br>
+    <h3>Agency:</h3>
+    <br>
+    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('crime', crime_state_values)">
+    </select>
+    <br><br>
+    <h3>Crime:</h3>
+    <br>
+    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('crime', crime_state_values)">
+    </select>
 
-        <br><br>
-        <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('crime', crime_state_values)">
-        <label for="rate">Rate per 100,000 Population</label>
-        <br><br>
-          <div id = "agency_level_boxes">
-        <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('crime', crime_state_values)">
-        <label for="clearance_rate">Clearances as % of Crimes Reported</label>
+    <br><br>
+    <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('crime', crime_state_values)">
+    <label for="rate">Rate per 100,000 Population</label>
+    <br><br>
+    <div id="agency_level_boxes">
+      <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('crime', crime_state_values)">
+      <label for="clearance_rate">Clearances as % of Crimes Reported</label>
 
       <br><br>
       <h3>Type of Crime:</h3>
 
       <br>
 
-      <input type="checkbox" id="checkbox_1" checked  onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
+      <input type="checkbox" id="checkbox_1" checked onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
       <span class="hint--right" aria-label="Number of crimes committed and found by investigation to have actually occurred. ">Actual Offenses</span>
       <br>
       <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('crime', '#checkbox_1')"></input>
-      <span class="hint--right" aria-label="Crimes where at least one person (even if there are multiple offenders) is arrested, charged, or when the police have a suspect but cannot make an arrest ('cleared by exceptional means'). Includes juveniles cited to juvenile court.">Offenses Cleared - Total</span>
+      <span class="hint--right"
+        aria-label="Crimes where at least one person (even if there are multiple offenders) is arrested, charged, or when the police have a suspect but cannot make an arrest ('cleared by exceptional means'). Includes juveniles cited to juvenile court.">Offenses
+        Cleared - Total</span>
       <br>
       <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('crime', '#checkbox_1')">
       <span class="hint--right" aria-label="Crimes cleared where all offenders arrested or cleared by exceptional means are under age 18.">Offenses Cleared - All Under Age 18</span></input>
@@ -114,26 +117,28 @@
       <hr>
     </div>
 
-      <button type="button" onclick="exportToCsv(all_data, 'crime', crime_values)">Download All Agency Data as CSV</button>
-      <br>
-      <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
+    <button type="button" onclick="exportToCsv(all_data, 'crime', crime_values)">Download All Agency Data as CSV</button>
+    <br>
+    <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
+  </div>
+
+
+  <div class="column main">
+    <div id="loader"></div>
+
+    <canvas id="graph" style="width:95%;height:500px;"></canvas>
+    <div>
+      <table id="table" class="display cell-border"></table>
     </div>
 
+    <script>
+      main("crime", crime_state_values, 4, crime_values, "murder");
 
-    <div class="column main" >
-      <div id="loader"></div>
+      change_url()
+    </script>
+  </div>
 
-      <canvas id="graph" style="width:95%;height:500px;"></canvas>
-      <div><table id="table" class="display cell-border"></table></div>
-
-      <script>
-          main("crime", crime_state_values, 4, crime_values, "murder");
-
-    //      change_url("#crime_dropdown", "#rate", crime_state_values, agencies, crime_values, subcategory_dropdown = "", subcategory_values = "")
-      </script>
-    </div>
-
-<div class="footer-wrap"></div>
+  <div class="footer-wrap"></div>
 </body>
 
 </html>
