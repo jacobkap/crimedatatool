@@ -1,19 +1,19 @@
 function ks() {
-/*
-$("body").hide();
-  var password_given = localStorage.getItem("password_given");
-  if (password_given === false | password_given === null) {
-        var testPassword = window.prompt("Site down for maintenance");
-        if (testPassword === "houdini") {
-            $("body").show();
-            localStorage.setItem("password_given", true);
+  /*
+  $("body").hide();
+    var password_given = localStorage.getItem("password_given");
+    if (password_given === false | password_given === null) {
+          var testPassword = window.prompt("Site down for maintenance");
+          if (testPassword === "houdini") {
+              $("body").show();
+              localStorage.setItem("password_given", true);
+          } else {
+              location.reload();
+          }
         } else {
-            location.reload();
+          $("body").show();
         }
-      } else {
-        $("body").show();
-      }
-      */
+        */
 }
 
 function highlight_current_page() {
@@ -21,7 +21,9 @@ function highlight_current_page() {
   page = page.replace(/.html/g, "");
   page = page.replace(/\//g, "");
   console.log(page)
-  $('a[href*=' + page + ']').css({'color' : 'red'});
+  $('a[href*=' + page + ']').css({
+    'color': 'red'
+  });
   $('a[href*=' + page + ']').text(page);
 }
 
@@ -57,9 +59,9 @@ function exportToCsv(tableData, type, states) {
     rate_or_count = "rate_";
   }
 
-    if (["death", "alcohol"].includes(type)) {
-      rate_or_count = "";
-    }
+  if (["death", "alcohol"].includes(type)) {
+    rate_or_count = "";
+  }
 
 
   if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
@@ -314,8 +316,8 @@ function makeCrimeClearanceRates(data) {
 
   for (var i = 0; i < crime_column.length; i++) {
     for (var n = 0; n < clearance_starters.length; n++) {
-        rate_val = data[crime_column[i].replace("actual", clearance_starters[n])] / data[crime_column[i]];
-        rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
+      rate_val = data[crime_column[i].replace("actual", clearance_starters[n])] / data[crime_column[i]];
+      rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
 
       if (!isFinite(rate_val)) {
         rate_val = NaN;
@@ -326,12 +328,12 @@ function makeCrimeClearanceRates(data) {
       new_key = crime_column[i].replace("actual", clearance_starters[n]) + rate_type;
       new_key = new_key.replace("_rate_clearance", "_clearance");
       Object.defineProperty(data, new_key,
-        Object.getOwnPropertyDescriptor(data,crime_column[i].replace("actual", clearance_starters[n])));
+        Object.getOwnPropertyDescriptor(data, crime_column[i].replace("actual", clearance_starters[n])));
       delete data[crime_column[i].replace("actual", clearance_starters[n])];
 
-//    }
+      //    }
+    }
   }
-}
   return data;
 }
 
@@ -340,13 +342,13 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
   if (type == "crime") {
-      type = "offenses";
+    type = "offenses";
   }
   if (type == "hate") {
-      type = "hate_crimes";
+    type = "hate_crimes";
   }
 
-  if(["offenses", "arrests", "leoka"].includes(type)) {
+  if (["offenses", "arrests", "leoka"].includes(type)) {
     if ($("#monthly").is(':checked')) {
       type += "_monthly";
     }
@@ -431,20 +433,19 @@ function main(type, states, state_default, crimes, crime_starter) {
   $('.simple-select').trigger('chosen:updated');
 
 
-    if (window.location.hash == "") {
-      change_url()
-    } else {
+  if (window.location.hash == "") {
+    change_url()
+  } else {
     change_data_from_url(type);
-
   }
 
 
 
-  main_results  = get_data(type, states);
-  table_data    = main_results[0];
+  main_results = get_data(type, states);
+  table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
-  all_data      = main_results[3];
+  all_data = main_results[3];
 
   graph = makeGraph(type, crimes);
   $("#graph").ready($("#loader").hide());

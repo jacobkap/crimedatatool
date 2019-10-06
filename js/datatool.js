@@ -94,6 +94,7 @@ function getStateData(type, states) {
   }
 
   state = states[$("#state_dropdown").val()];
+  console.log(state)
   state = state.replace(/ /g, "_");
   state = state.replace(/-/g, "_");
   state = state.replace(/___/g, "_");
