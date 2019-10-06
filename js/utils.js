@@ -439,7 +439,9 @@ function main(type, states, state_default, crimes, crime_starter) {
     change_data_from_url(type);
   }
 
-
+  if (type == "border_patrol"){
+    states = get_border_states(category_val)
+  }
 
   main_results = get_data(type, states);
   table_data = main_results[0];

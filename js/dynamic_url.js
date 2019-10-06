@@ -33,6 +33,19 @@ find_url_string = function(url, string) {
   return (final);
 }
 
+get_border_states = function(crime) {
+  if (["sector_profile", "family", "staffing"].includes(crime)) {
+    border_states = border_sectors;
+  } else if (["southwest_apprehensions", "southwest_deaths"].includes(crime)) {
+    border_states = southwest_border_sectors;
+  } else if (["seizures"].includes(crime)) {
+    border_states = border_regions;
+  } else if (["nationwide"].includes(crime)) {
+    border_states = nationwide_only;
+  }
+  return(border_states)
+}
+
 change_data_from_url = function(type) {
   url = window.location.hash;
   split_url = url.split("&");
@@ -63,17 +76,9 @@ change_data_from_url = function(type) {
   }
   if (type == "borderpatrol") {
     subcatergory_keys = makeBorderSubcategoriesDropdown();
-    if (["sector_profile", "family", "staffing"].includes(category_val)) {
-      border_states = border_sectors;
-    } else if (["southwest_apprehensions", "southwest_deaths"].includes(category_val)) {
-      border_states = southwest_border_sectors;
-    } else if (["seizures"].includes(category_val)) {
-      border_states = border_regions;
-    } else if (["nationwide"].includes(category_val)) {
-      border_states = nationwide_only;
-    }
+    border_states = get_border_states(category_val)
     makeStateDropdown(border_states, 0);
-    var states = border_states
+    var states = border_states;
   }
   if (type == "prisoners") {
     if (category_val.includes("_crime")) {
