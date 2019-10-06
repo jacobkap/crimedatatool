@@ -204,14 +204,14 @@ function makePrisonerSubcategoriesDropdown() {
 function makeBorderSubcategoriesDropdown() {
   subcategory_starts = [7, 0, 2, 0, 9, 0, 0];
   category_index_num = _.indexOf(_.keys(border_categories), $('#crime_dropdown').val());
-  $('#subcategories').empty();
+  $('#subcategory_dropdown').empty();
   values = border_subcategories[category_index_num];
   keys = _.keys(values);
   values = _.values(values);
   $.each(values, function(val, text) {
-    $('#subcategories').append(new Option(text, val));
+    $('#subcategory_dropdown').append(new Option(text, val));
   });
-  $('#subcategories').val(subcategory_starts[category_index_num]);
+  $('#subcategory_dropdown').val(subcategory_starts[category_index_num]);
 
   return (keys);
 }

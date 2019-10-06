@@ -115,7 +115,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     label = label.replace(/crude_rate_/g, "");
 
     if (type == "borderpatrol") {
-      label = values[$("#subcategories").val()]
+      label = values[$("#subcategory_dropdown").val()]
     } else if (type == "jail") {
       label = jail_categories[$("#state_dropdown").val()][label]
     } else if (type == "crime_nibrs" && $("#rate").is(':checked')) {
@@ -398,7 +398,7 @@ function getTitle(data, type) {
   } else if (type == "borderpatrol") {
     title = border_states[$("#state_dropdown").val()];
     subtitle = border_categories[$("#crime_dropdown").val()];
-    subtitle = subtitle + ", " + values[$("#subcategories").val()]
+    subtitle = subtitle + ", " + values[$("#subcategory_dropdown").val()]
   } else if (type == "jail") {
     title = jail_state_values[$("#state_dropdown").val()];
     title += ", " + agencies[$("#agency_dropdown").val()] + " County Jail";

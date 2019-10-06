@@ -270,7 +270,7 @@ function getCrimeColumns(headers, type, output) {
   if (["crime", "death", 'crime_nibrs', "hate", "jail"].includes(type)) {
     crime = $("#crime_dropdown").val();
   } else if (type == "borderpatrol") {
-    crime = subcatergory_keys[$("#subcategories").val()];
+    crime = subcatergory_keys[$("#subcategory_dropdown").val()];
   } else if (type == "arrests") {
     crime = $("#crime_dropdown").val();
     if (output == "graph") {
