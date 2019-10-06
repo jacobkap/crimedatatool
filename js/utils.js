@@ -430,6 +430,16 @@ function main(type, states, state_default, crimes, crime_starter) {
 
   $('.simple-select').trigger('chosen:updated');
 
+  
+    if (window.location.hash == "") {
+      change_url()
+    } else {
+    change_data_from_url(type);
+
+  }
+
+
+
   main_results  = get_data(type, states);
   table_data    = main_results[0];
   graph_headers = main_results[1];
@@ -441,16 +451,8 @@ function main(type, states, state_default, crimes, crime_starter) {
   table = makeTable(type);
 
 
-change_url()
-  /*
-    if (window.location.hash == "") {
-      change_url("#state_dropdown", "#agency_dropdown", "#crime_dropdown", "#offenses_rate", offense_agencies, crime_values)
-    } else {
-    change_data_from_url("#state_dropdown", "#agency_dropdown",
-    "#crime_dropdown", "#rate", crime_values, offenses_largest_agency, "offenses");
 
-  }
-  */
+
   jQuery(window).on('resize', resizeChosen);
 
 }

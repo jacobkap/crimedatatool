@@ -5,8 +5,8 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
     "&agency=" + $("#agency_dropdown").children("option:selected").text() +
     "&category=" + $("#crime_dropdown").children("option:selected").text()
 
-  if (rate) {
-    new_url += "&rate=" + $(rate_checkbox).prop("checked");;
+  if ($('#rate').length != 0) {
+    new_url += "&rate=" + $("#rate").prop("checked");;
   }
 
   if (subcategory_dropdown !== "") {
@@ -18,29 +18,41 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
 };
 
 
-change_data_from_url = function(category_values, largest_agency, type, subcategory_dropdown = "", subcategory_values = "") {
+change_data_from_url = function(type, subcategory_dropdown = "", subcategory_values = "") {
   url = window.location.hash;
 
   split_url = url.split("&");
   state_val = split_url[0].replace("#state=", "");
   agency_val = split_url[1].replace("agency=", "");
   category_val = split_url[2].replace("category=", "");
-  rate_checked = split_url[3].replace("rate=", "");
-  rate_checked = $.parseJSON(rate_checked);
+  if (split_url.length > 3) {
+    rate_checked = split_url[3].replace("rate=", "");
+    rate_checked = $.parseJSON(rate_checked);
+  }
 
   state_val = state_val.replace(/%20/g, " ");
   agency_val = agency_val.replace(/%20/g, " ");
   category_val = category_val.replace(/%20/g, " ");
 
-  state_val = _.indexOf(state_values, state_val);
+  category_values = $('#crime_dropdown')[0].options;
+  category_values = $.map(category_values, function(elem) {
+    return (elem.text);
+  });
   category_val = _.indexOf(_.values(category_values), category_val);
   category_val = _.keys(category_values)[category_val];
 
+  state_values = $('#state_dropdown')[0].options;
+  state_values = $.map(state_values, function(elem) {
+    return (elem.text);
+  });
+  state_val = _.indexOf(state_values, state_val);
   $(state_dropdown).val(state_val);
+  $(state_dropdown).trigger("chosen:updated");
 
-  agencies = updateAgencies(type, largest_agency, agency_dropdown, state_dropdown);
+  agencies = updateAgencies(type, state_values);
   agency_val = _.indexOf(agencies, agency_val);
   $(agency_dropdown).val(agency_val);
+  $(agency_dropdown).trigger("chosen:updated");
 
   $(category_dropdown).val(category_val);
   $(category_dropdown).trigger("chosen:updated");
@@ -65,6 +77,6 @@ change_data_from_url = function(category_values, largest_agency, type, subcatego
     $(rate_checkbox).prop("checked", rate_checked);
   }
 
-  return (agencies);
+  $('.simple-select').trigger('chosen:updated');
 
 };
