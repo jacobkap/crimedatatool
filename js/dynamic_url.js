@@ -75,7 +75,12 @@ change_data_from_url = function(type, subcategory_dropdown = "", subcategory_val
 
 
   if (type == "leoka") {
+    toggle_leoka_weapon_display();
+    $("#policeSex").show();
     leoka_subcatergory_values = makeLeokaSubcategoriesDropdown();
+  }
+  if (type == "borderpatrol") {
+    subcatergory_keys = makeBorderSubcategoriesDropdown();
   }
   $("#subcategory_dropdown").val(subcategory_val);
   $("#subcategory_dropdown").trigger("chosen:updated");
