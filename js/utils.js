@@ -3,7 +3,7 @@ function ks() {
 $("body").hide();
   var password_given = localStorage.getItem("password_given");
   if (password_given === false | password_given === null) {
-        var testPassword = window.prompt("Luxembourg");
+        var testPassword = window.prompt("Site down for maintenance");
         if (testPassword === "houdini") {
             $("body").show();
             localStorage.setItem("password_given", true);
