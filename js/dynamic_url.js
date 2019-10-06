@@ -1,10 +1,10 @@
 change_url = function(rate = false, subcategory_dropdown = "", subcategory_values = "") {
 
   new_url = window.location.pathname +
-    "#state=" + $("#state_dropdown").children("option:selected").text() 
+    "#state=" + $("#state_dropdown").children("option:selected").text()
 
     if ("#agency_dropdown" !== "") {
-      new_url += "&agency=" + $("#agency_dropdown").children("option:selected").text() +
+      new_url += "&agency=" + $("#agency_dropdown").children("option:selected").text()
     }
 
     if ("#crime_dropdown" !== "") {
