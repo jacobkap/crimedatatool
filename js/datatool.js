@@ -161,7 +161,7 @@ function checkIfRateChecked(type) {
   if (["crime", "arrests", "crime_nibrs"].includes(type)) {
     return $("#rate").is(':checked');
   } else if (type == "leoka") {
-    return ($("#leoka_rate").is(':checked') ||
+    return ($("#rate").is(':checked') ||
       $("#leoka_rate_per_officer").is(':checked'));
   } else if (type == "prisoners") {
     return $("#prisoners_rate").is(':checked') || $("#prisoners_rate_adult").is(':checked') || $("#prisoners_rate_18_65").is(':checked');
