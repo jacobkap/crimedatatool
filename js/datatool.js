@@ -280,7 +280,7 @@ function getCrimeColumns(headers, type, output) {
     crime = _.keys(leoka_subcatergory_values)[$("#subcategory_dropdown").val()];
 
     if (leoka_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
-      weapon = _.keys(leoka_weapons)[$("#leoka_weapons").val()];
+      weapon = _.keys(leoka_weapons)[$("#subsubcategory_dropdown").val()];
 
       // The total columns have slightly different names than others so this makes them work.
       if (crime == "assaults_with_injury" || crime == "assaults_no_injury") {

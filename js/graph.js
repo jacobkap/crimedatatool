@@ -408,7 +408,7 @@ function getTitle(data, type) {
     subtitle += ": " + _.values(leoka_subcatergory_values)[$("#subcategory_dropdown").val()];
 
     if (leoka_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
-      weapon = _.values(leoka_weapons)[$("#leoka_weapons").val()];
+      weapon = _.values(leoka_weapons)[$("#subsubcategory_dropdown").val()];
       subtitle = subtitle + " - " + weapon;
     }
 

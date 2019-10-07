@@ -12,13 +12,16 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   if ($("#subcategory_dropdown").length != 0) {
     new_url += "&subcategory=" + $("#subcategory_dropdown").val();
   }
+  if ($("#subsubcategory_dropdown").length != 0) {
+    new_url += "&subsubcategory=" + $("#subsubcategory_dropdown").val();
+  }
+
   if ($('#rate').length != 0) {
     new_url += "&rate=" + $("#rate").prop("checked");;
   }
   if ($('#monthly').length != 0) {
     new_url += "&monthly=" + $("#monthly").prop("checked");;
   }
-
   if ($('#checkbox_1').length != 0) {
     new_url += "&checkbox_1=" + $("#checkbox_1").prop("checked");;
   }
@@ -68,6 +71,7 @@ change_data_from_url = function(type) {
   agency_val = find_url_string(split_url, "agency=")
   category_val = find_url_string(split_url, "category=")
   subcategory_val = find_url_string(split_url, "subcategory=")
+  subsubcategory_val = find_url_string(split_url, "subsubcategory=")
   rate_val = find_url_string(split_url, "rate=")
   monthly_val = find_url_string(split_url, "monthly=")
   checkbox1_val = find_url_string(split_url, "checkbox_1=")
@@ -121,7 +125,6 @@ change_data_from_url = function(type) {
     }
   }
 
-
   state_values = $('#state_dropdown')[0].options;
   state_values = $.map(state_values, function(elem) {
     return (elem.text);
@@ -136,6 +139,7 @@ change_data_from_url = function(type) {
   }
 
   $("#subcategory_dropdown").val(subcategory_val);
+  $("#subsubcategory_dropdown").val(subsubcategory_val);
 
 
   $('.simple-select').trigger('chosen:updated');

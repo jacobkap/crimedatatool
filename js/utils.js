@@ -160,9 +160,9 @@ function makeStateDropdown(states, default_value) {
 function makeLeokaWeaponDropdown() {
   temp = _.values(leoka_weapons);
   $.each(temp, function(val, text) {
-    $('#leoka_weapons').append(new Option(text, val));
+    $('#subsubcategory_dropdown').append(new Option(text, val));
   });
-  $('#leoka_weapons').val(4);
+  $('#subsubcategory_dropdown').val(4);
 }
 
 function makeLeokaSubcategoriesDropdown() {
