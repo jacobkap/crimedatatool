@@ -134,6 +134,7 @@ change_data_from_url = function(type) {
   console.log(state_values)
   console.log(state_val)
   state_val = _.indexOf(state_values, state_val);
+  console.log(state_val)
   $('#state_dropdown').val(state_val);
 
   if (agency_val != "") {
