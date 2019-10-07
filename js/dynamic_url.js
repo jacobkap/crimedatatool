@@ -128,16 +128,16 @@ change_data_from_url = function(type) {
     $('.simple-select').trigger('chosen:updated');
   }
 
-  state_values = $('#state_dropdown')[0].options;
-  state_values = $.map(state_values, function(elem) {
+  temp_state_values = $('#state_dropdown')[0].options;
+  temp_state_values = $.map(temp_state_values, function(elem) {
     return (elem.text);
   });
   console.log(state_val)
-  state_val = _.indexOf(state_values, state_val);
+  state_val = _.indexOf(temp_state_values, state_val);
   $('#state_dropdown').val(state_val);
 
   if (agency_val != "") {
-    agencies = updateAgencies(type, state_values);
+    agencies = updateAgencies(type, temp_state_values);
     agency_val = _.indexOf(agencies, agency_val);
     $('#agency_dropdown').val(agency_val);
   }
