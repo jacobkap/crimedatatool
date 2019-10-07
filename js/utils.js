@@ -439,8 +439,14 @@ function main(type, states, state_default, crimes, crime_starter) {
     change_data_from_url(type);
   }
 
-  if (type == "borderpatrol"){
+  if (type == "borderpatrol") {
     states = get_border_states($("#crime_dropdown").val())
+  }
+
+  if (type == "prisoners") {
+    if (!$("#crime_dropdown").val().includes("_crime")) {
+      states = prisoner_state_values
+    }
   }
 
   main_results = get_data(type, states);
