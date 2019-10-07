@@ -124,6 +124,7 @@ change_data_from_url = function(type) {
       makeStateDropdown(prisoners_state_values, 0);
     }
     prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
+    $('.simple-select').trigger('chosen:updated');
   }
 
   state_values = $('#state_dropdown')[0].options;
