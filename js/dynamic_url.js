@@ -118,6 +118,7 @@ change_data_from_url = function(type) {
     var states = border_states;
   }
   if (type == "prisoners") {
+    console.log(category_val)
     if (category_val.includes("_crime")) {
       makeStateDropdown(state_values, 0);
     } else {
