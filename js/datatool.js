@@ -28,7 +28,7 @@ function objToString(obj) {
 
 function subsetColumns(data, columns, output, type) {
   rate_type = "_rate";
-  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked') === true) {
     rate_type = "_rate_per_officer";
   }
   if (!checkIfRateChecked(type)) {
@@ -165,7 +165,7 @@ function checkIfRateChecked(type) {
     return $("#rate").is(':checked');
   } else if (type == "leoka") {
     return ($("#rate").is(':checked') ||
-      $("#leoka_rate_per_officer").is(':checked'));
+      $("#checkbox_4").is(':checked'));
   } else if (type == "prisoners") {
     return $("#prisoners_rate").is(':checked') || $("#prisoners_rate_adult").is(':checked') || $("#prisoners_rate_18_65").is(':checked');
   }

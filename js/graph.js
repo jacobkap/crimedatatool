@@ -31,7 +31,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "hate") {
     checkbox_names = ["Violent", "Nonviolent", "Total"];
   }
-  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked') === true) {
     rate_type = "_rate_per_officer";
   }
 
@@ -182,7 +182,7 @@ function makeGraph(type, crimes) {
     if (checkIfRateChecked(type)) {
       yaxis_label = 'Rate per 100,000 Population';
     }
-    if ($("#leoka_rate_per_officer").is(':checked')) {
+    if ($("#checkbox_4").is(':checked')) {
       yaxis_label = "Rate per Officer";
     }
   } else if (type == "prisoners") {

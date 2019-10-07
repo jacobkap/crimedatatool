@@ -121,7 +121,7 @@ function fixTableName(name, type) {
     } else {
     name += " Rate";
   }
-    if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked')) {
+    if (type == "leoka" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
     }
   }
@@ -130,7 +130,7 @@ function fixTableName(name, type) {
 
 function fixTableDataName(name, type) {
   rate_type = "_rate";
-  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked') === true) {
     rate_type = "_rate_per_officer";
   }
 

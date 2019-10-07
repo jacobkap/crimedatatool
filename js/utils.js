@@ -64,7 +64,7 @@ function exportToCsv(tableData, type, states) {
   }
 
 
-  if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked') === true) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked') === true) {
     rate_or_count = "rate_per_officer_";
   }
   if (type == "leoka") {
@@ -226,7 +226,7 @@ function makeArrestCategoriesDropdown() {
 
 function countToRate(data, type, per_officer = false) {
 
-  per_officer = $("#leoka_rate_per_officer").is(':checked');
+  per_officer = $("#checkbox_4").is(':checked');
   data_keys = _.keys(data);
   population_column = "population";
   if (per_officer === true) {
