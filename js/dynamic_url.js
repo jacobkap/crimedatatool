@@ -132,6 +132,7 @@ change_data_from_url = function(type) {
   state_values = $.map(state_values, function(elem) {
     return (elem.text);
   });
+  console.log(state_val)
   state_val = _.indexOf(state_values, state_val);
   $('#state_dropdown').val(state_val);
 
