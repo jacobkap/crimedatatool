@@ -123,6 +123,7 @@ change_data_from_url = function(type) {
     } else {
       makeStateDropdown(prisoners_state_values, 0);
     }
+    prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
   }
 
   state_values = $('#state_dropdown')[0].options;
@@ -139,6 +140,9 @@ change_data_from_url = function(type) {
   }
 
   $("#subcategory_dropdown").val(subcategory_val);
+  if (type == "prisoners") {
+    toggle_prisoners_race_display();
+  }
   $("#subsubcategory_dropdown").val(subsubcategory_val);
 
 
