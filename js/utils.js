@@ -444,8 +444,10 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
 
   if (type == "prisoners") {
-    if (!$("#crime_dropdown").val().includes("_crime")) {
-      states = prisoner_state_values
+    if ($("#crime_dropdown").val().includes("_crime")) {
+      states = state_values
+    } else {
+      states = prisoners_state_values
     }
   }
 
