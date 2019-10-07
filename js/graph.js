@@ -420,7 +420,7 @@ function getTitle(data, type) {
     subtitle += prisoners_subcategory[category_index_num][name];
 
     if (_.keys(prisoner_categories)[category_index_num].includes("_crime")) {
-      subtitle += ", Race: " + _.values(prisoners_race)[$("#prisoners_race").val()];
+      subtitle += ", Race: " + _.values(prisoners_race)[$("#subsubcategory_dropdown").val()];
     }
   } else if (type == "alcohol") {
     title = data[0].state + ' Alcohol Consumption: ';

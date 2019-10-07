@@ -252,7 +252,7 @@ function getCrimeColumns(headers, type, output) {
       race_value = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
 
       if (prisoner_categories[$("#crime_dropdown").val()].includes("_crime")) {
-        race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
+        race_value = _.keys(prisoners_race)[$("#subsubcategory_dropdown").val()];
       }
       columnNames = ["state", "year"];
       columnNames.push("population_" + race_value);
@@ -294,7 +294,7 @@ function getCrimeColumns(headers, type, output) {
     crime = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
     category = $("#crime_dropdown").val();
     if (category.includes("_crime")) {
-      race = _.keys(prisoners_race)[$("#prisoners_race").val()];
+      race = _.keys(prisoners_race)[$("#subsubcategory_dropdown").val()];
       crime += "_" + race;
     }
   }

@@ -135,9 +135,9 @@ function toggle_leoka_weapon_display() {
 
 function toggle_prisoners_race_display() {
   if (!$("#crime_dropdown").val().includes("_crime")) {
-    $("#prisoners_race_div").hide();
+    $("#subsubcategory_dropdown_div").hide();
   } else {
-    $("#prisoners_race_div").show();
+    $("#subsubcategory_dropdown_div").show();
   }
 }
 
@@ -181,9 +181,9 @@ function makeLeokaSubcategoriesDropdown() {
 function makePrisonersRaceDropdown() {
   temp = _.values(prisoners_race);
   $.each(temp, function(val, text) {
-    $('#prisoners_race').append(new Option(text, val));
+    $('#subsubcategory_dropdown').append(new Option(text, val));
   });
-  $('#prisoners_race').val(4);
+  $('#subsubcategory_dropdown').val(4);
 }
 
 function makePrisonerSubcategoriesDropdown() {
@@ -251,7 +251,7 @@ function countToRate(data, type, per_officer = false) {
       race_value = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
 
       if (prisoner_categories[$("#crime_dropdown").val()].includes("_crime")) {
-        race_value = _.keys(prisoners_race)[$("#prisoners_race").val()];
+        race_value = _.keys(prisoners_race)[$("#subsubcategory_dropdown").val()];
       }
       if (race_value != "total") {
         total_population_column += "_" + race_value;
