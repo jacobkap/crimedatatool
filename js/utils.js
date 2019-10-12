@@ -1,19 +1,19 @@
 function ks(active = "no") {
-  if (active == "yes")
+  if (active == "yes") {
     $("body").hide();
-  var password_given = localStorage.getItem("password_given");
-  if (password_given === false | password_given === null) {
-    var testPassword = window.prompt("Site down for maintenance");
-    if (testPassword === "houdini") {
-      $("body").show();
-      localStorage.setItem("password_given", true);
+    var password_given = localStorage.getItem("password_given");
+    if (password_given === false | password_given === null) {
+      var testPassword = window.prompt("Site down for maintenance");
+      if (testPassword === "houdini") {
+        $("body").show();
+        localStorage.setItem("password_given", true);
+      } else {
+        location.reload();
+      }
     } else {
-      location.reload();
+      $("body").show();
     }
-  } else {
-    $("body").show();
   }
-
 }
 
 function highlight_current_page() {
