@@ -54,7 +54,7 @@
   <div class="navigation-wrapper"></div>
 
   <script>
-      ks()
+      ks("yes")
     $(function() {
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
@@ -83,14 +83,14 @@
     </div>
 
     <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="prisonersPopBoxChange('#prisoners_rate')">
-    <label for="prisoners_rate">% of Population</label>
+    <label for="prisoners_rate">Rate per 100,000 Population</label>
     <br><br>
 
     <input type="checkbox" id="prisoners_rate_adult" name="prisoners_rate_adult" value="prisoners_rate_adult" onchange="prisonersPopBoxChange('#prisoners_rate_adult')">
-    <label for="prisoners_rate_adult">% of Adult Population</label>
+    <label for="prisoners_rate_adult">Rate per 100,000 Adults</label>
     <br><br>
     <input type="checkbox" id="prisoners_rate_18_65" name="prisoners_rate_18_65" value="prisoners_rate_18_65" onchange="prisonersPopBoxChange('#prisoners_rate_18_65')">
-    <label for="prisoners_rate_18_65">% of Population Aged 18-65</label>
+    <label for="prisoners_rate_18_65">Rate per 100,000 Aged 18-65</label>
     <br><br>
 
     <h3>Prisoner Sex:</h3>

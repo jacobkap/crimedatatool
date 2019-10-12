@@ -34,6 +34,9 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   if ($('#checkbox_4').length != 0) {
     new_url += "&checkbox_4=" + $("#checkbox_4").prop("checked");;
   }
+  if ($('#checkbox_5').length != 0) {
+    new_url += "&checkbox_5=" + $("#checkbox_5").prop("checked");;
+  }
 
   window.history.pushState("", 'Title', new_url);
   return (new_url);
@@ -78,6 +81,7 @@ change_data_from_url = function(type) {
   checkbox2_val = find_url_string(split_url, "checkbox_2=")
   checkbox3_val = find_url_string(split_url, "checkbox_3=")
   checkbox4_val = find_url_string(split_url, "checkbox_4=")
+  checkbox5_val = find_url_string(split_url, "checkbox_5=")
 
   if (rate_val != "") {
     rate_val = $.parseJSON(rate_val);
@@ -102,6 +106,10 @@ change_data_from_url = function(type) {
   if (checkbox4_val != "") {
     checkbox4_val = $.parseJSON(checkbox4_val);
     $("#checkbox_4").prop("checked", checkbox4_val);
+  }
+  if (checkbox5_val != "") {
+    checkbox5_val = $.parseJSON(checkbox5_val);
+    $("#checkbox_5").prop("checked", checkbox5_val);
   }
 
   $("#crime_dropdown").val(category_val);
@@ -131,10 +139,7 @@ change_data_from_url = function(type) {
   state_values = $.map(state_values, function(elem) {
     return (elem.text);
   });
-  console.log(state_values)
-  console.log(state_val)
   state_val = _.indexOf(state_values, state_val);
-  console.log(state_val)
   $('#state_dropdown').val(state_val);
 
   if (agency_val != "") {

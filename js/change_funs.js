@@ -5,7 +5,7 @@ function checkboxesUpdate(type, always_on_box, crimes) {
     !$("#checkbox_4").is(':checked')) {
     $(always_on_box).prop("checked", true);
   }
-  if (["death", "crime"].includes(type)) {
+  if (["death", "offenses"].includes(type)) {
     agencyChangeFun(type, state_values);
   } else {
     remake_graph(type, crimes);
@@ -53,6 +53,11 @@ function leoka_categoryChangeFun() {
   toggle_leoka_weapon_display();
   toggle_leoka_employee_sex_display();
   agencyChangeFun('leoka', state_values, leoka_categories);
+}
+
+function arrest_subsubcategoryChangeFun() {
+  toggle_arrest_display();
+  agencyChangeFun('arrests', state_values);
 }
 
 function borderCategoryChange(type, states, crimes) {
@@ -106,7 +111,7 @@ function prisonerCategoryChange(current_category) {
 
 function agencyChangeFun(type, states, crimes) {
 
-  if (type == "crime") {
+  if (type == "offenses") {
     if ($("#clearance_rate").is(":checked")) {
       $("#checkbox_2+span").text("% Cleared - Total");
       $("#checkbox_3+span").text("% Cleared - All Under Age 18");
@@ -145,7 +150,7 @@ function agencyChangeFun(type, states, crimes) {
 
   remake_graph(type, crimes);
 
-  if (type == "crime" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {
+  if (type == "offenses" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {
     addYAxis();
   }
 

@@ -5,15 +5,6 @@ function resizeChosen() {
 }
 
 
-/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
 
 function objToString(obj) {
   var str = '';
@@ -28,17 +19,20 @@ function objToString(obj) {
 
 function subsetColumns(data, columns, output, type) {
   rate_type = "_rate";
-  if (type == "leoka" && $("#checkbox_4").is(':checked') === true) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked')) {
     rate_type = "_rate_per_officer";
+  }
+  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+    rate_type = "_percent_of_arrests";
   }
   if (!checkIfRateChecked(type)) {
     rate_type = "";
   }
 
 
-  if (checkIfRateChecked(type) || (type == "crime" && $("#clearance_rate").is(":checked"))) {
+  if (checkIfRateChecked(type) || (type == "offenses" && $("#clearance_rate").is(":checked"))) {
     columns = _.map(columns, function(x) {
-      if (type == "crime" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
+      if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
         return x + "_clearance_rate";
       } else {
         return x + rate_type;
@@ -75,22 +69,11 @@ function subsetColumns(data, columns, output, type) {
 function getStateData(type, states) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
-  if (type == "crime") {
-    type = "offenses";
-  }
-  if (type == "hate") {
-    type = "hate_crimes";
-  }
 
   if (["offenses", "arrests", "leoka", "hate_crimes"].includes(type)) {
     if ($("#monthly").is(':checked')) {
       type += "_monthly";
     }
-  }
-
-
-  if (type == "crime_nibrs") {
-    type = "nibrs";
   }
 
   state = states[$("#state_dropdown").val()];
@@ -149,7 +132,7 @@ function getAgencyData(stateData, headers, table_headers, type) {
       return countToRate(currentObject, type);
     });
   }
-  if (type == "crime" && $("#clearance_rate").is(":checked")) {
+  if (type == "offenses" && $("#clearance_rate").is(":checked")) {
     agencyData = _.map(agencyData, function(currentObject) {
       return makeCrimeClearanceRates(currentObject, type);
     });
@@ -158,13 +141,15 @@ function getAgencyData(stateData, headers, table_headers, type) {
 }
 
 function checkIfRateChecked(type) {
-  if (["crime", "arrests", "crime_nibrs"].includes(type)) {
+  if (["offenses", "nibrs"].includes(type)) {
     return $("#rate").is(':checked');
   } else if (type == "leoka") {
     return ($("#rate").is(':checked') ||
       $("#checkbox_4").is(':checked'));
   } else if (type == "prisoners") {
     return $("#prisoners_rate").is(':checked') || $("#prisoners_rate_adult").is(':checked') || $("#prisoners_rate_18_65").is(':checked');
+  } else if (type == "arrests") {
+    return ($("#percent_of_arrests").is(':checked') || $("#rate").is(':checked'))
   }
 }
 
@@ -188,7 +173,7 @@ function get_data(type, states) {
       return countToRate(currentObject, type);
     });
   }
-  if (type == "crime" && $("#clearance_rate").is(":checked")) {
+  if (type == "offenses" && $("#clearance_rate").is(":checked")) {
     allAgencyData = _.map(allAgencyData, function(currentObject) {
       return makeCrimeClearanceRates(currentObject, type);
     });
@@ -264,7 +249,7 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (["crime", "death", 'crime_nibrs', "hate", "jail"].includes(type)) {
+  if (["offenses", "death", 'nibrs', "hate_crimes", "jail"].includes(type)) {
     crime = $("#crime_dropdown").val();
   } else if (type == "borderpatrol") {
     crime = subcatergory_keys[$("#subcategory_dropdown").val()];
@@ -296,7 +281,6 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-
   if (type == "death" & output == "graph") {
     if ($("#rate").is(':checked')) {
       crime = "crude_rate_" + crime;
@@ -316,9 +300,6 @@ function getCrimeColumns(headers, type, output) {
     columnNames = ["state", "year", "county"];
   }
 
-
-
-
   for (var n = 0; n < headers.length; n++) {
     if (type == "prisoners") {
       if (headers[n].startsWith(crime)) {
@@ -328,14 +309,35 @@ function getCrimeColumns(headers, type, output) {
         columnNames.push(headers[n]);
       }
     } else if (type == "arrests") {
-      if (headers[n].match(crime + ".*" + arrest_category) !== null) {
-        columnNames.push(headers[n]);
-      }
-      if (arrest_category == "tot_arrests") {
-        if (headers[n] == crime + "_tot_adult" || headers[n] == crime + "_tot_juv") {
+      if ($("#subsubcategory_dropdown").val() == "Sex") {
+        female_arrest = crime + "_tot_female_" + arrest_category;
+        male_arrest = crime + "_tot_male_" + arrest_category;
+        if (arrest_category == "tot") {
+          female_arrest = crime + "_tot_female";
+          male_arrest = crime + "_tot_male";
+          arrest_category_temp = "arrests";
+          total_arrest = crime + "_tot_arrests";
+        } else {
+          total_arrest = crime + "_tot_" + arrest_category;
+        }
+        if ([female_arrest, male_arrest, total_arrest].includes(headers[n])) {
+          columnNames.push(headers[n]);
+        }
+      } else {
+        amer_ind_arrest = crime + "_" + arrest_category + "_amer_ind";
+        asian_arrest = crime + "_" + arrest_category + "_asian";
+        black_arrest = crime + "_" + arrest_category + "_black";
+        white_arrest = crime + "_" + arrest_category + "_white";
+        if (arrest_category == "tot") {
+          total_arrest = crime + "_tot_arrests"
+        } else {
+          total_arrest = crime + "_tot_" + arrest_category;
+        }
+        if ([amer_ind_arrest, asian_arrest, black_arrest, white_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
         }
       }
+
     } else if (type == "borderpatrol") {
       if (headers[n] === crime) {
         columnNames.push(headers[n]);
@@ -367,7 +369,10 @@ function getCrimeColumns(headers, type, output) {
     columnNames.push("total_employees_officers");
   }
 
-
+  if (type == "arrests") {
+    index = columnNames.indexOf(total_arrest);
+    columnNames.push(columnNames.splice(index, 1)[0]);
+  }
 
   return (columnNames);
 }

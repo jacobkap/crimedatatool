@@ -1,19 +1,19 @@
-function ks() {
-  /*
-  $("body").hide();
-    var password_given = localStorage.getItem("password_given");
-    if (password_given === false | password_given === null) {
-          var testPassword = window.prompt("Site down for maintenance");
-          if (testPassword === "houdini") {
-              $("body").show();
-              localStorage.setItem("password_given", true);
-          } else {
-              location.reload();
-          }
-        } else {
-          $("body").show();
-        }
-        */
+function ks(active = "no") {
+  if (active == "yes")
+    $("body").hide();
+  var password_given = localStorage.getItem("password_given");
+  if (password_given === false | password_given === null) {
+    var testPassword = window.prompt("Site down for maintenance");
+    if (testPassword === "houdini") {
+      $("body").show();
+      localStorage.setItem("password_given", true);
+    } else {
+      location.reload();
+    }
+  } else {
+    $("body").show();
+  }
+
 }
 
 function highlight_current_page() {
@@ -64,7 +64,7 @@ function exportToCsv(tableData, type, states) {
   }
 
 
-  if (type == "leoka" && $("#checkbox_4").is(':checked') === true) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked')) {
     rate_or_count = "rate_per_officer_";
   }
   if (type == "leoka") {
@@ -117,6 +117,38 @@ function exportToCsv(tableData, type, states) {
 }
 
 
+function make_dropdown(dropdown_id, values, starter) {
+  $(dropdown_id).empty();
+  $.each(values, function(val, text) {
+    $(dropdown_id).append(new Option(text, val));
+  });
+  $(dropdown_id).val(starter);
+}
+
+
+function makePrisonersRaceDropdown() {
+  temp = _.values(prisoners_race);
+  $.each(temp, function(val, text) {
+    $('#subsubcategory_dropdown').append(new Option(text, val));
+  });
+  $('#subsubcategory_dropdown').val(4);
+}
+
+function makeStateDropdown(states, default_value) {
+  $('#state_dropdown').empty();
+  $.each(states, function(val, text) {
+    $("#state_dropdown").append(new Option(text, val));
+  });
+  $("#state_dropdown").val(default_value);
+}
+
+function makeLeokaWeaponDropdown() {
+  temp = _.values(leoka_weapons);
+  $.each(temp, function(val, text) {
+    $('#subsubcategory_dropdown').append(new Option(text, val));
+  });
+  $('#subsubcategory_dropdown').val(4);
+}
 
 function makeCrimeDropdown(values, starter) {
   $.each(values, function(val, text) {
@@ -149,20 +181,31 @@ function toggle_leoka_employee_sex_display() {
   }
 }
 
-function makeStateDropdown(states, default_value) {
-  $('#state_dropdown').empty();
-  $.each(states, function(val, text) {
-    $("#state_dropdown").append(new Option(text, val));
-  });
-  $("#state_dropdown").val(default_value);
-}
+function toggle_arrest_display() {
+  if ($("#subsubcategory_dropdown").val() == "Sex") {
+    breakdown_name.innerText = "Sex:";
+    $("#race").hide();
+    $("label[for='checkbox_1']").html("Female")
+    $("label[for='checkbox_2']").html("Male")
+    $("label[for='checkbox_3']").html("Total")
+    $("#checkbox_1").prop("checked", false);
+    $("#checkbox_2").prop("checked", false);
+    $("#checkbox_3").prop("checked", true);
+    $("#checkbox_4").prop("checked", false);
+    $("#checkbox_5").prop("checked", false);
+  } else {
+    breakdown_name.innerText = "Race:";
+    $("#race").show();
+    $("label[for='checkbox_1']").html("American Indian")
+    $("label[for='checkbox_2']").html("Asian")
+    $("label[for='checkbox_3']").html("Black")
 
-function makeLeokaWeaponDropdown() {
-  temp = _.values(leoka_weapons);
-  $.each(temp, function(val, text) {
-    $('#subsubcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subsubcategory_dropdown').val(4);
+    $("#checkbox_1").prop("checked", false);
+    $("#checkbox_2").prop("checked", false);
+    $("#checkbox_3").prop("checked", false);
+    $("#checkbox_4").prop("checked", false);
+    $("#checkbox_5").prop("checked", true);
+  }
 }
 
 function makeLeokaSubcategoriesDropdown() {
@@ -178,13 +221,6 @@ function makeLeokaSubcategoriesDropdown() {
   return (values);
 }
 
-function makePrisonersRaceDropdown() {
-  temp = _.values(prisoners_race);
-  $.each(temp, function(val, text) {
-    $('#subsubcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subsubcategory_dropdown').val(4);
-}
 
 function makePrisonerSubcategoriesDropdown() {
   prisoner_subcategory_starts = [1, 5, 4, 0, 9, 5, 10, 5, 1, 0, 8, 3];
@@ -217,20 +253,21 @@ function makeBorderSubcategoriesDropdown() {
 }
 
 
-function makeArrestCategoriesDropdown() {
-  $.each(arrest_categories, function(val, text) {
-    $('#subcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subcategory_dropdown').val("tot_arrests");
-}
+
 
 function countToRate(data, type, per_officer = false) {
 
   per_officer = $("#checkbox_4").is(':checked');
   data_keys = _.keys(data);
   population_column = "population";
-  if (per_officer === true) {
+  if (per_officer && type == "leoka") {
     population_column = "total_employees_officers";
+  }
+  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+    population_column = $("#crime_dropdown").val() + "_tot_" + $("#subcategory_dropdown").val();
+    if ($("#subcategory_dropdown").val() == "tot") {
+      population_column = $("#crime_dropdown").val() + "_tot_arrests";
+    }
   }
   if (type == "prisoners") {
     total_population_column = "population";
@@ -263,11 +300,7 @@ function countToRate(data, type, per_officer = false) {
 
 
   for (var i = 0; i < data_keys.length; i++) {
-    if (!data_keys[i].includes("agency") &&
-      data_keys[i] !== "year" &&
-      !data_keys[i].includes("state") &&
-      !data_keys[i].includes("population") &&
-      !data_keys[i].includes("ORI")) {
+    if (!["agency", "year", "state", "population", "ORI"].includes(data_keys[i])) {
 
       if (type == "prisoners") {
         if (data_keys[i].includes("_female")) {
@@ -277,23 +310,26 @@ function countToRate(data, type, per_officer = false) {
         } else {
           population_column = total_population_column;
         }
+        rate_val = data[data_keys[i]] / data[population_column] * 100000;
+      } else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
-        rate_val = parseFloat(rate_val).toFixed(2);
       } else {
-
         rate_val = data[data_keys[i]] / data[population_column];
         if (population_column !== "total_employees_officers") {
           rate_val = rate_val * 100000;
         }
-        rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
       }
+      rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
       if (!isFinite(rate_val)) {
         rate_val = NaN;
       }
       data[data_keys[i]] = rate_val;
       rate_type = "_rate";
-      if (per_officer === true) {
+      if (per_officer === true && type == "leoka") {
         rate_type = "_rate_per_officer";
+      }
+      if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+        rate_type = "_percent_of_arrests";
       }
       new_key = data_keys[i] + rate_type;
       Object.defineProperty(data, new_key,
@@ -341,23 +377,12 @@ function makeCrimeClearanceRates(data) {
 function getStateAgencies(type, states = state_values, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
-  if (type == "crime") {
-    type = "offenses";
-  }
-  if (type == "hate") {
-    type = "hate_crimes";
-  }
-
   if (["offenses", "arrests", "leoka"].includes(type)) {
     if ($("#monthly").is(':checked')) {
       type += "_monthly";
     }
   }
 
-
-  if (type == "crime_nibrs") {
-    type = "nibrs";
-  }
   url += type + "/";
   final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
   if (largest_agencies === true) {
@@ -400,7 +425,9 @@ function main(type, states, state_default, crimes, crime_starter) {
   makeStateDropdown(states, state_default);
 
   if (type == "arrests") {
-    makeArrestCategoriesDropdown();
+    make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
+    make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
+    toggle_arrest_display();
   }
   if (type == "jail") {
     crimes = crimes[$("#state_dropdown").val()]
@@ -461,9 +488,5 @@ function main(type, states, state_default, crimes, crime_starter) {
   $("#graph").ready($("#loader").hide());
   table = makeTable(type);
 
-
-
-
   jQuery(window).on('resize', resizeChosen);
-
 }

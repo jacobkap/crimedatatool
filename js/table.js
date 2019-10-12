@@ -2,16 +2,17 @@ function fixTableName(name, type) {
   temp_name = name;
   name = name.replace(/_rate/g, "");
   name = name.replace(/_clearance/g, "");
-  if (type == "crime") {
+  name = name.replace(/_percent_of_arrests/g, "");
+  if (type == "offenses") {
     temp1 = name.replace(/actual_.*/, "Actual ");
     if ($("#clearance_rate").is(":checked")) {
       temp2 = name.replace(/clr_18_.*/, "Clearance Rate Under Age 18 - ");
       temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance Rate - ");
 
-  } else {
-    temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
-    temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
-  }
+    } else {
+      temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
+      temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
+    }
     temp4 = name.replace(/unfound_.*/, "Unfounded ");
     name = name.replace(/actual_|clr_18_|tot_clr_|unfound_/, "");
     name = crime_values[name];
@@ -76,13 +77,13 @@ function fixTableName(name, type) {
   } else if (type == "jail") {
     name = jail_categories[$("#state_dropdown").val()][name];
 
-  } else if (type == "hate") {
+  } else if (type == "hate_crimes") {
     name = name.replace(/_/g, " ");
     name = toTitleCase(name);
-  } else if (type == "crime_nibrs") {
+  } else if (type == "nibrs") {
     if ($("#rate").is(':checked')) {
-    name = name.replace(/_rate/g, "");
-  }
+      name = name.replace(/_rate/g, "");
+    }
     name = nibrs_crime_values[name];
   } else if (type == "death") {
     temp_name = name;
@@ -101,28 +102,26 @@ function fixTableName(name, type) {
       name = "Fiscal Year";
     } else {
       index_val = keys.findIndex(function(element) {
-  return element == name;
-});
-        name = values[index_val]
-      }
-}
+        return element == name;
+      });
+      name = values[index_val]
+    }
+  }
 
   if (name === undefined || default_table_headers.includes(name)) {
     name = temp_name.replace(/^\w/, c => c.toUpperCase());
   }
 
-  if (checkIfRateChecked(type) &&
-    !name.includes("Agency") &&
-    !name.startsWith("Year") &&
-    !name.includes("State") &&
-    !name.includes("Population") &&
-    !name.includes("ORI")) {
-    if (type == "crime" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {
-    } else {
-    name += " Rate";
-  }
-    if (type == "leoka" && $("#checkbox_4").is(':checked')) {
+  if (checkIfRateChecked(type) && !["Agency", "State", "Population", "ORI"].includes(name) &&
+    !name.startsWith("Year")) {
+
+    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {
+    } else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+      name += " % of Arrests";
+    } else if (type == "leoka" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
+    } else {
+      name += " Rate";
     }
   }
   return name;
@@ -130,24 +129,25 @@ function fixTableName(name, type) {
 
 function fixTableDataName(name, type) {
   rate_type = "_rate";
-  if (type == "leoka" && $("#checkbox_4").is(':checked') === true) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked')) {
     rate_type = "_rate_per_officer";
   }
+  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+    rate_type = "_percent_of_arrests";
+  }
 
-  if (!name.includes("agency") &&
+  if (!["ORI", "agency", "state", "population"].includes(name) &&
     !name.startsWith("year") &&
-    !name.startsWith("county") &&
-    !name.includes("state") &&
-    !name.includes("population") &&
-    !name.includes("ORI")) {
-    if (checkIfRateChecked(type)) {
-        name += rate_type;
-      }
-    if (type == "crime" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {
-        name += "_clearance_rate";
-        name = name.replace("_rate_clearance", "_clearance");
-    }
+    !name.startsWith("county")) {
 
+
+    if (checkIfRateChecked(type)) {
+      name += rate_type;
+    }
+    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {
+      name += "_clearance_rate";
+      name = name.replace("_rate_clearance", "_clearance");
+    }
   }
   return name;
 }
@@ -157,8 +157,7 @@ function makeTable(type) {
 
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
-    return a !== 'agency' && a !== 'year' &&
-      a !== 'state' && a !== 'ORI' && a !== 'county' && a !== 'sector' && a !== 'fiscal_year';
+    return !["agency", "year", "state", "ORI", "county", "sector", "fiscal_year"].includes(a);
   });
 
   // Adds commas in numbers to make it easier to read!
@@ -171,7 +170,6 @@ function makeTable(type) {
       }
     }
   }
-
   // Makes real (as they appear in the data) names and pretty names
   // as they will appear in the table.
   table_columns = [];
@@ -200,7 +198,13 @@ function makeTable(type) {
     "ordering": true,
     "order": [1, "desc"],
     "fixedHeader": true,
-    "render":function(data){if(typeof(data) == "undefined") {return "tbd"} else {return data}},
+    "render": function(data) {
+      if (typeof(data) == "undefined") {
+        return "tbd"
+      } else {
+        return data
+      }
+    },
     fixedColumns: {
       leftColumns: 2
     }
