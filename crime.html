@@ -36,6 +36,7 @@
   <script src="js/datatool.js"></script>
   <script src="js/dynamic_url.js"></script>
   <script src="js/moment.min.js"></script>
+  <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
   <link rel="stylesheet" href="css/hint.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -57,7 +58,6 @@
   <script>
     ks()
     $(function() {
-      $('.state_agency_crime').load("reusable_js.html #state_agency_crime");
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
     })
@@ -65,9 +65,23 @@
 
 
   <div class="column sidebar">
-    <div class="state_agency_crime"></div>
+    <p>Enter a police agency to see its crime over time.</p>
+    <h3>State:</h3>
+    <br>
+    <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)">
+    </select>
+    <br><br>
+    <h3>Agency:</h3>
+    <br>
+    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)">
+    </select>
+    <br><br>
+    <h3>Crime:</h3>
+    <br>
+    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)">
+    </select>
 
-
+    <br><br>
     <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('offenses', crime_state_values)">
     <label for="rate">Rate per 100,000 Population</label>
     <br><br>
