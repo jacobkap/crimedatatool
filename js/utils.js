@@ -98,9 +98,12 @@ function exportToCsv(tableData, type, states) {
   }
 }
 
-
 function make_dropdown(dropdown_id, values, starter) {
   $(dropdown_id).empty();
+  if (!Array.isArray(values)) {
+    values = _.values(values)
+  }
+
   $.each(values, function(val, text) {
     $(dropdown_id).append(new Option(text, val));
   });
@@ -149,24 +152,6 @@ function makeBorderSubcategoriesDropdown() {
 
   return (keys);
 }
-
-
-function makePrisonersRaceDropdown() {
-  temp = _.values(prisoners_race);
-  $.each(temp, function(val, text) {
-    $('#subsubcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subsubcategory_dropdown').val(4);
-}
-
-function makeLeokaWeaponDropdown() {
-  temp = _.values(leoka_weapons);
-  $.each(temp, function(val, text) {
-    $('#subsubcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subsubcategory_dropdown').val(4);
-}
-
 
 
 function toggle_leoka_weapon_display() {
@@ -386,7 +371,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   $('.simple-select').chosen();
   resizeChosen();
   ctx = document.getElementById("graph").getContext('2d');
-make_dropdown('#state_dropdown', states, state_default)
+  make_dropdown('#state_dropdown', states, state_default)
 
   if (type == "arrests") {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
@@ -407,7 +392,7 @@ make_dropdown('#state_dropdown', states, state_default)
   if (type == "prisoners") {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
-    makePrisonersRaceDropdown();
+    make_dropdown("#subsubcategory_dropdown", prisoners_race, 4)
     toggle_prisoners_race_display();
   }
   if (type == "borderpatrol") {
@@ -415,7 +400,7 @@ make_dropdown('#state_dropdown', states, state_default)
     subcatergory_keys = makeBorderSubcategoriesDropdown();
   }
   if (type == "leoka") {
-    makeLeokaWeaponDropdown();
+    make_dropdown("#subsubcategory_dropdown", leoka_weapons, 4);
     toggle_leoka_weapon_display();
     $("#policeSex").show();
     leoka_subcatergory_values = makeLeokaSubcategoriesDropdown();

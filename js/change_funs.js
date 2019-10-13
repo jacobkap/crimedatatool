@@ -40,7 +40,7 @@ function jailStateChange(type, states, crimes) {
   default_starter = ["avg_daily_pop_total_jurisdiction", "average_daily_population", "total_population"]
   default_starter = default_starter[$("#state_dropdown").val()]
   $('#crime_dropdown').empty();
-  makeCrimeDropdown(crimes, default_starter)
+      make_dropdown("#crime_dropdown", crimes, default_starter)
 
   agencies = updateAgencies(type, states);
   $('.simple-select').trigger('chosen:updated');
@@ -63,16 +63,6 @@ function arrest_subsubcategoryChangeFun() {
 function borderCategoryChange(type, states, crimes) {
   subcatergory_keys = makeBorderSubcategoriesDropdown();
   border_states = get_border_states($("#crime_dropdown").val());
-/*  if (["sector_profile", "family", "staffing"].includes($("#crime_dropdown").val())) {
-    border_states = border_sectors;
-  } else if (["southwest_apprehensions", "southwest_deaths"].includes($("#crime_dropdown").val())) {
-    border_states = southwest_border_sectors;
-  } else if (["seizures"].includes($("#crime_dropdown").val())) {
-    border_states = border_regions;
-  } else if (["nationwide"].includes($("#crime_dropdown").val())) {
-    border_states = nationwide_only;
-  }
-  */
   make_dropdown('#state_dropdown', border_states, 0);
   $('.simple-select').trigger('chosen:updated');
   agencyChangeFun('borderpatrol', border_states, border_categories);

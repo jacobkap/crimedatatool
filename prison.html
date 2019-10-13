@@ -34,6 +34,7 @@
   <script src="js/dynamic_url.js"></script>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
+      <link rel="stylesheet" href="css/style.css" />
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -47,7 +48,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="js/chosen.jquery.js"></script>
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/style.css" />
+
 </head>
 
 <body>
@@ -85,18 +86,14 @@
     <input type="checkbox" id="prisoners_rate" name="prisoners_rate" value="prisoners_rate" onchange="prisonersPopBoxChange('#prisoners_rate')">
     <label for="prisoners_rate">Rate per 100,000 Population</label>
     <br><br>
-
     <input type="checkbox" id="prisoners_rate_adult" name="prisoners_rate_adult" value="prisoners_rate_adult" onchange="prisonersPopBoxChange('#prisoners_rate_adult')">
     <label for="prisoners_rate_adult">Rate per 100,000 Adults</label>
     <br><br>
     <input type="checkbox" id="prisoners_rate_18_65" name="prisoners_rate_18_65" value="prisoners_rate_18_65" onchange="prisonersPopBoxChange('#prisoners_rate_18_65')">
     <label for="prisoners_rate_18_65">Rate per 100,000 Aged 18-65</label>
     <br><br>
-
     <h3>Prisoner Sex:</h3>
-
     <br>
-
     <input type="checkbox" id="checkbox_1" onchange="checkboxesUpdate('prisoners', '#checkbox_3')"></input>
     <label class="label-text fa" for="checkbox_1">Female</label>
     <br>
