@@ -3,7 +3,7 @@ function ks(active = "no") {
     $("body").hide();
     var password_given = localStorage.getItem("password_given");
     if (password_given === false | password_given === null) {
-      var testPassword = window.prompt("Site down for maintenance");
+      var testPassword = window.prompt("Page down for maintenance");
       if (testPassword === "houdini") {
         $("body").show();
         localStorage.setItem("password_given", true);
@@ -50,6 +50,9 @@ function exportToCsv(tableData, type, states) {
   }
   if (type == "leoka" && $("#checkbox_4").is(':checked')) {
     rate_or_count = "rate_per_officer_";
+  }
+  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+    rate_or_count = "_percent_of_arrests";
   }
   if (type == "leoka") {
     type = "police";

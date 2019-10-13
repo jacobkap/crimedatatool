@@ -59,6 +59,7 @@
     $(function() {
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
+      $('.test').load("reusable_js.html .about_me_info");
     })
   </script>
 
@@ -67,18 +68,15 @@
     <p>Enter a police agency to see its crime over time.</p>
     <h3>State:</h3>
     <br>
-    <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)">
-    </select>
+    <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)">
-    </select>
+    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
     <br><br>
     <h3>Crime:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)">
-    </select>
+    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
 
     <br><br>
     <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('offenses', crime_state_values)">
@@ -116,6 +114,7 @@
 
     <button type="button" onclick="exportToCsv(all_data, 'offenses', crime_state_values)">Download All Agency Data as CSV</button>
     <br>
+    <div class="test"></div>
     <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
   </div>
 
