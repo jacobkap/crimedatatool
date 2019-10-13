@@ -6,6 +6,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
       dataLayer.push(arguments);
     }
@@ -51,7 +52,7 @@
   <div class="navigation-wrapper"></div>
 
   <script>
-      ks()
+    ks()
     $(function() {
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
@@ -71,10 +72,10 @@
     </select>
     <br>
     <input type="checkbox" id="rate" onchange="rateBoxesChange('#checkbox_2', 'death', state_values, death_categories)"></input>
-    <span>Rate per 100,000 Population</span>
+    <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br>
     <input type="checkbox" id="checkbox_2" onchange="rateBoxesChange('#rate', 'death', state_values, death_categories)"></input>
-    <span>Age-Adjusted Rate per 100,000 Population</span>
+    <label class="label-text fa" for="checkbox_2">Age-Adjusted Rate per 100,000 Pop</label>
 
     <hr>
     <button type="button" onclick="exportToCsv(all_data, 'death', state_values)">Download All State Data as CSV</button>

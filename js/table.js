@@ -8,7 +8,6 @@ function fixTableName(name, type) {
     if ($("#clearance_rate").is(":checked")) {
       temp2 = name.replace(/clr_18_.*/, "Clearance Rate Under Age 18 - ");
       temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance Rate - ");
-
     } else {
       temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
       temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
@@ -32,11 +31,11 @@ function fixTableName(name, type) {
     temp_name = toTitleCase(temp_name);
     name = name + " " + temp_name;
 
-  } else if (type == "leoka" && !default_table_headers.includes(name)) {
+  } else if (type == "police" && !default_table_headers.includes(name)) {
     temp_name = name;
-    category_index_num = _.indexOf(_.keys(leoka_categories), $("#crime_dropdown").val());
-    crime_val = _.keys(leoka_subcategories[category_index_num])[$("#subcategory_dropdown").val()];
-    name = _.values(leoka_subcategories[category_index_num])[_.indexOf(_.keys(leoka_subcategories[category_index_num]), crime_val)];
+    category_index_num = _.indexOf(_.keys(police_categories), $("#crime_dropdown").val());
+    crime_val = _.keys(police_subcategories[category_index_num])[$("#subcategory_dropdown").val()];
+    name = _.values(police_subcategories[category_index_num])[_.indexOf(_.keys(police_subcategories[category_index_num]), crime_val)];
 
     temp_name = temp_name.replace(crime_val + "_", "");
     temp_name = temp_name.replace(/_/g, " ");
@@ -49,12 +48,10 @@ function fixTableName(name, type) {
     }
   } else if (type == "prisoners") {
     if (!["state", "year"].includes(name)) {
-      category_index_num = _.indexOf(_.keys(prisoner_categories), $("#crime_dropdown").val());
       if ($("#crime_dropdown").val().includes("_crime")) {
         temp_name = name;
-        crime_val = _.keys(prisoners_subcategory[category_index_num])[$("#subcategory_dropdown").val()];
-        name = _.values(prisoners_subcategory[category_index_num])[_.indexOf(_.keys(prisoners_subcategory[category_index_num]), crime_val)];
-        temp_name = temp_name.replace(crime_val + "_", "");
+        $("#subcategory_dropdown").val()
+        temp_name = temp_name.replace($("#subcategory_dropdown").val() + "_", "");
         temp_name = temp_name.replace(/_/g, " ");
         temp_name = temp_name.replace("total total", "total");
 
@@ -66,7 +63,7 @@ function fixTableName(name, type) {
         temp2 = name.replace(/.*_male/, " Male");
         temp3 = name.replace(/.*_total/, " Total");
         name = name.replace(/_total|_female|_male/, "");
-        name = prisoners_subcategory[category_index_num][name];
+        name = $("#subcategory_dropdown").val()
         if (temp1 != temp_name) name += temp1;
         if (temp2 != temp_name) name += temp2;
         if (temp3 != temp_name) name += temp3;
@@ -75,7 +72,7 @@ function fixTableName(name, type) {
   } else if (type == "alcohol") {
     name = alcohol_categories[name];
   } else if (type == "jail") {
-    name = jail_categories[$("#state_dropdown").val()][name];
+    name = jail_categories[jail_state_values[$("#state_dropdown").val()]][name];
 
   } else if (type == "hate") {
     name = name.replace(/_/g, " ");
@@ -87,24 +84,21 @@ function fixTableName(name, type) {
     name = nibrs_crime_values[name];
   } else if (type == "death") {
     temp_name = name;
-    temp1 = name.replace(/deaths_.*/, "Deaths ");
-    temp2 = name.replace(/crude.*/, "Crude Rate ");
-    temp3 = name.replace(/age_adjusted.*/, "Age-Adjusted Rate ");
-    name = name.replace(/deaths_|crude_|age_adjusted_/, "");
+    temp1 = name.replace(/deaths_.*/, " Deaths");
+    temp2 = name.replace(/.*crude/, " Crude Rate");
+    temp3 = name.replace(/.*_age_adjusted/, " Age-Adjusted Rate");
+    name = name.replace(/deaths_|_crude|_age_adjusted/, "");
     name = death_categories[name];
-    if (temp1 != temp_name) name = temp1 + name;
-    if (temp2 != temp_name) name = temp2 + name;
-    if (temp3 != temp_name) name = temp3 + name;
+    if (temp1 != temp_name) name += temp1;
+    if (temp2 != temp_name) name += temp2;
+    if (temp3 != temp_name) name += temp3;
   } else if (type == "borderpatrol") {
     if (name == "sector") {
       name = "Sector";
     } else if (name == "fiscal_year") {
       name = "Fiscal Year";
     } else {
-      index_val = keys.findIndex(function(element) {
-        return element == name;
-      });
-      name = values[index_val]
+      name = border_subcategories[$('#crime_dropdown').val()][name]
     }
   }
 
@@ -112,13 +106,12 @@ function fixTableName(name, type) {
     name = temp_name.replace(/^\w/, c => c.toUpperCase());
   }
 
-  if (checkIfRateChecked(type) && !["Agency", "State", "Population", "ORI"].includes(name) &&
+  if (get_rate_type(type, binary = true) && !["Agency", "State", "Population", "ORI"].includes(name) &&
     !name.startsWith("Year")) {
 
-    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {
-    } else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {} else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
       name += " % of Arrests";
-    } else if (type == "leoka" && $("#checkbox_4").is(':checked')) {
+    } else if (type == "police" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
     } else {
       name += " Rate";
@@ -128,20 +121,11 @@ function fixTableName(name, type) {
 }
 
 function fixTableDataName(name, type) {
-  rate_type = "_rate";
-  if (type == "leoka" && $("#checkbox_4").is(':checked')) {
-    rate_type = "_rate_per_officer";
-  }
-  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
-    rate_type = "_percent_of_arrests";
-  }
-
+  rate_type = get_rate_type(type);
   if (!["ORI", "agency", "state", "population"].includes(name) &&
     !name.startsWith("year") &&
     !name.startsWith("county")) {
-
-
-    if (checkIfRateChecked(type)) {
+    if (get_rate_type(type, binary = true)) {
       name += rate_type;
     }
     if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {

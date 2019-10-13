@@ -31,7 +31,6 @@ function rateBoxesChange(dropdown_to_turnoff, type, states, crimes) {
 
 function stateChangeFun(type, states, crimes) {
   updateAgencies(type, states);
-  $('.simple-select').trigger('chosen:updated');
   agencyChangeFun(type, states, crimes);
 }
 
@@ -40,19 +39,17 @@ function jailStateChange(type, states, crimes) {
   default_starter = ["avg_daily_pop_total_jurisdiction", "average_daily_population", "total_population"]
   default_starter = default_starter[$("#state_dropdown").val()]
   $('#crime_dropdown').empty();
-      make_dropdown("#crime_dropdown", crimes, default_starter)
+  make_dropdown("#crime_dropdown", crimes, default_starter)
 
   agencies = updateAgencies(type, states);
-  $('.simple-select').trigger('chosen:updated');
   agencyChangeFun('jail', jail_state_values, jail_categories)
 }
 
-function leoka_categoryChangeFun() {
-  leoka_subcatergory_values = makeLeokaSubcategoriesDropdown();
-  $('.simple-select').trigger('chosen:updated');
-  toggle_leoka_weapon_display();
-  toggle_leoka_employee_sex_display();
-  agencyChangeFun('leoka', state_values, leoka_categories);
+function police_categoryChangeFun() {
+  make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
+  toggle_display("#weaponsDiv", [0]);
+  toggle_display("#policeSex", [2]);
+  agencyChangeFun('police', state_values, police_categories);
 }
 
 function arrest_subsubcategoryChangeFun() {
@@ -61,17 +58,16 @@ function arrest_subsubcategoryChangeFun() {
 }
 
 function borderCategoryChange(type, states, crimes) {
-  subcatergory_keys = makeBorderSubcategoriesDropdown();
+  make_dropdown('#subcategory_dropdown', border_subcategories[$('#crime_dropdown').val()], border_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
   border_states = get_border_states($("#crime_dropdown").val());
   make_dropdown('#state_dropdown', border_states, 0);
-  $('.simple-select').trigger('chosen:updated');
   agencyChangeFun('borderpatrol', border_states, border_categories);
 }
 
 function prisonerCategoryChange(current_category) {
-  toggle_prisoners_race_display();
-  prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
-  $('.simple-select').trigger('chosen:updated');
+  toggle_display("#subsubcategory_dropdown_div", [1, 5])
+  make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
+
 
   // If it's one of the prisoner_crime categories (from national corrections Reporting
   // program), change states since it only has state info, not national-level info.
@@ -85,14 +81,14 @@ function prisonerCategoryChange(current_category) {
     }
     make_dropdown('#state_dropdown', state_values, default_value)
     agencyChangeFun('prisoners', state_values);
-    $('.simple-select').trigger('chosen:updated');
+
   } else if (!$("#crime_dropdown").val().includes("_crime") & current_category.includes("_crime")) {
     // If possible, keep same state when switching data sets.
     current_state = state_values[$("#state_dropdown").val()];
     default_value = _.indexOf(prisoners_state_values, current_state);
     make_dropdown('#state_dropdown', prisoners_state_values, default_value)
     agencyChangeFun('prisoners', prisoners_state_values);
-    $('.simple-select').trigger('chosen:updated');
+
   } else {
     agencyChangeFun('prisoners', prisoners_state_values);
   }
@@ -111,7 +107,6 @@ function agencyChangeFun(type, states, crimes) {
       $("#checkbox_2+span").text("Offenses Cleared - Total");
       $("#checkbox_3+span").text("Offenses Cleared - All Under Age 18");
     }
-
 
     agency = $("#agency_dropdown").children("option:selected").text()
     if (agency.includes("Estimate")) {
@@ -150,6 +145,7 @@ function agencyChangeFun(type, states, crimes) {
   $('#table').empty();
   table = makeTable(type);
   change_url()
+  $('.simple-select').trigger('chosen:updated');
 }
 
 function remake_graph(type, crimes) {

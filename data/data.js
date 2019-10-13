@@ -6,6 +6,28 @@ default_table_headers = [
   "ORI"
 ];
 
+yaxis_labels = {
+  "offenses": "# of Crimes",
+  "nibrs": "# of Crimes",
+  "offenses_rate": "Rate per 100,000 Population",
+  "nibrs_rate": "Rate per 100,000 Population",
+  "arrests": "# of Arrests",
+  "arrests_rate": "Rate per 100,000 Population",
+  "arrests_percent_of_arrests": "% of Arrests",
+  "police": "# of People",
+  "police_rate": "# of Officer Deaths",
+  "police_rate_per_officer": "Rate per Officer",
+  "prisoners": "# of Prisoners",
+  "prisoners_rate": "Rate per 100,000 Population",
+  "prisoners_rate_adults": "Rate per 100,000 Adults",
+  "prisoners_rate_age_18_65": "Rate per 100,000 Aged 18-65",
+  "alcohol": "# of Drinks",
+  "death": "# of Deaths",
+  "death_rate": "Deaths per 100,000 population",
+  "death_rate_age_adjusted": "Age-Adjusted Deaths per 100,000 population"
+}
+
+
 var border_sectors = [
   "Nationwide - Total",
   "Coastal Border - Total",
@@ -173,135 +195,143 @@ var border_categories = {
   "southwest_deaths": "Southwest Border Deaths",
 };
 
-var jail_categories = [
-  california = {
-    "adp_of_maximum_security_inmates": "Average Daily Population - Maximum Security Inmates",
-    "adp_of_medium_security_inmates": "Average Daily Population - Medium Security Inmates",
-    "adp_of_minimum_security_inmates": "Average Daily Population - Minimum Security Inmates",
-    "avg_daily_pop_sentenced_female": "Average Daily Population - Sentenced Female",
-    "avg_daily_pop_sentenced_male": "Average Daily Population - Sentenced Male",
-    "avg_daily_pop_unsentenced_female": "Average Daily Population - Unsentenced Female",
-    "avg_daily_pop_unsentenced_male": "Average Daily Population - Unsentenced Male",
-    "avg_daily_pop_total_jurisdiction": "Average Daily Population - Total Jurisdiction",
-    "avg_fed_inmate_housed_contract": "Average Daily Population - Federal Inmate Housed on Contract",
-    "avg_felony_inmate_sentenced": "Average Daily Population - Felony Inmate Sentenced",
-    "avg_felony_inmate_total": "Average Daily Population - Felony Inmate Total",
-    "avg_felony_inmate_unsentenced": "Average Daily Population - Felony Inmate Unsentenced",
-    "avg_inmate_get_sick_bed": "Average Daily Population - Inmate Get Sick Bed",
-    "avg_inmate_in_hospital": "Average Daily Population - Inmate In Hospital",
-    "avg_inmate_need_reg_med_attent": "Average Daily Population - Inmate Need Regular Medical Attention",
-    "avg_inmate_not_assign_housing": "Average Daily Population - Inmate Not Assigned Housing",
-    "avg_inmate_wait_transport_prison": "Average Daily Population - Inmate Wait Transport Prison",
-    "avg_inmates_get_medical_bed": "Average Daily Population - Inmates Get Medical Bed",
-    "avg_inmates_get_mental_heath_bed": "Average Daily Population - Inmates Get Mental Heath Bed",
-    "avg_inmates_need_reg_ment_health": "Average Daily Population - Inmates Need Regular Mental Health Attention",
-    "avg_local_inmate_housed_contract": "Average Daily Population - Local Inmate Housed Contract",
-    "avg_misdemean_inmate_sentenced": "Average Daily Population - Misdemeanant Inmate Sentenced",
-    "avg_misdemean_inmate_unsentenced": "Average Daily Population - Misdemeanant Inmate Unsentenced",
-    "avg_misdemean_inmate_total": "Average Daily Population - Misdemeanant Inmate Total",
-    "avg_own_inmate_housed_elsewhere": "Average Daily Population - Own Inmate Housed Elsewhere",
-    "avg_state_inmate_housed_contract": "Average Daily Population - State Inmate Housed Contract",
-    "highest_inmate_count": "Highest Inmate Count",
-    "mental_heath_case_open_end_month": "Number of Mental Heath Case Open End Month",
-    "num_dental_encounters": "Number of Dental Encounters",
-    "num_doctor_occurrences": "Number of Doctor Occurrences",
-    "num_inmate_get_mental_heath_bed": "Number of Inmate Get Mental Heath Bed",
-    "num_inmate_get_psych_meds": "Number of Inmate Get Psych Meds",
-    "num_inmates_seen_sick_call": "Number of Inmates Seen Sick Call",
-    "num_new_mental_health_cases": "Number of New Mental Health Cases",
-    "num_offsite_medical_appointment": "Number of Offsite Medical Appointment",
-    "tot_pretrial_release_lack_bed": "Total Pretrial Release Lack Bed",
-    "tot_sentenced_release_lack_bed": "Total Sentenced Release Lack Bed",
-    "total_juv_in_custody": "Total Juveniles In Custody",
-    "total_num_persons_booked": "Total Number of Persons Booked into Jail"
-  },
-  illinois = {
-    "number_of_inmates_booked": "Total Number of Persons Booked into Jail",
-    "average_daily_population": "Average Daily Population - Total Jurisdiction"
-  },
-  texas = {
-    "available_beds": "Available Beds",
-    "immigrant_detainer_cost_in_dollars": "Immigrant Detainer Cost In Dollars",
-    "num_bench_warrants": "Number of Bench Warrants",
-    "num_convicted_felons": "Number of Convicted Felons",
-    "num_convicted_felony_sentenced_jail": "Number of Convicted - Felony Sentenced to Jail",
-    "num_convicted_misdemeanor": "Number of Convicted - Misdemeanor",
-    "num_convicted_state_jail_felons_to_county_jail_time": "Number of Convicted - State Jail Felons to County Jail Time",
-    "num_convicted_state_jail_felons_to_state_jail_time": "Number of Convicted - State Jail Felons to State Jail Time",
-    "num_federal": "Number of Federal Inmates",
-    "num_of_immigrant_detainer_inmate_days": "Number of Immigrant Detainer Inmate Days",
-    "num_of_immigrant_detainer_inmates": "Number of Immigrant Detainer Inmates",
-    "num_parole_violators": "Number of Parole Violators",
-    "num_parole_violators_new_charge": "Number of Parole Violators With a New Charge",
-    "num_pregnant_women": "Number of Pregnant Women",
-    "num_pretrial_felons": "Number of Pretrial Felons",
-    "num_pretrial_misdemeanor": "Number of Pretrial Misdemeanants",
-    "num_pretrial_state_jail_felons": "Number of Pretrial State Jail Felons",
-    "percent_of_capacity": "Percent of Capacity",
-    "total_capacity": "Total Capacity",
-    "total_contract": "Total Contract",
-    "total_local": "Total Local",
-    "total_others": "Total Others",
-    "total_population": "Total Inmate Population"
-  },
-];
+var jail_categories = []
+jail_categories["California"] = {
+  "adp_of_maximum_security_inmates": "Average Daily Population - Maximum Security Inmates",
+  "adp_of_medium_security_inmates": "Average Daily Population - Medium Security Inmates",
+  "adp_of_minimum_security_inmates": "Average Daily Population - Minimum Security Inmates",
+  "avg_daily_pop_sentenced_female": "Average Daily Population - Sentenced Female",
+  "avg_daily_pop_sentenced_male": "Average Daily Population - Sentenced Male",
+  "avg_daily_pop_unsentenced_female": "Average Daily Population - Unsentenced Female",
+  "avg_daily_pop_unsentenced_male": "Average Daily Population - Unsentenced Male",
+  "avg_daily_pop_total_jurisdiction": "Average Daily Population - Total Jurisdiction",
+  "avg_fed_inmate_housed_contract": "Average Daily Population - Federal Inmate Housed on Contract",
+  "avg_felony_inmate_sentenced": "Average Daily Population - Felony Inmate Sentenced",
+  "avg_felony_inmate_total": "Average Daily Population - Felony Inmate Total",
+  "avg_felony_inmate_unsentenced": "Average Daily Population - Felony Inmate Unsentenced",
+  "avg_inmate_get_sick_bed": "Average Daily Population - Inmate Get Sick Bed",
+  "avg_inmate_in_hospital": "Average Daily Population - Inmate In Hospital",
+  "avg_inmate_need_reg_med_attent": "Average Daily Population - Inmate Need Regular Medical Attention",
+  "avg_inmate_not_assign_housing": "Average Daily Population - Inmate Not Assigned Housing",
+  "avg_inmate_wait_transport_prison": "Average Daily Population - Inmate Wait Transport Prison",
+  "avg_inmates_get_medical_bed": "Average Daily Population - Inmates Get Medical Bed",
+  "avg_inmates_get_mental_heath_bed": "Average Daily Population - Inmates Get Mental Heath Bed",
+  "avg_inmates_need_reg_ment_health": "Average Daily Population - Inmates Need Regular Mental Health Attention",
+  "avg_local_inmate_housed_contract": "Average Daily Population - Local Inmate Housed Contract",
+  "avg_misdemean_inmate_sentenced": "Average Daily Population - Misdemeanant Inmate Sentenced",
+  "avg_misdemean_inmate_unsentenced": "Average Daily Population - Misdemeanant Inmate Unsentenced",
+  "avg_misdemean_inmate_total": "Average Daily Population - Misdemeanant Inmate Total",
+  "avg_own_inmate_housed_elsewhere": "Average Daily Population - Own Inmate Housed Elsewhere",
+  "avg_state_inmate_housed_contract": "Average Daily Population - State Inmate Housed Contract",
+  "highest_inmate_count": "Highest Inmate Count",
+  "mental_heath_case_open_end_month": "Number of Mental Heath Case Open End Month",
+  "num_dental_encounters": "Number of Dental Encounters",
+  "num_doctor_occurrences": "Number of Doctor Occurrences",
+  "num_inmate_get_mental_heath_bed": "Number of Inmate Get Mental Heath Bed",
+  "num_inmate_get_psych_meds": "Number of Inmate Get Psych Meds",
+  "num_inmates_seen_sick_call": "Number of Inmates Seen Sick Call",
+  "num_new_mental_health_cases": "Number of New Mental Health Cases",
+  "num_offsite_medical_appointment": "Number of Offsite Medical Appointment",
+  "tot_pretrial_release_lack_bed": "Total Pretrial Release Lack Bed",
+  "tot_sentenced_release_lack_bed": "Total Sentenced Release Lack Bed",
+  "total_juv_in_custody": "Total Juveniles In Custody",
+  "total_num_persons_booked": "Total Number of Persons Booked into Jail"
+}
+jail_categories["Illinois"] = {
+  "number_of_inmates_booked": "Total Number of Persons Booked into Jail",
+  "average_daily_population": "Average Daily Population - Total Jurisdiction"
+}
+jail_categories["Texas"] = {
+  "available_beds": "Available Beds",
+  "immigrant_detainer_cost_in_dollars": "Immigrant Detainer Cost In Dollars",
+  "num_bench_warrants": "Number of Bench Warrants",
+  "num_convicted_felons": "Number of Convicted Felons",
+  "num_convicted_felony_sentenced_jail": "Number of Convicted - Felony Sentenced to Jail",
+  "num_convicted_misdemeanor": "Number of Convicted - Misdemeanor",
+  "num_convicted_state_jail_felons_to_county_jail_time": "Number of Convicted - State Jail Felons to County Jail Time",
+  "num_convicted_state_jail_felons_to_state_jail_time": "Number of Convicted - State Jail Felons to State Jail Time",
+  "num_federal": "Number of Federal Inmates",
+  "num_of_immigrant_detainer_inmate_days": "Number of Immigrant Detainer Inmate Days",
+  "num_of_immigrant_detainer_inmates": "Number of Immigrant Detainer Inmates",
+  "num_parole_violators": "Number of Parole Violators",
+  "num_parole_violators_new_charge": "Number of Parole Violators With a New Charge",
+  "num_pregnant_women": "Number of Pregnant Women",
+  "num_pretrial_felons": "Number of Pretrial Felons",
+  "num_pretrial_misdemeanor": "Number of Pretrial Misdemeanants",
+  "num_pretrial_state_jail_felons": "Number of Pretrial State Jail Felons",
+  "percent_of_capacity": "Percent of Capacity",
+  "total_capacity": "Total Capacity",
+  "total_contract": "Total Contract",
+  "total_local": "Total Local",
+  "total_others": "Total Others",
+  "total_population": "Total Inmate Population"
+}
 
-var border_subcategories = [
-  seizures = {
-    "ammunition_rounds": "Ammunition (Rounds)",
-    "other_than_mexican_apprehensions": "Apprehensions (Other than Mexicans)",
-    "apprehensions": "Apprehensions - Total",
-    "cocaine_pounds": "Cocaine (in Pounds)",
-    "cocaine_seizures": "Cocaine (# of Seizures)",
-    "ecstasy_pounds": "Ecstasy (in Pounds)",
-    "ecstasy_seizures": "Ecstasy (# of Seizures)",
-    "heroin_ounces": "Heroin (in Ounces)",
-    "heroin_seizures": "Heroin (# of Seizures)",
-    "marijuana_pounds": "Marijuana (in Pounds)",
-    "marijuana_seizures": "Marijuana (# of Seizures)",
-    "methamphetamine_pounds": "Methamphetamine (in Pounds)",
-    "methamphetamine_seizures": "Methamphetamine (# of Seizures)",
-    "other_drugs_pounds": "Other Drugs (in Pounds)",
-    "other_drugs_seizures": "Other Drugs (# of Seizures)",
-    "firearms": "Firearms",
-    "conveyances": "Conveyances",
-    "currency_in_dollars": "Currency (in Dollars)"
-  },
-  staffing = {
-    "number_of_agents": "Number of Agents"
-  },
-  family = {
-    "total_apprehensions": "Apprehensions - Total",
-    "family_apprehensions": "Apprehensions - Family",
-    "unaccompanied_child_apprehension": "Apprehensions - Unaccompanied Juveniles"
-  },
-  nationwide = {
-    "total_apprehensions": "Total Apprehensions"
-  },
-  sector_profile = {
-    "assaults": "Assaults",
-    "accompanied_juveniles": "Apprehensions - Accompanied Juveniles",
-    "unaccompanied_juveniles": "Apprehensions - Unaccompanied Juveniles",
-    "female_apprehensions": "Apprehensions - Females",
-    "male_apprehensions": "Apprehensions - Males",
-    "other_than_mexican_apprehensions": "Apprehensions - Other than Mexican",
-    "total_juveniles": "Apprehensions - Total Juveniles",
-    "total_adults": "Apprehensions - Total Adults",
-    "total_apprehensions": "Apprehensions - Total",
-    "cocaine_pounds": "Cocaine Seizures (in Pounds)",
-    "marijuana_pounds": "Marijuana Seizures (in Pounds)",
-    "deaths": "Deaths (Southwest Border Only)",
-    "accepted_prosecutions": "Number of Accepted Prosecutions",
-    "number_of_agents": "Number of CBP Agents",
-    "rescues": "Rescues (Southwest Border Only)"
-  },
-  southwest_apprehensions = {
-    "total_apprehensions": "Apprehensions - Total"
-  },
-  southwest_deaths = {
-    "deaths": "Deaths"
-  }
-];
+
+var border_categories_starts = {
+  "seizures": "heroin_ounces",
+  "staffing": "number_of_agents",
+  "family": "unaccompanied_child_apprehension",
+  "nationwide": "total_apprehensions",
+  "sector_profile": "cocaine_pounds",
+  "southwest_apprehensions": "total_apprehensions",
+  "southwest_deaths": "deaths"
+};
+var border_subcategories = []
+border_subcategories["seizures"] = {
+  "ammunition_rounds": "Ammunition (Rounds)",
+  "other_than_mexican_apprehensions": "Apprehensions (Other than Mexicans)",
+  "apprehensions": "Apprehensions - Total",
+  "cocaine_pounds": "Cocaine (in Pounds)",
+  "cocaine_seizures": "Cocaine (# of Seizures)",
+  "ecstasy_pounds": "Ecstasy (in Pounds)",
+  "ecstasy_seizures": "Ecstasy (# of Seizures)",
+  "heroin_ounces": "Heroin (in Ounces)",
+  "heroin_seizures": "Heroin (# of Seizures)",
+  "marijuana_pounds": "Marijuana (in Pounds)",
+  "marijuana_seizures": "Marijuana (# of Seizures)",
+  "methamphetamine_pounds": "Methamphetamine (in Pounds)",
+  "methamphetamine_seizures": "Methamphetamine (# of Seizures)",
+  "other_drugs_pounds": "Other Drugs (in Pounds)",
+  "other_drugs_seizures": "Other Drugs (# of Seizures)",
+  "firearms": "Firearms",
+  "conveyances": "Conveyances",
+  "currency_in_dollars": "Currency (in Dollars)"
+}
+border_subcategories["staffing"] = {
+  "number_of_agents": "Number of Agents"
+}
+border_subcategories["family"] = {
+  "total_apprehensions": "Apprehensions - Total",
+  "family_apprehensions": "Apprehensions - Family",
+  "unaccompanied_child_apprehension": "Apprehensions - Unaccompanied Juveniles"
+}
+border_subcategories["nationwide"] = {
+  "total_apprehensions": "Total Apprehensions"
+}
+border_subcategories["sector_profile"] = {
+  "assaults": "Assaults",
+  "accompanied_juveniles": "Apprehensions - Accompanied Juveniles",
+  "unaccompanied_juveniles": "Apprehensions - Unaccompanied Juveniles",
+  "female_apprehensions": "Apprehensions - Females",
+  "male_apprehensions": "Apprehensions - Males",
+  "other_than_mexican_apprehensions": "Apprehensions - Other than Mexican",
+  "total_juveniles": "Apprehensions - Total Juveniles",
+  "total_adults": "Apprehensions - Total Adults",
+  "total_apprehensions": "Apprehensions - Total",
+  "cocaine_pounds": "Cocaine Seizures (in Pounds)",
+  "marijuana_pounds": "Marijuana Seizures (in Pounds)",
+  "deaths": "Deaths (Southwest Border Only)",
+  "accepted_prosecutions": "Number of Accepted Prosecutions",
+  "number_of_agents": "Number of CBP Agents",
+  "rescues": "Rescues (Southwest Border Only)"
+}
+border_subcategories["southwest_apprehensions"] = {
+  "total_apprehensions": "Apprehensions - Total"
+}
+border_subcategories["southwest_deaths"] = {
+  "deaths": "Deaths"
+}
 
 
 agency_desc_vals = {
@@ -358,6 +388,7 @@ var prisoner_categories = {
   "aids": "Prisoners with HIV/AIDS"
 };
 
+
 prison_crimes = {
   "aggravated_or_simple_assault": "Assault - Aggravated or Simple",
   "burglary": "Burglary",
@@ -384,98 +415,100 @@ prisoners_race = {
   "total": "Total"
 };
 
-var prisoners_subcategory = [{
-    "custody_unsentenced": "Unsentenced or <1 Year Sentence Prisoners",
-    "total_under_custody": "Total Prisoners",
-    "custody_public_prisons": "In Public Prison",
-    "custody_private_prison": "In Private Prison"
-  },
-  prison_crimes,
-  {
-    "jurisdiction_housed_in_local_facility": "In Local Facility",
-    "local_facilities_solely_to_ease_prison_crowding": "In Local Facility to Ease Prison Overcrowding",
-    "jurisdiction_private_prison_in_state": "In Private Prison In-State",
-    "jurisdiction_private_prison_out_of_state": "In Private Prison Out-of-State",
-    "total_under_jurisdiction": "Total Prisoners",
-    "jurisdiction_unsentenced": "Unsentenced or <1 Year Sentence Prisoners"
-  },
+prisoner_subcategory_starts = {
+  "custody": "total_under_custody",
+  "custody_crime": "murder",
+  "jurisdiction": "total_under_jurisdiction",
+  "race_ethnicity": "american_indian",
+  "admission": "total_admissions",
+  "admissions_crime": "murder",
+  "release": "total_releases",
+  "releases_crime": "murder",
+  "capacity": "operational_capacity",
+  "noncitizen_juvenile": "in_custody_not_us_citizens",
+  "death": "total_deaths",
+  "aids": "total_in_custody_hiv_positive_or_with_aids"
+}
+var prisoners_subcategory = []
+prisoners_subcategory["custody"] = {
+  "custody_unsentenced": "Unsentenced or <1 Year Sentence Prisoners",
+  "total_under_custody": "Total Prisoners",
+  "custody_public_prisons": "In Public Prison",
+  "custody_private_prison": "In Private Prison"
+}
+prisoners_subcategory["custody_crime"] = prison_crimes
+prisoners_subcategory["jurisdiction"] = {
+  "jurisdiction_housed_in_local_facility": "In Local Facility",
+  "local_facilities_solely_to_ease_prison_crowding": "In Local Facility to Ease Prison Overcrowding",
+  "jurisdiction_private_prison_in_state": "In Private Prison In-State",
+  "jurisdiction_private_prison_out_of_state": "In Private Prison Out-of-State",
+  "total_under_jurisdiction": "Total Prisoners",
+  "jurisdiction_unsentenced": "Unsentenced or <1 Year Sentence Prisoners"
+}
+prisoners_subcategory["race_ethnicity"] = {
+  "american_indian": "American Indian",
+  "asian": "Asian",
+  "black": "Black",
+  "hispanic": "Hispanic/Latino",
+  "other_or_unknown": "Other/Unknown",
+  "white": "White"
+}
+prisoners_subcategory["admission"] = {
+  "awol_returns_with_or_without_new_sentences": "AWOL Returns",
+  "escapee_returns_with_or_without_new_sentences": "Escapee Returns",
+  "new_court_commitments": "New Court Commitment",
+  "other_conditional_release_violators_admitted_with_new_sentence": "Other Conditional Release Violators With New Sentence",
+  "other_conditional_release_violators_admitted_without_new_sentence": "Other Conditional Release Violators Without New Sentence",
+  "other_admissions": "Other Admissions",
+  "parole_violators_with_new_sentence": "Parole Violators With New Sentence",
+  "parole_violators_without_new_sentence": "Parole Violators Without New Sentence",
+  "returns_from_appeal_or_bond": "Returns From Appeal or Bond",
+  "total_admissions": "Total Admissions",
+  "transfers_admitted_from_other_jurisdictions": "Transfers From Other Jurisdiction"
+}
+prisoners_subcategory["admissions_crime"] = prison_crimes
+prisoners_subcategory["release"] = {
+  "awol_release": "AWOL Released",
+  "conditional_release_probations": "Conditional Release Probation",
+  "discretionary_parole": "Discretionary Parole",
+  "escape_from_confinement": "Escaped from Confinement",
+  "unconditional_release_expirations_of_sentence": "Expiration of Sentence",
+  "other_conditional_release": "Other Conditional Release",
+  "other_unconditional_release": "Other Unconditional Release",
+  "release_to_appeal_or_bond": "Release to Appeal or Bond",
+  "unconditional_release_commutations": "Sentence Commuted",
+  "supervised_mandatory_release": "Supervised Mandatory Release",
+  "total_releases": "Total Released",
+  "transfers_to_other_jurisdictions": "Transferred to Other Jurisdiction"
+}
+prisoners_subcategory["releases_crime"] = prison_crimes
+prisoners_subcategory["capacity"] = {
+  "design_capacity": "Design Capacity of Prisons",
+  "operational_capacity": "Operational Capacity of Prisons",
+  "rated_capacity": "Rated Capacity of Prisons"
+}
+prisoners_subcategory["noncitizen_juvenile"] = {
+  "in_custody_not_us_citizens": "Not U.S. Citizen",
+  "in_custody_under_18_years_of_age": "Under 18 Years of Age"
+}
+prisoners_subcategory["death"] = {
+  "deaths_from_accidental_injury_to_self": "Accidental Injury to Self",
+  "deaths_from_aids": "AIDS",
+  "deaths_caused_by_another_person": "Caused by Another Person",
+  "deaths_from_execution": "Execution",
+  "deaths_from_illness_or_natural_cause": "Illness or Natural Cause",
+  "deaths_from_homicide_by_other_inmates": "Murder by Other Inmates",
+  "deaths_from_other_homicide": "Other Murder",
+  "deaths_from_suicide": "Suicide",
+  "total_deaths": "Total Deaths"
+}
+prisoners_subcategory["aids"] = {
+  "asymptomatic_hiv_positive": "Asymptomatic HIV Positive",
+  "confirmed_to_have_aids": "Confirmed to have AIDS",
+  "infected_with_lesser_forms_of_symptomatic_hiv_disease": "Infected with Lesser Forms of Symptomatic HIV",
+  "total_in_custody_hiv_positive_or_with_aids": "Total Prisoners With HIV or Aids"
+}
 
-  // Race/ethnicity
-  {
-    "american_indian": "American Indian",
-    "asian": "Asian",
-    "black": "Black",
-    "hispanic": "Hispanic/Latino",
-    "other_or_unknown": "Other/Unknown",
-    "white": "White"
-  },
-
-  // Admissions
-  {
-    "awol_returns_with_or_without_new_sentences": "AWOL Returns",
-    "escapee_returns_with_or_without_new_sentences": "Escapee Returns",
-    "new_court_commitments": "New Court Commitment",
-    "other_conditional_release_violators_admitted_with_new_sentence": "Other Conditional Release Violators With New Sentence",
-    "other_conditional_release_violators_admitted_without_new_sentence": "Other Conditional Release Violators Without New Sentence",
-    "other_admissions": "Other Admissions",
-    "parole_violators_with_new_sentence": "Parole Violators With New Sentence",
-    "parole_violators_without_new_sentence": "Parole Violators Without New Sentence",
-    "returns_from_appeal_or_bond": "Returns From Appeal or Bond",
-    "total_admissions": "Total Admissions",
-    "transfers_admitted_from_other_jurisdictions": "Transfers From Other Jurisdiction"
-  },
-  prison_crimes,
-  // Releases
-  {
-    "awol_release": "AWOL Released",
-    "conditional_release_probations": "Conditional Release Probation",
-    "discretionary_parole": "Discretionary Parole",
-    "escape_from_confinement": "Escaped from Confinement",
-    "unconditional_release_expirations_of_sentence": "Expiration of Sentence",
-    "other_conditional_release": "Other Conditional Release",
-    "other_unconditional_release": "Other Unconditional Release",
-    "release_to_appeal_or_bond": "Release to Appeal or Bond",
-    "unconditional_release_commutations": "Sentence Commuted",
-    "supervised_mandatory_release": "Supervised Mandatory Release",
-    "total_releases": "Total Released",
-    "transfers_to_other_jurisdictions": "Transferred to Other Jurisdiction"
-  },
-
-  prison_crimes,
-  // Capacity
-  {
-    "design_capacity": "Design Capacity of Prisons",
-    "operational_capacity": "Operational Capacity of Prisons",
-    "rated_capacity": "Rated Capacity of Prisons"
-  },
-
-  // Minors and non-citizens
-  {
-    "in_custody_not_us_citizens": "Not U.S. Citizen",
-    "in_custody_under_18_years_of_age": "Under 18 Years of Age"
-  },
-
-  // Death
-  {
-    "deaths_from_accidental_injury_to_self": "Accidental Injury to Self",
-    "deaths_from_aids": "AIDS",
-    "deaths_caused_by_another_person": "Caused by Another Person",
-    "deaths_from_execution": "Execution",
-    "deaths_from_illness_or_natural_cause": "Illness or Natural Cause",
-    "deaths_from_homicide_by_other_inmates": "Murder by Other Inmates",
-    "deaths_from_other_homicide": "Other Murder",
-    "deaths_from_suicide": "Suicide",
-    "total_deaths": "Total Deaths"
-  },
-
-  // HIV/AIDS
-  {
-    "asymptomatic_hiv_positive": "Asymptomatic HIV Positive",
-    "confirmed_to_have_aids": "Confirmed to have AIDS",
-    "infected_with_lesser_forms_of_symptomatic_hiv_disease": "Infected with Lesser Forms of Symptomatic HIV",
-    "total_in_custody_hiv_positive_or_with_aids": "Total Prisoners With HIV or Aids"
-  }
-];
 
 var hate_bias_motivations = {
   "anti_american_indian_or_native_alaskan": "Anti-American Indian or Native Alaskan",
@@ -666,7 +699,7 @@ var arrest_values = {
   "weapons": "Weapons Offenses"
 };
 
-var leoka_weapons = {
+var police_weapons = {
   "assault_gun": "Gun",
   "assault_knife": "Knife",
   "assault_oth_weap": "Other Weapon",
@@ -674,37 +707,43 @@ var leoka_weapons = {
   "total_assaults": "Total"
 };
 
-var leoka_categories = [
-  "Officers Assaulted",
-  "Officers Killed",
-  "Police Department Employees"
-];
+var police_categories = {
+  "officers_assaulted": "Officers Assaulted",
+  "officers_killed": "Officers Killed",
+  "employees": "Police Department Employees"
+};
 
-leoka_subcategories = [{
-    "ambush": "Ambush",
-    "burglary": "Burglary",
-    "deranged": "Handling Person with Mental Illness",
-    "disturbance": "Disturbance (fight, domestic violence, etc.)",
-    "oth_arrest": "Attempt to Make Other Arrest",
-    "prisoner": "Custody of Prisoner",
-    "riot": "Civil Disorder (riot)",
-    "robbery": "Robbery",
-    "susp_pers": "Suspicious Person",
-    "traffic": "Traffic Stop",
-    "assaults_with_injury": "Total Assaults - With Injury",
-    "assaults_no_injury": "Total Assaults - Without Injury",
-    "total": "Total Assaults",
-  },
-  {
-    "officers_killed_by_accident": "Killed by Accident",
-    "officers_killed_by_felony": "Killed by Felony"
-  },
-  {
-    "employees_civilians": "Civilians",
-    "employees_officers": "Officers",
-    "employees_total": "Total Employees",
-  }
-];
+var police_categories_starts = {
+  "officers_assaulted": "total",
+  "officers_killed": "officers_killed_by_felony",
+  "employees": "employees_total"
+};
+
+police_subcategories = []
+police_subcategories["officers_assaulted"] = {
+  "ambush": "Ambush",
+  "burglary": "Burglary",
+  "deranged": "Handling Person with Mental Illness",
+  "disturbance": "Disturbance (fight, domestic violence, etc.)",
+  "oth_arrest": "Attempt to Make Other Arrest",
+  "prisoner": "Custody of Prisoner",
+  "riot": "Civil Disorder (riot)",
+  "robbery": "Robbery",
+  "susp_pers": "Suspicious Person",
+  "traffic": "Traffic Stop",
+  "assaults_with_injury": "Total Assaults - With Injury",
+  "assaults_no_injury": "Total Assaults - Without Injury",
+  "total": "Total Assaults",
+}
+police_subcategories["officers_killed"] = {
+  "officers_killed_by_accident": "Killed by Accident",
+  "officers_killed_by_felony": "Killed by Felony"
+}
+police_subcategories["employees"] = {
+  "employees_civilians": "Civilians",
+  "employees_officers": "Officers",
+  "employees_total": "Total Employees",
+}
 
 var arrest_age_categories = {
   "juv": "Juvenile",

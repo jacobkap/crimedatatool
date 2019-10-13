@@ -74,57 +74,35 @@ change_data_from_url = function(type) {
   checkbox4_val = find_url_string(split_url, "checkbox_4=")
   checkbox5_val = find_url_string(split_url, "checkbox_5=")
 
-  if (rate_val != "") {
-    rate_val = $.parseJSON(rate_val);
-    $("#rate").prop("checked", rate_val);
+checkbox = [rate_val, percent_val, monthly_val, checkbox1_val, checkbox2_val, checkbox3_val, checkbox4_val, checkbox5_val];
+checkbox_div = ["#rate", "#percent_of_arrests", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3", "#checkbox_4", "#checkbox_5"];
+  for (var i = 0; i < checkbox.length; i++) {
+    if ($(checkbox[i]).length != 0) {
+      if (checkbox[i] != "") {
+        checkbox[i] = $.parseJSON(checkbox[i]);
+        $(checkbox_div[i]).prop("checked", checkbox[i]);
+      }
+    }
   }
-  if (percent_val != "") {
-    percent_val = $.parseJSON(percent_val);
-    $("#percent_of_arrests").prop("checked", percent_val);
-  }
-  if (monthly_val != "") {
-    monthly_val = $.parseJSON(monthly_val);
-    $("#monthly").prop("checked", monthly_val);
-  }
-  if (checkbox1_val != "") {
-    checkbox1_val = $.parseJSON(checkbox1_val);
-    $("#checkbox_1").prop("checked", checkbox1_val);
-  }
-  if (checkbox2_val != "") {
-    checkbox2_val = $.parseJSON(checkbox2_val);
-    $("#checkbox_2").prop("checked", checkbox2_val);
-  }
-  if (checkbox3_val != "") {
-    checkbox3_val = $.parseJSON(checkbox3_val);
-    $("#checkbox_3").prop("checked", checkbox3_val);
-  }
-  if (checkbox4_val != "") {
-    checkbox4_val = $.parseJSON(checkbox4_val);
-    $("#checkbox_4").prop("checked", checkbox4_val);
-  }
-  if (checkbox5_val != "") {
-    checkbox5_val = $.parseJSON(checkbox5_val);
-    $("#checkbox_5").prop("checked", checkbox5_val);
-  }
-
   $("#crime_dropdown").val(category_val);
 
-  if (type == "leoka") {
-    toggle_leoka_weapon_display();
-    toggle_leoka_employee_sex_display();
-    leoka_subcatergory_values = makeLeokaSubcategoriesDropdown();
+  if (type == "police") {
+    toggle_display("#weaponsDiv", [0]);
+    toggle_display("#policeSex", [2]);
+    make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], [12, 1, 1], '#crime_dropdown');
+    police_subcatergory_values = police_subcategories[$('#crime_dropdown').val()]
   }
   if (type == "borderpatrol") {
-    subcatergory_keys = makeBorderSubcategoriesDropdown();
+    make_dropdown('#subcategory_dropdown', border_subcategories[$('#crime_dropdown').val()], border_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
     border_states = get_border_states(category_val)
-    makeStateDropdown(border_states, 0);
+    make_dropdown('#state_dropdown', border_states, 0)
     var states = border_states;
   }
   if (type == "prisoners") {
     if (category_val.includes("_crime")) {
-      makeStateDropdown(state_values, 0);
+      make_dropdown('#state_dropdown', states, 0)
     } else {
-      makeStateDropdown(prisoners_state_values, 0);
+      make_dropdown('#state_dropdown', prisoners_state_values, 0)
     }
     prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
     $('.simple-select').trigger('chosen:updated');
@@ -145,7 +123,7 @@ change_data_from_url = function(type) {
 
   $("#subcategory_dropdown").val(subcategory_val);
   if (type == "prisoners") {
-    toggle_prisoners_race_display();
+    toggle_display("#subsubcategory_dropdown_div", [1, 5])
   }
   $("#subsubcategory_dropdown").val(subsubcategory_val);
   $('.simple-select').trigger('chosen:updated');
