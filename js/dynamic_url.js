@@ -148,8 +148,5 @@ change_data_from_url = function(type) {
     toggle_prisoners_race_display();
   }
   $("#subsubcategory_dropdown").val(subsubcategory_val);
-
-
   $('.simple-select').trigger('chosen:updated');
-
 };

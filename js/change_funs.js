@@ -62,7 +62,8 @@ function arrest_subsubcategoryChangeFun() {
 
 function borderCategoryChange(type, states, crimes) {
   subcatergory_keys = makeBorderSubcategoriesDropdown();
-  if (["sector_profile", "family", "staffing"].includes($("#crime_dropdown").val())) {
+  border_states = get_border_states($("#crime_dropdown").val());
+/*  if (["sector_profile", "family", "staffing"].includes($("#crime_dropdown").val())) {
     border_states = border_sectors;
   } else if (["southwest_apprehensions", "southwest_deaths"].includes($("#crime_dropdown").val())) {
     border_states = southwest_border_sectors;
@@ -71,7 +72,8 @@ function borderCategoryChange(type, states, crimes) {
   } else if (["nationwide"].includes($("#crime_dropdown").val())) {
     border_states = nationwide_only;
   }
-  makeStateDropdown(border_states, 0);
+  */
+  make_dropdown('#state_dropdown', border_states, 0);
   $('.simple-select').trigger('chosen:updated');
   agencyChangeFun('borderpatrol', border_states, border_categories);
 }
@@ -91,14 +93,14 @@ function prisonerCategoryChange(current_category) {
     } else {
       default_value = 4;
     }
-    makeStateDropdown(state_values, default_value);
+    make_dropdown('#state_dropdown', state_values, default_value)
     agencyChangeFun('prisoners', state_values);
     $('.simple-select').trigger('chosen:updated');
   } else if (!$("#crime_dropdown").val().includes("_crime") & current_category.includes("_crime")) {
     // If possible, keep same state when switching data sets.
     current_state = state_values[$("#state_dropdown").val()];
     default_value = _.indexOf(prisoners_state_values, current_state);
-    makeStateDropdown(prisoners_state_values, default_value);
+    make_dropdown('#state_dropdown', prisoners_state_values, default_value)
     agencyChangeFun('prisoners', prisoners_state_values);
     $('.simple-select').trigger('chosen:updated');
   } else {

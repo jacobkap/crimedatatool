@@ -713,6 +713,6 @@ var arrest_age_categories = {
 };
 
 var arrests_breakdown = {
-  "Race" : "Race",
-  "Sex" : "Sex"
+  "Race": "Race",
+  "Sex": "Sex"
 }

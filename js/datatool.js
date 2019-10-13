@@ -75,9 +75,9 @@ function getStateData(type, states) {
   }
 
   state = states[$("#state_dropdown").val()];
-  state = state.replace(/ |-|___/g, "_");
-//  state = state.replace(/-/g, "_");
-//  state = state.replace(/___/g, "_");
+  state = state.replace(/ /g, "_");
+ state = state.replace(/-/g, "_");
+  state = state.replace(/___/g, "_");
 
   if (type == "prisoners") {
     category = $("#crime_dropdown").val();
@@ -91,9 +91,9 @@ function getStateData(type, states) {
     url += type + "/" + category + "_" + state;
   } else {
     agency = agencies[$("#agency_dropdown").val()];
-    agency = agency.replace(/ |:|__/g, "_");
-  //  agency = agency.replace(/:/g, "_");
-  //  agency = agency.replace(/__/g, "_");
+    agency = agency.replace(/ /g, "_");
+    agency = agency.replace(/:/g, "_");
+    agency = agency.replace(/__/g, "_");
     url += type + "/" + state + "_" + agency;
   }
   url += ".csv";
