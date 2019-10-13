@@ -16,19 +16,6 @@ function ks(active = "no") {
   }
 }
 
-function highlight_current_page() {
-  page = window.location.pathname
-  page = page.replace(/.html/g, "");
-  page = page.replace(/\//g, "");
-  console.log(page)
-  $('a[href*=' + page + ']').css({
-    'color': 'red'
-  });
-  $('a[href*=' + page + ']').text(page);
-}
-
-
-
 function readCSV(csv) {
   var result = null;
   var scriptUrl = csv;
@@ -58,12 +45,9 @@ function exportToCsv(tableData, type, states) {
   if (checkIfRateChecked(type)) {
     rate_or_count = "rate_";
   }
-
   if (["death", "alcohol"].includes(type)) {
     rate_or_count = "";
   }
-
-
   if (type == "leoka" && $("#checkbox_4").is(':checked')) {
     rate_or_count = "rate_per_officer_";
   }
@@ -79,21 +63,16 @@ function exportToCsv(tableData, type, states) {
   if (!["prisoners", "death", "alcohol", "borderpatrol"].includes(type)) {
     filename += agencies[$("#agency_dropdown").val()] + "_";
   }
-
   filename += states[$("#state_dropdown").val()];
-
   if (type == "prisoners") {
     filename += "_" + prisoner_categories[$("#crime_dropdown").val()];
   }
-
   if (type == "borderpatrol") {
     filename += "_" + border_categories[$("#crime_dropdown").val()];
   }
-
   if (type == "jail") {
     filename = "jacobdkaplan.com_" + jail_state_values[$("#state_dropdown").val()] + "_" + agencies[$("#agency_dropdown").val()] + "_jail";
   }
-
   filename += ".csv";
 
   var blob = new Blob([data], {
@@ -125,6 +104,49 @@ function make_dropdown(dropdown_id, values, starter) {
   $(dropdown_id).val(starter);
 }
 
+function makeLeokaSubcategoriesDropdown() {
+  leoka_subcategory_starts = [12, 1, 1];
+  $('#subcategory_dropdown').empty();
+  values = leoka_subcategories[$('#crime_dropdown').val()];
+  $.each(_.values(values), function(val, text) {
+    $('#subcategory_dropdown').append(new Option(text, val));
+  });
+  $('#subcategory_dropdown').val(leoka_subcategory_starts[$('#crime_dropdown').val()]);
+
+  return (values);
+}
+
+
+function makePrisonerSubcategoriesDropdown() {
+  prisoner_subcategory_starts = [1, 5, 4, 0, 9, 5, 10, 5, 1, 0, 8, 3];
+  category_index_num = _.indexOf(_.keys(prisoner_categories), $('#crime_dropdown').val());
+  $('#subcategory_dropdown').empty();
+  values = prisoners_subcategory[category_index_num];
+  keys = _.keys(values);
+  values = _.values(values);
+  $.each(values, function(val, text) {
+    $('#subcategory_dropdown').append(new Option(text, val));
+  });
+  $('#subcategory_dropdown').val(prisoner_subcategory_starts[category_index_num]);
+
+  return (keys);
+}
+
+function makeBorderSubcategoriesDropdown() {
+  subcategory_starts = [7, 0, 2, 0, 9, 0, 0];
+  category_index_num = _.indexOf(_.keys(border_categories), $('#crime_dropdown').val());
+  $('#subcategory_dropdown').empty();
+  values = border_subcategories[category_index_num];
+  keys = _.keys(values);
+  values = _.values(values);
+  $.each(values, function(val, text) {
+    $('#subcategory_dropdown').append(new Option(text, val));
+  });
+  $('#subcategory_dropdown').val(subcategory_starts[category_index_num]);
+
+  return (keys);
+}
+
 
 function makePrisonersRaceDropdown() {
   temp = _.values(prisoners_race);
@@ -132,14 +154,6 @@ function makePrisonersRaceDropdown() {
     $('#subsubcategory_dropdown').append(new Option(text, val));
   });
   $('#subsubcategory_dropdown').val(4);
-}
-
-function makeStateDropdown(states, default_value) {
-  $('#state_dropdown').empty();
-  $.each(states, function(val, text) {
-    $("#state_dropdown").append(new Option(text, val));
-  });
-  $("#state_dropdown").val(default_value);
 }
 
 function makeLeokaWeaponDropdown() {
@@ -150,12 +164,7 @@ function makeLeokaWeaponDropdown() {
   $('#subsubcategory_dropdown').val(4);
 }
 
-function makeCrimeDropdown(values, starter) {
-  $.each(values, function(val, text) {
-    $("#crime_dropdown").append(new Option(text, val));
-  });
-  $("#crime_dropdown").val(starter);
-}
+
 
 function toggle_leoka_weapon_display() {
   if (leoka_categories[$("#crime_dropdown").val()] != "Officers Assaulted") {
@@ -207,53 +216,6 @@ function toggle_arrest_display() {
     $("#checkbox_5").prop("checked", true);
   }
 }
-
-function makeLeokaSubcategoriesDropdown() {
-  leoka_subcategory_starts = [12, 1, 1];
-
-  $('#subcategory_dropdown').empty();
-  values = leoka_subcategories[$('#crime_dropdown').val()];
-  $.each(_.values(values), function(val, text) {
-    $('#subcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subcategory_dropdown').val(leoka_subcategory_starts[$('#crime_dropdown').val()]);
-
-  return (values);
-}
-
-
-function makePrisonerSubcategoriesDropdown() {
-  prisoner_subcategory_starts = [1, 5, 4, 0, 9, 5, 10, 5, 1, 0, 8, 3];
-  category_index_num = _.indexOf(_.keys(prisoner_categories), $('#crime_dropdown').val());
-  $('#subcategory_dropdown').empty();
-  values = prisoners_subcategory[category_index_num];
-  keys = _.keys(values);
-  values = _.values(values);
-  $.each(values, function(val, text) {
-    $('#subcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subcategory_dropdown').val(prisoner_subcategory_starts[category_index_num]);
-
-  return (keys);
-}
-
-function makeBorderSubcategoriesDropdown() {
-  subcategory_starts = [7, 0, 2, 0, 9, 0, 0];
-  category_index_num = _.indexOf(_.keys(border_categories), $('#crime_dropdown').val());
-  $('#subcategory_dropdown').empty();
-  values = border_subcategories[category_index_num];
-  keys = _.keys(values);
-  values = _.values(values);
-  $.each(values, function(val, text) {
-    $('#subcategory_dropdown').append(new Option(text, val));
-  });
-  $('#subcategory_dropdown').val(subcategory_starts[category_index_num]);
-
-  return (keys);
-}
-
-
-
 
 function countToRate(data, type, per_officer = false) {
 
@@ -367,7 +329,6 @@ function makeCrimeClearanceRates(data) {
         Object.getOwnPropertyDescriptor(data, crime_column[i].replace("actual", clearance_starters[n])));
       delete data[crime_column[i].replace("actual", clearance_starters[n])];
 
-      //    }
     }
   }
   return data;
@@ -422,7 +383,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   $('.simple-select').chosen();
   resizeChosen();
   ctx = document.getElementById("graph").getContext('2d');
-  makeStateDropdown(states, state_default);
+make_dropdown('#state_dropdown', states, state_default)
 
   if (type == "arrests") {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
@@ -433,21 +394,21 @@ function main(type, states, state_default, crimes, crime_starter) {
     crimes = crimes[$("#state_dropdown").val()]
   }
   if (!["alcohol", "prisoners", "death", "borderpatrol"].includes(type)) {
-    makeCrimeDropdown(crimes, crime_starter);
+    make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
     agencies = updateAgencies(type, states);
   }
   if (type == "death") {
-    makeCrimeDropdown(crimes, crime_starter);
+    make_dropdown("#crime_dropdown", crimes, crime_starter);
   }
   if (type == "prisoners") {
-    makeCrimeDropdown(crimes, crime_starter);
+    make_dropdown("#crime_dropdown", crimes, crime_starter);
     prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
     makePrisonersRaceDropdown();
     toggle_prisoners_race_display();
   }
   if (type == "borderpatrol") {
-    makeCrimeDropdown(crimes, crime_starter);
+    make_dropdown("#crime_dropdown", crimes, crime_starter);
     subcatergory_keys = makeBorderSubcategoriesDropdown();
   }
   if (type == "leoka") {

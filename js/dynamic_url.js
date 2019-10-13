@@ -3,41 +3,31 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   new_url = window.location.pathname +
     "#state=" + $("#state_dropdown").children("option:selected").text()
 
-  if ($("#agency_dropdown").length != 0) {
-    new_url += "&agency=" + $("#agency_dropdown").children("option:selected").text()
-  }
-  if ($("#crime_dropdown").length != 0) {
-    new_url += "&category=" + $("#crime_dropdown").val()
-  }
-  if ($("#subcategory_dropdown").length != 0) {
-    new_url += "&subcategory=" + $("#subcategory_dropdown").val();
-  }
-  if ($("#subsubcategory_dropdown").length != 0) {
-    new_url += "&subsubcategory=" + $("#subsubcategory_dropdown").val();
-  }
+  dropdowns = ["#agency_dropdown", "#crime_dropdown", "#subcategory_dropdown",
+    "#subsubcategory_dropdown", '#rate', '#percent_of_arrests',
+    '#monthly', '#checkbox_1', '#checkbox_2', '#checkbox_3',
+    '#checkbox_4', '#checkbox_5'
+  ]
+  dropdown_labels = ["&agency=", "&category=", "&subcategory=", "&subsubcategory=",
+    "&rate=", "&percent=", "&monthly=", "&checkbox_1=", "&checkbox_2=",
+    "&checkbox_3=", "&checkbox_4=", "&checkbox_1="
+  ]
+  dropdown_type = ["text_selected", "value", "value", "value", "checked",
+   "checked", "checked", "checked", "checked", "checked", "checked", "checked"]
 
-  if ($('#rate').length != 0) {
-    new_url += "&rate=" + $("#rate").prop("checked");;
-  }
-  if ($('#monthly').length != 0) {
-    new_url += "&monthly=" + $("#monthly").prop("checked");;
-  }
-  if ($('#checkbox_1').length != 0) {
-    new_url += "&checkbox_1=" + $("#checkbox_1").prop("checked");;
-  }
-  if ($('#checkbox_2').length != 0) {
-    new_url += "&checkbox_2=" + $("#checkbox_2").prop("checked");;
-  }
-  if ($('#checkbox_3').length != 0) {
-    new_url += "&checkbox_3=" + $("#checkbox_3").prop("checked");;
-  }
-  if ($('#checkbox_4').length != 0) {
-    new_url += "&checkbox_4=" + $("#checkbox_4").prop("checked");;
-  }
-  if ($('#checkbox_5').length != 0) {
-    new_url += "&checkbox_5=" + $("#checkbox_5").prop("checked");;
-  }
 
+
+  for (var i = 0; i < dropdowns.length; i++) {
+    if ($(dropdowns[i]).length != 0) {
+      if (dropdown_type[i] == "text_selected") {
+        new_url += dropdown_labels[i] + $(dropdowns[i]).children("option:selected").text();
+      } else if (dropdown_type[i] == "value") {
+        new_url += dropdown_labels[i] + $(dropdowns[i]).val();
+      } else {
+        new_url += dropdown_labels[i] + $(dropdowns[i]).prop("checked");
+      }
+    }
+  }
   window.history.pushState("", 'Title', new_url);
   return (new_url);
 };
@@ -76,6 +66,7 @@ change_data_from_url = function(type) {
   subcategory_val = find_url_string(split_url, "subcategory=")
   subsubcategory_val = find_url_string(split_url, "subsubcategory=")
   rate_val = find_url_string(split_url, "rate=")
+  percent_val = find_url_string(split_url, "percent=")
   monthly_val = find_url_string(split_url, "monthly=")
   checkbox1_val = find_url_string(split_url, "checkbox_1=")
   checkbox2_val = find_url_string(split_url, "checkbox_2=")
@@ -86,6 +77,10 @@ change_data_from_url = function(type) {
   if (rate_val != "") {
     rate_val = $.parseJSON(rate_val);
     $("#rate").prop("checked", rate_val);
+  }
+  if (percent_val != "") {
+    percent_val = $.parseJSON(percent_val);
+    $("#percent_of_arrests").prop("checked", percent_val);
   }
   if (monthly_val != "") {
     monthly_val = $.parseJSON(monthly_val);

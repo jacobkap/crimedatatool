@@ -4,8 +4,6 @@ function resizeChosen() {
   });
 }
 
-
-
 function objToString(obj) {
   var str = '';
   for (var p in obj) {
@@ -70,16 +68,16 @@ function getStateData(type, states) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
 
-  if (["offenses", "arrests", "leoka", "hate_crimes"].includes(type)) {
+  if (["offenses", "arrests", "leoka", "hate"].includes(type)) {
     if ($("#monthly").is(':checked')) {
       type += "_monthly";
     }
   }
 
   state = states[$("#state_dropdown").val()];
-  state = state.replace(/ /g, "_");
-  state = state.replace(/-/g, "_");
-  state = state.replace(/___/g, "_");
+  state = state.replace(/ |-|___/g, "_");
+//  state = state.replace(/-/g, "_");
+//  state = state.replace(/___/g, "_");
 
   if (type == "prisoners") {
     category = $("#crime_dropdown").val();
@@ -93,9 +91,9 @@ function getStateData(type, states) {
     url += type + "/" + category + "_" + state;
   } else {
     agency = agencies[$("#agency_dropdown").val()];
-    agency = agency.replace(/ /g, "_");
-    agency = agency.replace(/:/g, "_");
-    agency = agency.replace(/__/g, "_");
+    agency = agency.replace(/ |:|__/g, "_");
+  //  agency = agency.replace(/:/g, "_");
+  //  agency = agency.replace(/__/g, "_");
     url += type + "/" + state + "_" + agency;
   }
   url += ".csv";
@@ -249,7 +247,7 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (["offenses", "death", 'nibrs', "hate_crimes", "jail"].includes(type)) {
+  if (["offenses", "death", 'nibrs', "hate", "jail"].includes(type)) {
     crime = $("#crime_dropdown").val();
   } else if (type == "borderpatrol") {
     crime = subcatergory_keys[$("#subcategory_dropdown").val()];

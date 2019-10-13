@@ -77,7 +77,7 @@ function fixTableName(name, type) {
   } else if (type == "jail") {
     name = jail_categories[$("#state_dropdown").val()][name];
 
-  } else if (type == "hate_crimes") {
+  } else if (type == "hate") {
     name = name.replace(/_/g, " ");
     name = toTitleCase(name);
   } else if (type == "nibrs") {

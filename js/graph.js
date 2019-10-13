@@ -2,8 +2,6 @@ function allowSaveGraph() {
   var url = myLine.toBase64Image();
 }
 
-
-
 function getGraphDataset(tableData, colsForGraph, type, crimes) {
 
   if (type == "borderpatrol") {
@@ -115,13 +113,6 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
         return x.label != checkbox_names[4];
       });
     }
-
-    /*  if (type == "arrests" & $("#subsubcategory_dropdown").val() == "Sex") {
-        final_data.pop();
-        final_data.pop();
-      }
-      */
-
   } else {
     years = [];
     data1 = [];
@@ -253,13 +244,11 @@ function makeGraph(type, crimes) {
   if (type == "borderpatrol") {
     xaxis_label = "Fiscal Year";
   }
-
   if (["offenses", "arrests", "leoka"].includes(type)) {
     if ($("#monthly").is(':checked')) {
       xaxis_label = "Year-Month"
     }
   }
-
   if (["jail"].includes(type)) {
     xaxis_label = "Year-Month"
   }
@@ -330,18 +319,7 @@ function makeGraph(type, crimes) {
     hover: {
       mode: 'nearest',
       intersect: true
-    },
-    plugins: {
-      zoom: {
-        zoom: {
-          drag: true,
-          enabled: false,
-          mode: 'x'
-        }
-      }
     }
-
-
   };
 
 
@@ -356,8 +334,6 @@ function makeGraph(type, crimes) {
   });
   return (myLineChart);
 }
-
-
 
 
 function addYAxis() {
