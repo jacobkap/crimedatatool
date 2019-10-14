@@ -38,7 +38,6 @@
   <script src="js/datatool.js"></script>
   <script src="js/dynamic_url.js"></script>
   <script src="js/moment.min.js"></script>
-  <link rel="stylesheet" href="css/misc.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
@@ -46,6 +45,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="js/chosen.jquery.js"></script>
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/test.css" />
+  <link rel="stylesheet" href="css/misc.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -96,11 +97,11 @@
     </div>
 
     <br><br>
-    <input type="checkbox" id="rate" name="police_rate" value="police_rate" onchange="rateBoxesChange('#checkbox_4', 'police', state_values)">
-    <label for="rate">Rate per 100,000 Population</label>
+    <input type="checkbox" id="rate" name="police_rate" value="police_rate" onchange="rateBoxesChange('#checkbox_4', 'police', state_values)"></input>
+    <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br>
-    <input type="checkbox" id="checkbox_4" name="police_rate_per_officer" value="police_rate_per_officer" onchange="rateBoxesChange('#rate', 'police', state_values)">
-    <label for="checkbox_4">Rate per Officer</label>
+    <input type="checkbox" id="checkbox_4" name="police_rate_per_officer" value="police_rate_per_officer" onchange="rateBoxesChange('#rate', 'police', state_values)"></input>
+    <label class="label-text fa" for="checkbox_4">Rate per Officer</label>
 
     <br><br>
     <hr>

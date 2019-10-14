@@ -22,6 +22,8 @@ yaxis_labels = {
   "prisoners_rate_adults": "Rate per 100,000 Adults",
   "prisoners_rate_age_18_65": "Rate per 100,000 Aged 18-65",
   "alcohol": "# of Drinks",
+  "hate": "# of Incidents",
+  "borderpatrol": "",
   "death": "# of Deaths",
   "death_rate": "Deaths per 100,000 population",
   "death_rate_age_adjusted": "Age-Adjusted Deaths per 100,000 population"
