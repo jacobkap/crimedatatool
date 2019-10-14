@@ -13,7 +13,8 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
     "&checkbox_3=", "&checkbox_4=", "&checkbox_1="
   ]
   dropdown_type = ["text_selected", "value", "value", "value", "checked",
-   "checked", "checked", "checked", "checked", "checked", "checked", "checked"]
+    "checked", "checked", "checked", "checked", "checked", "checked", "checked"
+  ]
 
 
 
@@ -74,16 +75,15 @@ change_data_from_url = function(type) {
   checkbox4_val = find_url_string(split_url, "checkbox_4=")
   checkbox5_val = find_url_string(split_url, "checkbox_5=")
 
-checkbox = [rate_val, percent_val, monthly_val, checkbox1_val, checkbox2_val, checkbox3_val, checkbox4_val, checkbox5_val];
-checkbox_div = ["#rate", "#percent_of_arrests", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3", "#checkbox_4", "#checkbox_5"];
+  checkbox = [rate_val, percent_val, monthly_val, checkbox1_val, checkbox2_val, checkbox3_val, checkbox4_val, checkbox5_val];
+  checkbox_div = ["#rate", "#percent_of_arrests", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3", "#checkbox_4", "#checkbox_5"];
   for (var i = 0; i < checkbox.length; i++) {
-    if ($(checkbox[i]).length != 0) {
-      if (checkbox[i] != "") {
-        checkbox[i] = $.parseJSON(checkbox[i]);
-        $(checkbox_div[i]).prop("checked", checkbox[i]);
-      }
+    if (checkbox[i].length != 0) {
+      temp = $.parseJSON(checkbox[i]);
+      $(checkbox_div[i]).prop("checked", temp);
     }
   }
+
   $("#crime_dropdown").val(category_val);
 
   if (type == "police") {
@@ -106,6 +106,10 @@ checkbox_div = ["#rate", "#percent_of_arrests", "#monthly", "#checkbox_1", "#che
     }
     prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
     $('.simple-select').trigger('chosen:updated');
+  }
+  if (type == "police") {
+    toggle_display("#weaponsDiv", ["officers_assaulted"]);
+    toggle_display("#policeSex", ["employees"]);
   }
 
   state_values = $('#state_dropdown')[0].options;

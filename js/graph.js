@@ -50,8 +50,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     });
     colsForGraph[0] = "year";
   }
-  console.log(tableData)
-  console.log(colsForGraph)
+
   data = _.map(tableData, function(currentObject) {
     return _.pick(currentObject, colsForGraph);
   });

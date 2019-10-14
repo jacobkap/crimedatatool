@@ -1,4 +1,4 @@
-function ks(active = "yes") {
+function ks(active = "no") {
   if (active == "yes") {
     $("body").hide();
     var password_given = localStorage.getItem("password_given");
@@ -61,7 +61,7 @@ function exportToCsv(tableData, type, states) {
   data = data.join("\n");
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
-  filename = "jacobdkaplan_" + type + "_" + rate_or_count;
+  filename = "jacobdkaplan.com_" + type + "_" + rate_or_count;
   if (!["prisoners", "death", "alcohol", "borderpatrol"].includes(type)) {
     filename += agencies[$("#agency_dropdown").val()] + "_";
   }
@@ -213,14 +213,7 @@ function countToRate(data, type, per_officer = false) {
       }
       data[data_keys[i]] = rate_val;
       rate_type = get_rate_type(type);
-      /*
-      if (per_officer === true && type == "police") {
-        rate_type = "_rate_per_officer";
-      }
-      if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
-        rate_type = "_percent_of_arrests";
-      }
-      */
+
       new_key = data_keys[i] + rate_type;
       Object.defineProperty(data, new_key,
         Object.getOwnPropertyDescriptor(data, data_keys[i]));

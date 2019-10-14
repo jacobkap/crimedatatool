@@ -36,6 +36,7 @@
   <script src="js/datatool.js"></script>
   <script src="js/dynamic_url.js"></script>
   <script src="js/moment.min.js"></script>
+  <link rel="stylesheet" href="css/hint.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
@@ -78,11 +79,11 @@
     <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
     <br><br>
     <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('offenses', crime_state_values)">
-    <label for="rate">Rate per 100,000 Population</label>
+    <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br><br>
     <div id="agency_level_boxes">
       <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('offenses', crime_state_values)">
-      <label for="clearance_rate">Clearances as % of Crimes Reported</label>
+      <label class="label-text fa" for="clearance_rate">Clearances as % of Crimes</label>
 
       <br><br>
       <h3>Type of Crime:</h3>
@@ -104,7 +105,7 @@
 
       <hr>
       <input type="checkbox" id="monthly" onchange="agencyChangeFun('offenses', state_values)"></input>
-      <label for="monthly">Monthly Data (large file size)</label>
+      <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
       <hr>
     </div>
 
