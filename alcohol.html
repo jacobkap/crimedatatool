@@ -6,6 +6,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
       dataLayer.push(arguments);
     }
@@ -53,7 +54,7 @@
   <div class="navigation-wrapper"></div>
 
   <script>
-      ks()
+    ks()
     $(function() {
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
@@ -68,16 +69,16 @@
     <select class="simple-select" id="state_dropdown" onchange="agencyChangeFun('alcohol', alcohol_state_values)"></select>
     <br><br>
     <input type="checkbox" id="checkbox_1" checked onchange="checkboxesUpdate('alcohol', '#checkbox_1')"></input>
-    <span>Beers</span>
+    <label class="label-text fa" for="checkbox_1">Beers</label>
     <br>
     <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('alcohol', '#checkbox_1')"></input>
-    <span>Shots of Liquor</span>
+    <label class="label-text fa" for="checkbox_2">Shots of Liquor</label>
     <br>
     <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('alcohol', '#checkbox_1')"></input>
-    <span>Glasses of Wine</span>
+    <label class="label-text fa" for="checkbox_3">Glasses of Wine</label>
     <br>
     <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('alcohol', '#checkbox_1')"></input>
-    <span>Total Drinks</span>
+    <label class="label-text fa" for="checkbox_4">Total Drinks</label>
 
     <hr>
     <button type="button" onclick="exportToCsv(all_data, 'alcohol', alcohol_state_values)">Download All State Data as CSV</button>

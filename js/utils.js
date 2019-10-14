@@ -112,7 +112,7 @@ function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
 
 
 function toggle_display(div, match_value) {
-  if ($("#crime_dropdown").val().includes(match_value)) {
+  if (match_value.includes($("#crime_dropdown").val())) {
     $(div).show();
   } else {
     $(div).hide();
@@ -175,12 +175,9 @@ function countToRate(data, type, per_officer = false) {
     }
 
     if (prisoner_categories[$("#crime_dropdown").val()] == "Race/Ethnicity" ||
-      prisoner_categories[$("#crime_dropdown").val()].includes("_crime")) {
-      race_value = prisoner_subcatergory_keys[$("#subcategory_dropdown").val()];
+      prisoner_categories[$("#crime_dropdown").val()].includes("Charge")) {
+      race_value = $("#subsubcategory_dropdown").val()
 
-      if (prisoner_categories[$("#crime_dropdown").val()].includes("_crime")) {
-        race_value = _.keys(prisoners_race)[$("#subsubcategory_dropdown").val()];
-      }
       if (race_value != "total") {
         total_population_column += "_" + race_value;
         female_population_column += "_" + race_value;
@@ -191,7 +188,7 @@ function countToRate(data, type, per_officer = false) {
 
 
   for (var i = 0; i < data_keys.length; i++) {
-    if (!["agency", "year", "state", "population", "ORI"].includes(data_keys[i])) {
+    if (!["agency", "year", "state", "population", "ORI"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
 
       if (type == "prisoners") {
         if (data_keys[i].includes("_female")) {
@@ -208,20 +205,22 @@ function countToRate(data, type, per_officer = false) {
         rate_val = data[data_keys[i]] / data[population_column];
         if (population_column !== "total_employees_officers") {
           rate_val = rate_val * 100000;
-        }
+       }
       }
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
       if (!isFinite(rate_val)) {
         rate_val = NaN;
       }
       data[data_keys[i]] = rate_val;
-      rate_type = "_rate";
+      rate_type = get_rate_type(type);
+      /*
       if (per_officer === true && type == "police") {
         rate_type = "_rate_per_officer";
       }
       if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
         rate_type = "_percent_of_arrests";
       }
+      */
       new_key = data_keys[i] + rate_type;
       Object.defineProperty(data, new_key,
         Object.getOwnPropertyDescriptor(data, data_keys[i]));
@@ -266,11 +265,10 @@ function makeCrimeClearanceRates(data) {
 function getStateAgencies(type, states = state_values, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
-  if (["offenses", "arrests", "police"].includes(type)) {
     if ($("#monthly").is(':checked')) {
       type += "_monthly";
     }
-  }
+
 
   url += type + "/";
   final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
@@ -333,7 +331,7 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
     make_dropdown("#subsubcategory_dropdown", prisoners_race, "total")
-    toggle_display("#subsubcategory_dropdown_div", [1, 5])
+    toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
   }
   if (type == "borderpatrol") {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
@@ -341,8 +339,8 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
-    make_dropdown("#subsubcategory_dropdown", police_weapons, 4);
-    toggle_display("#weaponsDiv", [0]);
+    make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
+    toggle_display("#weaponsDiv", ["officers_assaulted"]);
     $("#policeSex").show();
   }
 

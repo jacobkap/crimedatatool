@@ -107,7 +107,7 @@ function fixTableName(name, type) {
   }
 
   if (get_rate_type(type, binary = true) && !["Agency", "State", "Population", "ORI"].includes(name) &&
-    !name.startsWith("Year")) {
+    !name.startsWith("Year") && type != "death") {
 
     if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {} else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
       name += " % of Arrests";
@@ -125,7 +125,7 @@ function fixTableDataName(name, type) {
   if (!["ORI", "agency", "state", "population"].includes(name) &&
     !name.startsWith("year") &&
     !name.startsWith("county")) {
-    if (get_rate_type(type, binary = true)) {
+    if (get_rate_type(type, binary = true) && type != "death") {
       name += rate_type;
     }
     if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {
@@ -138,7 +138,6 @@ function fixTableDataName(name, type) {
 
 function makeTable(type) {
   data = subsetColumns(table_data, table_headers, "table", type);
-
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
     return !["agency", "year", "state", "ORI", "county", "sector", "fiscal_year"].includes(a);
@@ -166,7 +165,6 @@ function makeTable(type) {
       className: "dt-head-left dt-body-left"
     });
   }
-
   temp_table = $("#table").DataTable({
     data: data,
     columns: table_columns,

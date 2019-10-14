@@ -17,7 +17,7 @@ function objToString(obj) {
 
 function get_rate_type(type, binary = false) {
   rate_type = "";
-  if ($("#rate").is(':checked')) {
+  if ($("#rate").is(':checked') || $("#prisoners_rate").is(':checked')) {
     rate_type = "_rate";
   } else if ($("#percent_of_arrests").is(':checked')) {
     rate_type = "_percent_of_arrests";
@@ -28,7 +28,7 @@ function get_rate_type(type, binary = false) {
   } else if ($("#prisoners_rate_18_65").is(':checked')) {
     rate_type = "_rate_age_18_65";
   } else if (type == "death" && $("#checkbox_2").is(':checked')) {
-    rate_type = "_age_adjusted_rate";
+    rate_type = "_rate_age_adjusted";
   } else if (type == "death" && $("#rate").is(':checked')) {
     rate_type = "_crude_rate";
   }
@@ -46,7 +46,7 @@ function get_rate_type(type, binary = false) {
 function subsetColumns(data, columns, output, type) {
 
   rate_type = get_rate_type(type)
-  if (rate_type != "" || (type == "offenses" && $("#clearance_rate").is(":checked"))) {
+  if ((rate_type != "" || (type == "offenses" && $("#clearance_rate").is(":checked"))) && type != "death") {
     columns = _.map(columns, function(x) {
       if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
         return x + "_clearance_rate";
@@ -143,7 +143,7 @@ function getAgencyData(stateData, headers, table_headers, type) {
   agencyData = _.map(agencyData, function(x) {
     return _.pick(x, table_headers);
   });
-  if (get_rate_type(type, binary = true)) {
+  if (get_rate_type(type, binary = true) && type != "death") {
     agencyData = _.map(agencyData, function(currentObject) {
       return countToRate(currentObject, type);
     });
@@ -171,7 +171,7 @@ function get_data(type, states) {
   allAgencyData.pop();
   allAgencyData.shift();
 
-  if (get_rate_type(type, binary = true)) {
+  if (get_rate_type(type, binary = true) && type != "death") {
     allAgencyData = _.map(allAgencyData, function(currentObject) {
       return countToRate(currentObject, type);
     });
@@ -232,7 +232,7 @@ function getCrimeColumns(headers, type, output) {
       "population_adult", "population_female_adult", "population_male_adult",
       "population_aged_18_65", "population_female_aged_18_65", "population_male_aged_18_65"
     ];
-    if ($("#crime_dropdown").val() == "race_ethnicity" |
+    if ($("#crime_dropdown").val() == "race_ethnicity" ||
       $("#crime_dropdown").val().includes("_crime")) {
       race_value = $("#subsubcategory_dropdown").val()
 
@@ -365,7 +365,7 @@ function getCrimeColumns(headers, type, output) {
     ]);
   }
 
-  if (type == "police" && police_categories[$("#crime_dropdown").val()] != "Police Department Employees") {
+  if (type == "police" && !columnNames.includes("total_employees_officers")) {
     columnNames.push("total_employees_officers");
   }
 

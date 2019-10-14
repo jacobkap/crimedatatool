@@ -20,7 +20,7 @@ function prisonersPopBoxChange(box_to_check) {
   $("#prisoners_rate_18_65").prop("checked", false);
 
   $(box_to_check).prop("checked", box_status);
-  agencyChangeFun('prisoners', prisoners_state_values);
+  agencyChangeFun('prisoners', prisoners_state_values, prisoner_categories);
 }
 
 
@@ -35,7 +35,7 @@ function stateChangeFun(type, states, crimes) {
 }
 
 function jailStateChange(type, states, crimes) {
-  crimes = crimes[$("#state_dropdown").val()]
+  crimes = crimes[states[$("#state_dropdown").val()]]
   default_starter = ["avg_daily_pop_total_jurisdiction", "average_daily_population", "total_population"]
   default_starter = default_starter[$("#state_dropdown").val()]
   $('#crime_dropdown').empty();
@@ -47,8 +47,8 @@ function jailStateChange(type, states, crimes) {
 
 function police_categoryChangeFun() {
   make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
-  toggle_display("#weaponsDiv", [0]);
-  toggle_display("#policeSex", [2]);
+  toggle_display("#weaponsDiv", ["officers_assaulted"]);
+  toggle_display("#policeSex", ["employees"]);
   agencyChangeFun('police', state_values, police_categories);
 }
 
@@ -67,7 +67,7 @@ function borderCategoryChange(type, states, crimes) {
 function prisonerCategoryChange(current_category) {
   toggle_display("#subsubcategory_dropdown_div", [1, 5])
   make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-
+    toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
 
   // If it's one of the prisoner_crime categories (from national corrections Reporting
   // program), change states since it only has state info, not national-level info.
@@ -134,6 +134,7 @@ function agencyChangeFun(type, states, crimes) {
   graph_headers = main_results[1];
   table_headers = main_results[2];
   all_data = main_results[3];
+
 
   remake_graph(type, crimes);
 

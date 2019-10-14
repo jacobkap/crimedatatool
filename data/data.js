@@ -15,7 +15,7 @@ yaxis_labels = {
   "arrests_rate": "Rate per 100,000 Population",
   "arrests_percent_of_arrests": "% of Arrests",
   "police": "# of People",
-  "police_rate": "# of Officer Deaths",
+  "police_rate": "Rate per 100,000 Population",
   "police_rate_per_officer": "Rate per Officer",
   "prisoners": "# of Prisoners",
   "prisoners_rate": "Rate per 100,000 Population",
