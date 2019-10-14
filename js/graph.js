@@ -3,7 +3,6 @@ function allowSaveGraph() {
 }
 
 function getGraphDataset(tableData, colsForGraph, type, crimes) {
-
   if (type == "borderpatrol") {
     colsForGraph[0] = "fiscal_year"
   }
@@ -11,6 +10,12 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   rate_type = "_rate";
   if (!get_rate_type(type, binary = true)) {
     rate_type = "";
+  }
+  if (type == "police" && $("#checkbox_4").is(':checked')) {
+    rate_type = "_rate_per_officer";
+  }
+  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+    rate_type = "_percent_of_arrests";
   }
   checkbox_names = ["Actual Offenses",
     "Total Offenses Cleared",
@@ -33,12 +38,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "hate") {
     checkbox_names = ["Violent", "Nonviolent", "Total"];
   }
-  if (type == "police" && $("#checkbox_4").is(':checked')) {
-    rate_type = "_rate_per_officer";
-  }
-  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
-    rate_type = "_percent_of_arrests";
-  }
+
 
   if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked"))) && type != "death") {
     colsForGraph = _.map(colsForGraph, function(x) {
@@ -107,6 +107,9 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     label = label.replace(/_age_adjusted_rate/g, "");
     label = label.replace(/_crude_rate/g, "");
 
+    if (type == "police") {
+      crimes = police_subcategories[$("#crime_dropdown").val()];
+    }
     if (type == "borderpatrol") {
       label = border_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
     } else if (type == "jail") {
@@ -116,7 +119,21 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       label = crimes[label]
       label += " Rate"
       // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
-    } else if (type != 'police') {
+    } else if (type == "police" && ["officers_assaulted", "officers_killed"].includes($("#crime_dropdown").val())) {
+      label = label.replace(/_rate/g, "");
+      label = label.replace(/_per_officer/g, "");
+      weapon = $("#subsubcategory_dropdown").val();
+      if (weapon == "total_assaults") {
+        weapon = "assaults_total"
+      }
+      label = label.replace("_" + weapon, "");
+      if (weapon == "assaults_total") {
+        weapon = "Total"
+      } else {
+        weapon = police_weapons[weapon];
+      }
+      label = crimes[label] + " " + weapon
+    } else {
       label = crimes[label]
     }
     final_data = [makeGraphObjects(data1, "#ca0020", label)];
@@ -339,7 +356,7 @@ function getTitle(data, type) {
     subtitle = crime_values[$("#crime_dropdown").val()];
   } else if (type == "arrests") {
     subtitle = arrest_values[$("#crime_dropdown").val()];
-    subtitle = "Arrests for: " + subtitle;
+    subtitle = "Arrests for: " + subtitle + ", Breakdown: " + arrests_breakdown[$("#subsubcategory_dropdown").val()];
   } else if (type == "borderpatrol") {
     title = border_states[$("#state_dropdown").val()];
     subtitle = border_categories[$("#crime_dropdown").val()];
