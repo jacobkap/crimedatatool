@@ -6,14 +6,15 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   dropdowns = ["#agency_dropdown", "#crime_dropdown", "#subcategory_dropdown",
     "#subsubcategory_dropdown", '#rate', '#percent_of_arrests',
     '#monthly', '#checkbox_1', '#checkbox_2', '#checkbox_3',
-    '#checkbox_4', '#checkbox_5'
+    '#checkbox_4', '#checkbox_5', "#prisoners_rate", "#prisoners_rate_adult", "#prisoners_rate_18_65"
   ]
   dropdown_labels = ["&agency=", "&category=", "&subcategory=", "&subsubcategory=",
     "&rate=", "&percent=", "&monthly=", "&checkbox_1=", "&checkbox_2=",
-    "&checkbox_3=", "&checkbox_4=", "&checkbox_1="
+    "&checkbox_3=", "&checkbox_4=", "&checkbox_1=", "&prisoners_rate_val=", "&prisoners_rate_adult=", "&prisoners_rate_18_65="
   ]
   dropdown_type = ["text_selected", "value", "value", "value", "checked",
-    "checked", "checked", "checked", "checked", "checked", "checked", "checked"
+    "checked", "checked", "checked", "checked", "checked", "checked", "checked",
+    "checked", "checked", "checked"
   ]
 
 
@@ -74,9 +75,14 @@ change_data_from_url = function(type) {
   checkbox3_val = find_url_string(split_url, "checkbox_3=")
   checkbox4_val = find_url_string(split_url, "checkbox_4=")
   checkbox5_val = find_url_string(split_url, "checkbox_5=")
+  prisoners_rate_val = find_url_string(split_url, "prisoners_rate_val=")
+  prisoners_rate_adult_val = find_url_string(split_url, "prisoners_rate_adult=")
+  prisoners_rate_18_65_val = find_url_string(split_url, "prisoners_rate_18_65=")
 
-  checkbox = [rate_val, percent_val, monthly_val, checkbox1_val, checkbox2_val, checkbox3_val, checkbox4_val, checkbox5_val];
-  checkbox_div = ["#rate", "#percent_of_arrests", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3", "#checkbox_4", "#checkbox_5"];
+  checkbox = [rate_val, percent_val, monthly_val, checkbox1_val, checkbox2_val, checkbox3_val,
+     checkbox4_val, checkbox5_val, prisoners_rate_val, prisoners_rate_adult_val, prisoners_rate_18_65_val];
+  checkbox_div = ["#rate", "#percent_of_arrests", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3",
+   "#checkbox_4", "#checkbox_5", "#prisoners_rate_val", "#prisoners_rate_adult", "#prisoners_rate_18_65"];
   for (var i = 0; i < checkbox.length; i++) {
     if (checkbox[i].length != 0) {
       temp = $.parseJSON(checkbox[i]);
@@ -100,12 +106,13 @@ change_data_from_url = function(type) {
   }
   if (type == "prisoners") {
     if (category_val.includes("_crime")) {
-      make_dropdown('#state_dropdown', states, 0)
+      make_dropdown('#state_dropdown', state_values, 0)
     } else {
       make_dropdown('#state_dropdown', prisoners_state_values, 0)
     }
-    prisoner_subcatergory_keys = makePrisonerSubcategoriesDropdown();
-    $('.simple-select').trigger('chosen:updated');
+    make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
+    make_dropdown("#subsubcategory_dropdown", prisoners_race, "total")
+    toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
   }
   if (type == "police") {
     toggle_display("#weaponsDiv", ["officers_assaulted"]);
