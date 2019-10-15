@@ -50,20 +50,22 @@ function fixTableName(name, type) {
     if (!["state", "year"].includes(name)) {
       if ($("#crime_dropdown").val().includes("_crime")) {
         temp_name = name;
-        $("#subcategory_dropdown").val()
+        crime = $("#subcategory_dropdown").val();
+
+        crime = " " + prison_crimes[crime]
+
         temp_name = temp_name.replace($("#subcategory_dropdown").val() + "_", "");
         temp_name = temp_name.replace(/_/g, " ");
         temp_name = temp_name.replace("total total", "total");
 
         temp_name = toTitleCase(temp_name);
-
-        name = name + " " + temp_name;
+        name = crime + " " + temp_name;
       } else {
         temp1 = name.replace(/.*_female/, " Female");
         temp2 = name.replace(/.*_male/, " Male");
         temp3 = name.replace(/.*_total/, " Total");
         name = name.replace(/_total|_female|_male/, "");
-        name = $("#subcategory_dropdown").val()
+        name = prisoners_subcategory[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
         if (temp1 != temp_name) name += temp1;
         if (temp2 != temp_name) name += temp2;
         if (temp3 != temp_name) name += temp3;
@@ -113,6 +115,12 @@ function fixTableName(name, type) {
       name += " % of Arrests";
     } else if (type == "police" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
+    } else if (type == "prisoners") {
+      rate_val = get_rate_type(type)
+      if (rate_val == "_rate") rate_val = " Rate"
+      if (rate_val == "_rate_age_18_65") rate_val = " Rate Aged 18-65"
+      if (rate_val == "_rate_adults") rate_val = " Rate Adults"
+      name += rate_val;
     } else {
       name += " Rate";
     }

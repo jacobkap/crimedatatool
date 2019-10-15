@@ -302,7 +302,7 @@ function getCrimeColumns(headers, type, output) {
 
   for (var n = 0; n < headers.length; n++) {
     if (type == "prisoners") {
-      if (headers[n].startsWith(crime)) {
+      if (headers[n].includes(crime)) {
         columnNames.push(headers[n]);
       }
       if (typeof race != "undefined" && headers[n].match("population" + ".*" + race) !== null) {
