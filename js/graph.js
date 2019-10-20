@@ -38,6 +38,9 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "hate") {
     checkbox_names = ["Violent", "Nonviolent", "Total"];
   }
+  if (type == "school") {
+    checkbox_names = ["Not on Campus", "On Campus - Total", "On Campus - Student Housing", "Public Property"];
+  }
 
 
   if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked"))) && type != "death") {
@@ -71,7 +74,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data5.push(data[i][colsForGraph[5]]);
   }
 
-  if (["offenses", "alcohol", "prisoners", "arrests", "hate"].includes(type) || type == "police" &
+  if (["offenses", "alcohol", "prisoners", "arrests", "hate", "school"].includes(type) || type == "police" &
     police_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
@@ -357,6 +360,13 @@ function getTitle(data, type) {
   } else if (type == "arrests") {
     subtitle = arrest_values[$("#crime_dropdown").val()];
     subtitle = "Arrests for: " + subtitle + ", Breakdown: " + arrests_breakdown[$("#subsubcategory_dropdown").val()];
+  } else if (type == "school") {
+    title = school_state_values[$("#state_dropdown").val()];
+    subtitle = school_categories[$("#crime_dropdown").val()];
+    subtitle += " - " +school_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
+    if ($("#crime_dropdown").val() == "hate") {
+      subtitle += ", Bias Motivation: " + school_bias_motivations[$("#subsubcategory_dropdown").val()]
+    }
   } else if (type == "borderpatrol") {
     title = border_states[$("#state_dropdown").val()];
     subtitle = border_categories[$("#crime_dropdown").val()];

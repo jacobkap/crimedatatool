@@ -54,8 +54,12 @@ function subsetColumns(data, columns, output, type) {
         return x + rate_type;
       }
     });
-
-    if (output == "table" && type != "prisoners") {
+    if (output == "table" && type == "school") {
+      columns[0] = "school_name";
+      columns[1] = "year";
+      columns[2] = "school_unique_id";
+      columns[3] = "number_of_students";
+    } else if (output == "table" && type != "prisoners") {
       columns[0] = "agency";
       columns[1] = "year";
       columns[2] = "state";
@@ -64,12 +68,10 @@ function subsetColumns(data, columns, output, type) {
     } else if (output == "table" && type == "prisoners") {
       columns[0] = "state";
       columns[1] = "year";
-    } else {
+    }  else {
       columns[0] = "year";
     }
-
   }
-
   data = _.map(data, function(currentObject) {
     return _.pick(currentObject, columns);
   });
@@ -86,11 +88,10 @@ function getStateData(type, states) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
 
-  if (["offenses", "arrests", "police", "hate"].includes(type)) {
-    if ($("#monthly").is(':checked')) {
-      type += "_monthly";
-    }
+  if ($("#monthly").is(':checked')) {
+    type += "_monthly";
   }
+
 
   state = states[$("#state_dropdown").val()];
   state = state.replace(/ /g, "_");
@@ -103,6 +104,8 @@ function getStateData(type, states) {
     url += "prisoners/" + state + "_" + category + "_prisoners";
   } else if (["alcohol", "death"].includes(type)) {
     url += type + "/" + state + "_" + type;
+  } else if (type == "school") {
+    url += type + "/" + state;
   } else if (["borderpatrol"].includes(type)) {
     category = $("#crime_dropdown").val();
     category = category.replace(/ /g, "_");
@@ -226,6 +229,14 @@ function getCrimeColumns(headers, type, output) {
     columnNames = ["agency", "year", "state", "population", "ORI"];
   }
 
+  if (type == "school") {
+    if (output == "graph") {
+      columnNames = ["year"];
+    } else {
+      columnNames = ["school_name", "year", "school_unique_id", "number_of_students"];
+    }
+  }
+
 
   if (type == "prisoners" && output == "table") {
     columnNames = ["state", "year", "population", "population_male", "population_female",
@@ -249,7 +260,7 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (["offenses", "death", 'nibrs', "hate", "jail"].includes(type)) {
+  if (["offenses", "death", 'nibrs', "hate", "jail", "school"].includes(type)) {
     crime = $("#crime_dropdown").val();
   } else if (type == "borderpatrol") {
     crime = $("#subcategory_dropdown").val()
@@ -280,6 +291,7 @@ function getCrimeColumns(headers, type, output) {
       crime += "_" + race;
     }
   }
+
 
   if (type == "death" & output == "graph") {
     if ($("#rate").is(':checked')) {
@@ -342,6 +354,19 @@ function getCrimeColumns(headers, type, output) {
       if (headers[n] === crime) {
         columnNames.push(headers[n]);
       }
+    } else if (type == "school") {
+      bias = "";
+      if ($("#crime_dropdown").val() == "hate") {
+        bias = "_" + $("#subsubcategory_dropdown").val() + "$";
+        if ($("#subsubcategory_dropdown").val() == "total") {
+          bias = "$";
+        }
+      }
+      crime_category = crime + "(.*campus|.*facilities|.*public_property)_" + $("#subcategory_dropdown").val() + bias;
+      crime_category = RegExp(crime_category);
+      if (headers[n].match(crime_category) != null) {
+        columnNames.push(headers[n]);
+      }
     } else {
       if (headers[n].includes(crime)) {
         columnNames.push(headers[n]);
@@ -374,8 +399,23 @@ function getCrimeColumns(headers, type, output) {
     columnNames.push(columnNames.splice(index, 1)[0]);
   }
 
+  if (type == "school" && output == "graph") {
+    noncampus = columnNames.indexOf(crime + "_noncampus_" + $("#subcategory_dropdown").val() + bias);
+    columnNames.move(noncampus, 1)
+    on_campus = columnNames.indexOf(crime + "_on_campus_" + $("#subcategory_dropdown").val() + bias);
+    columnNames.move(on_campus, 2)
+    student_housing = columnNames.indexOf(crime + "_on_campus_student_housing_facilities_" + $("#subcategory_dropdown").val() + bias);
+    columnNames.move(student_housing, 3)
+    public = columnNames.indexOf(crime + "_public_property" + $("#subcategory_dropdown").val() + bias);
+    columnNames.move(public, 4)
+  }
+
   return (columnNames);
 }
+
+Array.prototype.move = function(from, to) {
+  this.splice(to, 0, this.splice(from, 1)[0]);
+};
 
 function data_object_fun(arr, headers) {
   headers = headers.split(",");

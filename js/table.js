@@ -102,19 +102,31 @@ function fixTableName(name, type) {
     } else {
       name = border_subcategories[$('#crime_dropdown').val()][name]
     }
+  } else if (type == "school" && !default_table_headers.includes(name)) {
+    name = name.replace($('#crime_dropdown').val() + "_", "", name);
+    name = name.replace("_" + $('#subcategory_dropdown').val(), "", name);
+    name = name.replace("_" + $('#subsubcategory_dropdown').val(), "", name);
+    crime = school_subcategories[$('#crime_dropdown').val()][$('#subcategory_dropdown').val()];
+    name =  crime + ": " + school_locations[name];
+    if ($("#crime_dropdown").val() == "hate") {
+      name += ", " + school_bias_motivations[$("#subsubcategory_dropdown").val()]
+    }
   }
 
   if (name === undefined || default_table_headers.includes(name)) {
-    name = temp_name.replace(/^\w/, c => c.toUpperCase());
+    name = temp_name.replace(/_/g, " ");
+    name = name.replace(/^\w| \w/g, c => c.toUpperCase());
   }
 
-  if (get_rate_type(type, binary = true) && !["Agency", "State", "Population", "ORI"].includes(name) &&
+  if (get_rate_type(type, binary = true) && !["Agency", "State", "Population", "ORI", "School Name", "Number Of Students", "School Unique Id"].includes(name) &&
     !name.startsWith("Year") && type != "death") {
 
     if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {} else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
       name += " % of Arrests";
     } else if (type == "police" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
+    } else if (type == "school") {
+      name += " Rate per 1,000 Students";
     } else if (type == "prisoners") {
       rate_val = get_rate_type(type)
       if (rate_val == "_rate") rate_val = " Rate"
@@ -130,7 +142,7 @@ function fixTableName(name, type) {
 
 function fixTableDataName(name, type) {
   rate_type = get_rate_type(type);
-  if (!["ORI", "agency", "state", "population"].includes(name) &&
+  if (!["ORI", "agency", "state", "population", "school_name", "school_unique_id", "number_of_students"].includes(name) &&
     !name.startsWith("year") &&
     !name.startsWith("county")) {
     if (get_rate_type(type, binary = true) && type != "death") {
@@ -148,9 +160,8 @@ function makeTable(type) {
   data = subsetColumns(table_data, table_headers, "table", type);
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
-    return !["agency", "year", "state", "ORI", "county", "sector", "fiscal_year"].includes(a);
+    return !["agency", "year", "state", "ORI", "county", "sector", "fiscal_year", "school_name", "school_unique_id"].includes(a);
   });
-
   // Adds commas in numbers to make it easier to read!
   for (var m = 0; m < data.length; m++) {
     for (n = 0; n < data_keys.length; n++) {
@@ -161,6 +172,7 @@ function makeTable(type) {
       }
     }
   }
+//  console.log(table_headers)
   // Makes real (as they appear in the data) names and pretty names
   // as they will appear in the table.
   table_columns = [];
@@ -170,7 +182,7 @@ function makeTable(type) {
     table_columns.push({
       data: data_name,
       title: label_name,
-      className: "dt-head-left dt-body-left"
+      className: "dt-head-left dt-body-right"
     });
   }
   temp_table = $("#table").DataTable({

@@ -3,7 +3,10 @@ default_table_headers = [
   "year",
   "state",
   "population",
-  "ORI"
+  "ORI",
+  "school_name",
+  "school_unique_id",
+  "number_of_students"
 ];
 
 yaxis_labels = {
@@ -23,6 +26,8 @@ yaxis_labels = {
   "prisoners_rate_age_18_65": "Rate per 100,000 Aged 18-65",
   "alcohol": "# of Drinks",
   "hate": "# of Incidents",
+  "school": "# of Incidents",
+  "school_rate": "Rate per 1,000 Students",
   "borderpatrol": "",
   "death": "# of Deaths",
   "death_rate": "Deaths per 100,000 population",
@@ -721,7 +726,7 @@ var police_categories_starts = {
   "employees": "employees_total"
 };
 
-police_subcategories = []
+police_subcategories = [];
 police_subcategories["officers_assaulted"] = {
   "ambush": "Ambush",
   "burglary": "Burglary",
@@ -756,4 +761,91 @@ var arrest_age_categories = {
 var arrests_breakdown = {
   "Race": "Race",
   "Sex": "Sex"
+}
+
+
+school_categories = {
+  "arrests": "Arrests",
+  "crimes": "Crimes",
+  "discipline": "Disciplinary Actions",
+  "hate": "Hate Crimes",
+  "vawa": "Violence Against Women Act"
+}
+
+var school_categories_starts = {
+  "arrests": "drug_law_violations",
+  "crimes": "sex_offenses_forcible",
+  "discipline": "drug_law_violations",
+  "hate": "sex_offenses_forcible",
+  "vawa": "Domestic"
+};
+
+school_subcategories = [];
+school_subcategories["arrests"] = {
+  "drug_law_violations": "Drug Law Violations",
+  "illegal_weapons_possession": "Illegal Weapon Possession",
+  "liquor_law_violations": "Liquor Law Violations"
+};
+school_subcategories["crimes"] = {
+  "aggravated_assault": "Assault - Aggravated",
+  "arson": "Arson",
+  "burglary": "Burglary",
+  "fondling": "Fondling",
+  "incest": "Incest",
+  "motor_vehicle_theft": "Motor Vehicle Theft",
+  "murder_non_negligent_manslaughter": "Murder and Non-Negligent Manslaughter",
+  "negligent_manslaughter": "Negligent Manslaughter",
+  "rape": "Rape",
+  "robbery": "Robbery",
+  "sex_offenses_forcible": "Sex Offenses - Forcible",
+  "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
+  "statutory_rape": "Statutory Rape"
+};
+school_subcategories["discipline"] = {
+  "drug_law_violations": "Drug Law Violations",
+  "illegal_weapons_possession": "Illegal Weapon Possession",
+  "liquor_law_violations": "Liquor Law Violations"
+};
+school_subcategories["hate"] = {
+  "aggravated_assault": "Assault - Aggravated",
+  "simple_assault": "Assault - Simple",
+  "arson": "Arson",
+  "burglary": "Burglary",
+  "destruction_damage_vandalism_of_property": "Vandalism/Destruction of Property",
+  "fondling": "Fondling",
+  "incest": "Incest",
+  "intimidation": "Intimidation",
+  "larceny_theft": "Theft",
+  "motor_vehicle_theft": "Motor Vehicle Theft",
+  "murder_non_negligent_manslaughter": "Murder and Non-Negligent Manslaughter",
+  "negligent_manslaughter": "Negligent Manslaughter",
+  "rape": "Rape",
+  "robbery": "Robbery",
+  "sex_offenses_forcible": "Sex Offenses - Forcible",
+  "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
+  "statutory_rape": "Statutory Rape"
+};
+school_subcategories["vawa"] = {
+  "dating_violence": "Dating Violence",
+  "domestic_violence": "Domestic Violence",
+  "stalking": "Stalking"
+};
+
+school_bias_motivations = {
+  "disability": "Anti-Disability",
+  "ethnicity": "Anti-Ethnicity",
+  "gender": "Anti-Gender",
+  "gender_identity": "Anti-Gender Identity",
+  "national_origin": "Anti-National Origin",
+  "race": "Anti-Race",
+  "religion": "Anti-Religion",
+  "sexual_orientation": "Anti-Sexual Orientation",
+  "total"              : "Anti-Total"
+};
+
+school_locations = {
+  "on_campus" : "On Campus - Total",
+  "on_campus_student_housing_facilities" : "On Campus - Student Housing",
+  "noncampus" : "Not on Campus",
+  "public_property" : "Public Property"
 }

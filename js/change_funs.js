@@ -57,6 +57,12 @@ function arrest_subsubcategoryChangeFun() {
   agencyChangeFun('arrests', state_values);
 }
 
+function school_category_change() {
+  make_dropdown('#subcategory_dropdown', school_subcategories[$('#crime_dropdown').val()], school_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
+  toggle_display("#school_bias_div", ["hate"])
+  agencyChangeFun('school', school_state_values);
+}
+
 function borderCategoryChange(type, states, crimes) {
   make_dropdown('#subcategory_dropdown', border_subcategories[$('#crime_dropdown').val()], border_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
   border_states = get_border_states($("#crime_dropdown").val());
@@ -67,7 +73,7 @@ function borderCategoryChange(type, states, crimes) {
 function prisonerCategoryChange(current_category) {
   toggle_display("#subsubcategory_dropdown_div", [1, 5])
   make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-    toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
+  toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
 
   // If it's one of the prisoner_crime categories (from national corrections Reporting
   // program), change states since it only has state info, not national-level info.

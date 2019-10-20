@@ -62,7 +62,7 @@ function exportToCsv(tableData, type, states) {
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
   filename = "jacobdkaplan.com_" + type + "_" + rate_or_count;
-  if (!["prisoners", "death", "alcohol", "borderpatrol"].includes(type)) {
+  if (!["prisoners", "death", "alcohol", "borderpatrol", "school"].includes(type)) {
     filename += agencies[$("#agency_dropdown").val()] + "_";
   }
   filename += states[$("#state_dropdown").val()];
@@ -154,6 +154,9 @@ function countToRate(data, type, per_officer = false) {
   if (per_officer && type == "police") {
     population_column = "total_employees_officers";
   }
+  if (type == "school") {
+    population_column = "number_of_students";
+  }
   if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
     population_column = $("#crime_dropdown").val() + "_tot_" + $("#subcategory_dropdown").val();
     if ($("#subcategory_dropdown").val() == "tot") {
@@ -188,7 +191,7 @@ function countToRate(data, type, per_officer = false) {
 
 
   for (var i = 0; i < data_keys.length; i++) {
-    if (!["agency", "year", "state", "population", "ORI"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
+    if (!["agency", "year", "state", "population", "ORI", "school_name", "school_unique_id", "number_of_students"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
 
       if (type == "prisoners") {
         if (data_keys[i].includes("_female")) {
@@ -203,12 +206,16 @@ function countToRate(data, type, per_officer = false) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
       } else {
         rate_val = data[data_keys[i]] / data[population_column];
-        if (population_column !== "total_employees_officers") {
+        if (type != "school" && population_column !== "total_employees_officers") {
           rate_val = rate_val * 100000;
-       }
+        }
+        if (type == "school") {
+          rate_val = rate_val * 1000
+
+        }
       }
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
-      if (!isFinite(rate_val)) {
+      if (!isFinite(rate_val) | data[data_keys[i]] == "") {
         rate_val = NaN;
       }
       data[data_keys[i]] = rate_val;
@@ -258,13 +265,16 @@ function makeCrimeClearanceRates(data) {
 function getStateAgencies(type, states = state_values, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
 
-    if ($("#monthly").is(':checked')) {
-      type += "_monthly";
-    }
-
+  if ($("#monthly").is(':checked')) {
+    type += "_monthly";
+  }
 
   url += type + "/";
-  final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
+  if (type == "school") {
+    final_url = url + "agency_choices.json";
+  } else {
+    final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
+  }
   if (largest_agencies) {
     final_url = url + "largest_agency_choices.json";
   }
@@ -312,10 +322,12 @@ function main(type, states, state_default, crimes, crime_starter) {
   if (type == "jail") {
     crimes = crimes[states[$("#state_dropdown").val()]]
   }
-  if (!["alcohol", "prisoners", "death", "borderpatrol"].includes(type)) {
+  if (!["alcohol", "prisoners", "death", "borderpatrol", "school"].includes(type)) {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
+    if (type != "school") {
     agencies = updateAgencies(type, states);
+  }
   }
   if (type == "death") {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
@@ -329,6 +341,12 @@ function main(type, states, state_default, crimes, crime_starter) {
   if (type == "borderpatrol") {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     make_dropdown('#subcategory_dropdown', border_subcategories[$('#crime_dropdown').val()], border_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
+  }
+  if (type == "school") {
+    make_dropdown("#crime_dropdown", crimes, crime_starter);
+    make_dropdown('#subcategory_dropdown', school_subcategories[$('#crime_dropdown').val()], school_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
+    make_dropdown("#subsubcategory_dropdown", school_bias_motivations, "total")
+    toggle_display("#school_bias_div", ["hate"])
   }
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
@@ -357,7 +375,6 @@ function main(type, states, state_default, crimes, crime_starter) {
       states = prisoners_state_values
     }
   }
-
   main_results = get_data(type, states);
   table_data = main_results[0];
   graph_headers = main_results[1];
