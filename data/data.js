@@ -834,18 +834,19 @@ school_subcategories["vawa"] = {
 school_bias_motivations = {
   "disability": "Anti-Disability",
   "ethnicity": "Anti-Ethnicity",
+  "ethnicity_national_origin": "Anti-Ethnicity or Anti-National Origin",
   "gender": "Anti-Gender",
   "gender_identity": "Anti-Gender Identity",
   "national_origin": "Anti-National Origin",
   "race": "Anti-Race",
   "religion": "Anti-Religion",
   "sexual_orientation": "Anti-Sexual Orientation",
-  "total"              : "Anti-Total"
+  "total": "Anti-Total"
 };
 
 school_locations = {
-  "on_campus" : "On Campus - Total",
-  "on_campus_student_housing_facilities" : "On Campus - Student Housing",
-  "noncampus" : "Not on Campus",
-  "public_property" : "Public Property"
+  "on_campus": "On Campus - Total",
+  "on_campus_student_housing_facilities": "On Campus - Student Housing",
+  "noncampus": "Not on Campus",
+  "public_property": "Public Property"
 }

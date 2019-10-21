@@ -118,6 +118,11 @@ change_data_from_url = function(type) {
     toggle_display("#weaponsDiv", ["officers_assaulted"]);
     toggle_display("#policeSex", ["employees"]);
   }
+  if (type == "school") {
+    make_dropdown('#subcategory_dropdown', school_subcategories[$('#crime_dropdown').val()], school_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
+    make_dropdown("#subsubcategory_dropdown", school_bias_motivations, "total")
+    toggle_display("#school_bias_div", ["hate"])
+  }
 
   state_values = $('#state_dropdown')[0].options;
   state_values = $.map(state_values, function(elem) {
