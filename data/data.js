@@ -5,7 +5,7 @@ default_table_headers = [
   "population",
   "ORI",
   "school_name",
-  "school_unique_id",
+  "school_unique_ID",
   "number_of_students"
 ];
 
@@ -774,10 +774,10 @@ school_categories = {
 
 var school_categories_starts = {
   "arrests": "drug_law_violations",
-  "crimes": "sex_offenses_forcible",
+  "crimes": "sex_offenses_total",
   "discipline": "drug_law_violations",
-  "hate": "sex_offenses_forcible",
-  "vawa": "Domestic"
+  "hate": "destruction_damage_vandalism_of_property",
+  "vawa": "domestic_violence"
 };
 
 school_subcategories = [];
@@ -799,6 +799,7 @@ school_subcategories["crimes"] = {
   "robbery": "Robbery",
   "sex_offenses_forcible": "Sex Offenses - Forcible",
   "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
+  "sex_offenses_total": "Sex Offenses - Total",
   "statutory_rape": "Statutory Rape"
 };
 school_subcategories["discipline"] = {
@@ -823,6 +824,7 @@ school_subcategories["hate"] = {
   "robbery": "Robbery",
   "sex_offenses_forcible": "Sex Offenses - Forcible",
   "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
+  "sex_offenses_total": "Sex Offenses - Total",
   "statutory_rape": "Statutory Rape"
 };
 school_subcategories["vawa"] = {
@@ -848,5 +850,6 @@ school_locations = {
   "on_campus": "On Campus - Total",
   "on_campus_student_housing_facilities": "On Campus - Student Housing",
   "noncampus": "Not on Campus",
-  "public_property": "Public Property"
+  "public_property": "Public Property",
+  "total" : "Total"
 }

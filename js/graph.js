@@ -39,7 +39,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     checkbox_names = ["Violent", "Nonviolent", "Total"];
   }
   if (type == "school") {
-    checkbox_names = ["Not on Campus", "On Campus - Total", "On Campus - Student Housing", "Public Property"];
+    checkbox_names = ["Not on Campus", "On Campus - Total", "On Campus - Student Housing", "Public Property", "Total"];
   }
 
 
@@ -363,7 +363,7 @@ function getTitle(data, type) {
   } else if (type == "school") {
     title = school_state_values[$("#state_dropdown").val()];
     subtitle = school_categories[$("#crime_dropdown").val()];
-    subtitle += " - " +school_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
+    subtitle += ": " +school_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
     if ($("#crime_dropdown").val() == "hate") {
       subtitle += ", Bias Motivation: " + school_bias_motivations[$("#subsubcategory_dropdown").val()]
     }

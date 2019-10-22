@@ -142,7 +142,7 @@ function fixTableName(name, type) {
 
 function fixTableDataName(name, type) {
   rate_type = get_rate_type(type);
-  if (!["ORI", "agency", "state", "population", "school_name", "school_unique_id", "number_of_students"].includes(name) &&
+  if (!["ORI", "agency", "state", "population", "school_name", "school_unique_ID", "number_of_students"].includes(name) &&
     !name.startsWith("year") &&
     !name.startsWith("county")) {
     if (get_rate_type(type, binary = true) && type != "death") {
@@ -160,7 +160,7 @@ function makeTable(type) {
   data = subsetColumns(table_data, table_headers, "table", type);
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
-    return !["agency", "year", "state", "ORI", "county", "sector", "fiscal_year", "school_name", "school_unique_id"].includes(a);
+    return !["agency", "year", "state", "ORI", "county", "sector", "fiscal_year", "school_name", "school_unique_ID"].includes(a);
   });
   // Adds commas in numbers to make it easier to read!
   for (var m = 0; m < data.length; m++) {

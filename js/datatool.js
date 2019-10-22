@@ -57,7 +57,7 @@ function subsetColumns(data, columns, output, type) {
     if (output == "table" && type == "school") {
       columns[0] = "school_name";
       columns[1] = "year";
-      columns[2] = "school_unique_id";
+      columns[2] = "school_unique_ID";
       columns[3] = "number_of_students";
     } else if (output == "table" && type != "prisoners") {
       columns[0] = "agency";
@@ -233,7 +233,7 @@ function getCrimeColumns(headers, type, output) {
     if (output == "graph") {
       columnNames = ["year"];
     } else {
-      columnNames = ["school_name", "year", "school_unique_id", "number_of_students"];
+      columnNames = ["school_name", "year", "school_unique_ID", "number_of_students"];
     }
   }
 
@@ -362,7 +362,8 @@ function getCrimeColumns(headers, type, output) {
           bias = "$";
         }
       }
-      crime_category = crime + "(.*campus|.*facilities|.*public_property)_" + $("#subcategory_dropdown").val() + bias;
+      crime_category = crime + "(_total|.*campus|.*facilities|.*public_property)_" + $("#subcategory_dropdown").val() + bias;
+      console.log(crime_category)
       crime_category = RegExp(crime_category);
       if (headers[n].match(crime_category) != null) {
         columnNames.push(headers[n]);
@@ -399,15 +400,28 @@ function getCrimeColumns(headers, type, output) {
     columnNames.push(columnNames.splice(index, 1)[0]);
   }
 
-  if (type == "school" && output == "graph") {
+  if (type == "school") {
+    if (output == "graph") {
+      adder = 0;
+    } else {
+      adder = 3;
+    }
     noncampus = columnNames.indexOf(crime + "_noncampus_" + $("#subcategory_dropdown").val() + bias);
-    columnNames.move(noncampus, 1)
+    console.log(noncampus)
+    columnNames.move(noncampus, (1 + adder))
     on_campus = columnNames.indexOf(crime + "_on_campus_" + $("#subcategory_dropdown").val() + bias);
-    columnNames.move(on_campus, 2)
+    console.log(on_campus)
+    columnNames.move(on_campus, (2 + adder))
     student_housing = columnNames.indexOf(crime + "_on_campus_student_housing_facilities_" + $("#subcategory_dropdown").val() + bias);
-    columnNames.move(student_housing, 3)
-    public = columnNames.indexOf(crime + "_public_property" + $("#subcategory_dropdown").val() + bias);
-    columnNames.move(public, 4)
+    console.log(student_housing)
+    columnNames.move(student_housing, (3 + adder))
+    public = columnNames.indexOf(crime + "_public_property_" + $("#subcategory_dropdown").val() + bias);
+    console.log(public)
+    columnNames.move(public, (4 + adder))
+    total = columnNames.indexOf(crime + "_total_" + $("#subcategory_dropdown").val() + bias);
+    console.log(crime + "_total_" + $("#subcategory_dropdown").val() + bias)
+    console.log(total)
+    columnNames.move(total, (5 + adder))
   }
 
   return (columnNames);

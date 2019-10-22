@@ -191,7 +191,7 @@ function countToRate(data, type, per_officer = false) {
 
 
   for (var i = 0; i < data_keys.length; i++) {
-    if (!["agency", "year", "state", "population", "ORI", "school_name", "school_unique_id", "number_of_students"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
+    if (!["agency", "year", "state", "population", "ORI", "school_name", "school_unique_ID", "number_of_students"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
 
       if (type == "prisoners") {
         if (data_keys[i].includes("_female")) {
