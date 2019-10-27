@@ -505,7 +505,7 @@
     var acc = document.getElementsByClassName("accordion");
     var i;
 
-    $("#accordion").on("show.bs.collapse",function(a){
+    $(".accordion").on("show.bs.collapse",function(a){
     var curr=$(a.target).attr("id");
     var url = window.location.href;
     var start = window.location.hash;
