@@ -367,57 +367,132 @@
 
       <button class="accordion">Where is the school data from?</button>
       <div class="panel">
-        <p></p>
+        <p>All of this data comes from the Department of Education Office of Postsecondary Education which collects crime data from colleges and
+          releases them publicly. Their website is <a href="https://ope.ed.gov/campussafety/#/">here</a>. While their site does allow you to look at a single
+            school's data, it only shows the prior three years and only as tables. For a comprehensive look at the data codebook, please see their PDF
+            <a href="https://www2.ed.gov/admins/lead/safety/handbook.pdf">here</a> </p>
       </div>
 
       <button class="accordion">What do the locations mean?</button>
       <div class="panel">
-        <p></p>
+        <p>As per the Department of Education definitions, available <a href="https://ope.ed.gov/campussafety/#/">here</a></p>
+        <blockquote><b>Not on Campus: </b>(1) Any building or property owned or controlled by a student organization that is officially recognized by
+          the institution; or (2) Any building or property owned or controlled by an institution that is used in direct support of, or in relation to,
+          the institution's educational purposes, is frequently used by students, and is not within the same reasonably contiguous geographic area of
+          the institution.</blockquote>
+        <blockquote><b>On Campus - Total: </b>(1) Any building or property owned or controlled by an institution within the same reasonably contiguous geographic area
+          and used by the institution in direct support of, or in a manner related to, the institution's educational purposes, including residence halls; and (2) Any
+          building or property that is within or reasonably contiguous to paragraph (1) of this definition, that is owned by the institution but controlled by another
+          person, is frequently used by students, and supports institutional purposes (such as a food or other retail vendor).</blockquote>
+        <blockquote><b>On Campus - Student Housing: </b>Any student housing facility that is owned or controlled by the institution, or is located on property that is
+          owned or controlled by the institution, and is within the reasonably contiguous geographic area that makes up the campus is considered an on-campus student
+          housing facility.</blockquote>
+        <blockquote><b>Public Property: </b>All public property, including thoroughfares, streets, sidewalks, and parking facilities, that is within
+          the campus, or immediately adjacent to and accessible from the campus.</blockquote>
+        <b>Total: </b>This is the sun of Not on Campus, On Campus - Total, and Public Property.
+        </p>
       </div>
 
       <button class="accordion">Why don't crime categories overlap between crimes and arrests?</button>
       <div class="panel">
-        <p></p>
+        <p>There are different rules for which offenses are included when an offense is committed and a person is arrested so these categories
+          do not necessarily overlap.</p>
       </div>
 
       <button class="accordion">Why aren't sexual offenses included in the Disciplinary Actions category?</button>
       <div class="panel">
-        <p></p>
+        <p>There are different rules for which offenses are included when an offense is committed and a disciplinary actions are taken so these categories
+          do not necessarily overlap. As sexual offenses are not included in the required categories for disciplinary action, they is not available in the data. </p>
+      </div>
+
+      <button class="accordion">Is there overlap for arrests and disciplinary actions?</button>
+      <div class="panel">
+        <p>No, if a person is arrested and then given disciplinary actions by the scohol, only the arrest is counted.</p>
+      </div>
+
+      <button class="accordion">What does Disciplinary Action mean?</button>
+      <div class="panel">
+        <p>This is when a person is referred to the school for a "disciplinary action" though the action does not need to actually take place and
+          the data does not specify which action is referred or the outcome of that referral .</p>
       </div>
 
       <button class="accordion">What is a Sexual Offense - Forcible and a Sexual Offense - Non-forcible?</button>
       <div class="panel">
-        <p></p>
+        <p>
+          <ul>
+            <li><b>Sexual Offense - Forcible</b> is the sum of rape and fondling.</li>
+            <li><b>Sexual Offense - Non-forcible</b> is the sum of incest and statutory rape.</li>
+            <li><b>Sexual Offense - Total</b> is the sum of Sexual Offense - Forcible and Sexual Offense - Non-forcible.</li>
+          </ul>
+          For definitions of each individual crimes please see the Department of Education's codebook <a href="https://www2.ed.gov/admins/lead/safety/handbook.pdf">here</a>
+        </p>
       </div>
 
       <button class="accordion">Are hate crimes consistently reported?</button>
       <div class="panel">
-        <p></p>
+        <p>No, the hate crime data unwent a series of changes in how the data was collected. The crimes theft, intimidation, and vandalism/destruction of property
+          only started being reported in 2009. Starting in 2014, "gender identity" was added as a possible bias motivation while in the same
+          year the "ethnicity or national origin" bias motivation was split into either "ethnicity" or "national origin" bias motivations.
+          This means that you should be cautious when looking at total hate crime changes as certain crimes/bias motivations were not included until recently. </p>
       </div>
 
       <button class="accordion">Why are there no rapes before 2014?</button>
       <div class="panel">
-        <p></p>
+        <p>This data set did not collect information on the number of rape, fondling, incest, or statutory rape crimes until 2014.
+          Instead, it grouped rape and fondling as Sexual Offense - Forcible, and incest and statutory rape as Sexual Offense - Non-forcible.
+        </p>
       </div>
 
       <button class="accordion">What do the Violence Against Women Act subcategories mean?</button>
       <div class="panel">
-        <p></p>
+        <p>
+          <p>As per the Department of Education definitions, available <a href="https://ope.ed.gov/campussafety/#/">here</a></p>
+          <blockquote><b>Dating Violence: </b>Violence committed by a person who is or has been in a social relationship of a romantic or
+            intimate nature with the victim. The existence of such a relationship shall be determined based on the reporting party’s
+            statement and with consideration of the length of the relationship, the type of relationship, and the frequency of interaction
+            between the persons involved in the relationship. For the purposes of this definition—
+            <ul>
+              <li>Dating violence includes, but is not limited to, sexual or physical abuse or the threat of such abuse.</li>
+              <li>Dating violence does not include acts covered under the definition of domestic violence.</li>
+            </ul>
+          </blockquote>
+          <blockquote><b>Domestic Violence: </b>A felony or misdemeanor crime of violence committed—
+            <ul>
+              <li>By a current or former spouse or intimate partner of the victim;</li>
+              <li>By a person with whom the victim shares a child in common;</li>
+              <li>By a person who is cohabitating with, or has cohabitated with, the victim as a spouse or intimate partner;</li>
+              <li>By a person similarly situated to a spouse of the victim under the domestic or family violence laws of the jurisdiction</li>
+            </ul>
+            in which the crime of violence occurred, or by any other person against an adult or youth victim who is protected from
+            that person’s acts under the domestic or family violence laws of the jurisdiction in which the crime of violence occurred.</blockquote>
+          <blockquote><b>Stalking: </b>Engaging in a course of conduct directed at a specific person that would cause a reasonable person to—
+            <ul>
+              <li>Fear for the person’s safety or the safety of others; or</li>
+              <li>Suffer substantial emotional distress.</li>
+            </ul>
+          </blockquote>
+        </p>
       </div>
 
       <button class="accordion">Is rate per 1,000 students a good measure?</button>
       <div class="panel">
-        <p></p>
+        <p>Using rates is useful as it removes the important influence of the number of people at that school, but has its own serious limiations.
+          Schools with similar number of students may still be very different in their student population and risk of victimization. Consider, for example,
+          two schools which each have 20,000 students. If these two schools are very similar in students, then the rate per 1,000 students could be useful
+          in comparing the schools are the groups are similar. If, however these schools differ on factors such as if the school is urban, whether students commute or
+          live on campus, ages of students, etc, then knowing purely the number of students is not a very useful rate. Also consider that crimes can occur against victims
+          other than students such as faculty or staff so a per 1,000 student rate would overestimate crime by decreasing the denominator. </p>
       </div>
+
 
       <button class="accordion">Are changes in crimes a reflection of actual changes in offenses, or changes in reporting?</button>
       <div class="panel">
-        <p></p>
+        <p>Like all crime data, this data has a limitation as it is reported offenses only. If likelihood of reporting changes, that will
+          be reflected in changes of reported offenses but we will not be able to tell (based only on this data) whether it was the number
+          of crimes or the likelihood of reporting that changed. This is especially a problem with sexual offenses as they are already were
+          unlikely to be reported and small changes in reporting likelihood can cause a seemingly large change in crimes reported. Also keep in mind
+          that the population included (primarily college students) may have different reporting likelihoods than other populations.</p>
       </div>
-
-
-
-
 
 
     </article>

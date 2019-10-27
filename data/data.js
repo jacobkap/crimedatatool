@@ -767,7 +767,7 @@ var arrests_breakdown = {
 school_categories = {
   "arrests": "Arrests",
   "crimes": "Crimes",
-  "discipline": "Disciplinary Actions",
+  "discipline": "Referred for Disciplinary Actions",
   "hate": "Hate Crimes",
   "vawa": "Violence Against Women Act"
 }
