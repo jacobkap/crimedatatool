@@ -776,7 +776,7 @@ var school_categories_starts = {
   "arrests": "drug_law_violations",
   "crimes": "sex_offenses_total",
   "discipline": "drug_law_violations",
-  "hate": "destruction_damage_vandalism_of_property",
+  "hate": "total",
   "vawa": "domestic_violence"
 };
 
@@ -784,7 +784,8 @@ school_subcategories = [];
 school_subcategories["arrests"] = {
   "drug_law_violations": "Drug Law Violations",
   "illegal_weapons_possession": "Illegal Weapon Possession",
-  "liquor_law_violations": "Liquor Law Violations"
+  "liquor_law_violations": "Liquor Law Violations",
+  "total" : "Total"
 };
 school_subcategories["crimes"] = {
   "aggravated_assault": "Assault - Aggravated",
@@ -800,12 +801,14 @@ school_subcategories["crimes"] = {
   "sex_offenses_forcible": "Sex Offenses - Forcible",
   "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
   "sex_offenses_total": "Sex Offenses - Total",
-  "statutory_rape": "Statutory Rape"
+  "statutory_rape": "Statutory Rape",
+  "total" : "Total"
 };
 school_subcategories["discipline"] = {
   "drug_law_violations": "Drug Law Violations",
   "illegal_weapons_possession": "Illegal Weapon Possession",
-  "liquor_law_violations": "Liquor Law Violations"
+  "liquor_law_violations": "Liquor Law Violations",
+  "total" : "Total"
 };
 school_subcategories["hate"] = {
   "aggravated_assault": "Assault - Aggravated",
@@ -819,18 +822,19 @@ school_subcategories["hate"] = {
   "larceny_theft": "Theft",
   "motor_vehicle_theft": "Motor Vehicle Theft",
   "murder_non_negligent_manslaughter": "Murder and Non-Negligent Manslaughter",
-  "negligent_manslaughter": "Negligent Manslaughter",
   "rape": "Rape",
   "robbery": "Robbery",
   "sex_offenses_forcible": "Sex Offenses - Forcible",
   "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
   "sex_offenses_total": "Sex Offenses - Total",
-  "statutory_rape": "Statutory Rape"
+  "statutory_rape": "Statutory Rape",
+  "total" : "Total"
 };
 school_subcategories["vawa"] = {
   "dating_violence": "Dating Violence",
   "domestic_violence": "Domestic Violence",
-  "stalking": "Stalking"
+  "stalking": "Stalking",
+  "total" : "Total"
 };
 
 school_bias_motivations = {

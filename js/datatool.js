@@ -357,13 +357,12 @@ function getCrimeColumns(headers, type, output) {
     } else if (type == "school") {
       bias = "";
       if ($("#crime_dropdown").val() == "hate") {
-        bias = "_" + $("#subsubcategory_dropdown").val() + "$";
+        bias = "_" + $("#subsubcategory_dropdown").val();
         if ($("#subsubcategory_dropdown").val() == "total") {
-          bias = "$";
+          bias = "";
         }
       }
       crime_category = crime + "(_total|.*campus|.*facilities|.*public_property)_" + $("#subcategory_dropdown").val() + bias;
-      console.log(crime_category)
       crime_category = RegExp(crime_category);
       if (headers[n].match(crime_category) != null) {
         columnNames.push(headers[n]);
@@ -406,21 +405,16 @@ function getCrimeColumns(headers, type, output) {
     } else {
       adder = 3;
     }
+
     noncampus = columnNames.indexOf(crime + "_noncampus_" + $("#subcategory_dropdown").val() + bias);
-    console.log(noncampus)
     columnNames.move(noncampus, (1 + adder))
     on_campus = columnNames.indexOf(crime + "_on_campus_" + $("#subcategory_dropdown").val() + bias);
-    console.log(on_campus)
     columnNames.move(on_campus, (2 + adder))
     student_housing = columnNames.indexOf(crime + "_on_campus_student_housing_facilities_" + $("#subcategory_dropdown").val() + bias);
-    console.log(student_housing)
     columnNames.move(student_housing, (3 + adder))
     public = columnNames.indexOf(crime + "_public_property_" + $("#subcategory_dropdown").val() + bias);
-    console.log(public)
     columnNames.move(public, (4 + adder))
     total = columnNames.indexOf(crime + "_total_" + $("#subcategory_dropdown").val() + bias);
-    console.log(crime + "_total_" + $("#subcategory_dropdown").val() + bias)
-    console.log(total)
     columnNames.move(total, (5 + adder))
   }
 
