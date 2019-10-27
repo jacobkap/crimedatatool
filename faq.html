@@ -505,6 +505,12 @@
     var acc = document.getElementsByClassName("accordion");
     var i;
 
+    $(document).ready(function(){
+    var url = window.location.href;
+    var start = url.substr(url.indexOf("#"));
+    $(start).collapse('show');
+});
+
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
