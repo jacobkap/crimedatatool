@@ -386,5 +386,4 @@ function main(type, states, state_default, crimes, crime_starter) {
   table = makeTable(type);
 
   jQuery(window).on('resize', resizeChosen);
-
 }

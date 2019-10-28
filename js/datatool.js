@@ -4,12 +4,12 @@ function resizeChosen() {
   });
 }
 
-function disable_animation_on_mobile(graph) {
+function disable_animation_on_mobile(graph_obj) {
    if (window.innerWidth <= 800 || window.innerHeight <= 600) {
-     graph.options.tooltips.enabled = false;
-     graph.options.events = []
+     graph_obj.options.tooltips.enabled = false;
+     graph_obj.options.events = []
    } else {
-     graph.options.tooltips.enabled = true;
+     graph_obj.options.tooltips.enabled = true;
    }
 }
 

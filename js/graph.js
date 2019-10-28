@@ -298,7 +298,7 @@ function makeGraph(type, crimes) {
     },
     options: opts
   });
-  disable_animation_on_mobile(graph)
+  disable_animation_on_mobile(myLineChart);
 
   return (myLineChart);
 }
