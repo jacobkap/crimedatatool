@@ -278,15 +278,6 @@ function makeGraph(type, crimes) {
     hover: {
       mode: 'nearest',
       intersect: true
-    },
-    plugins: {
-      zoom: {
-        zoom: {
-          drag: false,
-          enabled: false,
-          mode: 'x'
-        }
-      }
     }
   };
 
