@@ -282,7 +282,7 @@ function makeGraph(type, crimes) {
     plugins: {
       zoom: {
         zoom: {
-          drag: true,
+          drag: false,
           enabled: false,
           mode: 'x'
         }
