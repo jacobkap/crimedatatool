@@ -298,6 +298,8 @@ function makeGraph(type, crimes) {
     },
     options: opts
   });
+  disable_animation_on_mobile(graph)
+
   return (myLineChart);
 }
 

@@ -4,11 +4,12 @@ function resizeChosen() {
   });
 }
 
-function disable_animation_on_mobile() {
-   if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+function disable_animation_on_mobile(graph) {
+   if (window.innerWidth <= 800 || window.innerHeight <= 600) {
      graph.options.tooltips.enabled = false;
+     graph.options.events = []
    } else {
-       graph.options.tooltips.enabled = true;
+     graph.options.tooltips.enabled = true;
    }
 }
 
