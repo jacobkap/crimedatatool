@@ -4,6 +4,14 @@ function resizeChosen() {
   });
 }
 
+function disable_animation_on_mobile() {
+   if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+     graph.options.tooltips.enabled = false;
+   } else {
+       graph.options.tooltips.enabled = true;
+   }
+}
+
 function objToString(obj) {
   var str = '';
   for (var p in obj) {
