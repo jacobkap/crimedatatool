@@ -142,6 +142,8 @@ function agencyChangeFun(type, states, crimes) {
   all_data = main_results[3];
 
 
+
+
   remake_graph(type, crimes);
 
   if (type == "offenses" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {

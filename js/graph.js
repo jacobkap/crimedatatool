@@ -7,6 +7,16 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     colsForGraph[0] = "fiscal_year"
   }
 
+  if (type == "prisoners" && $("#crime_dropdown").val() == "race_ethnicity") {
+    temp_graph_headers = []
+    for (var m = 0; m < colsForGraph.length; m++) {
+        if (!colsForGraph[m].startsWith("population")) {
+          temp_graph_headers.push(colsForGraph[m])
+        }
+    }
+    colsForGraph = temp_graph_headers
+  }
+
   rate_type = "_rate";
   if (!get_rate_type(type, binary = true)) {
     rate_type = "";

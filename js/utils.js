@@ -164,32 +164,34 @@ function countToRate(data, type, per_officer = false) {
     }
   }
   if (type == "prisoners") {
-    total_population_column = "population";
+    total_population_column  = "population";
     female_population_column = "population_female";
-    male_population_column = "population_male";
+    male_population_column   = "population_male";
     if ($("#prisoners_rate_adult").is(':checked')) {
-      total_population_column = "population_adult";
+      total_population_column  = "population_adult";
       female_population_column = "population_female_adult";
-      male_population_column = "population_male_adult";
+      male_population_column   = "population_male_adult";
     } else if ($("#prisoners_rate_18_65").is(':checked')) {
-      total_population_column = "population_aged_18_65";
+      total_population_column  = "population_aged_18_65";
       female_population_column = "population_female_aged_18_65";
-      male_population_column = "population_male_aged_18_65";
+      male_population_column   = "population_male_aged_18_65";
     }
 
-    if (prisoner_categories[$("#crime_dropdown").val()] == "Race/Ethnicity" ||
-      prisoner_categories[$("#crime_dropdown").val()].includes("Charge")) {
-      race_value = $("#subsubcategory_dropdown").val()
+    race_value = "total";
+    if (prisoner_categories[$("#crime_dropdown").val()] == "Race/Ethnicity") {
+      race_value = $("#subcategory_dropdown").val();
+    }
+    if (prisoner_categories[$("#crime_dropdown").val()].includes("Charge")) {
+      race_value = $("#subsubcategory_dropdown").val();
+    }
+
 
       if (race_value != "total") {
-        total_population_column += "_" + race_value;
+        total_population_column  += "_" + race_value;
         female_population_column += "_" + race_value;
-        male_population_column += "_" + race_value;
+        male_population_column   += "_" + race_value;
       }
     }
-  }
-
-
   for (var i = 0; i < data_keys.length; i++) {
     if (!["agency", "year", "state", "population", "ORI", "school_name", "school_unique_ID", "number_of_students"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
 
