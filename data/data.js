@@ -661,6 +661,7 @@ var nibrs_crime_values = {
 };
 
 var arrest_values = {
+  "all_arrests_total" : "All Arrests Total",
   "all_other": "All Other Non-Traffic",
   "agg_assault": "Aggravated Assault",
   "oth_assault": "Assault - Other",
@@ -686,7 +687,7 @@ var arrest_values = {
   "forgery": "Forgery",
   "fraud": "Fraud",
   "gamble_total": "Gambling - Total",
-  "gamble_bookmaker": "Gambling - Bookmaking",
+  "gamble_bookmake": "Gambling - Bookmaking",
   "gamble_lottery": "Gambling - Numbers/Lottery",
   "gamble_other": "Gambling - Other",
   "liquor": "Liquor Laws",
