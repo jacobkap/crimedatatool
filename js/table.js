@@ -125,6 +125,8 @@ function fixTableName(name, type) {
       name += " % of Arrests";
     } else if (type == "police" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
+    } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
+      name += " % of All Arrests for All Crimes";
     } else if (type == "school") {
       name += " Rate per 1,000 Students";
     } else if (type == "prisoners") {
