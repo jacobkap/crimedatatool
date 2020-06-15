@@ -84,15 +84,15 @@
     </select>
 
     <br><br>
-    <input type="checkbox" id="rate" name="rate" value="rate" onchange="rateBoxesChange('#percent_of_arrests', 'arrests', state_values, arrest_values)">
+    <input type="checkbox" id="rate" name="rate" value="rate" onchange="arrestsPopBoxChange('#rate')">
     <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br><br>
     <br><br>
-    <input type="checkbox" id="percent_of_arrests" onchange="rateBoxesChange('#rate', 'arrests', state_values, arrest_values)">
-    <label class="label-text fa" for="percent_of_arrests">% of Arrests</label>
+    <input type="checkbox" id="percent_of_arrests" onchange="arrestsPopBoxChange('#percent_of_arrests')">
+    <label class="label-text fa" for="percent_of_arrests">% of Arrests for This Crime</label>
     <br><br>
-    <input type="checkbox" id="percent_of_all_arrests" onchange="rateBoxesChange('#rate', 'arrests', state_values, arrest_values)">
-    <label class="label-text fa" for="percent_of_all_arrests">% of All Arrests</label>
+    <input type="checkbox" id="percent_of_all_arrests" onchange="arrestsPopBoxChange('#percent_of_all_arrests')">
+    <label class="label-text fa" for="percent_of_all_arrests">% of All Arrests For All Crimes</label>
     <br><br>
     <h3 id="breakdown_name">Race:</h3>
     <br><br>

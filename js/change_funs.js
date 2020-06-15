@@ -24,6 +24,17 @@ function prisonersPopBoxChange(box_to_check) {
 }
 
 
+function arrestsPopBoxChange(box_to_check) {
+  box_status = $(box_to_check).prop("checked");
+  $("#percent_of_arrests").prop("checked", false);
+  $("#rate").prop("checked", false);
+  $("#percent_of_all_arrests").prop("checked", false);
+
+  $(box_to_check).prop("checked", box_status);
+  agencyChangeFun("arrests", state_values, arrest_values);
+}
+
+
 function rateBoxesChange(dropdown_to_turnoff, type, states, crimes) {
   $(dropdown_to_turnoff).prop("checked", false);
   agencyChangeFun(type, states, crimes);

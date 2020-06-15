@@ -14,7 +14,7 @@ function ks(active = "no") {
       $("body").show();
     }
   }
-}
+}'[]'
 
 function readCSV(csv) {
   var result = null;
@@ -56,6 +56,10 @@ function exportToCsv(tableData, type, states) {
   if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
     rate_or_count = "_percent_of_arrests";
   }
+  if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
+    rate_or_count = "_percent_of_all_arrests";
+  }
+
 
   data = data.map(objToString);
   data = data.join("\n");
@@ -157,6 +161,9 @@ function countToRate(data, type, per_officer = false) {
   if (type == "school") {
     population_column = "number_of_students";
   }
+  if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
+    population_column = "all_arrests_total_tot_arrests";
+  }
   if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
     population_column = $("#crime_dropdown").val() + "_tot_" + $("#subcategory_dropdown").val();
     if ($("#subcategory_dropdown").val() == "tot") {
@@ -205,6 +212,8 @@ function countToRate(data, type, per_officer = false) {
         }
         rate_val = data[data_keys[i]] / data[population_column] * 100000;
       } else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+        rate_val = data[data_keys[i]] / data[population_column] * 100;
+      } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
       } else {
         rate_val = data[data_keys[i]] / data[population_column];
@@ -377,11 +386,11 @@ function main(type, states, state_default, crimes, crime_starter) {
       states = prisoners_state_values
     }
   }
-  main_results = get_data(type, states);
-  table_data = main_results[0];
+  main_results  = get_data(type, states);
+  table_data    = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
-  all_data = main_results[3];
+  all_data      = main_results[3];
 
   graph = makeGraph(type, crimes);
   $("#graph").ready($("#loader").hide());

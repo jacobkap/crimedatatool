@@ -30,6 +30,8 @@ function get_rate_type(type, binary = false) {
     rate_type = "_rate";
   } else if ($("#percent_of_arrests").is(':checked')) {
     rate_type = "_percent_of_arrests";
+  } else if ($("#percent_of_all_arrests").is(':checked')) {
+    rate_type = "_percent_of_all_arrests";
   } else if (type == "police" && $("#checkbox_4").is(':checked')) {
     rate_type = "_rate_per_officer";
   } else if ($("#prisoners_rate_adult").is(':checked')) {
@@ -425,6 +427,10 @@ function getCrimeColumns(headers, type, output) {
     columnNames.move(public, (4 + adder))
     total = columnNames.indexOf(crime + "_total_" + $("#subcategory_dropdown").val() + bias);
     columnNames.move(total, (5 + adder))
+  }
+
+  if (type == "arrests") {
+    columnNames.push("all_arrests_total_tot_arrests")
   }
 
   return (columnNames);

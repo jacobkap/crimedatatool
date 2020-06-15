@@ -27,6 +27,9 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
     rate_type = "_percent_of_arrests";
   }
+  if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
+    rate_type = "_percent_of_all_arrests";
+  }
   checkbox_names = ["Actual Offenses",
     "Total Offenses Cleared",
     "Offenses Cleared Involving Only Persons Under age 18",
