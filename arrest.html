@@ -44,10 +44,12 @@
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
+  <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link type="text/css" rel="stylesheet" href="http://gregfranko.com/jquery.selectBoxIt.js/css/jquery.selectBoxIt.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 
 <body>
@@ -66,24 +68,24 @@
     <p>Enter a police agency to see its arrests over time.</p>
     <h3>State:</h3>
     <br>
-    <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('arrests', state_values)"></select>
+    <select id="state_dropdown" onchange="stateChangeFun('arrests', state_values)"></select>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('arrests', state_values)"></select>
+    <select id="agency_dropdown" onchange="agencyChangeFun('arrests', state_values)"></select>
     <br><br>
     <h3>Crime:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('arrests', state_values)"></select>
+    <select id="crime_dropdown" onchange="agencyChangeFun('arrests', state_values)"></select>
     <br><br>
     <h3>Age:</h3>
     <br>
-    <select class="simple-select" id="subcategory_dropdown" onchange="agencyChangeFun('arrests', state_values)">
+    <select id="subcategory_dropdown" onchange="agencyChangeFun('arrests', state_values)">
     </select>
     <br><br>
     <h3>Breakdown:</h3>
     <br>
-    <select class="simple-select" id="subsubcategory_dropdown" onchange="arrest_subsubcategoryChangeFun()">
+    <select id="subsubcategory_dropdown" onchange="arrest_subsubcategoryChangeFun()">
     </select>
 
     <br><br>
