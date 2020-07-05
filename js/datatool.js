@@ -1,3 +1,12 @@
+// Chosen touch support.
+    if ($('.chosen-container').length > 0) {
+      $('.chosen-container').on('touchstart', function(e){
+        e.stopPropagation(); e.preventDefault();
+        // Trigger the mousedown event.
+        $(this).trigger('mousedown');
+      });
+    }
+
 function resizeChosen() {
   $(".chosen-container").each(function() {
     $(this).attr('style', 'width: 85%');
