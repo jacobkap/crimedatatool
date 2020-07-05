@@ -8,7 +8,7 @@
     }
 
 function resizeChosen() {
-  $(".chosen-container").each(function() {
+  $(".select").each(function() {
     $(this).attr('style', 'width: 85%');
   });
 }
