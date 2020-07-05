@@ -34,6 +34,10 @@
   <script src="js/dynamic_url.js"></script>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
+  <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link type="text/css" rel="stylesheet" href="http://gregfranko.com/jquery.selectBoxIt.js/css/jquery.selectBoxIt.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -66,15 +70,15 @@
     <p>Enter a university to see crime data.</p>
     <h3>School:</h3>
     <br>
-    <select class="simple-select" id="state_dropdown" onchange="agencyChangeFun('school', school_state_values)"></select>
+    <select id="state_dropdown" onchange="agencyChangeFun('school', school_state_values)"></select>
     <br><br>
     <h3>Category:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="school_category_change()"></select>
+    <select id="crime_dropdown" onchange="school_category_change()"></select>
     <br><br>
     <h3>Subcategory:</h3>
     <br>
-    <select class="simple-select" id="subcategory_dropdown" onchange="agencyChangeFun('school', school_state_values)"></select>
+    <select id="subcategory_dropdown" onchange="agencyChangeFun('school', school_state_values)"></select>
     <br><br>
     <div id="school_bias_div">
       <h3>Bias Motivation:</h3>
@@ -106,26 +110,26 @@
     <br><br>
     <hr>
     <button type="button" onclick="exportToCsv(all_data, 'school', school_state_values)">Download School Data as CSV</button>
-</div>
+  </div>
 
 
 
-    <div class="column main">
-      <div id="loader"></div>
-      <canvas id="graph" style="width:95%;height:500px;"></canvas>
-      <div>
-        <table id="table" class="display cell-border"></table>
-      </div>
-
-      <script>
-        school_state_values = getStateAgencies("school", states = "");
-        main("school", school_state_values, 5691, school_categories, "crimes");
-      </script>
-
-
+  <div class="column main">
+    <div id="loader"></div>
+    <canvas id="graph" style="width:95%;height:500px;"></canvas>
+    <div>
+      <table id="table" class="display cell-border"></table>
     </div>
 
-    <div class="footer-wrap"></div>
+    <script>
+      school_state_values = getStateAgencies("school", states = "");
+      main("school", school_state_values, 5691, school_categories, "crimes");
+    </script>
+
+
+  </div>
+
+  <div class="footer-wrap"></div>
 </body>
 
 </html>

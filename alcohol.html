@@ -43,7 +43,11 @@
   <script src="js/chosen.jquery.js"></script>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
-    <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+  <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link type="text/css" rel="stylesheet" href="http://gregfranko.com/jquery.selectBoxIt.js/css/jquery.selectBoxIt.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -65,7 +69,7 @@
     <p>Enter a state to see annual per capita (population aged 14+) alcohol consumption over time.</p>
     <h3>State:</h3>
     <br><br>
-    <select class="simple-select" id="state_dropdown" onchange="agencyChangeFun('alcohol', alcohol_state_values)"></select>
+    <select id="state_dropdown" onchange="agencyChangeFun('alcohol', alcohol_state_values)"></select>
     <br><br>
     <input type="checkbox" id="checkbox_1" checked onchange="checkboxesUpdate('alcohol', '#checkbox_1')"></input>
     <label class="label-text fa" for="checkbox_1">Beers</label>

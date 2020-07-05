@@ -6,6 +6,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
       dataLayer.push(arguments);
     }
@@ -41,6 +42,10 @@
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
+  <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link type="text/css" rel="stylesheet" href="http://gregfranko.com/jquery.selectBoxIt.js/css/jquery.selectBoxIt.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -49,7 +54,7 @@
   <div class="navigation-wrapper"></div>
 
   <script>
-      ks()
+    ks()
     $(function() {
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
@@ -62,15 +67,15 @@
     <p>Enter a county to see jail information over time.</p>
     <h3>State:</h3>
     <br><br>
-    <select class="simple-select" id="state_dropdown" onchange="jailStateChange('jail', jail_state_values, jail_categories)"></select>
+    <select id="state_dropdown" onchange="jailStateChange('jail', jail_state_values, jail_categories)"></select>
     <br><br>
     <h3>County:</h3>
     <br><br>
-    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories)"></select>
+    <select id="agency_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories)"></select>
     <br><br>
     <h3>Category:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories)">
+    <select id="crime_dropdown" onchange="agencyChangeFun('jail', jail_state_values, jail_categories)">
     </select>
 
 

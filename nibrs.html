@@ -43,9 +43,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="js/chosen.jquery.js"></script>
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/test.css"/>
-  <link rel="stylesheet" href="css/misc.css"/>
-  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/test.css" />
+  <link rel="stylesheet" href="css/misc.css" />
+  <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link type="text/css" rel="stylesheet" href="http://gregfranko.com/jquery.selectBoxIt.js/css/jquery.selectBoxIt.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
 
 </head>
 
@@ -67,17 +71,17 @@
     <p>Enter a police agency to see its crime over time.</p>
     <h3>State:</h3>
     <br>
-    <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
+    <select id="state_dropdown" onchange="stateChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
     </select>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <select class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
+    <select id="agency_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
     </select>
     <br><br>
     <h3>Crime:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
+    <select id="crime_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
     </select>
 
     <br><br>

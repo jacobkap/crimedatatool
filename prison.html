@@ -6,6 +6,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
+
     function gtag() {
       dataLayer.push(arguments);
     }
@@ -33,6 +34,10 @@
   <script src="js/dynamic_url.js"></script>
   <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
+  <link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link type="text/css" rel="stylesheet" href="http://gregfranko.com/jquery.selectBoxIt.js/css/jquery.selectBoxIt.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -55,7 +60,7 @@
   <div class="navigation-wrapper"></div>
 
   <script>
-      ks("no")
+    ks("no")
     $(function() {
       $('.footer-wrap').load("reusable_js.html .foot");
       $('.navigation-wrapper').load("reusable_js.html #navigation-wrapper");
@@ -67,15 +72,15 @@
     <p>Enter a jurisdiction to see its prisoner data.</p>
     <h3>Jurisdiction:</h3>
     <br>
-    <select class="simple-select" id="state_dropdown" onchange="agencyChangeFun('prisoners', prisoners_state_values)"></select>
+    <select id="state_dropdown" onchange="agencyChangeFun('prisoners', prisoners_state_values)"></select>
     <br><br>
     <h3>Category:</h3>
     <br>
-    <select class="simple-select" id="crime_dropdown" onchange="current_category = prisonerCategoryChange(current_category)"></select>
+    <select id="crime_dropdown" onchange="current_category = prisonerCategoryChange(current_category)"></select>
     <br><br>
     <h3>Subcategory:</h3>
     <br>
-    <select class="simple-select" id="subcategory_dropdown" onchange="agencyChangeFun('prisoners', prisoners_state_values)"></select>
+    <select id="subcategory_dropdown" onchange="agencyChangeFun('prisoners', prisoners_state_values)"></select>
     <br><br>
 
     <div id="prisoners_race_div">
@@ -120,7 +125,6 @@
     <script>
       main("prisoners", prisoners_state_values, 0, prisoner_categories, "jurisdiction");
       current_category = $("#crime_dropdown").val();
-
     </script>
 
 
