@@ -6,7 +6,6 @@ input[type="checkbox"] {
 
 
 
-
 .label-text {
   display: inline-block;
   width: 200px;
@@ -42,12 +41,6 @@ a {
   margin: 0;
 }
 
-.sidebar select{
-  padding: 1px 0 0 5px;
-	width:85%;
-	}
-
-
 .accordion {
   background-color: #eee;
   color: black;
@@ -74,7 +67,6 @@ a {
 }
 
 /* Spinner while stuff loads */
-
 #loader {
   position: fixed;
   left: 50%;
@@ -95,6 +87,7 @@ a {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -137,7 +130,6 @@ body {
 }
 
 /* Hide the link that should open and close the topnav on small screens */
-
 .topnav .icon {
   display: none;
 }
@@ -147,8 +139,8 @@ h3 {
 }
 
 ​
-/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) {
   .row {
     flex-direction: column;
@@ -156,7 +148,6 @@ h3 {
 }
 
 /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-
 @media screen and (max-width: 400px) {
   .navbar a {
     float: none;
@@ -186,7 +177,7 @@ h3 {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 17%;
   height: auto;
@@ -216,26 +207,36 @@ h3 {
 
 .sidebar {
   width: 20%;
+  height: auto;
   padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
+  overflow: visible;
+  z-index: 10000
+  position: relative
+}
+
+.sidebar select {
+  width: 50%
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 .main {
   width: 80%;
 }
-br {
-   display: block;
-   margin: 1px 0;
-}
-/* Clear floats after the columns */
 
+br {
+  display: block;
+  margin: 1px 0;
+}
+
+/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
-
 
 @media screen and (max-width: 670px) {
   .column {
@@ -250,6 +251,7 @@ br {
     padding-top: 10px;
     padding-bottom: 10px;
   }
+
   .main {
     width: 80%;
   }
@@ -257,7 +259,8 @@ br {
   .crosswalk {
     width: 95%;
   }
-   .chart-container {
+
+  .chart-container {
     height: 400px !important;
   }
 }
