@@ -71,14 +71,10 @@
     <p>Enter a police agency to see its crime over time.</p>
     <h3>State:</h3>
     <br>
-    <select id="test" name="test">
-  <option value="SelectBoxIt is:">SelectBoxIt is:</option>
-  <option value="a jQuery Plugin">a jQuery Plugin</option>
-  <option value="a Select Box Replacement">a Select Box Replacement</option>
-  <option value="a Stateful UI Widget">a Stateful UI Widget</option>
+    <select id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)">
 </select>
 <br>
-    <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select>
+  <!--   <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select> -->
     <br><br>
     <h3>Agency:</h3>
     <br>
