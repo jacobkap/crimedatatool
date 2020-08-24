@@ -558,6 +558,19 @@ var hate_bias_motivations = {
 
 var crime_values = {
   "all_crimes": "All Crimes",
+  "arson_all_oth_structures": "Arson - All Other Structures"
+  "arson_industrial": "Arson - Industrial Building"
+  "arson_other_commercial": "Arson - Other Commercial Building"
+  "arson_other_residential": "Arson - Other Residential Building"
+  "arson_community_public": "Arson - Public Community Building"
+  "arson_single_occupancy": "Arson - Single Occupancy Building"
+  "arson_storage": "Arson - Storage Building"
+  "arson_other_mobile": "Arson - Other Vehicle"
+  "arson_motor_vehicles": "Arson - Motor Vehicle"
+  "arson_total_mobile": "Arson - Total Vehicles"
+  "arson_total_structures": "Arson - Total Buildings"
+  "arson_all_other": "Arson - All Other"
+  "arson_grand_total": "Arson - Grand Total"
   "assault_aggravated": "Aggravated Assault",
   "assault_total": "Assault - Total",
   "assault_with_a_gun": "Assault -  Gun",
@@ -662,7 +675,7 @@ var nibrs_crime_values = {
 };
 
 var arrest_values = {
-  "all_arrests_total" : "All Arrests Total",
+  "all_arrests_total": "All Arrests Total",
   "all_other": "All Other Non-Traffic",
   "agg_assault": "Aggravated Assault",
   "oth_assault": "Assault - Other",
@@ -787,7 +800,7 @@ school_subcategories["arrests"] = {
   "drug_law_violations": "Drug Law Violations",
   "illegal_weapons_possession": "Illegal Weapon Possession",
   "liquor_law_violations": "Liquor Law Violations",
-  "total" : "Total"
+  "total": "Total"
 };
 school_subcategories["crimes"] = {
   "aggravated_assault": "Assault - Aggravated",
@@ -804,13 +817,13 @@ school_subcategories["crimes"] = {
   "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
   "sex_offenses_total": "Sex Offenses - Total",
   "statutory_rape": "Statutory Rape",
-  "total" : "Total"
+  "total": "Total"
 };
 school_subcategories["discipline"] = {
   "drug_law_violations": "Drug Law Violations",
   "illegal_weapons_possession": "Illegal Weapon Possession",
   "liquor_law_violations": "Liquor Law Violations",
-  "total" : "Total"
+  "total": "Total"
 };
 school_subcategories["hate"] = {
   "aggravated_assault": "Assault - Aggravated",
@@ -830,13 +843,13 @@ school_subcategories["hate"] = {
   "sex_offenses_non_forcible": "Sex Offenses - Non-Forcible",
   "sex_offenses_total": "Sex Offenses - Total",
   "statutory_rape": "Statutory Rape",
-  "total" : "Total"
+  "total": "Total"
 };
 school_subcategories["vawa"] = {
   "dating_violence": "Dating Violence",
   "domestic_violence": "Domestic Violence",
   "stalking": "Stalking",
-  "total" : "Total"
+  "total": "Total"
 };
 
 school_bias_motivations = {
@@ -857,5 +870,5 @@ school_locations = {
   "on_campus_student_housing_facilities": "On Campus - Student Housing",
   "noncampus": "Not on Campus",
   "public_property": "Public Property",
-  "total" : "Total"
+  "total": "Total"
 }
