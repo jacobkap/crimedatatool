@@ -5,12 +5,12 @@ function resizeChosen() {
 }
 
 function disable_animation_on_mobile(graph_obj) {
-   if (window.innerWidth <= 800 || window.innerHeight <= 600) {
-     graph_obj.options.tooltips.enabled = false;
-     graph_obj.options.events = []
-   } else {
-     graph_obj.options.tooltips.enabled = true;
-   }
+  if (window.innerWidth <= 800 || window.innerHeight <= 600) {
+    graph_obj.options.tooltips.enabled = false;
+    graph_obj.options.events = []
+  } else {
+    graph_obj.options.tooltips.enabled = true;
+  }
 }
 
 function objToString(obj) {
@@ -79,7 +79,7 @@ function subsetColumns(data, columns, output, type) {
     } else if (output == "table" && type == "prisoners") {
       columns[0] = "state";
       columns[1] = "year";
-    }  else {
+    } else {
       columns[0] = "year";
     }
   }
@@ -346,7 +346,7 @@ function getCrimeColumns(headers, type, output) {
         if ([female_arrest, male_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
         }
-      } else {
+      } else if ($("#subsubcategory_dropdown").val() == "Race") {
         amer_ind_arrest = crime + "_" + arrest_category + "_amer_ind";
         asian_arrest = crime + "_" + arrest_category + "_asian";
         black_arrest = crime + "_" + arrest_category + "_black";
@@ -359,8 +359,18 @@ function getCrimeColumns(headers, type, output) {
         if ([amer_ind_arrest, asian_arrest, black_arrest, white_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
         }
+      } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {
+        hispanic_arrest = crime + "_" + arrest_category + "_hispanic";
+        nonhispanic_arrest = crime + "_" + arrest_category + "_non_hisp";
+        if (arrest_category == "tot") {
+          total_arrest = crime + "_tot_arrests"
+        } else {
+          total_arrest = crime + "_tot_" + arrest_category;
+        }
+        if ([hispanic_arrest, nonhispanic_arrest, total_arrest].includes(headers[n])) {
+          columnNames.push(headers[n]);
+        }
       }
-
     } else if (type == "borderpatrol") {
       if (headers[n] === crime) {
         columnNames.push(headers[n]);

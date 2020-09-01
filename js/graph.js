@@ -44,8 +44,10 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "arrests") {
     if ($("#subsubcategory_dropdown").val() == "Sex") {
       checkbox_names = ["Female", "Male", "Total"];
-    } else {
+    } else if ($("#subsubcategory_dropdown").val() == "Race") {
       checkbox_names = ["American Indian", "Asian", "Black", "White", "Total"];
+    } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {
+      checkbox_names = ["Hispanic", "Non-Hispanic", "Total"];
     }
   }
   if (type == "hate") {
@@ -365,7 +367,8 @@ function getTitle(data, type) {
     subtitle = crime_values[$("#crime_dropdown").val()];
   } else if (type == "arrests") {
     subtitle = arrest_values[$("#crime_dropdown").val()];
-    subtitle = "Arrests for: " + subtitle + ", Breakdown: " + arrests_breakdown[$("#subsubcategory_dropdown").val()];
+    subtitle = "Arrests for: " + subtitle + ", Breakdown: " + arrests_breakdown[$("#subsubcategory_dropdown").val()] + ", Age: " +
+    arrest_age_categories[$("#subcategory_dropdown").val()];
   } else if (type == "school") {
     title = school_state_values[$("#state_dropdown").val()];
     subtitle = school_categories[$("#crime_dropdown").val()];

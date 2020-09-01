@@ -3,6 +3,7 @@ function fixTableName(name, type) {
   name = name.replace(/_rate/g, "");
   name = name.replace(/_clearance/g, "");
   name = name.replace(/_percent_of_arrests/g, "");
+  name = name.replace(/_non_hisp/g, " Non-Hispanic");
   if (type == "offenses") {
     temp1 = name.replace(/actual_.*/, "Actual ");
     if ($("#clearance_rate").is(":checked")) {
@@ -21,6 +22,9 @@ function fixTableName(name, type) {
     if (temp4 != temp_name) name = temp4 + name;
   } else if (type == "arrests" && !default_table_headers.includes(name)) {
 
+    if (name == "all_arrests_total_tot_arrests") {
+      name = "All Arrests Total in Agency"
+    } else {
     temp_name = name;
     name = arrest_values[$("#crime_dropdown").val()];
     temp_name = temp_name.replace($("#crime_dropdown").val() + "_", "");
@@ -30,6 +34,7 @@ function fixTableName(name, type) {
     temp_name = temp_name.replace("amer ind", "American Indian");
     temp_name = toTitleCase(temp_name);
     name = name + " " + temp_name;
+  }
 
   } else if (type == "police" && !default_table_headers.includes(name)) {
     temp_name = name;
@@ -139,6 +144,7 @@ function fixTableName(name, type) {
       name += " Rate";
     }
   }
+      name = name.replace(/hispanic/, "Hispanic");
   return name;
 }
 
@@ -187,6 +193,9 @@ function makeTable(type) {
       className: "dt-head-left dt-body-right"
     });
   }
+
+
+
   temp_table = $("#table").DataTable({
     data: data,
     columns: table_columns,

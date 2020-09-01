@@ -127,6 +127,7 @@ function toggle_arrest_display() {
   if ($("#subsubcategory_dropdown").val() == "Sex") {
     breakdown_name.innerText = "Sex:";
     $("#race").hide();
+    $("#ethnicity").hide();
     $("label[for='checkbox_1']").html("Female")
     $("label[for='checkbox_2']").html("Male")
     $("label[for='checkbox_3']").html("Total")
@@ -135,9 +136,11 @@ function toggle_arrest_display() {
     $("#checkbox_3").prop("checked", true);
     $("#checkbox_4").prop("checked", false);
     $("#checkbox_5").prop("checked", false);
-  } else {
+  } else if ($("#subsubcategory_dropdown").val() == "Race") {
     breakdown_name.innerText = "Race:";
     $("#race").show();
+    $("#ethnicity").hide();
+
     $("label[for='checkbox_1']").html("American Indian")
     $("label[for='checkbox_2']").html("Asian")
     $("label[for='checkbox_3']").html("Black")
@@ -147,6 +150,17 @@ function toggle_arrest_display() {
     $("#checkbox_3").prop("checked", false);
     $("#checkbox_4").prop("checked", false);
     $("#checkbox_5").prop("checked", true);
+  } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {
+    breakdown_name.innerText = "Ethnicity:";
+    $("#race").hide();
+    $("#sex").hide();
+    $("label[for='checkbox_1']").html("Hispanic")
+    $("label[for='checkbox_2']").html("Non-Hispanic")
+    $("label[for='checkbox_3']").html("Total")
+
+    $("#checkbox_1").prop("checked", false);
+    $("#checkbox_2").prop("checked", false);
+    $("#checkbox_3").prop("checked", true);
   }
 }
 

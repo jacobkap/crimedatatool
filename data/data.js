@@ -775,7 +775,8 @@ var arrest_age_categories = {
 
 var arrests_breakdown = {
   "Race": "Race",
-  "Sex": "Sex"
+  "Sex": "Sex",
+  "Ethnicity" : "Ethnicity"
 }
 
 
