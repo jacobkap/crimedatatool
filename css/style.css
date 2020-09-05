@@ -4,7 +4,33 @@ input[type="checkbox"] {
   vertical-align: top;
 }
 
+.select2-results {
+    height: 90% !important;
+}
 
+
+
+
+.select2-results__options {
+    max-height: 100% !important;
+    height: 100% !important;
+    overflow-y: scroll !important;
+}
+
+
+
+
+    .select2-dropdown--below {
+    display: block !important;
+    position: fixed !important;
+    top: 0px !important;
+    left: 0px !important;
+    background: white !important;
+    width: 250px !important;
+    height: 100%;
+    z-index: 3000 !important;
+
+}
 
 
 .label-text {
