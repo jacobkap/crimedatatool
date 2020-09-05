@@ -300,6 +300,7 @@ function getCrimeColumns(headers, type, output) {
     if (category.includes("_crime")) {
       race = $("#subsubcategory_dropdown").val()
       crime += "_" + race;
+      console.log(crime)
     }
   }
 
