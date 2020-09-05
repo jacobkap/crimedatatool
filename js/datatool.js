@@ -326,7 +326,11 @@ function getCrimeColumns(headers, type, output) {
 
   for (var n = 0; n < headers.length; n++) {
     if (type == "prisoners") {
-      if (headers[n].includes(crime)) {
+      if (crime == "total_total") {
+        if (/^total_total/.test(headers[n])) {
+          columnNames.push(headers[n]);
+        }
+      } else if (headers[n].includes(crime)) {
         columnNames.push(headers[n]);
       }
       if (typeof race != "undefined" && headers[n].match("population" + ".*" + race) !== null) {
