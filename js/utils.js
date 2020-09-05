@@ -334,9 +334,9 @@ function updateAgencies(type, states) {
 }
 
 function main(type, states, state_default, crimes, crime_starter) {
-/*
+
   //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
- $(function() {
+
    //Calls the selectBoxIt method on your HTML select box.
    $("select").selectBoxIt({
      autoWidth: false,
@@ -344,7 +344,7 @@ function main(type, states, state_default, crimes, crime_starter) {
    });
   $('.simple-select').chosen();
   resizeChosen();
-  */
+
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
 
