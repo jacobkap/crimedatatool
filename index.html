@@ -70,7 +70,8 @@
           a Postdoctoral Fellow at the University of Pennsylvania. I earned
           both my Master's degree and PhD in the crimininology department at
           Penn. My research focus has been on Crime Prevention Through Environmental
-          Design (CPTED) and working with large public datasets such as the UCR and NIBRS data. </p>
+          Design (CPTED) and working with large public datasets such as the UCR
+          and NIBRS data. </p>
       </div>
 
       <button class="accordion">What should I do if I have a question?</button>
@@ -103,11 +104,13 @@
       <div class="panel">
         <p>The short answer is no. The long answer is that it takes a very long time
           to clean data that I would like to add to the site and then make a page to display
-          that data. I will likely keep this site updated to fix bugs but can't guarantee making any changes or
-          adding any specific data just due to the time it takes and the lack of time I have now.</p>
+          that data. I will likely keep this site updated to fix bugs but
+          there are no guarantees that I will add any
+          new data or even update data when new data is released.</p>
       </div>
 
-      <button class="accordion">Will more data (or new years of current data) be added to openICPSR?</button>
+      <button class="accordion">Will more data (or new years of current data)
+        be added to openICPSR?</button>
       <div class="panel">
         <p>The short answer is no. The long answer is that it takes a very long time
           to clean data and make sure the data is correct (i.e. no issues in my code
@@ -154,10 +157,14 @@
 
         <button class="accordion">Why are there negative numbers? Is that a mistake?</button>
         <div class="panel">
-          <p>Negative values reflect adjustments of previous returns. So if the agency reports, for example,
-            a burglary in January then in February discovers that it wasn't actually a burglary, they
-            will record that both as 1 unfounded burglary and -1 actual burglary in February. This is
-            so it "deletes" the erroneously recorded burglary from January. See more on pages 82-83
+          <p>Negative values reflect adjustments of previous returns. So if
+            the agency reports, for example,
+            a burglary in January then in February discovers that it wasn't
+            actually a burglary, they
+            will record that both as 1 unfounded burglary and -1 actual burglary
+            in February. This is
+            so it "deletes" the erroneously recorded burglary from January.
+            See more on pages 82-83
             of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's
               Manual for UCR data</a>. </p>
         </div>
@@ -182,32 +189,46 @@
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>This data is from the Apparent Per Capita Alcohol Consumption: National, State, and Regional Trends
-          1977-2016 report produced by Sarah P. Haughwout and Dr. Megan E. Slater at the National Institute
-          on Alcohol Abuse and Alcoholism. The Data page of this site has a link to download he data. For the
-          original report, click <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here</a></p>
+        <p>This data is from the Apparent Per Capita Alcohol Consumption:
+          National, State, and Regional Trends
+          1977-2016 report produced by Sarah P. Haughwout and Dr. Megan E.
+          Slater at the National Institute
+          on Alcohol Abuse and Alcoholism. The Data page of this site has a
+          link to download he data. For the
+          original report, click
+          <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here</a>
+        </p>
       </div>
 
       <button class="accordion">How was per capita alcohol consumption determined?</button>
       <div class="panel">
         <p>For a complete methodology please see the actual report
           <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here.</a> The
-          authors determined the amount of alcohol consumed (originally measured in gallons of ethanol
-          - pure alcohol) through sales data or tax information for each state-year. Population data
-          for how many people age 14 and up live in each state was acquired from the CDC' WONDER data.
+          authors determined the amount of alcohol consumed (originally
+          measured in gallons of ethanol
+          - pure alcohol) through sales data or tax information for each
+          state-year. Population data
+          for how many people age 14 and up live in each state was acquired
+          from the CDC' WONDER data.
           Ethanol was divided by population to determine per capita consumption.
         </p>
       </div>
 
-      <button class="accordion">Why is the "Total Drinks" column not equal the sum of the individul drink categories?</button>
+      <button class="accordion">Why is the "Total Drinks" column not equal the
+        sum of the individul drink categories?</button>
       <div class="panel">
-        <p>The original report provides an equation to convert the amount of total ethanol consumed into a
-          "total drinks" variable so I used that to make that variable. For the individual drink categories
-          (beer, shots of liquor, and glasses of wine), it provides an equation to convert the amount of
-          ethanol consumed into the amount of alcohol. I then converted this to number of drinks for each
+        <p>The original report provides an equation to convert the amount of
+          total ethanol consumed into a
+          "total drinks" variable so I used that to make that variable. For the
+          individual drink categories
+          (beer, shots of liquor, and glasses of wine), it provides an equation
+          to convert the amount of
+          ethanol consumed into the amount of alcohol. I then converted this to
+          number of drinks for each
           category based on the National Institute of Health's
           <a href="https://www.niaaa.nih.gov/alcohol-health/overview-alcohol-consumption/what-standard-drink">page</a>
-          saying how many ounces of alcohol make up a drink for those categories. Therefore, the sum of the categories
+          saying how many ounces of alcohol make up a drink for those categories.
+          Therefore, the sum of the categories
           is slightly different than the "total drinks" column.
         </p>
       </div>
@@ -216,21 +237,27 @@
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>This data is from the FBI's Arrests by Age, Sex, and Race data which is part of the Uniform Crime Reporting (UCR) Program.
-          This data provides the number of arrests that occurred in a city in any given year and breaks that down by age
+        <p>This data is from the FBI's Arrests by Age, Sex, and Race data
+          which is part of the Uniform Crime Reporting (UCR) Program.
+          This data provides the number of arrests that occurred in a city
+          in any given year and breaks that down by age
           (adult or juvenile), race, and gender. </a></p>
       </div>
 
       <button class="accordion">Why does it say 'cannabis' instead of 'marijuana'?</button>
       <div class="panel">
-        <p>I try to keep data on this site consistent with the data I have published on openICPSR and I
-          call it 'cannabis' there. I do so only because the programming language Stata limits columns to 32 characters
+        <p>I try to keep data on this site consistent with the data I have
+          published on openICPSR and I
+          call it 'cannabis' there. I do so only because the programming language
+          Stata limits columns to 32 characters
           and 'cannabis' is a shorter word than 'marijuana'. </a></p>
       </div>
 
-      <button class="accordion">Why doesn't it show arrests by ethnicity (Hispanic/Not Hispanic)?</button>
+      <button class="accordion">Why doesn't it show arrests by ethnicity
+        (Hispanic/Not Hispanic)?</button>
       <div class="panel">
-        <p>This data does not show arrests broken down by if the arrestee is Hispanic or not. </a></p>
+        <p>This data does not show arrests broken down by if the arrestee is
+          Hispanic or not. </a></p>
       </div>
 
 
@@ -248,8 +275,10 @@
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>This data is from the FBI's Offenses Known and Clearances by Arrest data which is part of the
-          Uniform Crime Reporting (UCR) Program. This data provides the number of crimes that occurred
+        <p>This data is from the FBI's Offenses Known and Clearances by
+          Arrest data which is part of the
+          Uniform Crime Reporting (UCR) Program. This data provides the
+          number of crimes that occurred
           in a city in any given year and how many of those crimes were cleared.</a></p>
       </div>
 
@@ -266,22 +295,32 @@
         </p>
       </div>
 
-      <button class="accordion">The data says there were 0 crimes but I know that a crime happened. Why does it say 0?</button>
+      <button class="accordion">The data says there were 0 crimes but I know
+        that a crime happened. Why does it say 0?</button>
       <div class="panel">
-        <p>This data doesn't differentiate between a "real zero" and a "not reported zero". If an agency
-          doesn't report any crimes (even if crimes did occur), the data will say zero crimes occurred.
-          Even though the data indicates how many months of the year that agency reported, that doesn't
-          necessarily mean that they reported fully. An agency that reports all 12 months of the year
-          may still report only incomplete data. Agencies can report partial data each month and still
-          be considered to have reported that month. Chicago, for example, reports every month but
+        <p>This data doesn't differentiate between a "real zero" and a "not
+          reported zero". If an agency
+          doesn't report any crimes (even if crimes did occur), the data will
+          say zero crimes occurred.
+          Even though the data indicates how many months of the year that agency
+          reported, that doesn't
+          necessarily mean that they reported fully. An agency that reports all
+          12 months of the year
+          may still report only incomplete data. Agencies can report partial
+          data each month and still
+          be considered to have reported that month. Chicago, for example,
+          reports every month but
           until the last few years didn't report any rapes.</p>
       </div>
 
       <button class="accordion">Does this include all crimes reported? (Hierarchy Rule)</button>
       <div class="panel">
-        <p>No, this data only includes the most serious crime in an incident (except for motor vehicle
-          theft which is always included). For incidents where most the one crime happens (for example,
-          a robbery and a murder), only the more serious (murder in this case) will be counted. This is
+        <p>No, this data only includes the most serious crime in an incident
+          (except for motor vehicle
+          theft which is always included). For incidents where most the one
+          crime happens (for example,
+          a robbery and a murder), only the more serious (murder in this case)
+          will be counted. This is
           called the Hierarchy Rule. See more on pages 10-12 of the
           <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's
             Manual for UCR data</a> which details the Hierarchy Rule.
@@ -291,13 +330,20 @@
       <button class="accordion">If this data only includes the most serious crime in an incident,
         how reliable is the data? (Does the Hierarchy Rule mess up our data?)</button>
       <div class="panel">
-        <p>Though the Hierarchy Rule does mean this data is an undercount, data from other sources
-          indicate it isn't much of an undercount. The FBI's other data set, the National Inicident-Based
-          Reporting System (NIBRS) contains every crime that occurs in an incident (i.e. it doesn't
-          use the Hierarchy Rule). Using this we can measure how many crimes the Hierarchy Rule excludes
-          (Most major cities do not report to NIBRS so what we find in NIBRS may not apply to them).
-          In over 90% of incidents, only one crime is committed. Additionally, when people talk about
-          "crime" they usually mean murder which, while incomplete to discuss crime, means the UCR
+        <p>Though the Hierarchy Rule does mean this data is an undercount, data
+          from other sources
+          indicate it isn't much of an undercount. The FBI's other data set,
+          the National Inicident-Based
+          Reporting System (NIBRS) contains every crime that occurs in an
+          incident (i.e. it doesn't
+          use the Hierarchy Rule). Using this we can measure how many crimes
+          the Hierarchy Rule excludes
+          (Most major cities do not report to NIBRS so what we find in NIBRS
+          may not apply to them).
+          In over 90% of incidents, only one crime is committed. Additionally,
+          when people talk about
+          "crime" they usually mean murder which, while incomplete to discuss
+          crime, means the UCR
           data here is accurate on that measure.</p>
       </div>
 
@@ -351,22 +397,35 @@
 
       <button class="accordion">Why are index crimes a poor measure of crime?</button>
       <div class="panel">
-        <p>The biggest problem with index crimes is that it is simply the sum of 8 (or 7 since arson data usually isn't available) crimes.
-          Index crimes have a huge range in their seriousness - it includes both murder and theft.This is clearly wrong as
-          100 murders is more serious than 100 thefts. This is especially a problem as less serious crimes (theft mostly) are far more
-          common than more serious crimes (in 2017 there were 1.25 million violent index crimes in the United States. That same year had 5.5 million thefts.).
-          So index crimes undercount the seriousness of crimes. Looking at total index crimes is, in effect, mostly just looking at theft.</p>
+        <p>The biggest problem with index crimes is that it is simply the sum
+          of 8 (or 7 since arson data usually isn't available) crimes.
+          Index crimes have a huge range in their seriousness - it includes
+          both murder and theft.This is clearly wrong as
+          100 murders is more serious than 100 thefts. This is especially a
+          problem as less serious crimes (theft mostly) are far more
+          common than more serious crimes (in 2017 there were 1.25 million violent
+          index crimes in the United States. That same year had 5.5 million thefts.).
+          So index crimes undercount the seriousness of crimes. Looking at total
+          index crimes is, in effect, mostly just looking at theft.</p>
         <br>
-        <p>This is especially a problem because it hide trends in violent crimes. San Francisco, as an example, has had a huge increase in
-          index crimes in the last several years. When looking closer, that increase is driven almost entirely by the near doubling of theft since 2011. During
-          the same years, violent crime has stayed fairly steady. So the city isn't getting more dangerous but it appears like it is due to just looking at
+        <p>This is especially a problem because it hide trends in violent crimes.
+          San Francisco, as an example, has had a huge increase in
+          index crimes in the last several years. When looking closer, that
+          increase is driven almost entirely by the near doubling of theft since 2011. During
+          the same years, violent crime has stayed fairly steady. So the city
+          isn't getting more dangerous but it appears like it is due to just looking at
           total index crimes.
         </p>
         <br>
-        <p>While many researchers divide index crimes into violent and nonviolent categories, which helps but even this isn't entirely sufficient.
-          Take Chicago as an example. It is a city infamous for its large number of murders. But as a fraction of
-          index crimes, Chicago has a rounding error worth of murders. Their 653 murders in 2017 is only 0.5% of total index crimes. For violent index crimes,
-          murder makes up 2.2%. What this means is that changes in murder are very difficult to detect. If Chicago had no murders this year, but a less serious crime (such as theft) increased
+        <p>While many researchers divide index crimes into violent and nonviolent
+          categories, which helps but even this isn't entirely sufficient.
+          Take Chicago as an example. It is a city infamous for its large number
+          of murders. But as a fraction of
+          index crimes, Chicago has a rounding error worth of murders. Their 653
+          murders in 2017 is only 0.5% of total index crimes. For violent index crimes,
+          murder makes up 2.2%. What this means is that changes in murder are very
+          difficult to detect. If Chicago had no murders this year, but a less
+          serious crime (such as theft) increased
           slightly, we couldn't tell from looking at the number of index crimes.
         </p>
       </div>
@@ -376,7 +435,8 @@
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>This data comes from the Center for Disease Control and Prevention's (CDC) WONDER data and provides
+        <p>This data comes from the Center for Disease Control and Prevention's
+          (CDC) WONDER data and provides
           the number of deaths for several cause of death categories for each state.</p>
       </div>
 
@@ -396,8 +456,10 @@
 
       <button class="accordion">Why are some values missing?</button>
       <div class="panel">
-        <p>The CDC does not report death counts when there are fewer than 16 deaths in that category.
-          They do this both for confidentiality of the deceased and to avoid the misuse of rates caused
+        <p>The CDC does not report death counts when there are fewer than 16
+          deaths in that category.
+          They do this both for confidentiality of the deceased and to avoid
+          the misuse of rates caused
           by such a small numerator.</p>
       </div>
 
@@ -405,14 +467,19 @@
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
-        <p>This data is from the FBI's Law Enforcement Officers Killed and Assaulted (LEOKA) data which is part of the Uniform
-          Crime Reporting (UCR) Program. This data provides information about how many employees (civilian and officers)
-          are at a given agency. It also says how many officers were assaulted for a number of different categories of assault.</a></p>
+        <p>This data is from the FBI's Law Enforcement Officers Killed and
+          Assaulted (LEOKA) data which is part of the Uniform
+          Crime Reporting (UCR) Program. This data provides information about
+          how many employees (civilian and officers)
+          are at a given agency. It also says how many officers were assaulted
+          for a number of different categories of assault.</a></p>
       </div>
 
-      <button class="accordion">Why are there no female police officers until 1971?</button>
+      <button class="accordion">Why are there no female police officers until
+        1971?</button>
       <div class="panel">
-        <p>Prior to 1971 the data did not breakdown employees by gender. The years 1960-1970 put the number of total
+        <p>Prior to 1971 the data did not breakdown employees by gender. The
+          years 1960-1970 put the number of total
           employees in the male employees column
           (and a value of 0 in the female employees column). </p>
       </div>
@@ -451,17 +518,26 @@
 
       <button class="accordion">What is the difference between custody and jurisdiction?</button>
       <div class="panel">
-        <p>As per the National Prisoner Statistics codebook, available to download <a href="https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37003">here</a></p>
-        <blockquote>As states and the Federal Bureau of Prisons increased their use of local jails and interstate compacts to house inmates, NPS began
-          asking states to report a count of inmates under the jurisdiction or legal authority of state and federal adult correctional officials in
+        <p>As per the National Prisoner Statistics codebook, available to
+          download <a href="https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37003">here</a></p>
+        <blockquote>As states and the Federal Bureau of Prisons increased their
+          use of local jails and interstate compacts to house inmates, NPS began
+          asking states to report a count of inmates under the jurisdiction or
+          legal authority of state and federal adult correctional officials in
           addition to their custody counts.
-          Since 1977, the jurisdiction count has been the preferred measure. This count includes all state and federal inmates held in a public or
-          private prison (custody) and those held in jail facilities either physically located inside or outside of the state of legal responsibility, and
-          other inmates who may be temporarily out to court or in transit from the jurisdiction of legal authority to the custody of a confinement
+          Since 1977, the jurisdiction count has been the preferred measure.
+          This count includes all state and federal inmates held in a public or
+          private prison (custody) and those held in jail facilities either
+          physically located inside or outside of the state of legal responsibility, and
+          other inmates who may be temporarily out to court or in transit from
+          the jurisdiction of legal authority to the custody of a confinement
           facility outside that jurisdiction.
-          The difference between the total custody count and the jurisdiction count was small (approximately 7,000) when both were first
-          collected in 1977. As more states began to report jurisdiction counts and more states began to rely on local and privately operated
-          facilities to house inmates, the difference increased. At yearend 2016 the jurisdiction population totaled 1,506,800 while the custody
+          The difference between the total custody count and the jurisdiction
+          count was small (approximately 7,000) when both were first
+          collected in 1977. As more states began to report jurisdiction counts
+          and more states began to rely on local and privately operated
+          facilities to house inmates, the difference increased. At yearend
+          2016 the jurisdiction population totaled 1,506,800 while the custody
           population totaled 1,293,887.</blockquote>
       </div>
 
@@ -471,107 +547,157 @@
 
       <button class="accordion">Where is the school data from?</button>
       <div class="panel">
-        <p>All of this data comes from the Department of Education Office of Postsecondary Education which collects crime data from colleges and
-          releases them publicly. Their website is <a href="https://ope.ed.gov/campussafety/#/">here</a>. While their site does allow you to look at a single
-          school's data, it only shows the prior three years and only as tables. For a comprehensive look at the data codebook, please see their PDF
+        <p>All of this data comes from the Department of Education Office of
+          Postsecondary Education which collects crime data from colleges and
+          releases them publicly. Their website is
+          <a href="https://ope.ed.gov/campussafety/#/">here</a>. While their
+          site does allow you to look at a single
+          school's data, it only shows the prior three years and only as tables.
+          For a comprehensive look at the data codebook, please see their PDF
           <a href="https://www2.ed.gov/admins/lead/safety/handbook.pdf">here</a>
         </p>
       </div>
 
       <button class="accordion">What do the locations mean?</button>
       <div class="panel">
-        <p>As per the Department of Education definitions, available <a href="https://ope.ed.gov/campussafety/#/">here</a></p>
-        <blockquote><b>Not on Campus: </b>(1) Any building or property owned or controlled by a student organization that is officially recognized by
-          the institution; or (2) Any building or property owned or controlled by an institution that is used in direct support of, or in relation to,
-          the institution's educational purposes, is frequently used by students, and is not within the same reasonably contiguous geographic area of
+        <p>As per the Department of Education definitions, available
+          <a href="https://ope.ed.gov/campussafety/#/">here</a>
+        </p>
+        <blockquote><b>Not on Campus: </b>(1) Any building or property owned or
+          controlled by a student organization that is officially recognized by
+          the institution; or (2) Any building or property owned or controlled
+          by an institution that is used in direct support of, or in relation to,
+          the institution's educational purposes, is frequently used by students,
+          and is not within the same reasonably contiguous geographic area of
           the institution.</blockquote>
-        <blockquote><b>On Campus - Total: </b>(1) Any building or property owned or controlled by an institution within the same reasonably contiguous geographic area
-          and used by the institution in direct support of, or in a manner related to, the institution's educational purposes, including residence halls; and (2) Any
-          building or property that is within or reasonably contiguous to paragraph (1) of this definition, that is owned by the institution but controlled by another
-          person, is frequently used by students, and supports institutional purposes (such as a food or other retail vendor).</blockquote>
-        <blockquote><b>On Campus - Student Housing: </b>Any student housing facility that is owned or controlled by the institution, or is located on property that is
-          owned or controlled by the institution, and is within the reasonably contiguous geographic area that makes up the campus is considered an on-campus student
+        <blockquote><b>On Campus - Total: </b>(1) Any building or property owned
+          or controlled by an institution within the same reasonably contiguous
+          geographic area
+          and used by the institution in direct support of, or in a manner related
+          to, the institution's educational purposes, including residence halls; and (2) Any
+          building or property that is within or reasonably contiguous to paragraph
+          (1) of this definition, that is owned by the institution but controlled by another
+          person, is frequently used by students, and supports institutional
+          purposes (such as a food or other retail vendor).</blockquote>
+        <blockquote><b>On Campus - Student Housing: </b>Any student housing
+          facility that is owned or controlled by the institution, or is located
+          on property that is
+          owned or controlled by the institution, and is within the reasonably
+          contiguous geographic area that makes up the campus is considered an on-campus student
           housing facility.</blockquote>
-        <blockquote><b>Public Property: </b>All public property, including thoroughfares, streets, sidewalks, and parking facilities, that is within
+        <blockquote><b>Public Property: </b>All public property, including
+          thoroughfares, streets, sidewalks, and parking facilities, that is within
           the campus, or immediately adjacent to and accessible from the campus.</blockquote>
         <b>Total: </b>This is the sun of Not on Campus, On Campus - Total, and Public Property.
         </p>
       </div>
 
-      <button class="accordion">Why don't crime categories overlap between crimes and arrests?</button>
+      <button class="accordion">Why don't crime categories overlap between
+        crimes and arrests?</button>
       <div class="panel">
-        <p>There are different rules for which offenses are included when an offense is committed and a person is arrested so these categories
+        <p>There are different rules for which offenses are included when
+          an offense is committed and a person is arrested so these categories
           do not necessarily overlap.</p>
       </div>
 
-      <button class="accordion">Why aren't sexual offenses included in the Disciplinary Actions category?</button>
+      <button class="accordion">Why aren't sexual offenses included in the
+        Disciplinary Actions category?</button>
       <div class="panel">
-        <p>There are different rules for which offenses are included when an offense is committed and a disciplinary actions are taken so these categories
-          do not necessarily overlap. As sexual offenses are not included in the required categories for disciplinary action, they is not available in the data. </p>
+        <p>There are different rules for which offenses are included when an
+          offense is committed and a disciplinary actions are taken so these categories
+          do not necessarily overlap. As sexual offenses are not included in
+          the required categories for disciplinary action, they is not available in the data. </p>
       </div>
 
-      <button class="accordion">Is there overlap for arrests and disciplinary actions?</button>
+      <button class="accordion">Is there overlap for arrests and disciplinary
+        actions?</button>
       <div class="panel">
-        <p>No, if a person is arrested and then given disciplinary actions by the scohol, only the arrest is counted.</p>
+        <p>No, if a person is arrested and then given disciplinary actions by
+          the scohol, only the arrest is counted.</p>
       </div>
 
       <button class="accordion">What does Disciplinary Action mean?</button>
       <div class="panel">
-        <p>This is when a person is referred to the school for a "disciplinary action" though the action does not need to actually take place and
-          the data does not specify which action is referred or the outcome of that referral .</p>
+        <p>This is when a person is referred to the school for a "disciplinary
+          action" though the action does not need to actually take place and
+          the data does not specify which action is referred or the outcome of
+          that referral .</p>
       </div>
 
-      <button class="accordion">What is a Sexual Offense - Forcible and a Sexual Offense - Non-forcible?</button>
+      <button class="accordion">What is a Sexual Offense - Forcible and a
+        Sexual Offense - Non-forcible?</button>
       <div class="panel">
         <p>
         <ul>
           <li><b>Sexual Offense - Forcible</b> is the sum of rape and fondling.</li>
           <li><b>Sexual Offense - Non-forcible</b> is the sum of incest and statutory rape.</li>
-          <li><b>Sexual Offense - Total</b> is the sum of Sexual Offense - Forcible and Sexual Offense - Non-forcible.</li>
+          <li><b>Sexual Offense - Total</b> is the sum of Sexual Offense -
+            Forcible and Sexual Offense - Non-forcible.</li>
         </ul>
-        For definitions of each individual crimes please see the Department of Education's codebook <a href="https://www2.ed.gov/admins/lead/safety/handbook.pdf">here</a>
+        For definitions of each individual crimes please see the Department of
+        Education's codebook <a href="https://www2.ed.gov/admins/lead/safety/handbook.pdf">here</a>
         </p>
       </div>
 
       <button class="accordion">Are hate crimes consistently reported?</button>
       <div class="panel">
-        <p>No, the hate crime data unwent a series of changes in how the data was collected. The crimes theft, intimidation, and vandalism/destruction of property
-          only started being reported in 2009. Starting in 2014, "gender identity" was added as a possible bias motivation while in the same
-          year the "ethnicity or national origin" bias motivation was split into either "ethnicity" or "national origin" bias motivations.
-          This means that you should be cautious when looking at total hate crime changes as certain crimes/bias motivations were not included until recently. </p>
+        <p>No, the hate crime data unwent a series of changes in how the data
+          was collected. The crimes theft, intimidation, and
+          vandalism/destruction of property
+          only started being reported in 2009. Starting in 2014, "gender identity"
+          was added as a possible bias motivation while in the same
+          year the "ethnicity or national origin" bias motivation was split into
+          either "ethnicity" or "national origin" bias motivations.
+          This means that you should be cautious when looking at total hate crime
+          changes as certain crimes/bias motivations were not included until recently. </p>
       </div>
 
       <button class="accordion">Why are there no rapes before 2014?</button>
       <div class="panel">
-        <p>This data set did not collect information on the number of rape, fondling, incest, or statutory rape crimes until 2014.
-          Instead, it grouped rape and fondling as Sexual Offense - Forcible, and incest and statutory rape as Sexual Offense - Non-forcible.
+        <p>This data set did not collect information on the number of rape,
+          fondling, incest, or statutory rape crimes until 2014.
+          Instead, it grouped rape and fondling as Sexual Offense - Forcible,
+          and incest and statutory rape as Sexual Offense - Non-forcible.
         </p>
       </div>
 
       <button class="accordion">What do the Violence Against Women Act subcategories mean?</button>
       <div class="panel">
         <p>
-        <p>As per the Department of Education definitions, available <a href="https://ope.ed.gov/campussafety/#/">here</a></p>
-        <blockquote><b>Dating Violence: </b>Violence committed by a person who is or has been in a social relationship of a romantic or
-          intimate nature with the victim. The existence of such a relationship shall be determined based on the reporting party’s
-          statement and with consideration of the length of the relationship, the type of relationship, and the frequency of interaction
-          between the persons involved in the relationship. For the purposes of this definition—
+        <p>As per the Department of Education definitions,
+          available <a href="https://ope.ed.gov/campussafety/#/">here</a></p>
+        <blockquote><b>Dating Violence: </b>Violence committed by a person
+          who is or has been in a social relationship of a romantic or
+          intimate nature with the victim. The existence of such a relationship
+          shall be determined based on the reporting party’s
+          statement and with consideration of the length of the relationship,
+          the type of relationship, and the frequency of interaction
+          between the persons involved in the relationship. For the purposes
+          of this definition—
           <ul>
-            <li>Dating violence includes, but is not limited to, sexual or physical abuse or the threat of such abuse.</li>
-            <li>Dating violence does not include acts covered under the definition of domestic violence.</li>
+            <li>Dating violence includes, but is not limited to, sexual or
+              physical abuse or the threat of such abuse.</li>
+            <li>Dating violence does not include acts covered under the
+              definition of domestic violence.</li>
           </ul>
         </blockquote>
-        <blockquote><b>Domestic Violence: </b>A felony or misdemeanor crime of violence committed—
+        <blockquote><b>Domestic Violence: </b>A felony or misdemeanor crime
+          of violence committed—
           <ul>
             <li>By a current or former spouse or intimate partner of the victim;</li>
             <li>By a person with whom the victim shares a child in common;</li>
-            <li>By a person who is cohabitating with, or has cohabitated with, the victim as a spouse or intimate partner;</li>
-            <li>By a person similarly situated to a spouse of the victim under the domestic or family violence laws of the jurisdiction</li>
+            <li>By a person who is cohabitating with, or has cohabitated with,
+              the victim as a spouse or intimate partner;</li>
+            <li>By a person similarly situated to a spouse of the victim under
+              the domestic or family violence laws of the jurisdiction</li>
           </ul>
-          in which the crime of violence occurred, or by any other person against an adult or youth victim who is protected from
-          that person’s acts under the domestic or family violence laws of the jurisdiction in which the crime of violence occurred.
+          in which the crime of violence occurred, or by any other person
+          against an adult or youth victim who is protected from
+          that person’s acts under the domestic or family violence laws of the
+          jurisdiction in which the crime of violence occurred.
         </blockquote>
-        <blockquote><b>Stalking: </b>Engaging in a course of conduct directed at a specific person that would cause a reasonable person to—
+        <blockquote><b>Stalking: </b>Engaging in a course of conduct directed at
+          a specific person that would cause a reasonable person to—
           <ul>
             <li>Fear for the person’s safety or the safety of others; or</li>
             <li>Suffer substantial emotional distress.</li>
@@ -582,22 +708,36 @@
 
       <button class="accordion">Is rate per 1,000 students a good measure?</button>
       <div class="panel">
-        <p>Using rates is useful as it removes the important influence of the number of people at that school, but has its own serious limitations.
-          Schools with similar number of students may still be very different in their student population and risk of victimization. Consider, for example,
-          two schools which each have 20,000 students. If these two schools are very similar in students, then the rate per 1,000 students could be useful
-          in comparing the schools are the groups are similar. If, however these schools differ on factors such as if the school is urban, whether students commute or
-          live on campus, ages of students, etc, then knowing purely the number of students is not a very useful rate. Also consider that crimes can occur against victims
-          other than students such as faculty or staff so a per 1,000 student rate would overestimate crime by decreasing the denominator. </p>
+        <p>Using rates is useful as it removes the important influence of the
+          number of people at that school, but has its own serious limitations.
+          Schools with similar number of students may still be very different
+          in their student population and risk of victimization. Consider, for example,
+          two schools which each have 20,000 students. If these two schools are
+          very similar in students, then the rate per 1,000 students could be useful
+          in comparing the schools are the groups are similar. If, however these
+          schools differ on factors such as if the school is urban, whether
+          students commute or
+          live on campus, ages of students, etc, then knowing purely the number
+          of students is not a very useful rate. Also consider that crimes can
+          occur against victims
+          other than students such as faculty or staff so a per 1,000 student
+          rate would overestimate crime by decreasing the denominator. </p>
       </div>
 
 
-      <button class="accordion">Are changes in crimes a reflection of actual changes in offenses, or changes in reporting?</button>
+      <button class="accordion">Are changes in crimes a reflection of actual
+        changes in offenses, or changes in reporting?</button>
       <div class="panel">
-        <p>Like all crime data, this data has a limitation as it is reported offenses only. If likelihood of reporting changes, that will
-          be reflected in changes of reported offenses but we will not be able to tell (based only on this data) whether it was the number
-          of crimes or the likelihood of reporting that changed. This is especially a problem with sexual offenses as they are already were
-          unlikely to be reported and small changes in reporting likelihood can cause a seemingly large change in crimes reported. Also keep in mind
-          that the population included (primarily college students) may have different reporting likelihoods than other populations.</p>
+        <p>Like all crime data, this data has a limitation as it is reported
+          offenses only. If likelihood of reporting changes, that will
+          be reflected in changes of reported offenses but we will not be able
+          to tell (based only on this data) whether it was the number
+          of crimes or the likelihood of reporting that changed. This is
+          especially a problem with sexual offenses as they are already were
+          unlikely to be reported and small changes in reporting likelihood
+          can cause a seemingly large change in crimes reported. Also keep in mind
+          that the population included (primarily college students) may have
+          different reporting likelihoods than other populations.</p>
       </div>
 
 
