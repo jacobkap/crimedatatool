@@ -146,6 +146,24 @@
         </p>
       </div>
 
+      <button class="accordion">Why are there be negative numbers (is this an error)?</button>
+      <div class="panel">
+        <p>Negative numbers can happen in UCR data and are correct, not a
+          data issue. UCR data is reported by police monthly and if they
+          discover that a previous month was incorrect they don't alter
+          the incorrect month to remove that reported crime, they report
+          a negative crime in the current month so the annual crime count
+          will be correct. For example, consider an agency that reports
+          a burglary in January and then in June discover that the burglary
+          didn't actually occur. In June they will report -1 burglaries.
+          In practice it's rare to see negative numbers since the number
+          of actual crimes in a month often outweights the number of corrections,
+          but it is possible and is not an error. Converting negative numbers to
+          missing values is not correct. See more on pages 82-83
+          of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's
+            Manual for UCR data</a>. </p> 
+        </p>
+
       <button class="accordion">Data errors</button>
       <div class="panel">
         <p>If you believe that you found an error in one of the datasets,
@@ -155,20 +173,6 @@
           Florida not appearing for many years in UCR data. 
         </p>
 
-        <button class="accordion">Why are there negative numbers? Is that a mistake?</button>
-        <div class="panel">
-          <p>Negative values reflect adjustments of previous returns. So if
-            the agency reports, for example,
-            a burglary in January then in February discovers that it wasn't
-            actually a burglary, they
-            will record that both as 1 unfounded burglary and -1 actual burglary
-            in February. This is
-            so it "deletes" the erroneously recorded burglary from January.
-            See more on pages 82-83
-            of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's
-              Manual for UCR data</a>. </p>
-        </div>
-      </div>
       <!---
       <button class="accordion">Are you available for consulting?</button>
       <div class="panel">
