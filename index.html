@@ -53,8 +53,9 @@
 
     <article class="post">
 
-      <h1 id = "general">
-        <a href="index.html#general" style="text-decoration: none; color: black">General</a></h1>
+      <h1 id="general">
+        <a href="index.html#general" style="text-decoration: none; color: black">General</a>
+      </h1>
 
       <button class="accordion">What is this site?</button>
       <div class="panel">
@@ -149,8 +150,9 @@
           new data or even update data when new data is released.</p>
       </div>
 
-      <h1 id = "common_questions" >
-        <a href="index.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a></h1>
+      <h1 id="common_questions">
+        <a href="index.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a>
+      </h1>
 
       <button class="accordion">County-level UCR data</button>
       <div class="panel">
@@ -224,8 +226,9 @@
 
 
 
-<h1 id = "alcohol" >
-  <a href="index.html#alcohol" style="text-decoration: none; color: black">Alcohol</a></h1>
+      <h1 id="alcohol">
+        <a href="index.html#alcohol" style="text-decoration: none; color: black">Alcohol</a>
+      </h1>
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
@@ -273,8 +276,9 @@
         </p>
       </div>
 
-      <h1 id = "arrest" >
-        <a href="index.html#arrest" style="text-decoration: none; color: black">Arrest</a></h1>
+      <h1 id="arrest">
+        <a href="index.html#arrest" style="text-decoration: none; color: black">Arrest</a>
+      </h1>
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
@@ -303,8 +307,9 @@
 
 
 
-      <h1 id = "border_patrol">
-        <a href="index.html#border_patrol" style="text-decoration: none; color: black">Border Patrol</a></h1>
+      <h1 id="border_patrol">
+        <a href="index.html#border_patrol" style="text-decoration: none; color: black">Border Patrol</a>
+      </h1>
 
       <button class="accordion">Where is the data from?</button>
       <div class="panel">
@@ -312,8 +317,9 @@
       </div>
 
 
-      <h1 id = "crime" >
-        <a href="index.html#crime" style="text-decoration: none; color: black">Crime</a></h1>
+      <h1 id="crime">
+        <a href="index.html#crime" style="text-decoration: none; color: black">Crime</a>
+      </h1>
 
 
       <button class="accordion">Where is the data from?</button>
@@ -473,8 +479,9 @@
         </p>
       </div>
 
-      <h1 id = "death" >
-        <a href="index.html#death" style="text-decoration: none; color: black">Death</a></h1>
+      <h1 id="death">
+        <a href="index.html#death" style="text-decoration: none; color: black">Death</a>
+      </h1>
 
 
       <button class="accordion">Where is the data from?</button>
@@ -501,14 +508,14 @@
       <button class="accordion">Why are some values missing?</button>
       <div class="panel">
         <p>The CDC does not report death counts when there are fewer than 16
-          deaths in that category.
-          They do this both for confidentiality of the deceased and to avoid
-          the misuse of rates caused
-          by such a small numerator.</p>
+          deaths in that category. They do this both for confidentiality of
+          the deceased and to avoid the misuse of rates caused by such a
+          small numerator.</p>
       </div>
 
-      <h1 id = "hate_crime">
-        <a href="index.html#hate_crime" style="text-decoration: none; color: black">Hate Crime</a></h1>
+      <h1 id="hate_crime">
+        <a href="index.html#hate_crime" style="text-decoration: none; color: black">Hate Crime</a>
+      </h1>
 
 
       <button class="accordion">Where is the data from?</button>
@@ -526,24 +533,72 @@
 
       <button class="accordion">WARNING: This data is very flawed</button>
       <div class="panel">
-        <p></p>
+        <p>This dataset is the most flawed of all of the UCR datasets.
+          While the main problems are simply an exacerbated version of
+          of dataset problems in other UCR data - low reporting rates among agencies,
+          only including reported crimes (and many hate crimes are not reported to police),
+          changing definitions of what counts as a hate crime, different agencies
+          reporting each year - the MAJOR problem is that people use this data
+          incredibly irresponsibly. A huge amount of research using this data
+          don't even acknowledge these problems and just naively use the data as
+          if it had no issues. The problems are discussed in more detail below but
+          the main takeaway is that this data is not appropriate for policy analysis. </p>
       </div>
 
       <button class="accordion">Where is the FBI manual on this data?</button>
       <div class="panel">
         <p>The manual is available on
-           <a href="https://www.fbi.gov/file-repository/ucr/ucr-hate-crime-data-collection-guidelines-training-manual-02272015.pdf/view">
-             this page.</a></p>
+          <a href="https://www.fbi.gov/file-repository/ucr/ucr-hate-crime-data-collection-guidelines-training-manual-02272015.pdf/view">
+            this page.</a>
+        </p>
+      </div>
+
+      <button class="accordion">What is a hate crime?</button>
+      <div class="panel">
+        <p>In this data a hate crime is defined as a "normal" crime (or in
+          other words a crime already collected by UCR or NIBRS in their
+          normal reporting) where the victim was chosen because of the victims
+          group or status. For example, vandalism is a crime already included
+          in NIBRS data. If the vandalism occurred because of the victim's group
+          or status, such as vandalizing a synagogue due to bias against Jews, that
+          would be considered a hate crime. Animal cruelty was not a NIBRS crime
+          until 2018 so for years prior to that would not count as a hate crime. For
+          example, if a person poisoned a Black person's dog because of their bias against
+          Black people (and not just personal opposition towards this individual), it would
+          not be a hate crime if committed before 2018. So this data is not inclusive of
+          even all hate crimes reported to police, only ones that have a crime type already
+          reported to the FBI. Note that the hate crime is for the perceived victim
+          group even if that perception is wrong. In the FBI manual they
+          give the example of a hate crime against an Indian man who the offenders
+          believe is Black. This is reported as an anti-Black hate crime. </p>
       </div>
 
       <button class="accordion">What should this data NOT be used for?</button>
       <div class="panel">
-        <p></p>
+        <p>This data should not be used for anything in the following
+          (incomplete) list:
+          <br>
+        <ul>
+          <li>Aggregating to a larger geography than the reporting agency
+            (ESPECIALLY NOT NATIONALLY)</li>
+          <li>Comparing agencies</li>
+          <li>Aggregating to total hate crimes per agency</li>
+          <li>Looking at hate crimes of a specific bias motivation within a single agency
+            over time without verifying that this bias motivation was reported for
+            all years</li>
+          <li>Imputing missing data</li>
+          <li>Assuming that underreporting is consistent across time and place.</li>
+        </ul>
+        </p>
       </div>
 
       <button class="accordion">What should this data be used for?</button>
       <div class="panel">
-        <p></p>
+        <p>The only thing you should do to use this data properly is
+          look at hate crimes of the same bias motivation (e.g. anti-Jewish,
+          anti-Black) in the same agency over time (assuming the agency reports
+          the same months each year) and assuming that the bias motivation
+          has been reported by that agency every year. </p>
       </div>
 
       <button class="accordion">Is it a good idea to aggregate over geographies?</button>
@@ -560,27 +615,53 @@
       <button class="accordion">Is it a good idea to compare hate crimes
         across time?</button>
       <div class="panel">
-        <p></p>
+        <p>Generally no. The FBI has added new bias motivations over time
+          so there is artificially an increase in hate crimes just due to this.
+          For example, if 10 transgender people (one of the bias motivations
+          that hasn't always been included as a reportable bias motivation) are always
+          the victim of a hate crime in a particular agency, the year that this becomes
+          an accepted motivation, the agency starts reporting an extra 10 hate crimes
+          per year. But in reality hate crime was consistent across time. </p>
       </div>
 
       <button class="accordion">Why do some bias motivations have zero for many
         years then start having hate crimes?</button>
       <div class="panel">
-        <p></p>
+        <p>There are three reasons this could be. First, the agency may have
+          gotten reports but not submitted hate crimes of those bias motivations.
+          Second, they may have never received a complaint for this bias motivation
+          prior to this year. Third, the FBI has increased the number of bias motivations
+          they accepted so this may be one of this bias motivations. Prior to the
+          accepted year, these would always be marked as zero reports. Note that in these
+          cases not all agencies start reporting these motivations in the same year as
+          the FBI accepts them. </p>
       </div>
 
       <button class="accordion">Are police agencies required to submit this data?</button>
       <div class="panel">
-        <p></p>
+        <p>No, reporting this data, like all UCR data, is voluntary. Some states
+          do require that their agencys report UCR data but this is no national
+          requirement. And even in these mandatory states not all agencies report.</p>
       </div>
 
       <button class="accordion">Are hate crimes a good measure of hate?</button>
       <div class="panel">
-        <p></p>
+        <p>No, like all crimes hate crimes are dependent on opportunity - though
+          hate crimes have more variation in opportunity than other crimes.
+          Consider, for example, a city with 10% Black population and one with 50%
+          Black population. If anti-Black sentiment and willingness to attack
+          Black people for their race is the same in each city, in the second city
+          there is about five times as many opportunities as in the first cities
+          to offend. So even if anti-Black hate is identical in both cities, we'd
+          expect there to be many more anti-Black hate crimes in the second city. This can
+          be particially alleviated by using rates per victim group using Census data but
+          that's still flawed since you'd likely only get decennial Census data and the Census
+          doesn't collect all victim type info.</p>
       </div>
 
-      <h1 id = "police">
-        <a href="index.html#police" style="text-decoration: none; color: black">Police</a></h1>
+      <h1 id="police">
+        <a href="index.html#police" style="text-decoration: none; color: black">Police</a>
+      </h1>
 
 
       <button class="accordion">Where is the data from?</button>
@@ -602,8 +683,9 @@
           (and a value of 0 in the female employees column). </p>
       </div>
 
-      <h1 id = "prison">
-        <a href="index.html#prison" style="text-decoration: none; color: black">Prison</a></h1>
+      <h1 id="prison">
+        <a href="index.html#prison" style="text-decoration: none; color: black">Prison</a>
+      </h1>
 
 
       <button class="accordion">Where is the prison data from?</button>
@@ -661,8 +743,9 @@
           population totaled 1,293,887.</blockquote>
       </div>
 
-      <h1 id = "school">
-        <a href="index.html#school" style="text-decoration: none; color: black">School</a></h1>
+      <h1 id="school">
+        <a href="index.html#school" style="text-decoration: none; color: black">School</a>
+      </h1>
 
       <button class="accordion">Where is the school data from?</button>
       <div class="panel">
