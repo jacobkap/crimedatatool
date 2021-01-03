@@ -215,6 +215,27 @@
         </p>
       </div>
 
+      <button class="accordion">What is the most common mistake people make
+        with this data?</button>
+      <div class="panel">
+        <p>Like all data, the data on this site and available to download
+          on <a href="openicpsr.org/">openicpsr.org/</a> has flaws. This is
+          especially true of the FBI's UCR and NIBRS data available here. The main
+          problems with the data is that it only counts reported crime and that
+          not all agencies report (and those that do may not report all year).
+          However, these are only the technical problems with the data - the bigger
+          issue is in how people use it. Each of these issues can be solved - or at least avoided
+          in conducting research - and the nuances of each dataset can be handled. However,
+          many published articles that I've read either do not address these issues or
+          even acknowledge that they exist. There is excellent documentation
+          on these datasets in academic articles and in the FBI's manual for the
+          data. <b>If you intend to use this data you should read these documents
+            (please don't ask me for links to them beyond what I already provide
+            on this page) carefully and spend time exploring the data yourself.
+            Simply running a regression on the data without fully understanding the
+            data is bad research.</b> </p>
+      </div>
+
       <button class="accordion">Data errors</button>
       <div class="panel">
         <p>If you believe that you found an error in one of the datasets,
@@ -222,6 +243,15 @@
           known issue or is not an error at all. Common incorrect beliefs
           that something is erroneous are negative numbers in UCR data or
           Florida not appearing for many years in UCR data. 
+        </p>
+      </div>
+
+      <button class="accordion">Misspellings in column names</button>
+      <div class="panel">
+        <p>I release the data as .dta (Stata) files which has a 32 character
+          limit for column names. Therefore I sometimes have to abbreviate
+          column names to meet this limit. Most misspellings you see in the
+          column names are intentional to meet this requirement.
         </p>
       </div>
 
