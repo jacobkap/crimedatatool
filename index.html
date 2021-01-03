@@ -199,6 +199,27 @@
         </p>
       </div>
 
+      <button class="accordion">What is the most common mistake people make
+        with this data?</button>
+      <div class="panel">
+        <p>Like all data, the data on this site and available to download
+          on <a href="openicpsr.org/">openicpsr.org/</a> has flaws. This is
+          especially true of the FBI's UCR and NIBRS data available here. The main
+          problems with the data is that it only counts reported crime and that
+          not all agencies report (and those that do may not report all year).
+          However, these are only the technical problems with the data - the bigger
+          issue is in how people use it. Each of these issues can be solved - or at least avoided
+          in conducting research - and the nuances of each dataset can be handled. However,
+          many published articles that I've read either do not address these issues or
+          even acknowledge that they exist. There is excellent documentation
+          on these datasets in academic articles and in the FBI's manual for the
+          data. <b>If you intend to use this data you should read these documents
+            (please don't ask me for links to them beyond what I already provide
+            on this page) carefully and spend time exploring the data yourself.
+            Simply running a regression on the data without fully understanding the
+            data is bad research.</b> </p>
+      </div>
+
 
       <button class="accordion">Data errors</button>
       <div class="panel">
@@ -580,7 +601,7 @@
           <br>
         <ul>
           <li>Aggregating to a larger geography than the reporting agency
-            (ESPECIALLY NOT NATIONALLY)</li>
+            (ESPECIALLY TO THE NATIONAL LEVEL)</li>
           <li>Comparing agencies</li>
           <li>Aggregating to total hate crimes per agency</li>
           <li>Looking at hate crimes of a specific bias motivation within a single agency
@@ -603,13 +624,25 @@
 
       <button class="accordion">Is it a good idea to aggregate over geographies?</button>
       <div class="panel">
-        <p></p>
+        <p>No. The problem with this is that few agencies report so aggregating
+          would exclude a lot of agencies that are actually in that geography
+          but don't report. To my opinion there is no good way to impute missing
+          hate crime data so any attempt to do so will be very flawed and give incorrect
+          results. Every year when the FBI releases the report on this data the news
+          and many academics will just aggregate all reporting agencies to the national
+          level (ignoring all the missing agencies) and pretend that this is an
+          accurate count of national hate crimes. This
+          is a terrible idea and gives very inaccurate counts of hate crimes. </p>
       </div>
 
       <button class="accordion">Is it a good idea to compare hate crimes
         across agencies?</button>
       <div class="panel">
-        <p></p>
+        <p>No. Not all agencies report for all months of the year or even for
+          all bias motivations so they're often not comparable. Additionally,
+          since the opportunity to commit a hate crime (i.e. the number of people
+          of a particular victim group) differs between cities, differences across
+          cities in hate crimes may be due to differences in opportunity, not hate. </p>
       </div>
 
       <button class="accordion">Is it a good idea to compare hate crimes
