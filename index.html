@@ -261,6 +261,23 @@
         </p>
       </div>
 
+      <button class="accordion">Source of FIPS codes</button>
+      <div class="panel">
+        <p>FIPS codes are US Census unique identifiers (within state) for
+          geographic areas including state, county, and "place" (i.e. city).
+          They are useful when merging with other datasets such as the US Census
+          or other government datasets. These identifiers are not in the UCR
+          data originally so I added them by merging the UCR data to the
+          Law Enforcement Agency Identifiers Crosswalk *LEAIC) that
+          <a href="https://www.icpsr.umich.edu/web/pages/NACJD/index.html">
+            NACJD</a> produced (for more info on this dataset please see
+          the Learning Guide on it that I made for NACJD
+          <a href="https://www.icpsr.umich.edu/web/pages/NACJD/guides/leaic/index.html">
+            Here</a>). I merged the LEAIC and UCR data by matching on the ORI
+          (unique agency identifier code) variable.
+        </p>
+      </div>
+
       <!---
       <button class="accordion">Are you available for consulting?</button>
       <div class="panel">
