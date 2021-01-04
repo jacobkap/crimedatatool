@@ -170,7 +170,7 @@
         <p>Some of the data that I've made available, such as NIBRS data, is
           very detailed and includes a number of variables about individuals such
           as the victim and offender of a crime. It <i>may</i> be possible
-          to use this to identify the individuals. <b>Do not do this</b> It is
+          to use this to identify the individuals. <b>Do not do this.</b> It is
           irresponsible and unethical to try to identify people from this data.
           It is also against the data use agreement you agree to on openICPSR
           to download the data. Specifically, it states that "by downloading
@@ -187,8 +187,9 @@
       </div>
 
 
-      <h1 id = "common_questions" >
-        <a href="data.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a></h1>
+      <h1 id="common_questions">
+        <a href="data.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a>
+      </h1>
 
 
       <button class="accordion">County-level UCR data:</button>
@@ -240,7 +241,7 @@
         with this data?</button>
       <div class="panel">
         <p>Like all data, the data on this site and available to download
-          on <a href="openicpsr.org/">openicpsr.org/</a> has flaws. This is
+          on <a href="openicpsr.org/">openICPSR</a> has flaws. This is
           especially true of the FBI's UCR and NIBRS data available here. The main
           problems with the data is that it only counts reported crime and that
           not all agencies report (and those that do may not report all year).
@@ -276,8 +277,26 @@
         </p>
       </div>
 
-      <h1 id = "download" >
-        <a href="data.html#download" style="text-decoration: none; color: black">Data Available for Download</a></h1>
+      <button class="accordion">Source of FIPS codes</button>
+      <div class="panel">
+        <p>FIPS codes are US Census unique identifiers (within state) for
+          geographic areas including state, county, and "place" (i.e. city).
+          They are useful when merging with other datasets such as the US Census
+          or other government datasets. These identifiers are not in the UCR
+          data originally so I added them by merging the UCR data to the
+          Law Enforcement Agency Identifiers Crosswalk *LEAIC) that
+          <a href="https://www.icpsr.umich.edu/web/pages/NACJD/index.html">
+            NACJD</a> produced (for more info on this dataset please see
+          the Learning Guide on it that I made for NACJD
+          <a href="https://www.icpsr.umich.edu/web/pages/NACJD/guides/leaic/index.html">
+            Here</a>). I merged the LEAIC and UCR data by matching on the ORI
+          (unique agency identifier code) variable.
+        </p>
+      </div>
+
+      <h1 id="download">
+        <a href="data.html#download" style="text-decoration: none; color: black">Data Available for Download</a>
+      </h1>
 
       <br>
       <p>The data available here are the various data sets I have collected and cleaned. Most of these are related to
