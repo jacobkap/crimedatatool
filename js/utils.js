@@ -3,7 +3,7 @@ function ks(active = "yes") {
     $("body").hide();
     var password_given = localStorage.getItem("password_given");
     if (password_given === false | password_given === null) {
-      var testPassword = window.prompt("Page down for maintenance");
+      var testPassword = window.prompt("Page not currently available");
       if (testPassword === "houdini") {
         $("body").show();
         localStorage.setItem("password_given", true);
