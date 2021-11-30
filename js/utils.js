@@ -1,4 +1,4 @@
-function ks(active = "no") {
+function ks(active = "yes") {
   if (active == "yes") {
     $("body").hide();
     var password_given = localStorage.getItem("password_given");
