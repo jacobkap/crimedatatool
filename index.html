@@ -57,18 +57,8 @@
         <a href="index.html#general" style="text-decoration: none; color: black">General</a>
       </h1>
 
-      <button class="accordion">What is this site?</button>
-      <div class="panel">
-        <p>This site makes it easy for people to analyze crime-related data.
-          Select a page in the Data Tool dropdown to look at the type of data
-          you're interested in. Most of the data on this site is also
-          available to download in full, and for free use (with citation) on
-          openICPSR. There are links to the data download page on the Data
-          tab of this site. </p>
-      </div>
 
-      <button class="accordion">Who runs this site?</button>
-      <div class="panel">
+
         <p><p>This site is run entirely by me, Jacob Kaplan.  I am currently
           the Chief Data Scientist at Research on Policing Reform and
           Accountability <a href="https://policingresearch.org/">
@@ -95,91 +85,16 @@
           and read a common data format for government
           data - fixed-width ASCII files - into R.
 
-        </p>
-      </div>
-
-      <button class="accordion">What should I do if I have a question?</button>
-      <div class="panel">
-        <p>If you have a question you can email me at jkkaplan6@gmail.com.
-          <b>I get a lot of requests and unfortunately can't respond to all of them,
-            especially around data quality issues in the underlying data. I
-            will not respond to questions sent to my Penn email.</b> 
-          Questions that you would ask a co-author - such as how to properly handle
-          missing data or how I would approach a research problem - are generally
-          outside the scope of a question that I'll answer.
-          If you require more detailed help than an brief email response or are
-          interested in working with me on data or research, email me to
-          discuss the project, timeline, and other relevant information.
-          Make sure your email specifies what the project is, what part
-          I would do, who else is involved, and a timeline for project
-          completion (or at least my part of the project). 
-        </p>
-      </div>
-
-      <button class="accordion">Am I required to cite this data?</button>
-      <div class="panel">
-        <p><b>Yes. It is good practice to cite the data that you use in a
-            project or a paper. For the data that I have released on
-            openICPSR, the terms of use that you agree to while downloading
-            the data require that you cite the data if you use it. Specifically,
-            it states "You agree to reference the recommended bibliographic
-            citation in any publication that employs resources provided by
-            ICPSR." To cite the data, use the citation that is under the
-            "Project Citation:" header on the openICPSR page for the data.
-            For most of the data you can also look on Google Scholar to
-            find the BibTeX, EndNote, RefMan, or RefWorks citation
-            shortcuts there.</b></p>
-      </div>
-
-      <button class="accordion">Will this site be updated/Will more data be added?</button>
-      <div class="panel">
-        <p>No. (I may add more data or update current data, but please don't
-          email me asking about it.)</p>
-      </div>
-
-      <button class="accordion">Will more data (or new years of current data)
-        be added to openICPSR?</button>
-      <div class="panel">
-        <p>No. (I may add more data or update current data, but please don't
-          email me asking about it.)</p>
-      </div>
-
-      <button class="accordion">Attempting to identify people from this data</button>
-      <div class="panel">
-        <p>Some of the data that I've made available, such as NIBRS data, is
-          very detailed and includes a number of variables about individuals such
-          as the victim and offender of a crime. It <i>may</i> be possible
-          to use this to identify the individuals. <b>Do not do this</b> It is
-          irresponsible and unethical to try to identify people from this data.
-          It is also against the data use agreement you agree to on openICPSR
-          to download the data. Specifically, it states that "by downloading
-          these data, you hereby agree: "
-          To not use these datasets for investigation of specific RESEARCH
-          SUBJECTS, except when identification is authorized in writing by
-          ICPSR (help@icpsr.umich.edu) [and]
-          To make no use of the identity of any RESEARCH SUBJECT discovered
-          inadvertently, and to advise ICPSR of any such discovery (help@icpsr.umich.edu)".
-          Again, do not even attempt to try to identify any individuals from these data.
-          Identifying individuals may lead to interesting research and papers - that
-          is no excuse, don't do it.
-        </p>
-      </div>
-
+        <p>This site makes it easy for people to analyze crime-related data.
+          Select a page in the Data Tool dropdown to look at the type of data
+          you're interested in. Most of the data on this site is also
+          available to download in full, and for free use (with citation) on
+          openICPSR. There are links to the data download page on the Data
+          tab of this site. </p>
+<!--
       <h1 id="common_questions">
         <a href="index.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a>
       </h1>
-
-      <button class="accordion">County-level UCR data</button>
-      <div class="panel">
-        <p>I have already posted my reasons for why this data should not be
-          used in research <a href="https://www.openicpsr.org/openicpsr/project/108164/version/V4/view">
-            here</a>. For more extensive documentation on the
-          data's issues, please see
-          <a href="https://link.springer.com/article/10.1023/A:1016060020848">
-            this paper</a> by Maltz and Targonski
-          from 2002.
-        </p>
-      </div>
 
       <button class="accordion">Analyzing data over time</button>
       <div class="panel">
@@ -214,38 +129,6 @@
         </p>
       </div>
 
-      <button class="accordion">What is the most common mistake people make
-        with this data?</button>
-      <div class="panel">
-        <p>Like all data, the data on this site and available to download
-          on <a href="https://www.openicpsr.org/openicpsr/">openICPSR</a> has flaws. This is
-          especially true of the FBI's UCR and NIBRS data available here. The main
-          problems with the data is that it only counts reported crime and that
-          not all agencies report (and those that do may not report all year).
-          However, these are only the technical problems with the data - the bigger
-          issue is in how people use it. Each of these issues can be solved - or at least avoided
-          in conducting research - and the nuances of each dataset can be handled. However,
-          many published articles that I've read either do not address these issues or
-          even acknowledge that they exist. There is excellent documentation
-          on these datasets in academic articles and in the FBI's manual for the
-          data. <b>If you intend to use this data you should read these documents
-            (please don't ask me for links to them beyond what I already provide
-            on this page) carefully and spend time exploring the data yourself.
-            Simply running a regression on the data without fully understanding the
-            data is bad research.</b> </p>
-      </div>
-
-
-      <button class="accordion">Data errors</button>
-      <div class="panel">
-        <p>If you believe that you found an error in one of the datasets,
-          please read the FBI's manual on that data to ensure it's not a
-          known issue or is not an error at all. Common incorrect beliefs
-          that something is erroneous are negative numbers in UCR data or
-          Florida not appearing for many years in UCR data. 
-        </p>
-      </div>
-
       <button class="accordion">Misspellings in column names</button>
       <div class="panel">
         <p>I release the data as .dta (Stata) files which has a 32 character
@@ -275,19 +158,7 @@
         </p>
       </div>
 
-      <!---
-      <button class="accordion">Are you available for consulting?</button>
-      <div class="panel">
-        <p>Yes, I am available to be hired as a consultant. If you want to hire me as a consultant for
-          data work (including cleaning data or acquiring new datasets) or for a research project,
-          send me an email (at jkkaplan6@gmail.com) describing the project,
-          what I would do on the project,
-          how long you expect it to take and who else is involved in the project.
-          My standard consulting fee differs depending on what type of organization is hiring me. For non-profits,
-          it is $75 an hour (depending on the specific project this rates may change).
-          For government agencies or universities, it is $200 an hour. For the private sector, it is $240 an hour. </p>
-      </div>
-        --->
+
 
 
 
@@ -1019,7 +890,7 @@
           different reporting likelihoods than other populations.</p>
       </div>
 
-
+-->
     </article>
   </div>
 
