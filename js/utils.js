@@ -159,8 +159,8 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_5']").hide()
     $("label[for='checkbox_6']").hide()
     $("label[for='checkbox_1']").html("Total")
-    $("label[for='checkbox_2']").html("Gun Used")
-    $("label[for='checkbox_3']").html("Gun Not Used")
+    $("label[for='checkbox_2']").html("Gun Not Used")
+    $("label[for='checkbox_3']").html("Gun Used")
 
   } else if ($("#subcategory_dropdown").val() == "total") {
     $("#checkbox_1").hide();
