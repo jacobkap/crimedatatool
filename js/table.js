@@ -1,9 +1,12 @@
 function fixTableName(name, type) {
   temp_name = name;
   name = name.replace(/_rate/g, "");
+  name = name.replace(/_percent/g, "");
   name = name.replace(/_clearance/g, "");
   name = name.replace(/_percent_of_arrests/g, "");
   name = name.replace(/_non_hisp/g, " Non-Hispanic");
+
+
   if (type == "offenses") {
     temp1 = name.replace(/actual_.*/, "Actual ");
     if ($("#clearance_rate").is(":checked")) {
@@ -88,6 +91,9 @@ function fixTableName(name, type) {
     if ($("#rate").is(':checked')) {
       name = name.replace(/_rate/g, "");
     }
+    if ($("#percent_of_crimes").is(':checked')) {
+      name = name.replace(/_percent/g, "");
+    }
     name = nibrs_crime_values[name];
   } else if (type == "death") {
     temp_name = name;
@@ -130,6 +136,8 @@ function fixTableName(name, type) {
       name += " % of Arrests";
     } else if (type == "police" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
+    }  else if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+      name += " %";
     } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
       name += " % of All Arrests for All Crimes";
     } else if (type == "school") {

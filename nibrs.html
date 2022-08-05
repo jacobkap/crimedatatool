@@ -71,28 +71,62 @@
     <p>Enter a police agency to see its crime over time.</p>
     <h3>State:</h3>
     <br>
-    <select id="state_dropdown" onchange="stateChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
+    <select id="state_dropdown" onchange="stateChangeFun('nibrs', nibrs_state_values, nibrs_crime_values['offense'])">
     </select>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <select id="agency_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
+    <select  class="simple-select" id="agency_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values['offense'])">
     </select>
     <br><br>
     <h3>Crime:</h3>
     <br>
-    <select id="crime_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
+    <select  class="simple-select" id="crime_dropdown" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values['offense'])">
     </select>
 
     <br><br>
-    <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values)">
+    <input type="checkbox" id="rate" name="rate" value="rate" onchange="nibrsPopBoxChange(rate)">
     <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
+    <hr>
     <br><br>
+    <input type="checkbox" id="percent_of_crimes" name="percent_of_crimes" value="percent_of_crimes"
+     onchange="nibrsPopBoxChange(percent_of_crimes)">
+    <label class="label-text fa" for="percent_of_crimes">% of Crimes</label>
+    <hr>
+    <br><br>
+    <h3>Category:</h3>
+    <br>
+    <select  class="simple-select" id="category_dropdown" onchange="nibrcategoryChange()"></select>
+    <br>
+    <h3>Subcategory:</h3>
+    <br>
+    <select  class="simple-select" id="subcategory_dropdown" onchange = "nibrsubcategoryChange()"></select>
+<br><br>
+      <input type="checkbox" checked id="checkbox_1" onchange="checkboxesUpdate('nibrs', '#checkbox_1')"></input>
+      <label class="hint--right" for="checkbox_1"></label>
+      <br>
+      <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('nibrs', '#checkbox_1')"></input>
+      <label class="hint--right" for="checkbox_2"></label>
+      <br>
+      <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('nibrs', '#checkbox_1')"></input>
+      <label class="hint--right" for="checkbox_3"></label>
+      <br>
+      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('nibrs', '#checkbox_1')"></input>
+      <label class="hint--right" for="checkbox_4"></label>
+      <br>
+      <input type="checkbox" id="checkbox_5" onchange="checkboxesUpdate('nibrs', '#checkbox_1')"></input>
+      <label class="hint--right" for="checkbox_5"></label>
+      <br>
+      <input type="checkbox" id="checkbox_6" onchange="checkboxesUpdate('nibrs', '#checkbox_1')"></input>
+      <label class="hint--right" for="checkbox_6"></label>
 
     <hr>
+    <input type="checkbox" id="monthly" onchange="agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values['offense'])"></input>
+    <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
+    <hr>
       <button type="button" onclick="exportToCsv(all_data, 'nibrs', nibrs_state_values)">Download All Agency Data as CSV</button>
-    <br>
-    <p>Please note that data are only available for agencies that report all 12 months of the year.
+      <br>
+      <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
   </div>
 
 
@@ -104,7 +138,7 @@
     </div>
 
     <script>
-      main("nibrs", nibrs_state_values, 3, nibrs_crime_values, "murder_nonnegligent_manslaughter");
+      main("nibrs", nibrs_state_values, 3, nibrs_crime_values['offense'], "murder_nonnegligent_manslaughter");
     </script>
   </div>
 

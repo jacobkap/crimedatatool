@@ -5,12 +5,44 @@ function checkboxesUpdate(type, always_on_box, crimes) {
     !$("#checkbox_4").is(':checked')) {
     $(always_on_box).prop("checked", true);
   }
+
+  if (type == "nibrs") {
+    if (!$("#checkbox_1").is(':checked') &&
+      !$("#checkbox_2").is(':checked') &&
+      !$("#checkbox_3").is(':checked') &&
+      !$("#checkbox_4").is(':checked') &&
+      !$("#checkbox_5").is(':checked') &&
+      !$("#checkbox_6").is(':checked')) {
+      $(always_on_box).prop("checked", true);
+
+
+      nibrs_crimes_temp = nibrs_crime_values["offense"]
+      if ($('#category_dropdown').val() == "victim") {
+        nibrs_crimes_temp = nibrs_crime_values["victim_demographics_offenses"]
+      }
+      if ($('#subcategory_dropdown').val() == "injury") {
+        nibrs_crimes_temp = nibrs_crime_values["injury_offenses"]
+      }
+      if ($('#category_dropdown').val() == "arrestee") {
+        nibrs_crimes_temp = nibrs_crime_values["arrestee_offenses"]
+      }
+      if ($('#category_dropdown').val() == "offense") {
+        nibrs_crimes_temp = nibrs_crime_values["offense"]
+      }
+      if ($('#subcategory_dropdown').val() == "gun") {
+        nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]
+      }
+    }
+  }
+
   if (["death", "offenses"].includes(type)) {
     agencyChangeFun(type, state_values);
+  } else if (type == "nibrs") {
+    remake_graph(type, nibrs_crimes_temp)
   } else {
     remake_graph(type, crimes);
   }
-  change_url()
+  change_url(type)
 }
 
 function prisonersPopBoxChange(box_to_check) {
@@ -32,6 +64,15 @@ function arrestsPopBoxChange(box_to_check) {
 
   $(box_to_check).prop("checked", box_status);
   agencyChangeFun("arrests", state_values, arrest_values);
+}
+
+function nibrsPopBoxChange(box_to_check) {
+  box_status = $(box_to_check).prop("checked");
+  $("#percent_of_crimes").prop("checked", false);
+  $("#rate").prop("checked", false);
+
+  $(box_to_check).prop("checked", box_status);
+  agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values['offense']);
 }
 
 
@@ -68,6 +109,8 @@ function arrest_subsubcategoryChangeFun() {
   agencyChangeFun('arrests', state_values);
 }
 
+
+
 function school_category_change() {
   make_dropdown('#subcategory_dropdown', school_subcategories[$('#crime_dropdown').val()], school_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
   toggle_display("#school_bias_div", ["hate"])
@@ -79,6 +122,44 @@ function borderCategoryChange(type, states, crimes) {
   border_states = get_border_states($("#crime_dropdown").val());
   make_dropdown('#state_dropdown', border_states, 0);
   agencyChangeFun('borderpatrol', border_states, border_categories);
+}
+
+function nibrcategoryChange() {
+  make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()]);
+  nibrsubcategoryChange();
+}
+
+function nibrsubcategoryChange() {
+
+  toggle_nibrs_display();
+  current_crime = $('#crime_dropdown').val()
+  nibrs_crimes_temp = nibrs_crime_values["offense"]
+  if ($('#category_dropdown').val() == "victim") {
+    nibrs_crimes_temp = nibrs_crime_values["victim_demographics_offenses"]
+  }
+  if ($('#subcategory_dropdown').val() == "injury") {
+    nibrs_crimes_temp = nibrs_crime_values["injury_offenses"]
+  }
+  if ($('#category_dropdown').val() == "arrestee") {
+    nibrs_crimes_temp = nibrs_crime_values["arrestee_offenses"]
+  }
+  if ($('#category_dropdown').val() == "offense") {
+    nibrs_crimes_temp = nibrs_crime_values["offense"]
+  }
+  if ($('#subcategory_dropdown').val() == "gun") {
+    nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]
+  }
+
+  $("#crime_dropdown").empty();
+  $.each(nibrs_crimes_temp, function(val, text) {
+    $("#crime_dropdown").append(new Option(text, val));
+  });
+  if (_.keys(nibrs_crimes_temp).includes(current_crime)) {
+    make_dropdown('#crime_dropdown', nibrs_crimes_temp, current_crime)
+  } else {
+    make_dropdown('#crime_dropdown', nibrs_crimes_temp, _.keys(nibrs_crimes_temp)[0])
+  }
+  agencyChangeFun('nibrs', nibrs_state_values, nibrs_crimes_temp);
 }
 
 function prisonerCategoryChange(current_category) {
@@ -139,7 +220,6 @@ function agencyChangeFun(type, states, crimes) {
       crimes = crime_values;
       $("#agency_level_boxes").show();
     }
-
   }
 
   if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
@@ -152,9 +232,6 @@ function agencyChangeFun(type, states, crimes) {
   table_headers = main_results[2];
   all_data = main_results[3];
 
-
-
-
   remake_graph(type, crimes);
 
   if (type == "offenses" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {
@@ -164,7 +241,7 @@ function agencyChangeFun(type, states, crimes) {
   table.destroy();
   $('#table').empty();
   table = makeTable(type);
-  change_url()
+  change_url(type)
   $('.simple-select').trigger('chosen:updated');
 }
 

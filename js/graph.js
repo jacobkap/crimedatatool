@@ -30,6 +30,9 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
     rate_type = "_percent_of_all_arrests";
   }
+  if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+   rate_type = "_percent";
+ }
   checkbox_names = ["Actual Offenses",
     "Total Offenses Cleared",
     "Offenses Cleared Involving Only Persons Under age 18",
@@ -58,6 +61,32 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   }
 
 
+  if (type == "nibrs") {
+    if ($("#subcategory_dropdown").val() == "sex") {
+      checkbox_names = ["Total", "Female", "Male",  "Unknown"];
+    } else if ($("#subcategory_dropdown").val() == "race") {
+      checkbox_names = ["Total", "Asian", "American Indian", "Black", "White", "Unknown"];
+    } else if ($("#subcategory_dropdown").val() == "ethnicity") {
+      checkbox_names = ["Total", "Hispanic", "Non-Hispanic", "Unknown"];
+    } else if ($("#subcategory_dropdown").val() == "age") {
+      checkbox_names = ["Total", "Adult", "Minor (<18 years)", "Unknown"];
+    } else if ($("#subcategory_dropdown").val() == "injury") {
+      checkbox_names = ["Total", "No Injury", "Minor Injury", "Serious Injury"];
+    }  else if ($("#subcategory_dropdown").val() == "gun") {
+      checkbox_names = ["Total", "Gun Not Used", "Gun used"];
+    } else if ($("#subcategory_dropdown").val() == "arrest_type") {
+      checkbox_names = ["Total", "On-View", "Summoned/Cited", "Taken Into Custody"];
+    } else if ($("#subcategory_dropdown").val() == "total") {
+      checkbox_names = ["Total"];
+    } else if ($("#subcategory_dropdown").val() == "sex" && $("#category_dropdown").val() == "arrestee") {
+      checkbox_names = ["Total", "Female", "Male"];
+    } else if ($("#subcategory_dropdown").val() == "race" && $("#category_dropdown").val() == "arrestee") {
+      checkbox_names = ["Total", "Asian", "American Indian", "Black", "White"];
+    } else if ($("#subcategory_dropdown").val() == "ethnicity" && $("#category_dropdown").val() == "arrestee") {
+      checkbox_names = ["Total", "Hispanic", "Non-Hispanic"];
+    }
+  }
+
   if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked"))) && type != "death") {
     colsForGraph = _.map(colsForGraph, function(x) {
       if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
@@ -79,6 +108,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   data3 = [];
   data4 = [];
   data5 = [];
+  data6 = [];
 
   for (var i = 0; i < data.length; i++) {
     years.push(data[i][colsForGraph[0]]);
@@ -87,9 +117,10 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data3.push(data[i][colsForGraph[3]]);
     data4.push(data[i][colsForGraph[4]]);
     data5.push(data[i][colsForGraph[5]]);
+    data6.push(data[i][colsForGraph[6]]);
   }
 
-  if (["offenses", "alcohol", "prisoners", "arrests", "hate", "school"].includes(type) || type == "police" &
+  if (["offenses", "alcohol", "prisoners", "arrests", "hate", "school", "nibrs"].includes(type) || type == "police" &
     police_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
@@ -97,12 +128,13 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       makeGraphObjects(data2, "#f4a582", checkbox_names[1]),
       makeGraphObjects(data3, "#92c5de", checkbox_names[2]),
       makeGraphObjects(data4, "#0571b0", checkbox_names[3]),
-      makeGraphObjects(data5, "#008837", checkbox_names[4])
+      makeGraphObjects(data5, "#008837", checkbox_names[4]),
+      makeGraphObjects(data6, "#000000", checkbox_names[5])
     ];
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 6; i++) {
       final_data[i].hidden = false;
     }
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 6; i++) {
       if (!$("#checkbox_" + (i + 1)).is(':checked')) {
         final_data = _.filter(final_data, function(x) {
           return x.label != checkbox_names[i];
@@ -134,6 +166,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       label = jail_categories[jail_state_values[$("#state_dropdown").val()]][label]
     } else if (type == "nibrs" && $("#rate").is(':checked')) {
       label = label.replace(/_rate/g, "");
+      label = label.replace(/_percent/g, "");
       label = crimes[label]
       label += " Rate"
       // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
@@ -201,6 +234,38 @@ function makeGraph(type, crimes) {
       yaxis_label = "# of Assaults";
     }
   }
+  if (type == "nibrs") {
+  if ($("#category_dropdown").val().includes("offense")) {
+    yaxis_label = "# of Offenses";
+  }
+  if ($("#category_dropdown").val().includes("offender")) {
+    yaxis_label = "# of Offenders";
+  }
+  if ($("#category_dropdown").val().includes("arrestee")) {
+    yaxis_label = "# of Arrestees";
+  }
+  if ($("#category_dropdown").val().includes("victim")) {
+    yaxis_label = "# of Victims";
+  }
+  if ($("#rate").is(":checked")) {
+    yaxis_label = "Rate per 100k Population"
+  }
+  if ($("#percent_of_crimes").is(":checked")) {
+    if ($("#category_dropdown").val().includes("offense")) {
+      yaxis_label = "% of Offenses";
+    }
+    if ($("#category_dropdown").val().includes("offender")) {
+      yaxis_label = "% of Offenders";
+    }
+    if ($("#category_dropdown").val().includes("arrestee")) {
+      yaxis_label = "% of Arrestees";
+    }
+    if ($("#category_dropdown").val().includes("victim")) {
+      yaxis_label = "% of Victims";
+    }
+  }
+}
+
   graph_datasets = getGraphDataset(table_data, graph_headers, type, crimes);
   if (type == "offenses" && $("#clearance_rate").is(":checked")) {
     cleared_data = [];
@@ -369,6 +434,9 @@ function getTitle(data, type) {
     subtitle = arrest_values[$("#crime_dropdown").val()];
     subtitle = "Arrests for: " + subtitle + ", Breakdown: " + arrests_breakdown[$("#subsubcategory_dropdown").val()] + ", Age: " +
     arrest_age_categories[$("#subcategory_dropdown").val()];
+  } else if (type == "nibrs") {
+    subtitle = nibrs_crime_values["arrestee_offenses"][$("#crime_dropdown").val()]
+    subtitle = nibrs_categories[$("#category_dropdown").val() ] + "s, " + subtitle
   } else if (type == "school") {
     title = school_state_values[$("#state_dropdown").val()];
     subtitle = school_categories[$("#crime_dropdown").val()];

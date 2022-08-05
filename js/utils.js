@@ -14,7 +14,8 @@ function ks(active = "no") {
       $("body").show();
     }
   }
-}'[]'
+}
+'[]'
 
 function readCSV(csv) {
   var result = null;
@@ -58,6 +59,9 @@ function exportToCsv(tableData, type, states) {
   }
   if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
     rate_or_count = "_percent_of_all_arrests";
+  }
+  if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+    rate_or_count = "percent_";
   }
 
 
@@ -123,6 +127,139 @@ function toggle_display(div, match_value) {
   }
 }
 
+
+
+
+function toggle_nibrs_display() {
+  $("#checkbox_1").show();
+  $("#checkbox_2").show();
+  $("#checkbox_3").show();
+  $("#checkbox_4").show();
+  $("#checkbox_5").show();
+  $("#checkbox_6").show();
+  $("label[for='checkbox_1']").show()
+  $("label[for='checkbox_2']").show()
+  $("label[for='checkbox_3']").show()
+  $("label[for='checkbox_4']").show()
+  $("label[for='checkbox_5']").show()
+  $("label[for='checkbox_6']").show()
+
+  $("#checkbox_1").prop("checked", true);
+  $("#checkbox_2").prop("checked", false);
+  $("#checkbox_3").prop("checked", false);
+  $("#checkbox_4").prop("checked", false);
+  $("#checkbox_5").prop("checked", false);
+  $("#checkbox_6").prop("checked", false);
+
+  if ($("#subcategory_dropdown").val() == "gun") {
+    $("#checkbox_4").hide();
+    $("#checkbox_5").hide();
+    $("#checkbox_6").hide();
+    $("label[for='checkbox_4']").hide()
+    $("label[for='checkbox_5']").hide()
+    $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Gun Used")
+    $("label[for='checkbox_3']").html("Gun Not Used")
+
+  } else if ($("#subcategory_dropdown").val() == "total") {
+    $("#checkbox_1").hide();
+    $("#checkbox_2").hide();
+    $("#checkbox_3").hide();
+    $("#checkbox_4").hide();
+    $("#checkbox_5").hide();
+    $("#checkbox_6").hide();
+    $("label[for='checkbox_1']").hide()
+    $("label[for='checkbox_2']").hide()
+    $("label[for='checkbox_3']").hide()
+    $("label[for='checkbox_4']").hide()
+    $("label[for='checkbox_5']").hide()
+    $("label[for='checkbox_6']").hide()
+  } else if ($("#subcategory_dropdown").val() == "race") {
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Asian")
+    $("label[for='checkbox_3']").html("American Indian")
+    $("label[for='checkbox_4']").html("Black")
+    $("label[for='checkbox_5']").html("White")
+    $("label[for='checkbox_6']").html("Unknown")
+
+
+    if ($('#category_dropdown').val() == "arrestee") {
+      $("#checkbox_6").hide();
+      $("label[for='checkbox_6']").hide()
+    }
+
+  } else if ($("#subcategory_dropdown").val() == "ethnicity") {
+    $("#checkbox_5").hide();
+    $("label[for='checkbox_5']").hide()
+
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Hispanic")
+    $("label[for='checkbox_3']").html("Non-Hispanic")
+    $("label[for='checkbox_4']").html("Unknown")
+
+
+    $("#checkbox_6").hide();
+    $("label[for='checkbox_6']").hide()
+
+    if ($('#category_dropdown').val() == "arrestee") {
+      $("label[for='checkbox_3']").html("Total")
+      $("#checkbox_4").hide();
+      $("label[for='checkbox_4']").hide()
+    }
+  } else if ($("#subcategory_dropdown").val() == "sex") {
+    $("#checkbox_5").hide();
+    $("#checkbox_6").hide();
+    $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_5']").hide()
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Female")
+    $("label[for='checkbox_3']").html("Male")
+    $("label[for='checkbox_4']").html("Unknown")
+
+    if ($('#category_dropdown').val() == "arrestee") {
+      $("#checkbox_4").hide();
+      $("label[for='checkbox_4']").hide()
+    }
+
+  } else if ($("#subcategory_dropdown").val() == "injury") {
+    $("#checkbox_5").hide();
+    $("label[for='checkbox_5']").hide()
+    $("#checkbox_6").hide();
+    $("label[for='checkbox_6']").hide()
+
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("No Injury")
+    $("label[for='checkbox_3']").html("Minor Injury")
+    $("label[for='checkbox_4']").html("Serious Injury")
+  } else if ($("#subcategory_dropdown").val() == "arrest_type") {
+    $("#checkbox_5").hide();
+    $("label[for='checkbox_5']").hide()
+    $("#checkbox_4").show();
+    $("label[for='checkbox_4']").show()
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("On-View Arrest")
+    $("label[for='checkbox_3']").html("Summoned/Cited")
+    $("label[for='checkbox_4']").html("Taken into Custody")
+
+
+    $("#checkbox_6").hide();
+    $("label[for='checkbox_6']").hide()
+  } else if ($("#subcategory_dropdown").val() == "age") {
+    $("#checkbox_5").hide();
+    $("label[for='checkbox_5']").hide()
+    $("#checkbox_4").show();
+    $("label[for='checkbox_4']").show()
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Adult")
+    $("label[for='checkbox_3']").html("Minor (<18 years)")
+    $("label[for='checkbox_4']").html("Unknown")
+
+    $("#checkbox_6").hide();
+    $("label[for='checkbox_6']").hide()
+  }
+}
+
 function toggle_arrest_display() {
   if ($("#subsubcategory_dropdown").val() == "Sex") {
     breakdown_name.innerText = "Sex:";
@@ -185,17 +322,17 @@ function countToRate(data, type, per_officer = false) {
     }
   }
   if (type == "prisoners") {
-    total_population_column  = "population";
+    total_population_column = "population";
     female_population_column = "population_female";
-    male_population_column   = "population_male";
+    male_population_column = "population_male";
     if ($("#prisoners_rate_adult").is(':checked')) {
-      total_population_column  = "population_adult";
+      total_population_column = "population_adult";
       female_population_column = "population_female_adult";
-      male_population_column   = "population_male_adult";
+      male_population_column = "population_male_adult";
     } else if ($("#prisoners_rate_18_65").is(':checked')) {
-      total_population_column  = "population_aged_18_65";
+      total_population_column = "population_aged_18_65";
       female_population_column = "population_female_aged_18_65";
-      male_population_column   = "population_male_aged_18_65";
+      male_population_column = "population_male_aged_18_65";
     }
 
     race_value = "total";
@@ -205,14 +342,16 @@ function countToRate(data, type, per_officer = false) {
     if (prisoner_categories[$("#crime_dropdown").val()].includes("Charge")) {
       race_value = $("#subsubcategory_dropdown").val();
     }
-
-
-      if (race_value != "total") {
-        total_population_column  += "_" + race_value;
-        female_population_column += "_" + race_value;
-        male_population_column   += "_" + race_value;
-      }
+    if (race_value != "total") {
+      total_population_column += "_" + race_value;
+      female_population_column += "_" + race_value;
+      male_population_column += "_" + race_value;
     }
+  }
+
+  if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+    population_column = data[$("#category_dropdown").val() + "_" + $("#crime_dropdown").val()]
+  }
   for (var i = 0; i < data_keys.length; i++) {
     if (!["agency", "year", "state", "population", "ORI", "school_name", "school_unique_ID", "number_of_students"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
 
@@ -229,16 +368,18 @@ function countToRate(data, type, per_officer = false) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
       } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
+      } else if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+        rate_val = data[data_keys[i]] / population_column * 100;
       } else {
         rate_val = data[data_keys[i]] / data[population_column];
         if (type != "school" && population_column !== "total_employees_officers") {
           rate_val = rate_val * 100000;
         }
         if (type == "school") {
-          rate_val = rate_val * 1000
-
+          rate_val = rate_val * 1000;
         }
       }
+
       rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
       if (!isFinite(rate_val) | data[data_keys[i]] == "") {
         rate_val = NaN;
@@ -289,7 +430,9 @@ function makeCrimeClearanceRates(data) {
 
 function getStateAgencies(type, states = state_values, largest_agencies = false) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
-
+  if (type == "nibrs") {
+    url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper_nibrs/master/data/";
+  }
   if ($("#monthly").is(':checked')) {
     type += "_monthly";
   }
@@ -336,15 +479,15 @@ function updateAgencies(type, states) {
 function main(type, states, state_default, crimes, crime_starter) {
 
   //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
-/*
-   //Calls the selectBoxIt method on your HTML select box.
-   $("select").selectBoxIt({
-     autoWidth: false,
-     dynamicPositioning: false
-   });
-  $('.simple-select').chosen();
-  resizeChosen();
-*/
+  /*
+     //Calls the selectBoxIt method on your HTML select box.
+     $("select").selectBoxIt({
+       autoWidth: false,
+       dynamicPositioning: false
+     });
+    $('.simple-select').chosen();
+    resizeChosen();
+  */
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
 
@@ -353,6 +496,13 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
     toggle_arrest_display();
   }
+
+  if (type == "nibrs") {
+    make_dropdown('#category_dropdown', nibrs_categories, "offense")
+    make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
+    toggle_nibrs_display()
+  }
+
   if (type == "jail") {
     crimes = crimes[states[$("#state_dropdown").val()]]
   }
@@ -360,8 +510,8 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
     if (type != "school") {
-    agencies = updateAgencies(type, states);
-  }
+      agencies = updateAgencies(type, states);
+    }
   }
   if (type == "death") {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
@@ -393,7 +543,7 @@ function main(type, states, state_default, crimes, crime_starter) {
 
 
   if (window.location.hash == "") {
-    change_url()
+    change_url(type)
   } else {
     change_data_from_url(type);
   }
@@ -409,11 +559,11 @@ function main(type, states, state_default, crimes, crime_starter) {
       states = prisoners_state_values
     }
   }
-  main_results  = get_data(type, states);
-  table_data    = main_results[0];
+  main_results = get_data(type, states);
+  table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
-  all_data      = main_results[3];
+  all_data = main_results[3];
 
   graph = makeGraph(type, crimes);
   $("#graph").ready($("#loader").hide());

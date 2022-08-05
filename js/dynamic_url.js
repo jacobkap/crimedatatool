@@ -1,4 +1,4 @@
-change_url = function(rate = false, subcategory_dropdown = "", subcategory_values = "") {
+change_url = function(type) {
 
   new_url = window.location.pathname +
     "#state=" + $("#state_dropdown").children("option:selected").text()
@@ -6,18 +6,23 @@ change_url = function(rate = false, subcategory_dropdown = "", subcategory_value
   dropdowns = ["#agency_dropdown", "#crime_dropdown", "#subcategory_dropdown",
     "#subsubcategory_dropdown", '#rate', '#percent_of_arrests',
     '#monthly', '#checkbox_1', '#checkbox_2', '#checkbox_3',
-    '#checkbox_4', '#checkbox_5', "#prisoners_rate", "#prisoners_rate_adult", "#prisoners_rate_18_65"
+    '#checkbox_4', '#checkbox_5', '#checkbox_6',
+    "#prisoners_rate", "#prisoners_rate_adult", "#prisoners_rate_18_65", "#percent_of_crimes",
   ]
   dropdown_labels = ["&agency=", "&category=", "&subcategory=", "&subsubcategory=",
     "&rate=", "&percent=", "&monthly=", "&checkbox_1=", "&checkbox_2=",
-    "&checkbox_3=", "&checkbox_4=", "&checkbox_1=", "&prisoners_rate_val=", "&prisoners_rate_adult=", "&prisoners_rate_18_65="
+    "&checkbox_3=", "&checkbox_4=", "&checkbox_5=", "&checkbox_6=",
+    "&prisoners_rate_val=", "&prisoners_rate_adult=", "&prisoners_rate_18_65=", "&percent_of_crimes="
   ]
   dropdown_type = ["text_selected", "value", "value", "value", "checked",
-    "checked", "checked", "checked", "checked", "checked", "checked", "checked",
-    "checked", "checked", "checked"
+    "checked", "checked", "checked", "checked", "checked", "checked", "checked", "checked",
+    "checked", "checked", "checked", "checked"
   ]
 
-
+  if (type == "nibrs") {
+    dropdowns[2] = "#category_dropdown"
+    dropdowns[3] = "#subcategory_dropdown"
+  }
 
   for (var i = 0; i < dropdowns.length; i++) {
     if ($(dropdowns[i]).length != 0) {
@@ -75,14 +80,20 @@ change_data_from_url = function(type) {
   checkbox3_val = find_url_string(split_url, "checkbox_3=")
   checkbox4_val = find_url_string(split_url, "checkbox_4=")
   checkbox5_val = find_url_string(split_url, "checkbox_5=")
+  checkbox6_val = find_url_string(split_url, "checkbox_6=")
   prisoners_rate_val = find_url_string(split_url, "prisoners_rate_val=")
   prisoners_rate_adult_val = find_url_string(split_url, "prisoners_rate_adult=")
   prisoners_rate_18_65_val = find_url_string(split_url, "prisoners_rate_18_65=")
+  percent_of_crimes_val = find_url_string(split_url, "percent_of_crimes=")
 
   checkbox = [rate_val, percent_val, monthly_val, checkbox1_val, checkbox2_val, checkbox3_val,
-     checkbox4_val, checkbox5_val, prisoners_rate_val, prisoners_rate_adult_val, prisoners_rate_18_65_val];
-  checkbox_div = ["#rate", "#percent_of_arrests", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3",
-   "#checkbox_4", "#checkbox_5", "#prisoners_rate_val", "#prisoners_rate_adult", "#prisoners_rate_18_65"];
+    checkbox4_val, checkbox5_val, checkbox6_val, prisoners_rate_val,
+    prisoners_rate_adult_val, prisoners_rate_18_65_val, percent_of_crimes_val
+  ];
+  checkbox_div = ["#rate", "#percent", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3",
+    "#checkbox_4", "#checkbox_5", "#checkbox6", "#prisoners_rate_val",
+    "#prisoners_rate_adult", "#prisoners_rate_18_65", "#percent_of_crimes"
+  ];
   for (var i = 0; i < checkbox.length; i++) {
     if (checkbox[i].length != 0) {
       temp = $.parseJSON(checkbox[i]);
@@ -90,7 +101,44 @@ change_data_from_url = function(type) {
     }
   }
 
-  $("#crime_dropdown").val(category_val);
+  if (type == "nibrs") {
+    make_dropdown("#category_dropdown", nibrs_categories, subcategory_val);
+    make_dropdown("#subcategory_dropdown", nibrs_subcategories[subcategory_val], subsubcategory_val);
+    toggle_nibrs_display();
+    current_crime = $('#crime_dropdown').val()
+    nibrs_crimes_temp = nibrs_crime_values["offense"]
+    if ($('#category_dropdown').val() == "victim") {
+      nibrs_crimes_temp = nibrs_crime_values["victim_demographics_offenses"]
+    }
+    if ($('#subcategory_dropdown').val() == "injury") {
+      nibrs_crimes_temp = nibrs_crime_values["injury_offenses"]
+    }
+    if ($('#category_dropdown').val() == "arrestee") {
+      nibrs_crimes_temp = nibrs_crime_values["arrestee_offenses"]
+    }
+    if ($('#category_dropdown').val() == "offense") {
+      nibrs_crimes_temp = nibrs_crime_values["offense"]
+    }
+    if ($('#subcategory_dropdown').val() == "gun") {
+      nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]
+    }
+
+    $("#crime_dropdown").empty();
+    $.each(nibrs_crimes_temp, function(val, text) {
+      $("#crime_dropdown").append(new Option(text, val));
+    });
+    if (_.keys(nibrs_crimes_temp).includes(current_crime)) {
+      make_dropdown('#crime_dropdown', nibrs_crimes_temp, current_crime)
+    } else {
+      make_dropdown('#crime_dropdown', nibrs_crimes_temp, _.keys(nibrs_crimes_temp)[0])
+    }
+    $("#checkbox_1").prop("checked", $.parseJSON(checkbox1_val .toLowerCase()))
+    $("#checkbox_2").prop("checked", $.parseJSON(checkbox2_val .toLowerCase()))
+    $("#checkbox_3").prop("checked", $.parseJSON(checkbox3_val .toLowerCase()))
+    $("#checkbox_4").prop("checked", $.parseJSON(checkbox4_val .toLowerCase()))
+    $("#checkbox_5").prop("checked", $.parseJSON(checkbox5_val .toLowerCase()))
+    $("#checkbox_6").prop("checked", $.parseJSON(checkbox6_val .toLowerCase()))
+  }
 
   if (type == "police") {
     toggle_display("#weaponsDiv", [0]);
@@ -137,10 +185,8 @@ change_data_from_url = function(type) {
     $('#agency_dropdown').val(agency_val);
   }
 
-  $("#subcategory_dropdown").val(subcategory_val);
   if (type == "prisoners") {
     toggle_display("#subsubcategory_dropdown_div", [1, 5])
   }
-  $("#subsubcategory_dropdown").val(subsubcategory_val);
   $('.simple-select').trigger('chosen:updated');
 };
