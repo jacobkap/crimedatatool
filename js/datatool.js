@@ -44,7 +44,7 @@ function get_rate_type(type, binary = false) {
     rate_type = "_crude_rate";
   }
 
-   if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+  if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
     rate_type = "_percent";
   }
   if (binary) {
@@ -101,9 +101,9 @@ function subsetColumns(data, columns, output, type) {
 
 function getStateData(type, states) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
-if (type == "nibrs") {
+  if (type == "nibrs") {
     url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper_nibrs/master/data/";
-}
+  }
   if ($("#monthly").is(':checked')) {
     type += "_monthly";
   }
@@ -135,7 +135,7 @@ if (type == "nibrs") {
   }
   url += ".csv";
   if (type == "nibrs") {
-    url = url.replace(/["()]/g,"");
+    url = url.replace(/["()]/g, "");
   }
 
   stateData = readCSV(url);
@@ -286,8 +286,41 @@ function getCrimeColumns(headers, type, output) {
     category_value = $("#category_dropdown").val()
 
     if ($('#subcategory_dropdown').val() == "gun") {
-        columnNames.push(category_value + "_no_gun_" + crime);
-        columnNames.push(category_value + "_gun_" + crime);
+      columnNames.push(category_value + "_no_gun_" + crime);
+      columnNames.push(category_value + "_handgun_" + crime);
+      columnNames.push(category_value + "_other_unknown_gun_" + crime);
+    }
+    if ($('#subcategory_dropdown').val() == "location") {
+      columnNames.push(category_value + "_bar_nightclub_" + crime);
+      columnNames.push(category_value + "_home_" + crime);
+      columnNames.push(category_value + "_other_unknown_location_" + crime);
+      columnNames.push(category_value + "_outside_" + crime);
+      columnNames.push(category_value + "_school_" + crime);
+    }
+    if ($('#subcategory_dropdown').val() == "clearance") {
+      columnNames.push(category_value + "_cleared_by_arrest_" + crime);
+      columnNames.push(category_value + "_death_of_suspect_" + crime);
+      columnNames.push(category_value + "_extradition_denied_" + crime);
+      columnNames.push(category_value + "_juvenile_no_custody_" + crime);
+      columnNames.push(category_value + "_prosecution_declined_" + crime);
+      columnNames.push(category_value + "_victim_refused_to_cooperate_" + crime);
+    }
+    if ($('#subcategory_dropdown').val() == "subtype" && $("#crime_dropdown").val() != "animal_cruelty") {
+      columnNames.push(category_value + "_buy_possess_consume_" + crime);
+      columnNames.push(category_value + "_sell_create_assist_" + crime);
+    }
+    if ($('#subcategory_dropdown').val() == "subtype" && $("#crime_dropdown").val() == "animal_cruelty") {
+      columnNames.push(category_value + "_abuse_torture_" + crime);
+      columnNames.push(category_value + "_animal_fighting_" + crime);
+      columnNames.push(category_value + "_bestiality_" + crime);
+      columnNames.push(category_value + "_neglect_" + crime);
+    }
+    if ($('#subcategory_dropdown').val() == "relationship") {
+      columnNames.push(category_value + "_intimate_partner_" + crime);
+      columnNames.push(category_value + "_other_family_" + crime);
+      columnNames.push(category_value + "_other_relationship_" + crime);
+      columnNames.push(category_value + "_stranger_" + crime);
+      columnNames.push(category_value + "_unknown_relationship_" + crime);
     }
     if ($('#subcategory_dropdown').val() == "injury") {
       columnNames.push(category_value + "_no_injury_" + crime);
@@ -303,17 +336,17 @@ function getCrimeColumns(headers, type, output) {
       columnNames.push(category_value + "_female_" + crime);
       columnNames.push(category_value + "_male_" + crime);
       if ($('#category_dropdown').val() != "arrestee") {
-      columnNames.push(category_value + "_unknown_sex_" + crime);
-    }
+        columnNames.push(category_value + "_unknown_sex_" + crime);
+      }
     }
     if ($('#subcategory_dropdown').val() == "race") {
       columnNames.push(category_value + "_asian_" + crime);
       columnNames.push(category_value + "_american_indian_" + crime);
       columnNames.push(category_value + "_black_" + crime);
       columnNames.push(category_value + "_white_" + crime);
-    if ($('#category_dropdown').val() != "arrestee") {
-      columnNames.push(category_value + "_unknown_race_" + crime);
-    }
+      if ($('#category_dropdown').val() != "arrestee") {
+        columnNames.push(category_value + "_unknown_race_" + crime);
+      }
     }
     if ($('#subcategory_dropdown').val() == "age") {
       columnNames.push(category_value + "_adult_" + crime);
@@ -324,10 +357,10 @@ function getCrimeColumns(headers, type, output) {
       columnNames.push(category_value + "_hispanic_" + crime);
       columnNames.push(category_value + "_not_hispanic_" + crime);
       if ($('#category_dropdown').val() != "arrestee") {
-      columnNames.push(category_value + "_unknown_ethnicity_" + crime);
+        columnNames.push(category_value + "_unknown_ethnicity_" + crime);
+      }
     }
-    }
-      crime = "hellodarknessmyoldfriend"
+    crime = "hellodarknessmyoldfriend"
   }
 
   if (["offenses", "death", "hate", "jail", "school"].includes(type)) {

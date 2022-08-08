@@ -131,7 +131,7 @@ function nibrcategoryChange() {
 
 function nibrsubcategoryChange() {
 
-  toggle_nibrs_display();
+
   current_crime = $('#crime_dropdown').val()
   nibrs_crimes_temp = nibrs_crime_values["offense"]
   if ($('#category_dropdown').val() == "victim") {
@@ -149,6 +149,9 @@ function nibrsubcategoryChange() {
   if ($('#subcategory_dropdown').val() == "gun") {
     nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]
   }
+  if ($('#subcategory_dropdown').val() == "subtype") {
+    nibrs_crimes_temp = nibrs_crime_values["subtype_offenses_main"]
+  }
 
   $("#crime_dropdown").empty();
   $.each(nibrs_crimes_temp, function(val, text) {
@@ -160,6 +163,7 @@ function nibrsubcategoryChange() {
     make_dropdown('#crime_dropdown', nibrs_crimes_temp, _.keys(nibrs_crimes_temp)[0])
   }
   agencyChangeFun('nibrs', nibrs_state_values, nibrs_crimes_temp);
+  toggle_nibrs_display();
 }
 
 function prisonerCategoryChange(current_category) {
@@ -242,6 +246,11 @@ function agencyChangeFun(type, states, crimes) {
   $('#table').empty();
   table = makeTable(type);
   change_url(type)
+
+if (type == "nibrs" && $("#subcategory_dropdown").val() == "subtype") {
+    toggle_nibrs_display();
+}
+
   $('.simple-select').trigger('chosen:updated');
 }
 

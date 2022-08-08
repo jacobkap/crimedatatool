@@ -72,10 +72,21 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       checkbox_names = ["Total", "Adult", "Minor (<18 years)", "Unknown"];
     } else if ($("#subcategory_dropdown").val() == "injury") {
       checkbox_names = ["Total", "No Injury", "Minor Injury", "Serious Injury"];
+    }  else if ($("#subcategory_dropdown").val() == "subtype" && $("#crime_dropdown").val() != "animal_cruelty") {
+      checkbox_names = ["Total", "Buy/Possess/Consume", "Sell/Create/Operate"];
+    }  else if ($("#subcategory_dropdown").val() == "subtype" && $("#crime_dropdown").val() == "animal_cruelty") {
+      checkbox_names = ["Total", "Abuse/Torture", "Animal Fighting", "Bestiality", "Neglect"];
+    } else if ($("#subcategory_dropdown").val() == "relationship") {
+      checkbox_names = ["Total", "Intimdate Partner (include exes)", "Other Family", "Other", "Stranger", "Unknown"];
+    }  else if ($("#subcategory_dropdown").val() == "location") {
+      checkbox_names = ["Total", "Bar/Nightclub", "Home", "Other/Unknown", "Outside", "School"];
     }  else if ($("#subcategory_dropdown").val() == "gun") {
-      checkbox_names = ["Total", "Gun Not Used", "Gun used"];
+      checkbox_names = ["Total", "Gun Not Used", "Handgun used", "Other/Unknown Type Gun Used"];
     } else if ($("#subcategory_dropdown").val() == "arrest_type") {
       checkbox_names = ["Total", "On-View", "Summoned/Cited", "Taken Into Custody"];
+    } else if ($("#subcategory_dropdown").val() == "clearance") {
+      checkbox_names = ["Total", "Cleared by Arrest", "Death of Suspect", "Extradition Denied",
+      "Juvenile/No Custody", "Prosecution Denied", "Victim Refused to Cooperate"];
     } else if ($("#subcategory_dropdown").val() == "total") {
       checkbox_names = ["Total"];
     } else if ($("#subcategory_dropdown").val() == "sex" && $("#category_dropdown").val() == "arrestee") {
@@ -109,6 +120,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   data4 = [];
   data5 = [];
   data6 = [];
+    data7 = [];
 
   for (var i = 0; i < data.length; i++) {
     years.push(data[i][colsForGraph[0]]);
@@ -118,6 +130,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data4.push(data[i][colsForGraph[4]]);
     data5.push(data[i][colsForGraph[5]]);
     data6.push(data[i][colsForGraph[6]]);
+        data7.push(data[i][colsForGraph[7]]);
   }
 
   if (["offenses", "alcohol", "prisoners", "arrests", "hate", "school", "nibrs"].includes(type) || type == "police" &
@@ -129,12 +142,13 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       makeGraphObjects(data3, "#92c5de", checkbox_names[2]),
       makeGraphObjects(data4, "#0571b0", checkbox_names[3]),
       makeGraphObjects(data5, "#008837", checkbox_names[4]),
-      makeGraphObjects(data6, "#000000", checkbox_names[5])
+      makeGraphObjects(data6, "#000000", checkbox_names[5]),
+      makeGraphObjects(data7, "#800080", checkbox_names[6])
     ];
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 7; i++) {
       final_data[i].hidden = false;
     }
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 7; i++) {
       if (!$("#checkbox_" + (i + 1)).is(':checked')) {
         final_data = _.filter(final_data, function(x) {
           return x.label != checkbox_names[i];

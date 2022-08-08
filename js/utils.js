@@ -137,12 +137,14 @@ function toggle_nibrs_display() {
   $("#checkbox_4").show();
   $("#checkbox_5").show();
   $("#checkbox_6").show();
+  $("#checkbox_7").show();
   $("label[for='checkbox_1']").show()
   $("label[for='checkbox_2']").show()
   $("label[for='checkbox_3']").show()
   $("label[for='checkbox_4']").show()
   $("label[for='checkbox_5']").show()
   $("label[for='checkbox_6']").show()
+  $("label[for='checkbox_7']").show()
 
   $("#checkbox_1").prop("checked", true);
   $("#checkbox_2").prop("checked", false);
@@ -150,18 +152,19 @@ function toggle_nibrs_display() {
   $("#checkbox_4").prop("checked", false);
   $("#checkbox_5").prop("checked", false);
   $("#checkbox_6").prop("checked", false);
+  $("#checkbox_7").prop("checked", false);
 
   if ($("#subcategory_dropdown").val() == "gun") {
-    $("#checkbox_4").hide();
     $("#checkbox_5").hide();
     $("#checkbox_6").hide();
-    $("label[for='checkbox_4']").hide()
+    $("#checkbox_7").hide();
     $("label[for='checkbox_5']").hide()
     $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_7']").hide()
     $("label[for='checkbox_1']").html("Total")
     $("label[for='checkbox_2']").html("Gun Not Used")
-    $("label[for='checkbox_3']").html("Gun Used")
-
+    $("label[for='checkbox_3']").html("Handgun Used")
+    $("label[for='checkbox_4']").html("Other/Unknown Type Gun Used")
   } else if ($("#subcategory_dropdown").val() == "total") {
     $("#checkbox_1").hide();
     $("#checkbox_2").hide();
@@ -169,39 +172,93 @@ function toggle_nibrs_display() {
     $("#checkbox_4").hide();
     $("#checkbox_5").hide();
     $("#checkbox_6").hide();
+    $("#checkbox_7").hide();
     $("label[for='checkbox_1']").hide()
     $("label[for='checkbox_2']").hide()
     $("label[for='checkbox_3']").hide()
     $("label[for='checkbox_4']").hide()
     $("label[for='checkbox_5']").hide()
     $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_7']").hide()
+  } else if ($("#subcategory_dropdown").val() == "location") {
+    $("#checkbox_7").hide();
+    $("label[for='checkbox_7']").hide()
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Bar/Nightclub")
+    $("label[for='checkbox_3']").html("Home")
+    $("label[for='checkbox_4']").html("Other/Unknown")
+    $("label[for='checkbox_5']").html("Outside")
+    $("label[for='checkbox_6']").html("School")
+  } else if ($("#subcategory_dropdown").val() == "subtype") {
+
+    if ($("#crime_dropdown").val() != "animal_cruelty") {
+        console.log("running animal")
+      $("#checkbox_4").hide();
+      $("#checkbox_5").hide();
+      $("#checkbox_6").hide();
+      $("#checkbox_7").hide();
+      $("label[for='checkbox_4']").hide()
+      $("label[for='checkbox_5']").hide()
+      $("label[for='checkbox_6']").hide()
+      $("label[for='checkbox_7']").hide()
+      $("label[for='checkbox_1']").html("Total")
+      $("label[for='checkbox_2']").html("Buy/Possess/Consume")
+      $("label[for='checkbox_3']").html("Sell/Create/Operate")
+    } else {
+        console.log("running other")
+      $("#checkbox_6").hide();
+      $("#checkbox_7").hide();
+      $("label[for='checkbox_6']").hide()
+      $("label[for='checkbox_7']").hide()
+      $("label[for='checkbox_2']").html("Abuse/Torture")
+      $("label[for='checkbox_3']").html("Animal Fighting")
+      $("label[for='checkbox_4']").html("Bestiality")
+      $("label[for='checkbox_5']").html("Neglect")
+    }
+  } else if ($("#subcategory_dropdown").val() == "clearance") {
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Cleared by Arrest")
+    $("label[for='checkbox_3']").html("Death of Suspect")
+    $("label[for='checkbox_4']").html("Extradition Denied")
+    $("label[for='checkbox_5']").html("Juvenile/No Custody")
+    $("label[for='checkbox_6']").html("Prosecution Declined")
+    $("label[for='checkbox_7']").html("Victim Refused to Cooperate")
+  } else if ($("#subcategory_dropdown").val() == "relationship") {
+    $("#checkbox_7").hide();
+    $("label[for='checkbox_7']").hide()
+    $("label[for='checkbox_1']").html("Total")
+    $("label[for='checkbox_2']").html("Intimate Partner")
+    $("label[for='checkbox_3']").html("Other Family")
+    $("label[for='checkbox_4']").html("Other")
+    $("label[for='checkbox_5']").html("Stranger")
+    $("label[for='checkbox_6']").html("Unknown")
   } else if ($("#subcategory_dropdown").val() == "race") {
+    $("#checkbox_7").hide();
+    $("label[for='checkbox_7']").hide()
     $("label[for='checkbox_1']").html("Total")
     $("label[for='checkbox_2']").html("Asian")
     $("label[for='checkbox_3']").html("American Indian")
     $("label[for='checkbox_4']").html("Black")
     $("label[for='checkbox_5']").html("White")
     $("label[for='checkbox_6']").html("Unknown")
-
-
     if ($('#category_dropdown').val() == "arrestee") {
       $("#checkbox_6").hide();
+      $("#checkbox_7").hide();
       $("label[for='checkbox_6']").hide()
+      $("label[for='checkbox_7']").hide()
     }
-
   } else if ($("#subcategory_dropdown").val() == "ethnicity") {
     $("#checkbox_5").hide();
+    $("#checkbox_6").hide();
+    $("#checkbox_7").hide();
     $("label[for='checkbox_5']").hide()
+    $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_7']").hide()
 
     $("label[for='checkbox_1']").html("Total")
     $("label[for='checkbox_2']").html("Hispanic")
     $("label[for='checkbox_3']").html("Non-Hispanic")
     $("label[for='checkbox_4']").html("Unknown")
-
-
-    $("#checkbox_6").hide();
-    $("label[for='checkbox_6']").hide()
-
     if ($('#category_dropdown').val() == "arrestee") {
       $("label[for='checkbox_3']").html("Total")
       $("#checkbox_4").hide();
@@ -210,8 +267,10 @@ function toggle_nibrs_display() {
   } else if ($("#subcategory_dropdown").val() == "sex") {
     $("#checkbox_5").hide();
     $("#checkbox_6").hide();
-    $("label[for='checkbox_6']").hide()
+    $("#checkbox_7").hide();
     $("label[for='checkbox_5']").hide()
+    $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_7']").hide()
     $("label[for='checkbox_1']").html("Total")
     $("label[for='checkbox_2']").html("Female")
     $("label[for='checkbox_3']").html("Male")
@@ -224,9 +283,11 @@ function toggle_nibrs_display() {
 
   } else if ($("#subcategory_dropdown").val() == "injury") {
     $("#checkbox_5").hide();
-    $("label[for='checkbox_5']").hide()
     $("#checkbox_6").hide();
+    $("#checkbox_7").hide();
+    $("label[for='checkbox_5']").hide()
     $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_7']").hide()
 
     $("label[for='checkbox_1']").html("Total")
     $("label[for='checkbox_2']").html("No Injury")
@@ -244,7 +305,9 @@ function toggle_nibrs_display() {
 
 
     $("#checkbox_6").hide();
+    $("#checkbox_7").hide();
     $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_7']").hide()
   } else if ($("#subcategory_dropdown").val() == "age") {
     $("#checkbox_5").hide();
     $("label[for='checkbox_5']").hide()
@@ -256,7 +319,9 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_4']").html("Unknown")
 
     $("#checkbox_6").hide();
+    $("#checkbox_7").hide();
     $("label[for='checkbox_6']").hide()
+    $("label[for='checkbox_7']").hide()
   }
 }
 
