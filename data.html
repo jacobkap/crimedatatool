@@ -53,44 +53,34 @@
 
     <article class="post">
 
+          If you would like to access any of the data that I previously made
+          publicly available, you must fill out this <a href="https://forms.gle/aaFPBkMNUQtQWs5F9">
+            application</a>. The data are not available any other way.
 
-
-
-        <p>This site is run entirely by me, Jacob Kaplan.  I am currently
-          a researcher at the Princeton School of
-            Public and International Affairs. I earned
-          both my PhD and Master's degree in the crimininology department at
-          Penn. My primary research focuses on using quasi-experimental designs
-          to quantitatively analyze criminal justice policies. Lately, my
-          research portfolio has been focused on the criminology of place,
-          specifically on how physical security devices - such as outdoor
-          lights - can affect crime. I've also studied a range of topics
-          including whether more police officers can reduce crime,
-          simulating whether firing "bad apples" will substantially
-          reduce complaints against the police, examining public
-          perceptions of the accuracy of forensic evidence, and how
-          decriminalizing marijuana affects serious domestic violence.
-          <br><br>
-          I also have significant experience in the programming
-          language R and have written the introductory R book
-          <a href="https://crimebythenumbers.com/">
-            Crime by the Numbers</a> to teach others. I have written several R
-          packages including ones that create dummy rows and columns,
-          predict race from surnames, handle the FBI's crime data API,
-          and read a common data format for government
-          data - fixed-width ASCII files - into R.
-<br>
-        <p>This site makes it easy for people to analyze crime-related data.
-          Select a page in the Data Tool dropdown to look at the type of data
-          you're interested in.  </p>
-<!--
-
--->
     </article>
   </div>
 
   <div class="footer-wrap"></div>
 
+
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
 
 </body>
 

@@ -30,10 +30,828 @@
   <div class="navigation-wrapper"></div>
 
   <div id="main" role="main">
-    <!-- Adds in the about me stuff and links -->
+    <h1 id="common_questions">
+      <a href="index.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a>
+    </h1>
+
+    <button class="accordion">Analyzing data over time</button>
+    <div class="panel">
+      <p>Each year of UCR/NIBRS data has different agencies reporting.
+        The overall trend is that more agencies report over time, though
+        this is not always true (e.g. Florida stopped reporting most data
+        in the 1990s). So if you have data that covers more than one year,
+        make sure you are only analyzing the same agencies each year.
+        Even within the same year some agencies don't report for 12
+        months, meaning they are not comparable to agencies that do.
+        This likely means removing agencies that don't report every
+        month of every year of your study period.
+      </p>
+    </div>
+
+    <button class="accordion">Why are there be negative numbers (is this an error)?</button>
+    <div class="panel">
+      <p>Negative numbers can happen in UCR data and are correct, not a
+        data issue. UCR data is reported by police monthly and if they
+        discover that a previous month was incorrect they don't alter
+        the incorrect month to remove that reported crime, they report
+        a negative crime in the current month so the annual crime count
+        will be correct. For example, consider an agency that reports
+        a burglary in January and then in June discover that the burglary
+        didn't actually occur. In June they will report -1 burglaries.
+        In practice it's rare to see negative numbers since the number
+        of actual crimes in a month often outweights the number of corrections,
+        but it is possible and is not an error. Converting negative numbers to
+        missing values is not correct. See more on pages 82-83
+        of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's
+          Manual for UCR data</a>. </p> 
+      </p>
+    </div>
+
+    <button class="accordion">Misspellings in column names</button>
+    <div class="panel">
+      <p>I release the data as .dta (Stata) files which has a 32 character
+        limit for column names. Therefore I sometimes have to abbreviate
+        column names to meet this limit. Most misspellings you see in the
+        column names are intentional to meet this requirement.
+      </p>
+    </div>
+
+    <button class="accordion">Source of FIPS codes</button>
+    <div class="panel">
+      <p>
+        <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html">
+          FIPS codes</a>
+        are US Census unique identifiers (within state) for
+        geographic areas including state, county, and "place" (i.e. city).
+        They are useful when merging with other datasets such as the US Census
+        or other government datasets. These identifiers are not in the UCR
+        data originally so I added them by merging the UCR data to the
+        Law Enforcement Agency Identifiers Crosswalk (LEAIC) that
+        <a href="https://www.icpsr.umich.edu/web/pages/NACJD/index.html">
+          NACJD</a> produced (for more info on this dataset please see
+        the Learning Guide on it that I made for NACJD
+        <a href="https://www.icpsr.umich.edu/web/pages/NACJD/guides/leaic/index.html">
+          Here</a>). I merged the LEAIC and UCR data by matching on the ORI
+        (unique agency identifier code) variable.
+      </p>
+    </div>
+
+
+
+
+
+    <h1 id="alcohol">
+      <a href="index.html#alcohol" style="text-decoration: none; color: black">Alcohol</a>
+    </h1>
+
+    <button class="accordion">Where is the data from?</button>
+    <div class="panel">
+      <p>This data is from the Apparent Per Capita Alcohol Consumption:
+        National, State, and Regional Trends
+        1977-2016 report produced by Sarah P. Haughwout and Dr. Megan E.
+        Slater at the National Institute
+        on Alcohol Abuse and Alcoholism. The Data page of this site has a
+        link to download he data. For the
+        original report, click
+        <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here</a>
+      </p>
+    </div>
+
+    <button class="accordion">How was per capita alcohol consumption determined?</button>
+    <div class="panel">
+      <p>For a complete methodology please see the actual report
+        <a href="https://pubs.niaaa.nih.gov/publications/surveillance110/CONS16.htm">here.</a> The
+        authors determined the amount of alcohol consumed (originally
+        measured in gallons of ethanol
+        - pure alcohol) through sales data or tax information for each
+        state-year. Population data
+        for how many people age 14 and up live in each state was acquired
+        from the CDC WONDER data.
+        Ethanol was divided by population to determine per capita consumption.
+      </p>
+    </div>
+
+    <button class="accordion">Why is the "Total Drinks" column not equal the
+      sum of the individul drink categories?</button>
+    <div class="panel">
+      <p>The original report provides an equation to convert the amount of
+        total ethanol consumed into a
+        "total drinks" variable so I used that to make that variable. For the
+        individual drink categories
+        (beer, shots of liquor, and glasses of wine), it provides an equation
+        to convert the amount of
+        ethanol consumed into the amount of alcohol. I then converted this to
+        number of drinks for each
+        category based on the National Institute of Health's
+        <a href="https://www.niaaa.nih.gov/alcohol-health/overview-alcohol-consumption/what-standard-drink">page</a>
+        saying how many ounces of alcohol make up a drink for those categories.
+        Therefore, the sum of the categories
+        is slightly different than the "total drinks" column.
+      </p>
+    </div>
+
+    <h1 id="arrest">
+      <a href="index.html#arrest" style="text-decoration: none; color: black">Arrest</a>
+    </h1>
+
+    <button class="accordion">Where is the data from?</button>
+    <div class="panel">
+      <p>This data is from the FBI's Arrests by Age, Sex, and Race data
+        which is part of the Uniform Crime Reporting (UCR) Program.
+        This data provides the number of arrests that occurred in a city
+        in any given year and breaks that down by age
+        (adult or juvenile), race, and gender. </a></p>
+    </div>
+
+    <button class="accordion">Why does it say 'cannabis' instead of 'marijuana'?</button>
+    <div class="panel">
+      <p>I try to keep data on this site consistent with the data I have
+        published on openICPSR and I
+        call it 'cannabis' there. I do so only because the programming language
+        Stata limits columns to 32 characters
+        and 'cannabis' is a shorter word than 'marijuana'. </a></p>
+    </div>
+
+    <button class="accordion">Why doesn't it show arrests by ethnicity
+      (Hispanic/Not Hispanic)?</button>
+    <div class="panel">
+      <p>This data does not show arrests broken down by if the arrestee is
+        Hispanic or not. </a></p>
+    </div>
+
+
+
+    <h1 id="border_patrol">
+      <a href="index.html#border_patrol" style="text-decoration: none; color: black">Border Patrol</a>
+    </h1>
+
+    <button class="accordion">Where is the data from?</button>
+    <div class="panel">
+      <p>See <a href="http://doi.org/10.3886/E109522V2">here.</a></p>
+    </div>
+
+
+    <h1 id="crime">
+      <a href="index.html#crime" style="text-decoration: none; color: black">Crime</a>
+    </h1>
+
+
+    <button class="accordion">Where is the data from?</button>
+    <div class="panel">
+      <p>This data is from the FBI's Offenses Known and Clearances by
+        Arrest data which is part of the
+        Uniform Crime Reporting (UCR) Program. This data provides the
+        number of crimes that occurred
+        in a city in any given year and how many of those crimes were cleared.</a></p>
+    </div>
+
+
+    <button class="accordion">Why did rape go up starting in 2013?</button>
+    <div class="panel">
+      <p>Starting in 2013, rape has a new, broader definition in the UCR to include oral and anal
+        penetration (by a body part or object) and allow men to be victims.
+        The previous definition included only forcible intercourse against a woman. As this revised
+        definition is broader than the original one, more rapes are reported (
+        social changes may also be partly responsible as they could encourage victims to report more).
+        This definitional change makes post-2013 rape data non-comparable to
+        pre-2013 data.
+      </p>
+    </div>
+
+    <button class="accordion">The data says there were 0 crimes but I know
+      that a crime happened. Why does it say 0?</button>
+    <div class="panel">
+      <p>This data doesn't differentiate between a "real zero" and a "not
+        reported zero". If an agency
+        doesn't report any crimes (even if crimes did occur), the data will
+        say zero crimes occurred.
+        Even though the data indicates how many months of the year that agency
+        reported, that doesn't
+        necessarily mean that they reported fully. An agency that reports all
+        12 months of the year
+        may still report only incomplete data. Agencies can report partial
+        data each month and still
+        be considered to have reported that month. Chicago, for example,
+        reports every month but
+        until the last few years didn't report any rapes.</p>
+    </div>
+
+    <button class="accordion">Does this include all crimes reported? (Hierarchy Rule)</button>
+    <div class="panel">
+      <p>No, this data only includes the most serious crime in an incident
+        (except for motor vehicle
+        theft which is always included). For incidents where most the one
+        crime happens (for example,
+        a robbery and a murder), only the more serious (murder in this case)
+        will be counted. This is
+        called the Hierarchy Rule. See more on pages 10-12 of the
+        <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's
+          Manual for UCR data</a> which details the Hierarchy Rule.
+      </p>
+    </div>
+
+    <button class="accordion">If this data only includes the most serious crime in an incident,
+      how reliable is the data? (Does the Hierarchy Rule mess up our data?)</button>
+    <div class="panel">
+      <p>Though the Hierarchy Rule does mean this data is an undercount, data
+        from other sources
+        indicate it isn't much of an undercount. The FBI's other data set,
+        the National Inicident-Based
+        Reporting System (NIBRS) contains every crime that occurs in an
+        incident (i.e. it doesn't
+        use the Hierarchy Rule). Using this we can measure how many crimes
+        the Hierarchy Rule excludes
+        (Most major cities do not report to NIBRS so what we find in NIBRS
+        may not apply to them).
+        In over 90% of incidents, only one crime is committed. Additionally,
+        when people talk about
+        "crime" they usually mean murder which, while incomplete to discuss
+        crime, means the UCR
+        data here is accurate on that measure.</p>
+    </div>
+
+    <button class="accordion">What about crimes not reported to the police?</button>
+    <div class="panel">
+      <p>A major limitation (in my opinion the most important limitation) to the data here is that it
+        doesn't include crimes not reported to police. Based on victimization surveys that ask people
+        both if they were victimized and if they reported that crime, we know that the majority of
+        crimes are not reported. This probably won't matter when looking at a single city for a short
+        period of time - the population won't change too much so even underreporting of crime will be
+        consistent underreporting. The issue becomes serious when looking at a city with major population
+        changes or comparing multiple cities as their population may have very different reporting
+        practices. There's no easy solution here but it is an important aspect of understanding crime
+        data that you should keep in mind. For a full breakdown of reporting rates broken down by
+        crime and a number of characteristics about the crime and victim (and reasons for not
+        reporting), see Tables 91-105 (pages 98-114) in <a href="https://www.bjs.gov/content/pub/pdf/cvus08.pdf">
+          this report on the National Crime Victmization Survey from 2008.</a></p>
+    </div>
+
+    <button class="accordion">Should I use the crime count or crime rate?</button>
+    <div class="panel">
+      <p>Using the rate helps deal with population changes that could lead to changes in crime merely
+        because of that change but it isn't without its drawbacks. The main drawback with using a
+        rate is that it assumes equal risk of victimization, which we know isn't correct. For example,
+        when looking at rape, a crime that affects 6 times as many women as men (according to the
+        <a href="https://www.bjs.gov/content/pub/pdf/cv16re.pdf">2016 National Crime Victimation
+          Survey Table 6, page 9</a>), yet the rate is based on total population in that city
+        (the UCR does not differentiate victims by gender but other data sets, such as NIBRS
+        do, allowing for better rates.). Other crimes require even more granular rates. Murder
+        victims are predominantly young men, but this differs by type of murder - domestic
+        violence victims are mostly women. Also, consider that population comes from those who
+        live in the city and doesn't include people like tourists or people who work in that
+        city but live elsewhere yet can still be victimized in the city. So while rates are
+        probably better than counts as it lets you control for population, consider exactly
+        who that population is, and how risk changes within that population.
+      </p>
+    </div>
+
+    <button class="accordion">What are index crimes?</button>
+    <div class="panel">
+      <p>Index crimes (sometimes called Part I crimes) are a collection of eight crimes often divided
+        between Violent Index Crimes (murder, rape, robbery, and aggravated assault (assault with a
+        weapon or causing serious bodily injury)) and Property Index Crimes (burglary, theft, motor
+        vehicle theft, and arson (however arson is not available in this data set)). When people discuss
+        "crime" they are often referring to this collection of crimes. One major drawback of this is
+        that it gives equal weight to each crimes. For example, consider if New York City has 100 fewer
+        murders and 100 more thefts this year than last year (and all other crimes didn't change). Their
+        total index crimes would be the same but this year would be far safer than last year. For complete
+        definitions of each crime, please see the FBI's <a href="https://www.ucrdatatool.gov/offenses.cfm">definitions page.</a></p>
+    </div>
+
+    <button class="accordion">Why are index crimes a poor measure of crime?</button>
+    <div class="panel">
+      <p>The biggest problem with index crimes is that it is simply the sum
+        of 8 (or 7 since arson data usually isn't available) crimes.
+        Index crimes have a huge range in their seriousness - it includes
+        both murder and theft.This is clearly wrong as
+        100 murders is more serious than 100 thefts. This is especially a
+        problem as less serious crimes (theft mostly) are far more
+        common than more serious crimes (in 2017 there were 1.25 million violent
+        index crimes in the United States. That same year had 5.5 million thefts.).
+        So index crimes undercount the seriousness of crimes. Looking at total
+        index crimes is, in effect, mostly just looking at theft.</p>
+      <br>
+      <p>This is especially a problem because it hide trends in violent crimes.
+        San Francisco, as an example, has had a huge increase in
+        index crimes in the last several years. When looking closer, that
+        increase is driven almost entirely by the near doubling of theft since 2011. During
+        the same years, violent crime has stayed fairly steady. So the city
+        isn't getting more dangerous but it appears like it is due to just looking at
+        total index crimes.
+      </p>
+      <br>
+      <p>While many researchers divide index crimes into violent and nonviolent
+        categories, which helps but even this isn't entirely sufficient.
+        Take Chicago as an example. It is a city infamous for its large number
+        of murders. But as a fraction of
+        index crimes, Chicago has a rounding error worth of murders. Their 653
+        murders in 2017 is only 0.5% of total index crimes. For violent index crimes,
+        murder makes up 2.2%. What this means is that changes in murder are very
+        difficult to detect. If Chicago had no murders this year, but a less
+        serious crime (such as theft) increased
+        slightly, we couldn't tell from looking at the number of index crimes.
+      </p>
+    </div>
+
+    <h1 id="death">
+      <a href="index.html#death" style="text-decoration: none; color: black">Death</a>
+    </h1>
+
+
+    <button class="accordion">Where is the data from?</button>
+    <div class="panel">
+      <p>This data comes from the Center for Disease Control and Prevention's
+        (CDC) WONDER data and provides
+        the number of deaths for several cause of death categories for each state.</p>
+    </div>
+
+    <button class="accordion">What are age-adjusted rates?</button>
+    <div class="panel">
+      <p>The following is the CDC's definition of age-adjusted rates from
+        <a href="https://wonder.cdc.gov/wonder/help/faq.html#6">this page.</a>
+      </p>
+      <blockquote>The rates of almost all causes of disease, injury, and death vary by age. Age
+        adjustment is a technique for "removing" the effects of age from crude rates so as to
+        allow meaningful comparisons across populations with different underlying age structures.
+        For example, comparing the crude rate of heart disease in Florida with that of California
+        is misleading, because the relatively older population in Florida leads to a higher crude
+        death rate, even if the age-specific rates of heart disease in Florida and California were
+        the same. For such a comparison, age-adjusted rates are preferable. </blockquote>
+    </div>
+
+    <button class="accordion">Why are some values missing?</button>
+    <div class="panel">
+      <p>The CDC does not report death counts when there are fewer than 16
+        deaths in that category. They do this both for confidentiality of
+        the deceased and to avoid the misuse of rates caused by such a
+        small numerator.</p>
+    </div>
+
+    <h1 id="hate_crime">
+      <a href="index.html#hate_crime" style="text-decoration: none; color: black">Hate Crime</a>
+    </h1>
+
+
+    <button class="accordion">Where is the data from?</button>
+    <div class="panel">
+      <p>This data is from the FBI's Hate Crime dataset that they
+        release annually since the early 1990s. The data shown on this
+        website is only a small subset of the variables available in the
+        dataset. </p>
+    </div>
+
+    <button class="accordion">What is the most common mistake people make with this data?</button>
+    <div class="panel">
+      <p>Using it.</p>
+    </div>
+
+    <button class="accordion">WARNING: This data is very flawed</button>
+    <div class="panel">
+      <p>This dataset is the most flawed of all of the UCR datasets.
+        While the main problems are simply an exacerbated version of
+        of dataset problems in other UCR data - low reporting rates among agencies,
+        only including reported crimes (and many hate crimes are not reported to police),
+        changing definitions of what counts as a hate crime, different agencies
+        reporting each year - the MAJOR problem is that people use this data
+        incredibly irresponsibly. A huge amount of research using this data
+        don't even acknowledge these problems and just naively use the data as
+        if it had no issues. The problems are discussed in more detail below but
+        the main takeaway is that this data is not appropriate for policy analysis. </p>
+    </div>
+
+    <button class="accordion">Where is the FBI manual on this data?</button>
+    <div class="panel">
+      <p>The manual is available on
+        <a href="https://www.fbi.gov/file-repository/ucr/ucr-hate-crime-data-collection-guidelines-training-manual-02272015.pdf/view">
+          this page.</a>
+      </p>
+    </div>
+
+    <button class="accordion">What is a hate crime?</button>
+    <div class="panel">
+      <p>In this data a hate crime is defined as a "normal" crime (or in
+        other words a crime already collected by UCR or NIBRS in their
+        normal reporting) where the victim was chosen because of the victims
+        group or status. For example, vandalism is a crime already included
+        in NIBRS data. If the vandalism occurred because of the victim's group
+        or status, such as vandalizing a synagogue due to bias against Jews, that
+        would be considered a hate crime. Animal cruelty was not a NIBRS crime
+        until 2018 so for years prior to that would not count as a hate crime. For
+        example, if a person poisoned a Black person's dog because of their bias against
+        Black people (and not just personal opposition towards this individual), it would
+        not be a hate crime if committed before 2018. So this data is not inclusive of
+        even all hate crimes reported to police, only ones that have a crime type already
+        reported to the FBI. Note that the hate crime is for the perceived victim
+        group even if that perception is wrong. In the FBI manual they
+        give the example of a hate crime against an Indian man who the offenders
+        believe is Black. This is reported as an anti-Black hate crime. </p>
+    </div>
+
+    <button class="accordion">What should this data NOT be used for?</button>
+    <div class="panel">
+      <p>This data should not be used for anything in the following
+        (incomplete) list:
+        <br>
+      <ul>
+        <li>Aggregating to a larger geography than the reporting agency
+          (ESPECIALLY TO THE NATIONAL LEVEL)</li>
+        <li>Comparing agencies</li>
+        <li>Aggregating to total hate crimes per agency</li>
+        <li>Looking at hate crimes of a specific bias motivation within a single agency
+          over time without verifying that this bias motivation was reported for
+          all years</li>
+        <li>Imputing missing data</li>
+        <li>Assuming that underreporting is consistent across time and place.</li>
+      </ul>
+      </p>
+    </div>
+
+    <button class="accordion">What should this data be used for?</button>
+    <div class="panel">
+      <p>The only thing you should do to use this data properly is
+        look at hate crimes of the same bias motivation (e.g. anti-Jewish,
+        anti-Black) in the same agency over time (assuming the agency reports
+        the same months each year) and assuming that the bias motivation
+        has been reported by that agency every year. </p>
+    </div>
+
+    <button class="accordion">Is it a good idea to aggregate over geographies?</button>
+    <div class="panel">
+      <p>No. The problem with this is that few agencies report so aggregating
+        would exclude a lot of agencies that are actually in that geography
+        but don't report. To my opinion there is no good way to impute missing
+        hate crime data so any attempt to do so will be very flawed and give incorrect
+        results. Every year when the FBI releases the report on this data the news
+        and many academics will just aggregate all reporting agencies to the national
+        level (ignoring all the missing agencies) and pretend that this is an
+        accurate count of national hate crimes. This
+        is a terrible idea and gives very inaccurate counts of hate crimes. </p>
+    </div>
+
+    <button class="accordion">Is it a good idea to compare hate crimes
+      across agencies?</button>
+    <div class="panel">
+      <p>No. Not all agencies report for all months of the year or even for
+        all bias motivations so they're often not comparable. Additionally,
+        since the opportunity to commit a hate crime (i.e. the number of people
+        of a particular victim group) differs between cities, differences across
+        cities in hate crimes may be due to differences in opportunity, not hate. </p>
+    </div>
+
+    <button class="accordion">Is it a good idea to compare hate crimes
+      across time?</button>
+    <div class="panel">
+      <p>Generally no. The FBI has added new bias motivations over time
+        so there is artificially an increase in hate crimes just due to this.
+        For example, if 10 transgender people (one of the bias motivations
+        that hasn't always been included as a reportable bias motivation) are always
+        the victim of a hate crime in a particular agency, the year that this becomes
+        an accepted motivation, the agency starts reporting an extra 10 hate crimes
+        per year. But in reality hate crime was consistent across time. </p>
+    </div>
+
+    <button class="accordion">Why do some bias motivations have zero for many
+      years then start having hate crimes?</button>
+    <div class="panel">
+      <p>There are three reasons this could be. First, the agency may have
+        gotten reports but not submitted hate crimes of those bias motivations.
+        Second, they may have never received a complaint for this bias motivation
+        prior to this year. Third, the FBI has increased the number of bias motivations
+        they accepted so this may be one of this bias motivations. Prior to the
+        accepted year, these would always be marked as zero reports. Note that in these
+        cases not all agencies start reporting these motivations in the same year as
+        the FBI accepts them. </p>
+    </div>
+
+    <button class="accordion">Are police agencies required to submit this data?</button>
+    <div class="panel">
+      <p>No, reporting this data, like all UCR data, is voluntary. Some states
+        do require that their agencys report UCR data but this is no national
+        requirement. And even in these mandatory states not all agencies report.</p>
+    </div>
+
+    <button class="accordion">Are hate crimes a good measure of hate?</button>
+    <div class="panel">
+      <p>No, like all crimes hate crimes are dependent on opportunity - though
+        hate crimes have more variation in opportunity than other crimes.
+        Consider, for example, a city with 10% Black population and one with 50%
+        Black population. If anti-Black sentiment and willingness to attack
+        Black people for their race is the same in each city, in the second city
+        there is about five times as many opportunities as in the first cities
+        to offend. So even if anti-Black hate is identical in both cities, we'd
+        expect there to be many more anti-Black hate crimes in the second city. This can
+        be particially alleviated by using rates per victim group using Census data but
+        that's still flawed since you'd likely only get decennial Census data and the Census
+        doesn't collect all victim type info.</p>
+    </div>
+
+    <h1 id="police">
+      <a href="index.html#police" style="text-decoration: none; color: black">Police</a>
+    </h1>
+
+
+    <button class="accordion">Where is the data from?</button>
+    <div class="panel">
+      <p>This data is from the FBI's Law Enforcement Officers Killed and
+        Assaulted (LEOKA) data which is part of the Uniform
+        Crime Reporting (UCR) Program. This data provides information about
+        how many employees (civilian and officers)
+        are at a given agency. It also says how many officers were assaulted
+        for a number of different categories of assault.</a></p>
+    </div>
+
+    <button class="accordion">Why are there no female police officers until
+      1971?</button>
+    <div class="panel">
+      <p>Prior to 1971 the data did not breakdown employees by gender. The
+        years 1960-1970 put the number of total
+        employees in the male employees column
+        (and a value of 0 in the female employees column). </p>
+    </div>
+
+    <h1 id="prison">
+      <a href="index.html#prison" style="text-decoration: none; color: black">Prison</a>
+    </h1>
+
+
+    <button class="accordion">Where is the prison data from?</button>
+    <div class="panel">
+      <p>The three categories that say the inmate's Most Serious Charge come from the
+        <a href="https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37021/datadocumentation">National
+          Corrections Reporting Program (NCRP)</a> which provides data on how many people are incarcerated,
+        admitted, or released from prison that year. This is divided by the most serious crime they are
+        convicted of, race/ethnicity, and gender. All other categories are from the
+        <a href="https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37003">National Prisoner
+          Statistics (NPS)</a> data which has different information than the NCRP and more years
+        available. Unlike the NCRP, the NPS has totals for the federal prison system, the state
+        prison system, and the combined US as a whole. Some states and some years do not have
+        information for some variables so you will likely see many missing values in this data.
+      </p>
+    </div>
+
+    <button class="accordion">Where is the population data from?</button>
+    <div class="panel">
+      <p>All of the population data comes from the United States Census. For the years 2001-2016, I use
+        the annual American Community Survey which is a census data set that samples 1% of the population.
+        For the other years I use the decennial census and linearly impute for the years between the
+        censuses. As such, please be aware that these population values are only estimates. </p>
+    </div>
+
+    <button class="accordion">What is wrong with the % of population aged 18-65 data?</button>
+    <div class="panel">
+      <p>I included this because most people incarcerated in prison are between these ages. However,
+        not all are in these age groups meaning that this is almost certainly an over estimate. As
+        such you should use the rates as estimates, NOT precise rates.</p>
+    </div>
+
+    <button class="accordion">What is the difference between custody and jurisdiction?</button>
+    <div class="panel">
+      <p>As per the National Prisoner Statistics codebook, available to
+        download <a href="https://www.icpsr.umich.edu/icpsrweb/NACJD/studies/37003">here</a></p>
+      <blockquote>As states and the Federal Bureau of Prisons increased their
+        use of local jails and interstate compacts to house inmates, NPS began
+        asking states to report a count of inmates under the jurisdiction or
+        legal authority of state and federal adult correctional officials in
+        addition to their custody counts.
+        Since 1977, the jurisdiction count has been the preferred measure.
+        This count includes all state and federal inmates held in a public or
+        private prison (custody) and those held in jail facilities either
+        physically located inside or outside of the state of legal responsibility, and
+        other inmates who may be temporarily out to court or in transit from
+        the jurisdiction of legal authority to the custody of a confinement
+        facility outside that jurisdiction.
+        The difference between the total custody count and the jurisdiction
+        count was small (approximately 7,000) when both were first
+        collected in 1977. As more states began to report jurisdiction counts
+        and more states began to rely on local and privately operated
+        facilities to house inmates, the difference increased. At yearend
+        2016 the jurisdiction population totaled 1,506,800 while the custody
+        population totaled 1,293,887.</blockquote>
+    </div>
+
+    <h1 id="school">
+      <a href="index.html#school" style="text-decoration: none; color: black">School</a>
+    </h1>
+
+    <button class="accordion">Where is the school data from?</button>
+    <div class="panel">
+      <p>All of this data comes from the Department of Education Office of
+        Postsecondary Education which collects crime data from colleges and
+        releases them publicly. Their website is
+        <a href="https://ope.ed.gov/campussafety/#/">here</a>. While their
+        site does allow you to look at a single
+        school's data, it only shows the prior three years and only as tables.
+        For a comprehensive look at the data codebook, please see their PDF
+        <a href="https://www2.ed.gov/admins/lead/safety/handbook.pdf">here</a>
+      </p>
+    </div>
+
+    <button class="accordion">What do the locations mean?</button>
+    <div class="panel">
+      <p>As per the Department of Education definitions, available
+        <a href="https://ope.ed.gov/campussafety/#/">here</a>
+      </p>
+      <blockquote><b>Not on Campus: </b>(1) Any building or property owned or
+        controlled by a student organization that is officially recognized by
+        the institution; or (2) Any building or property owned or controlled
+        by an institution that is used in direct support of, or in relation to,
+        the institution's educational purposes, is frequently used by students,
+        and is not within the same reasonably contiguous geographic area of
+        the institution.</blockquote>
+      <blockquote><b>On Campus - Total: </b>(1) Any building or property owned
+        or controlled by an institution within the same reasonably contiguous
+        geographic area
+        and used by the institution in direct support of, or in a manner related
+        to, the institution's educational purposes, including residence halls; and (2) Any
+        building or property that is within or reasonably contiguous to paragraph
+        (1) of this definition, that is owned by the institution but controlled by another
+        person, is frequently used by students, and supports institutional
+        purposes (such as a food or other retail vendor).</blockquote>
+      <blockquote><b>On Campus - Student Housing: </b>Any student housing
+        facility that is owned or controlled by the institution, or is located
+        on property that is
+        owned or controlled by the institution, and is within the reasonably
+        contiguous geographic area that makes up the campus is considered an on-campus student
+        housing facility.</blockquote>
+      <blockquote><b>Public Property: </b>All public property, including
+        thoroughfares, streets, sidewalks, and parking facilities, that is within
+        the campus, or immediately adjacent to and accessible from the campus.</blockquote>
+      <b>Total: </b>This is the sun of Not on Campus, On Campus - Total, and Public Property.
+      </p>
+    </div>
+
+    <button class="accordion">Why don't crime categories overlap between
+      crimes and arrests?</button>
+    <div class="panel">
+      <p>There are different rules for which offenses are included when
+        an offense is committed and a person is arrested so these categories
+        do not necessarily overlap.</p>
+    </div>
+
+    <button class="accordion">Why aren't sexual offenses included in the
+      Disciplinary Actions category?</button>
+    <div class="panel">
+      <p>There are different rules for which offenses are included when an
+        offense is committed and a disciplinary actions are taken so these categories
+        do not necessarily overlap. As sexual offenses are not included in
+        the required categories for disciplinary action, they is not available in the data. </p>
+    </div>
+
+    <button class="accordion">Is there overlap for arrests and disciplinary
+      actions?</button>
+    <div class="panel">
+      <p>No, if a person is arrested and then given disciplinary actions by
+        the scohol, only the arrest is counted.</p>
+    </div>
+
+    <button class="accordion">What does Disciplinary Action mean?</button>
+    <div class="panel">
+      <p>This is when a person is referred to the school for a "disciplinary
+        action" though the action does not need to actually take place and
+        the data does not specify which action is referred or the outcome of
+        that referral .</p>
+    </div>
+
+    <button class="accordion">What is a Sexual Offense - Forcible and a
+      Sexual Offense - Non-forcible?</button>
+    <div class="panel">
+      <p>
+      <ul>
+        <li><b>Sexual Offense - Forcible</b> is the sum of rape and fondling.</li>
+        <li><b>Sexual Offense - Non-forcible</b> is the sum of incest and statutory rape.</li>
+        <li><b>Sexual Offense - Total</b> is the sum of Sexual Offense -
+          Forcible and Sexual Offense - Non-forcible.</li>
+      </ul>
+      For definitions of each individual crimes please see the Department of
+      Education's codebook <a href="https://www2.ed.gov/admins/lead/safety/handbook.pdf">here</a>
+      </p>
+    </div>
+
+    <button class="accordion">Are hate crimes consistently reported?</button>
+    <div class="panel">
+      <p>No, the hate crime data unwent a series of changes in how the data
+        was collected. The crimes theft, intimidation, and
+        vandalism/destruction of property
+        only started being reported in 2009. Starting in 2014, "gender identity"
+        was added as a possible bias motivation while in the same
+        year the "ethnicity or national origin" bias motivation was split into
+        either "ethnicity" or "national origin" bias motivations.
+        This means that you should be cautious when looking at total hate crime
+        changes as certain crimes/bias motivations were not included until recently. </p>
+    </div>
+
+    <button class="accordion">Why are there no rapes before 2014?</button>
+    <div class="panel">
+      <p>This data set did not collect information on the number of rape,
+        fondling, incest, or statutory rape crimes until 2014.
+        Instead, it grouped rape and fondling as Sexual Offense - Forcible,
+        and incest and statutory rape as Sexual Offense - Non-forcible.
+      </p>
+    </div>
+
+    <button class="accordion">What do the Violence Against Women Act subcategories mean?</button>
+    <div class="panel">
+      <p>
+      <p>As per the Department of Education definitions,
+        available <a href="https://ope.ed.gov/campussafety/#/">here</a></p>
+      <blockquote><b>Dating Violence: </b>Violence committed by a person
+        who is or has been in a social relationship of a romantic or
+        intimate nature with the victim. The existence of such a relationship
+        shall be determined based on the reporting party’s
+        statement and with consideration of the length of the relationship,
+        the type of relationship, and the frequency of interaction
+        between the persons involved in the relationship. For the purposes
+        of this definition—
+        <ul>
+          <li>Dating violence includes, but is not limited to, sexual or
+            physical abuse or the threat of such abuse.</li>
+          <li>Dating violence does not include acts covered under the
+            definition of domestic violence.</li>
+        </ul>
+      </blockquote>
+      <blockquote><b>Domestic Violence: </b>A felony or misdemeanor crime
+        of violence committed—
+        <ul>
+          <li>By a current or former spouse or intimate partner of the victim;</li>
+          <li>By a person with whom the victim shares a child in common;</li>
+          <li>By a person who is cohabitating with, or has cohabitated with,
+            the victim as a spouse or intimate partner;</li>
+          <li>By a person similarly situated to a spouse of the victim under
+            the domestic or family violence laws of the jurisdiction</li>
+        </ul>
+        in which the crime of violence occurred, or by any other person
+        against an adult or youth victim who is protected from
+        that person’s acts under the domestic or family violence laws of the
+        jurisdiction in which the crime of violence occurred.
+      </blockquote>
+      <blockquote><b>Stalking: </b>Engaging in a course of conduct directed at
+        a specific person that would cause a reasonable person to—
+        <ul>
+          <li>Fear for the person’s safety or the safety of others; or</li>
+          <li>Suffer substantial emotional distress.</li>
+        </ul>
+      </blockquote>
+      </p>
+    </div>
+
+    <button class="accordion">Is rate per 1,000 students a good measure?</button>
+    <div class="panel">
+      <p>Using rates is useful as it removes the important influence of the
+        number of people at that school, but has its own serious limitations.
+        Schools with similar number of students may still be very different
+        in their student population and risk of victimization. Consider, for example,
+        two schools which each have 20,000 students. If these two schools are
+        very similar in students, then the rate per 1,000 students could be useful
+        in comparing the schools are the groups are similar. If, however these
+        schools differ on factors such as if the school is urban, whether
+        students commute or
+        live on campus, ages of students, etc, then knowing purely the number
+        of students is not a very useful rate. Also consider that crimes can
+        occur against victims
+        other than students such as faculty or staff so a per 1,000 student
+        rate would overestimate crime by decreasing the denominator. </p>
+    </div>
+
+
+    <button class="accordion">Are changes in crimes a reflection of actual
+      changes in offenses, or changes in reporting?</button>
+    <div class="panel">
+      <p>Like all crime data, this data has a limitation as it is reported
+        offenses only. If likelihood of reporting changes, that will
+        be reflected in changes of reported offenses but we will not be able
+        to tell (based only on this data) whether it was the number
+        of crimes or the likelihood of reporting that changed. This is
+        especially a problem with sexual offenses as they are already were
+        unlikely to be reported and small changes in reporting likelihood
+        can cause a seemingly large change in crimes reported. Also keep in mind
+        that the population included (primarily college students) may have
+        different reporting likelihoods than other populations.</p>
+    </div>
+
     <script>
         $(location).attr('href', 'https://jacobdkaplan.com/index.html')
     </script>
+
+
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+      </script>
+
 
 </body>
 
