@@ -56,8 +56,21 @@
 
   <div id="main" role="main">
     <h1 id="common_questions">
-      <a href="index.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a>
+      <a href="data.html#common_questions" style="text-decoration: none; color: black">Common data questions/issues</a>
     </h1>
+
+
+    <button class="accordion">County-level UCR data</button>
+    <div class="panel">
+      <p>I have already posted my reasons for why this data should not be
+        used in research <a href="https://ucrbook.com/county-level-ucr-data.html">
+          here</a>. For more extensive documentation on the
+        data's issues, please see
+        <a href="https://link.springer.com/article/10.1023/A:1016060020848">
+          this paper</a> by Maltz and Targonski
+        from 2002.
+      </p>
+    </div>
 
     <button class="accordion">Analyzing data over time</button>
     <div class="panel">
@@ -73,7 +86,8 @@
       </p>
     </div>
 
-    <button class="accordion">Why are there be negative numbers (is this an error)?</button>
+    <button class="accordion">Why are there be negative numbers
+       (is this an error)?</button>
     <div class="panel">
       <p>Negative numbers can happen in UCR data and are correct, not a
         data issue. UCR data is reported by police monthly and if they
@@ -89,6 +103,37 @@
         missing values is not correct. See more on pages 82-83
         of the <a href="https://ucr.fbi.gov/additional-ucr-publications/ucr_handbook.pdf/at_download/file">FBI's
           Manual for UCR data</a>. </p> 
+      </p>
+    </div>
+
+    <button class="accordion">What is the most common mistake people make
+      with this data?</button>
+    <div class="panel">
+      <p>Like all data, the data on this site and available to download
+        on <a href="openicpsr.org/">openICPSR</a> has flaws. This is
+        especially true of the FBI's UCR and NIBRS data available here. The main
+        problems with the data is that it only counts reported crime and that
+        not all agencies report (and those that do may not report all year).
+        However, these are only the technical problems with the data - the bigger
+        issue is in how people use it. Each of these issues can be solved - or at least avoided
+        in conducting research - and the nuances of each dataset can be handled. However,
+        many published articles that I've read either do not address these issues or
+        even acknowledge that they exist. There is excellent documentation
+        on these datasets in academic articles and in the FBI's manual for the
+        data. <b>If you intend to use this data you should read these documents
+          (please don't ask me for links to them beyond what I already provide
+          on this page) carefully and spend time exploring the data yourself.
+          Simply running a regression on the data without fully understanding the
+          data is bad research.</b> </p>
+    </div>
+
+    <button class="accordion">Data errors</button>
+    <div class="panel">
+      <p>If you believe that you found an error in one of the datasets,
+        please read the FBI's manual on that data to ensure it's not a
+        known issue or is not an error at all. Common incorrect beliefs
+        that something is erroneous are negative numbers in UCR data or
+        Florida not appearing for many years in UCR data. 
       </p>
     </div>
 
@@ -120,9 +165,6 @@
         (unique agency identifier code) variable.
       </p>
     </div>
-
-
-
 
 
     <h1 id="alcohol">
