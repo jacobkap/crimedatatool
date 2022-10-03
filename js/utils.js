@@ -131,6 +131,9 @@ function toggle_display(div, match_value) {
 
 
 function toggle_nibrs_display() {
+  $("#percent_of_crimes").show();
+  $("label[for='percent_of_crimes']").show()
+  $("label[for='percent_of_crimes']").html("% of Crimes")
   $("#checkbox_1").show();
   $("#checkbox_2").show();
   $("#checkbox_3").show();
@@ -165,6 +168,21 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_2']").html("Gun Not Used")
     $("label[for='checkbox_3']").html("Handgun Used")
     $("label[for='checkbox_4']").html("Other/Unknown Type Gun Used")
+  } else if ($("#category_dropdown").val() == "property") {
+    $("#percent_of_crimes").prop("checked", false);
+    $("#percent_of_crimes").hide();
+    $("label[for='percent_of_crimes']").hide()
+    $("#checkbox_7").hide();
+    $("label[for='checkbox_7']").hide()
+    $("label[for='checkbox_1']").html("Burned")
+    $("label[for='checkbox_2']").html("Counterfeited/Forged")
+    $("label[for='checkbox_3']").html("Destroyed/Damaged/Vandalized")
+    $("label[for='checkbox_4']").html("Recovered")
+    $("label[for='checkbox_5']").html("Seized")
+    $("label[for='checkbox_6']").html("Stolen/Robbed/Defrauded/Etc.")
+
+    $("#checkbox_1").prop("checked", false);
+    $("#checkbox_6").prop("checked", true);
   } else if ($("#subcategory_dropdown").val() == "total") {
     $("#checkbox_1").hide();
     $("#checkbox_2").hide();
@@ -192,7 +210,6 @@ function toggle_nibrs_display() {
   } else if ($("#subcategory_dropdown").val() == "subtype") {
 
     if ($("#crime_dropdown").val() != "animal_cruelty") {
-        console.log("running animal")
       $("#checkbox_4").hide();
       $("#checkbox_5").hide();
       $("#checkbox_6").hide();
@@ -205,7 +222,6 @@ function toggle_nibrs_display() {
       $("label[for='checkbox_2']").html("Buy/Possess/Consume")
       $("label[for='checkbox_3']").html("Sell/Create/Operate")
     } else {
-        console.log("running other")
       $("#checkbox_6").hide();
       $("#checkbox_7").hide();
       $("label[for='checkbox_6']").hide()

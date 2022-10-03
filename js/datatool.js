@@ -103,7 +103,11 @@ function getStateData(type, states) {
   url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
   if (type == "nibrs") {
     url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper_nibrs/master/data/";
+    if ($("#category_dropdown").val() == "property") {
+          type = "nibrs_property";
+    }
   }
+
   if ($("#monthly").is(':checked')) {
     type += "_monthly";
   }
@@ -134,7 +138,7 @@ function getStateData(type, states) {
     url += type + "/" + state + "_" + agency;
   }
   url += ".csv";
-  if (type == "nibrs") {
+  if (type == "nibrs" | type == 'nibrs_property') {
     url = url.replace(/["()]/g, "");
   }
 
@@ -282,13 +286,23 @@ function getCrimeColumns(headers, type, output) {
 
   if (type == "nibrs") {
     crime = $("#crime_dropdown").val();
+    if ($('#category_dropdown').val() != "property") {
     columnNames.push($("#category_dropdown").val() + "_" + crime);
+  }
     category_value = $("#category_dropdown").val()
 
     if ($('#subcategory_dropdown').val() == "gun") {
       columnNames.push(category_value + "_no_gun_" + crime);
       columnNames.push(category_value + "_handgun_" + crime);
       columnNames.push(category_value + "_other_unknown_gun_" + crime);
+    }
+    if ($('#category_dropdown').val() == "property") {
+      columnNames.push(category_value + "_burned_" + crime);
+      columnNames.push(category_value + "_counterfeited_" + crime);
+      columnNames.push(category_value + "_destroyed_" + crime);
+      columnNames.push(category_value + "_recovered_" + crime);
+      columnNames.push(category_value + "_seized_" + crime);
+      columnNames.push(category_value + "_stolen_" + crime);
     }
     if ($('#subcategory_dropdown').val() == "location") {
       columnNames.push(category_value + "_bar_nightclub_" + crime);

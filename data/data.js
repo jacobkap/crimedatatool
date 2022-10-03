@@ -288,7 +288,8 @@ var nibrs_starts = {
   "offense": "total",
   "offender": "sex",
   "victim": "injury",
-  "arrestee": "arrest_type"
+  "arrestee": "arrest_type",
+  "property": "total"
 }
 
 nibrs_categories = {
@@ -296,6 +297,7 @@ nibrs_categories = {
   "offender": "Offender",
   "victim": "Victim",
   "arrestee": "Arrestee",
+  "property": "Property",
 }
 
 var nibrs_subcategories = []
@@ -311,7 +313,6 @@ nibrs_subcategories["offender"] = {
   "age": "Age",
   "race": "Race",
   "sex": "Sex"
-
 }
 nibrs_subcategories["victim"] = {
   "total": "Total",
@@ -330,6 +331,81 @@ nibrs_subcategories["arrestee"] = {
   "race": "Race",
   "sex": "Sex"
 }
+nibrs_subcategories["property"] = {
+  "total" : "Total"
+}
+
+nibrs_property_values = {
+"aircraft"  : "Aircraft",
+"aircraft_parts_accessories"  : "Aircraft Parts/Accessories",
+"alcohol"  : "Alcohol",
+"artistic_supplies_accessories"  : "Artistic Supplies/Accessories",
+"automobiles"  : "Automobiles",
+"bicycles"  : "Bicycles",
+"building_materials"  : "Building Materials",
+"buses"  : "Buses",
+"camping_hunting_fishing_equipment_supplies"  : "Camping/Hunting/Fishing Equipment/Supplies",
+"chemicals"  : "Chemicals",
+"clothes_furs"  : "Clothes/Furs",
+"collections_collectibles"  : "Collections/Collectibles",
+"computer_hardware_software"  : "Computer Hardware/Software",
+"consumable_goods"  : "Consumable Goods",
+"credit_debit_cards"  : "Credit/Debit Cards",
+"crops"  : "Crops",
+"documents_personal_or_business"  : "Documents - Personal or Business",
+"drug_narcotic_equipment"  : "Drug/Narcotic Equipment",
+"drugs_narcotics"  : "Drugs/Narcotics",
+"explosives"  : "Explosives",
+"farm_equipment"  : "Farm Equipment",
+"firearm_accessories"  : "Firearm Accessories",
+"firearms"  : "Firearms",
+"fuel"  : "Fuel",
+"gambling_equipment"  : "Gambling Equipment",
+"heavy_construction_industrial_equipment"  : "Heavy Construction/Industrial Equipment",
+"household_goods"  : "Household Goods",
+"identity_intangible"  : "Identity - Intangible",
+"identity_documents"  : "Indentity Documents",
+"jewelry_precious_metals"  : "Jewelry/Precious Metals",
+"law_enforcement_equipment"  : "Law Enforcement Equipment",
+"lawn_yard_garden_equipment"  : "Lawn/Yard/Garden Equipment",
+"livestock"  : "Livestock",
+"logging_equipment"  : "Logging Equipment",
+"medical_medical_lab_equipment"  : "Medical/medical lab equipment",
+"merchandise"  : "Merchandise",
+"metals_non_precious"  : "Metals, Non-precious",
+"money"  : "Money",
+"musical_instruments"  : "Musical Instruments",
+"negotiable_instruments"  : "Negotiable Instruments",
+"nonnegotiable_instruments"  : "Nonnegotiable Instruments",
+"office_type_equipment"  : "Office-type Equipment",
+"other"  : "Other",
+"other_motor_vehicles"  : "Other Motor Vehicles",
+"pending_inventory_of_property"  : "Pending Inventory (of property)",
+"pets"  : "Pets",
+"photographic_optical_equipment"  : "Photographic Equipement",
+"portible_electronic_communications"  : "Portible Electronic Communications",
+"purses_handbags_wallets"  : "Purses/Handbags/Wallets",
+"radios_t_vs_v_c_rs"  : "Radios/TVs/VCRs",
+"recordings_audio_visual"  : "Recordings - Audio/Visual",
+"recreational_vehicles"  : "Recreational Vehicles",
+"recreational_sports_equipment"  : "Recreational/Sports Equipment",
+"special_category"  : "Special Category",
+"structures_commercial_business"  : "Structures - Commercial/Business",
+"structures_industrial_manufacturing"  : "Structures - Industrial Manufacturing",
+"structures_other"  : "Structures - Other",
+"structures_other_dwellings"  : "Structures-  Other Dwellings",
+"structures_public_community"  : "Structures - Public/Community",
+"structures_single_occupancy_dwellings"  : "Structures - Single Occupancy Dwellings",
+"structures_storage"  : "Structures - Storage",
+"tools_power_hand"  : "Tools - Power/Hand",
+"trailers"  : "Trailers",
+"trucks"  : "Trucks",
+"vehicle_parts_accessories"  : "Vehicle Parts/Accessories",
+"watercraft"  : "Watercraft",
+"watercraft_equipment_parts_accessories"  : "Watercraft Equipment/Parts/Accessories",
+"weapons_other"  : "Weapons - Other"
+}
+
 
 var nibrs_crime_values = []
 nibrs_crime_values["offense"] = {

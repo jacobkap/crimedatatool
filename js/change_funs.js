@@ -1,12 +1,17 @@
 function checkboxesUpdate(type, always_on_box, crimes) {
+    if (type != "nibrs") {
   if (!$("#checkbox_1").is(':checked') &&
     !$("#checkbox_2").is(':checked') &&
     !$("#checkbox_3").is(':checked') &&
     !$("#checkbox_4").is(':checked')) {
     $(always_on_box).prop("checked", true);
   }
+}
 
   if (type == "nibrs") {
+    if ($('#category_dropdown').val() == "property") {
+      always_on_box = "#checkbox_6";
+    }
     if (!$("#checkbox_1").is(':checked') &&
       !$("#checkbox_2").is(':checked') &&
       !$("#checkbox_3").is(':checked') &&
@@ -14,11 +19,14 @@ function checkboxesUpdate(type, always_on_box, crimes) {
       !$("#checkbox_5").is(':checked') &&
       !$("#checkbox_6").is(':checked')) {
       $(always_on_box).prop("checked", true);
-
+}
 
       nibrs_crimes_temp = nibrs_crime_values["offense"]
       if ($('#category_dropdown').val() == "victim") {
         nibrs_crimes_temp = nibrs_crime_values["victim_demographics_offenses"]
+      }
+      if ($('#category_dropdown').val() == "property") {
+        nibrs_crimes_temp = nibrs_property_values
       }
       if ($('#subcategory_dropdown').val() == "injury") {
         nibrs_crimes_temp = nibrs_crime_values["injury_offenses"]
@@ -32,7 +40,7 @@ function checkboxesUpdate(type, always_on_box, crimes) {
       if ($('#subcategory_dropdown').val() == "gun") {
         nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]
       }
-    }
+
   }
 
   if (["death", "offenses"].includes(type)) {
@@ -125,6 +133,11 @@ function borderCategoryChange(type, states, crimes) {
 }
 
 function nibrcategoryChange() {
+  if ($('#category_dropdown').val() == "property") {
+    $("#percent_of_crimes").prop("checked", false);
+    $("#checkbox_1").prop("checked", false);
+    $("#checkbox_6").prop("checked", true);
+  }
   make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()]);
   nibrsubcategoryChange();
 }
@@ -146,6 +159,9 @@ function nibrsubcategoryChange() {
   if ($('#category_dropdown').val() == "offense") {
     nibrs_crimes_temp = nibrs_crime_values["offense"]
   }
+  if ($('#category_dropdown').val() == "property") {
+    nibrs_crimes_temp = nibrs_property_values
+  }
   if ($('#subcategory_dropdown').val() == "gun") {
     nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]
   }
@@ -159,6 +175,8 @@ function nibrsubcategoryChange() {
   });
   if (_.keys(nibrs_crimes_temp).includes(current_crime)) {
     make_dropdown('#crime_dropdown', nibrs_crimes_temp, current_crime)
+  } else if ($('#category_dropdown').val() == "property") {
+        make_dropdown('#crime_dropdown', nibrs_crimes_temp, "money")
   } else {
     make_dropdown('#crime_dropdown', nibrs_crimes_temp, _.keys(nibrs_crimes_temp)[0])
   }
