@@ -296,13 +296,32 @@ function getCrimeColumns(headers, type, output) {
       columnNames.push(category_value + "_handgun_" + crime);
       columnNames.push(category_value + "_other_unknown_gun_" + crime);
     }
-    if ($('#category_dropdown').val() == "property") {
-      columnNames.push(category_value + "_burned_" + crime);
-      columnNames.push(category_value + "_counterfeited_" + crime);
-      columnNames.push(category_value + "_destroyed_" + crime);
-      columnNames.push(category_value + "_recovered_" + crime);
-      columnNames.push(category_value + "_seized_" + crime);
-      columnNames.push(category_value + "_stolen_" + crime);
+    if ($('#category_dropdown').val() == "property" & $('#subcategory_dropdown').val() == "total") {
+      columnNames.push("burned_" + crime);
+      columnNames.push("counterfeited_" + crime);
+      columnNames.push("destroyed_" + crime);
+      columnNames.push("recovered_" + crime);
+      columnNames.push("seized_" + crime);
+      columnNames.push("stolen_" + crime);
+    }
+    if ($('#category_dropdown').val() == "property" & $('#subcategory_dropdown').val() == "value_mean") {
+      columnNames.push("burned_mean_value_" + crime);
+      columnNames.push("counterfeited_mean_value_" + crime);
+      columnNames.push("destroyed_mean_value_" + crime);
+      columnNames.push("recovered_mean_value_" + crime);
+      columnNames.push("seized_mean_value_" + crime);
+      columnNames.push("stolen_mean_value_" + crime);
+    }
+    if ($('#category_dropdown').val() == "property" & $('#subcategory_dropdown').val() == "value_median") {
+      columnNames.push("burned_median_value_" + crime);
+      columnNames.push("counterfeited_median_value_" + crime);
+      columnNames.push("destroyed_median_value_" + crime);
+      columnNames.push("recovered_median_value_" + crime);
+      columnNames.push("seized_median_value_" + crime);
+      columnNames.push("stolen_median_value_" + crime);
+    }
+    if ($('#category_dropdown').val() == "property" & $('#subcategory_dropdown').val() == "drugs") {
+      columnNames.push("drugs_" + crime);
     }
     if ($('#subcategory_dropdown').val() == "location") {
       columnNames.push(category_value + "_bar_nightclub_" + crime);

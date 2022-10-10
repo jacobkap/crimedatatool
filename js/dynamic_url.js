@@ -105,7 +105,7 @@ change_data_from_url = function(type) {
     make_dropdown("#category_dropdown", nibrs_categories, subcategory_val);
     make_dropdown("#subcategory_dropdown", nibrs_subcategories[subcategory_val], subsubcategory_val);
     toggle_nibrs_display();
-    current_crime = $('#crime_dropdown').val()
+    current_crime = category_val
     nibrs_crimes_temp = nibrs_crime_values["offense"]
     if ($('#category_dropdown').val() == "victim") {
       nibrs_crimes_temp = nibrs_crime_values["victim_demographics_offenses"]
@@ -118,6 +118,12 @@ change_data_from_url = function(type) {
     }
     if ($('#category_dropdown').val() == "offense") {
       nibrs_crimes_temp = nibrs_crime_values["offense"]
+    }
+    if ($('#category_dropdown').val() == "property") {
+      nibrs_crimes_temp = nibrs_property_values
+    }
+    if ($('#category_dropdown').val() == "property" & $('#subcategory_dropdown').val() == "drugs") {
+      nibrs_crimes_temp = nibrs_property_drugs_values
     }
     if ($('#subcategory_dropdown').val() == "gun") {
       nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]

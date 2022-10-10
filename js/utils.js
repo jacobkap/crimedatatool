@@ -131,9 +131,13 @@ function toggle_display(div, match_value) {
 
 
 function toggle_nibrs_display() {
+  $("h3").eq(2).html("Crime:");
   $("#percent_of_crimes").show();
+  $("#rate").show();
   $("label[for='percent_of_crimes']").show()
   $("label[for='percent_of_crimes']").html("% of Crimes")
+  $("label[for='rate']").show()
+  $("label[for='rate']").html("Rate per 100,000 Population")
   $("#checkbox_1").show();
   $("#checkbox_2").show();
   $("#checkbox_3").show();
@@ -169,6 +173,7 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_3']").html("Handgun Used")
     $("label[for='checkbox_4']").html("Other/Unknown Type Gun Used")
   } else if ($("#category_dropdown").val() == "property") {
+    $("h3").eq(2).html("Property Type:");
     $("#percent_of_crimes").prop("checked", false);
     $("#percent_of_crimes").hide();
     $("label[for='percent_of_crimes']").hide()
@@ -183,6 +188,33 @@ function toggle_nibrs_display() {
 
     $("#checkbox_1").prop("checked", false);
     $("#checkbox_6").prop("checked", true);
+
+
+    if ($("#subcategory_dropdown").val() == "value_mean" | $("#subcategory_dropdown").val() == "value_median") {
+      $("#rate").prop("checked", false);
+      $("#rate").hide();
+      $("label[for='rate']").hide()
+    }
+
+    if ($("#subcategory_dropdown").val() == "drugs") {
+      $("h3").eq(2).html("Drug Type:");
+      $("#checkbox_1").prop("checked", true);
+      $("#checkbox_6").prop("checked", false);
+      $("#checkbox_1").hide();
+      $("#checkbox_2").hide();
+      $("#checkbox_3").hide();
+      $("#checkbox_4").hide();
+      $("#checkbox_5").hide();
+      $("#checkbox_6").hide();
+      $("#checkbox_7").hide();
+      $("label[for='checkbox_1']").hide()
+      $("label[for='checkbox_2']").hide()
+      $("label[for='checkbox_3']").hide()
+      $("label[for='checkbox_4']").hide()
+      $("label[for='checkbox_5']").hide()
+      $("label[for='checkbox_6']").hide()
+      $("label[for='checkbox_7']").hide()
+    }
   } else if ($("#subcategory_dropdown").val() == "total") {
     $("#checkbox_1").hide();
     $("#checkbox_2").hide();

@@ -96,8 +96,10 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       checkbox_names = ["Total", "Asian", "American Indian", "Black", "White"];
     } else if ($("#subcategory_dropdown").val() == "ethnicity" && $("#category_dropdown").val() == "arrestee") {
       checkbox_names = ["Total", "Hispanic", "Non-Hispanic"];
-    } else if ($("#category_dropdown").val() == "property") {
+    } else if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() != "drugs") {
       checkbox_names = ["Burned", "Counterfeited/Forged", "Destroyed/Damaged/Vandalized", "Recovered", "Seized", "Stolen/Robbed/Defrauded/Etc."];
+    } else if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() == "drugs") {
+      checkbox_names = ["Total Incidents With Drug Seized"];
     }
   }
 
@@ -266,6 +268,12 @@ function makeGraph(type, crimes) {
     }
     if ($("#category_dropdown").val() == "property") {
       yaxis_label = "# of Incidents";
+    }
+    if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() == "value_mean") {
+      yaxis_label = "Mean Value (Inflation-Adjusted 2021 Dollars)";
+    }
+    if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() == "value_median") {
+      yaxis_label = "Median Value (Inflation-Adjusted 2021 Dollars)";
     }
     if ($("#rate").is(":checked")) {
       yaxis_label = "Rate per 100k Population"
@@ -458,7 +466,7 @@ function getTitle(data, type) {
     subtitle = nibrs_crime_values["arrestee_offenses"][$("#crime_dropdown").val()]
     subtitle = nibrs_categories[$("#category_dropdown").val()] + "s, " + subtitle
     if ($("#category_dropdown").val() == "property") {
-      subtitle = "Property Data";
+      subtitle = "Property Data: " + nibrs_property_values[$("#crime_dropdown").val()];
     }
   } else if (type == "school") {
     title = school_state_values[$("#state_dropdown").val()];
