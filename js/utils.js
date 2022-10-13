@@ -41,7 +41,7 @@ function exportToCsv(tableData, type, states) {
   }
 
   data = tableData.reverse();
-
+/*
   rate_or_count = "count_";
 
 
@@ -103,6 +103,7 @@ function exportToCsv(tableData, type, states) {
       document.body.removeChild(link);
     }
   }
+  */
 }
 
 function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
