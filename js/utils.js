@@ -32,8 +32,9 @@ function readCSV(csv) {
   return result;
 }
 
-function exportToCsv(tableData, type, states) {
   /*
+function exportToCsv(tableData, type, states) {
+
   if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
     states = state_values;
   }
@@ -104,9 +105,9 @@ function exportToCsv(tableData, type, states) {
       document.body.removeChild(link);
     }
   }
-  */
-}
 
+}
+  */
 function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
   $(dropdown_id).empty();
   $.each(dropdown_values, function(val, text) {
