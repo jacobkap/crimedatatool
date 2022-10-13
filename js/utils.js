@@ -33,6 +33,7 @@ function readCSV(csv) {
 }
 
 function exportToCsv(tableData, type, states) {
+  /*
   if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
     states = state_values;
   }
@@ -41,7 +42,7 @@ function exportToCsv(tableData, type, states) {
   }
 
   data = tableData.reverse();
-/*
+
   rate_or_count = "count_";
 
 
