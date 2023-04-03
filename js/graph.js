@@ -511,6 +511,6 @@ function getTitle(data, type) {
   }
 
 
-  title = [title, subtitle, "Source: https://jacobdkaplan.com/"];
+  title = [title, subtitle, "Source: https://crimedatatool.com/"];
   return title;
 }
