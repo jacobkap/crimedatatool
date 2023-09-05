@@ -599,6 +599,7 @@ nibrs_crime_values["arrestee_offenses"] = {
   "incest": "Incest",
   "impersonation": "Impersonation",
   "intimidation": "Intimidation",
+    "justifiable_homicide": "Justifiable Homicide",
   "kidnapping_abduction": "Kidnapping/Abduction",
   "liquor_law_violations": "Liquor Law Violations",
   "motor_vehicle_theft": "Motor Vehicle Theft",
