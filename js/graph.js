@@ -270,10 +270,10 @@ function makeGraph(type, crimes) {
       yaxis_label = "# of Incidents";
     }
     if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() == "value_mean") {
-      yaxis_label = "Mean Value (Inflation-Adjusted 2021 Dollars)";
+      yaxis_label = "Mean Value (Inflation-Adjusted 2022 Dollars)";
     }
     if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() == "value_median") {
-      yaxis_label = "Median Value (Inflation-Adjusted 2021 Dollars)";
+      yaxis_label = "Median Value (Inflation-Adjusted 2022 Dollars)";
     }
     if ($("#rate").is(":checked")) {
       yaxis_label = "Rate per 100k Population"
