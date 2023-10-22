@@ -522,8 +522,6 @@ nibrs_crime_values["subtype_offenses_main"] = {
   "weapon_law_violations_weapon_law_violations": "Weapon Law Violations",
   "weapon_law_violations_violation_of_national_firearm_act_of_1934" : "Violation of National Firearm Act of 1934",
   "weapon_law_violations_weapons_of_mass_destruction" : "Weapons of Mass Destruction"
-
-
 };
 nibrs_crime_values["subtype_offenses_animal"] = {
   "animal_cruelty": "Animal Cruelty"
@@ -557,28 +555,18 @@ nibrs_crime_values["victim_demographics_offenses"] = {
   "fraud_offenses_credit_card_atm_fraud": "Credit Card/ATM Fraud",
   "destruction_damage_vandalism_of_property": "Destruction/Damage/Vandalism of Property",
   "embezzlement": "Embezzlement",
-  "espionage" : "Espionage",
-  "weapon_law_violations_explosives" : "Explosives",
-  "commerce_violations_export_violations" : "Export Violations",
   "extortion_blackmail": "Extortion/Blackmail",
-  "immigration_violations_false_citizenship" : "False Citizenship",
   "fraud_offenses_false_pretenses_swindle_confidence_game": "False Pretenses/Swindle/Confidence Game",
   "failure_to_appear" : "Failure To Appear",
-  "sex_offenses_failure_to_register_as_a_sex_offender" : "Failure To Register As A Sex Offender",
-  "commerce_violations_federal_liquor_offenses" : "Federal Liquor Offenses",
-  "commerce_violations_federal_tobacco_offenses" : "Federal Tobacco Offenses",
   "federal_resource_violations" : "Federal Resource Violations",
   "fugitive_offenses_flight_to_avoid_deportation" : "Flight To Avoid Deportation",
   "fugitive_offenses_flight_to_avoid_prosecution" : "Flight To Avoid Prosecution",
   "sex_offenses_fondling_incident_liberties_child_molest": "Fondling/Child Molest",
   "fraud_offenses_hacking_computer_invasion": "Hacking/Computer Invasion",
-  "fugitive_offenses_harboring_escappee_concealing_from_arrest" : "Harboring Escappee/Concealing From Arrest",
   "human_trafficking_commercial_sex_acts": "Human Trafficking - Commercial Sex Acts",
   "human_trafficking_involuntary_servitude": "Human Trafficking - Involuntary Servitude",
-  "fraud_offenses_identity_theft": "Identity Theft",
-  "immigration_violations_illegal_entry_into_the_united_states" : "Illegal Entry Into The United States",
+  "fraud_offenses_identity_theft": "Identity Theft"
   "fraud_offenses_impersonation": "Impersonation",
-  "commerce_violations_import_violations" : "Import Violations",
   "sex_offenses_incest": "Incest",
   "assault_offenses_intimidation": "Intimidation",
   "justifiable_homicide_not_a_crime": "Justifiable Homicide",
@@ -587,10 +575,8 @@ nibrs_crime_values["victim_demographics_offenses"] = {
   "fraud_offenses_money_laundering" : "Money Laundering",
   "murder_nonnegligent_manslaughter": "Murder/Nonnegligent Manslaughter",
   "negligent_manslaughter": "Negligent Manslaughter",
-  "perjury" : "Perjury",
   "pocket_picking": "Pocket-Picking",
   "sex_offenses_rape": "Rape",
-  "immigration_violations_re_entry_into_the_united_states" : "Re-Entry Into The United States",
   "robbery": "Robbery",
   "sexual_assault_with_an_object": "Sexual Assault With an Object",
   "simple_assault": "Simple Assault",
@@ -599,12 +585,8 @@ nibrs_crime_values["victim_demographics_offenses"] = {
   "statutory_rape": "Statutory Rape",
   "stolen_property_offenses_receiving_selling_etc": "Stolen Property - Receiving/Selling/etc.",
   "theft" : "Theft",
-  "treason" : "Treason",
-  "weapon_law_violations_weapons_of_mass_destruction" : "Weapons of Mass Destruction",
   "fraud_offenses_welfare_fraud": "Welfare Fraud",
-  "commerce_violations_wildlife_trafficking" : "Wildlife Trafficking",
-  "wire_fraud": "Wire Fraud",
-  "weapon_law_violations_violation_of_national_firearm_act_of_1934" : "Violation of National Firearm Act of 1934"
+  "wire_fraud": "Wire Fraud"
 
 }
 nibrs_crime_values["arrestee_offenses"] = {
