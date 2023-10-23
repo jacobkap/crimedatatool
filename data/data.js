@@ -565,7 +565,7 @@ nibrs_crime_values["victim_demographics_offenses"] = {
   "fraud_offenses_hacking_computer_invasion": "Hacking/Computer Invasion",
   "human_trafficking_commercial_sex_acts": "Human Trafficking - Commercial Sex Acts",
   "human_trafficking_involuntary_servitude": "Human Trafficking - Involuntary Servitude",
-  "fraud_offenses_identity_theft": "Identity Theft"
+  "fraud_offenses_identity_theft": "Identity Theft",
   "fraud_offenses_impersonation": "Impersonation",
   "sex_offenses_incest": "Incest",
   "assault_offenses_intimidation": "Intimidation",
@@ -587,8 +587,7 @@ nibrs_crime_values["victim_demographics_offenses"] = {
   "theft" : "Theft",
   "fraud_offenses_welfare_fraud": "Welfare Fraud",
   "wire_fraud": "Wire Fraud"
-
-}
+};
 nibrs_crime_values["arrestee_offenses"] = {
   "assault_offenses_aggravated_assault": "Aggravated Assault",
   "all_other_offenses": "All Other Offenses",
