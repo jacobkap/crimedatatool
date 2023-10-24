@@ -435,7 +435,7 @@ nibrs_crime_values["offense"] = {
   "immigration_violations_re_entry_into_the_united_states" : "Re-Entry Into The United States",
   "robbery": "Robbery",
   "sexual_assault_with_an_object": "Sexual Assault with an Object",
-  "simple_assault": "Simple Assault",
+  "assault_offenses_simple_assault": "Simple Assault",
   "immigration_violations_smuggling_aliens" : "Smuggling Aliens",
   "sex_offenses_sodomy": "Sodomy",
   "gambling_offenses_sports_tampering": "Sports Tampering",
@@ -459,7 +459,7 @@ nibrs_crime_values["injury_offenses"] = {
   "sex_offenses_rape": "Rape",
   "robbery": "Robbery",
   "sexual_assault_with_an_object": "Sexual Assault with an Object",
-  "simple_assault": "Simple Assault",
+  "assault_offenses_simple_assault": "Simple Assault",
   "sex_offenses_sodomy": "Sodomy"
 };
 nibrs_crime_values["subtype_offenses_main"] = {
@@ -531,7 +531,7 @@ nibrs_crime_values["victim_demographics_offenses"] = {
   "sex_offenses_rape": "Rape",
   "robbery": "Robbery",
   "sexual_assault_with_an_object": "Sexual Assault With an Object",
-  "simple_assault": "Simple Assault",
+  "assault_offenses_simple_assault": "Simple Assault",
   "immigration_violations_smuggling_aliens" : "Smuggling Aliens",
   "sex_offenses_sodomy": "Sodomy",
   "statutory_rape": "Statutory Rape",
@@ -605,7 +605,7 @@ nibrs_crime_values["arrestee_offenses"] = {
   "runaway": "Runaway",
   "sexual_assault_with_an_object": "Sexual Assault With an Object",
   "shoplifting": "Shoplifting",
-  "simple_assault": "Simple Assault",
+  "assault_offenses_simple_assault": "Simple Assault",
   "immigration_violations_smuggling_aliens" : "Smuggling Aliens",
   "sex_offenses_sodomy": "Sodomy",
   "gambling_offenses_sports_tampering": "Sports Tampering",
