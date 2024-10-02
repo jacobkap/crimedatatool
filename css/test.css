@@ -1363,45 +1363,11 @@ body {
     -webkit-transform: rotate3d(0,  0,  1,  -45deg);
     transform: rotate3d(0,  0,  1,  -45deg);
 }
-.nav .navtoogle {
-    font-size: 18px;
-    font-size: 1.125rem;
-    font-weight: normal;
-    background-color: #000000 ;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-@media only screen and (min-width: 37.5em) {
-    .nav .navtoogle {
-    display: none;
-}
-}.nav button {
-    border: none;
-    background: none;
-}
-.navtoogle i {
-    z-index: -1;
-}
+
 .icon-menu {
     position: relative;
     top: 3px;
     line-height: 0;
-}
-.no-js .nav .navtoggle {
-    display: none;
-}
-.no-js .nav ul {
-    max-height: 30em;
-    overflow: hidden;
-}
-.js .nav ul {
-    max-height: 0;
-    overflow: hidden;
-}
-@media only screen and (min-width: 37.5em) {
-    .js .nav ul {
-    max-height: 30em;
 }
 }.js .nav .active+ul {
     max-height: 30em;
