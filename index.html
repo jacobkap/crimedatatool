@@ -96,13 +96,17 @@
       <h3>Type of Crime:</h3>
       <br>
       <input type="checkbox" id="checkbox_1" checked onchange="checkboxesUpdate('offenses', '#checkbox_1')"></input>
-
+      <span class="hint--right">Actual Offenses</span>
       <br>
       <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('offenses', '#checkbox_1')"></input>
+      <span class="hint--right">Offenses
+        Cleared - Total</span>
       <br>
       <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <span class="hint--right">Offenses Cleared - All Under Age 18</span></input>
       <br>
       <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('offenses', '#checkbox_1')"></input>
+      <span class="hint--right">Unfounded Offenses</span>
 
       <hr>
       <input type="checkbox" id="monthly" onchange="agencyChangeFun('offenses', state_values)"></input>

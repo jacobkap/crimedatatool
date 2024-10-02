@@ -511,6 +511,6 @@ function getTitle(data, type) {
   }
 
 
-
+  title = [title, subtitle];
   return title;
 }
