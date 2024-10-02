@@ -511,6 +511,6 @@ function getTitle(data, type) {
   }
 
 
-  title = [title, subtitle, "Source: Dr Jacob Kaplan's https://crimedatatool.com/"];
+
   return title;
 }
