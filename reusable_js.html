@@ -4,7 +4,7 @@
 <head>
   <meta name="robots" content="noindex">
   </meta>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--
   <div class="about_me_info">
     <img src="bio_photo.jpg" class="bio-photo" alt="Jacob Kaplan bio photo"></img>
@@ -32,10 +32,22 @@
   </div>
 -->
 
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+
   <!--<div class="topnav" id="myTopnav"> -->
       <nav role="navigation" id="site-nav" class="nav">
         <div class="menu a">
-          <a href="index.html">Home</a>
+          <a href="#home" class="active">Home</a>
         <!--  <a href="data.html">Data</a>
           <a href="research.html">Research</a>
 
@@ -50,15 +62,15 @@
               </button>
               <div class="dropdown-content"> -->
             <!--     <a href="alcohol.html">Alcohol</a> -->
-                <a href="arrest.html">Arrest</a>
+                <a href="#arrest">Arrest</a>
           <!--      <a href="borderpatrol.html">Border Patrol</a> -->
-                <a href="nibrs.html">Crime (NIBRS)</a>
-                <a href="index.html">Crime (UCR)</a>
-                <a href="crosswalk.html">Crosswalk</a>
+                <a href="#nibrs.html">Crime (NIBRS)</a>
+              <!--    <a href="index.html">Crime (UCR)</a> -->
+                <a href="#crosswalk">Crosswalk</a>
           <!--      <a href="death.html">Death</a> -->
-                <a href="hate.html">Hate Crime</a>
+                <a href="#hate">Hate Crime</a>
             <!--     <a href="jail.html">Jail</a> -->
-                <a href="police.html">Police</a>
+                <a href="#police">Police</a>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
   <i class="fa fa-bars"></i>
             <!--    <a href="prison.html">Prison</a>-->
@@ -66,7 +78,6 @@
             </div>
       </nav>
     </div>
-
   <!--  </div> -->
 
 
