@@ -582,19 +582,19 @@ function makeDataSourceDropdown() {
     $("#data_source").append(new Option(text, val));
   });
 
-  if (page_temp != "https://crimedatatool.com/index.html") {
+  if (page_temp == "https://crimedatatool.com/index.html") {
     current_page = 0
   }
-  if (page_temp != "https://crimedatatool.com/hate.html") {
+  if (page_temp == "https://crimedatatool.com/hate.html") {
       current_page = 1
   }
-  if (page_temp != "https://crimedatatool.com/arrest.html") {
+  if (page_temp == "https://crimedatatool.com/arrest.html") {
       current_page = 2
   }
-  if (page_temp != "https://crimedatatool.com/police.html") {
+  if (page_temp == "https://crimedatatool.com/police.html") {
       current_page = 3
   }
-  if (page_temp != "https://crimedatatool.com/nibrs.html") {
+  if (page_temp == "https://crimedatatool.com/nibrs.html") {
     current_page = 4
   }
     $("#data_source").val(current_page)
