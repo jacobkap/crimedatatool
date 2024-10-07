@@ -669,8 +669,8 @@ function main(type, states, state_default, crimes, crime_starter) {
     resizeChosen();
   */
 
-makeDataSourceDropdown()
-  updateDataSource()
+  makeDataSourceDropdown()
+  //updateDataSource()
 
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
