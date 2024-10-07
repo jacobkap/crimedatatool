@@ -582,19 +582,19 @@ function makeDataSourceDropdown() {
     $("#data_source").append(new Option(text, val));
   });
 
-  if (page_temp != "/E:/Dropbox/crimedatatool/index.html") {
+  if (page_temp != "https://crimedatatool.com/index.html") {
     current_page = 0
   }
-  if (page_temp != "/E:/Dropbox/crimedatatool/hate.html") {
+  if (page_temp != "https://crimedatatool.com/hate.html") {
       current_page = 1
   }
-  if (page_temp != "/E:/Dropbox/crimedatatool/arrest.html") {
+  if (page_temp != "https://crimedatatool.com/arrest.html") {
       current_page = 2
   }
-  if (page_temp != "/E:/Dropbox/crimedatatool/police.html") {
+  if (page_temp != "https://crimedatatool.com/police.html") {
       current_page = 3
   }
-  if (page_temp != "/E:/Dropbox/crimedatatool/nibrs.html") {
+  if (page_temp != "https://crimedatatool.com/nibrs.html") {
     current_page = 4
   }
     $("#data_source").val(current_page)
@@ -621,19 +621,19 @@ function updateDataSource() {
 
 current_page = data_sources[$("#data_source").val()]
   page_temp = window.location.pathname
-  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/E:/Dropbox/crimedatatool/index.html") {
+  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "https://crimedatatool.com/index.html") {
     window.location.href = new_url_path;
   }
-  if (current_page == "Hate Crime Statistics" & page_temp != "/E:/Dropbox/crimedatatool/hate.html") {
+  if (current_page == "Hate Crime Statistics" & page_temp != "https://crimedatatool.com/hate.html") {
     window.location.href = new_url_path;
   }
-  if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "/E:/Dropbox/crimedatatool/arrest.html") {
+  if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "https://crimedatatool.com/arrest.html") {
     window.location.href = new_url_path;
   }
-  if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/E:/Dropbox/crimedatatool/police.html") {
+  if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "https://crimedatatool.com/police.html") {
     window.location.href = new_url_path;
   }
-  if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/E:/Dropbox/crimedatatool/nibrs.html") {
+  if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "https://crimedatatool.com/nibrs.html") {
     window.location.href = new_url_path;
   }
 }
