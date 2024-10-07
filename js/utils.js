@@ -577,7 +577,6 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
 
 function makeDataSourceDropdown() {
   page_temp = window.location.pathname
-  console.log(page_temp)
   $("#data_source").empty();
   $.each(data_sources, function(val, text) {
     $("#data_source").append(new Option(text, val));
@@ -595,7 +594,7 @@ function makeDataSourceDropdown() {
   if (page_temp == "/nibrs.html") {
     current_page = 3
   }
-  if (page_temp == "/") {
+  if (page_temp == "/" || page_temp == "/index.html") {
     current_page = 4
   }
     $("#data_source").val(current_page)
@@ -622,7 +621,8 @@ function updateDataSource() {
 
 current_page = data_sources[$("#data_source").val()]
   page_temp = window.location.pathname
-  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/") {
+  if ((current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/") ||
+(current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/index.html")) {
     window.location.href = new_url_path;
   }
   if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
