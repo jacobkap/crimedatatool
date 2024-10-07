@@ -577,6 +577,7 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
 
 function makeDataSourceDropdown() {
   page_temp = window.location.pathname
+  console.log(page_temp)
   $("#data_source").empty();
   $.each(data_sources, function(val, text) {
     $("#data_source").append(new Option(text, val));
@@ -636,6 +637,7 @@ current_page = data_sources[$("#data_source").val()]
   if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/nibrs.html") {
     window.location.href = new_url_path;
   }
+   makeDataSourceDropdown()
 }
 
 
