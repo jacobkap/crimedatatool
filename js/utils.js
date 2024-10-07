@@ -582,19 +582,19 @@ function makeDataSourceDropdown() {
     $("#data_source").append(new Option(text, val));
   });
 
-  if (page_temp == "/") {
-    current_page = 0
+  if (page_temp == "/arrest.html") {
+      current_page = 0
   }
   if (page_temp == "/hate.html") {
       current_page = 1
   }
-  if (page_temp == "/arrest.html") {
+  if (page_temp == "/police.html") {
       current_page = 2
   }
-  if (page_temp == "/police.html") {
-      current_page = 3
-  }
   if (page_temp == "/nibrs.html") {
+    current_page = 3
+  }
+  if (page_temp == "/") {
     current_page = 4
   }
     $("#data_source").val(current_page)
@@ -604,7 +604,7 @@ function updateDataSource() {
 
 
   if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
-    new_url_path = "https://crimedatatool.com"
+    new_url_path = "https://crimedatatool.com/"
   }
   if (data_sources[$("#data_source").val()] == "Hate Crime Statistics") {
     new_url_path = "https://crimedatatool.com/hate.html"
@@ -621,7 +621,7 @@ function updateDataSource() {
 
 current_page = data_sources[$("#data_source").val()]
   page_temp = window.location.pathname
-  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/index.html") {
+  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/") {
     window.location.href = new_url_path;
   }
   if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
