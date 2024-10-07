@@ -1,3 +1,11 @@
+var data_sources = [
+  "Arrests by Age, Sex, and Race",
+  "Hate Crime Statistics",
+  "Law Enforcement Officers Killed and Assaulted (LEOKA)",
+  "National Incident-Based Reporting System (NIBRS)",
+  "Offenses Known and Clearances by Arrest"
+];
+
 default_table_headers = [
   "agency",
   "year",

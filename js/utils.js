@@ -574,6 +574,71 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
   return (state_agencies);
 }
 
+
+function makeDataSourceDropdown() {
+  page_temp = window.location.pathname
+  $("#data_source").empty();
+  $.each(data_sources, function(val, text) {
+    $("#data_source").append(new Option(text, val));
+  });
+
+  if (page_temp != "/E:/Dropbox/crimedatatool/index.html") {
+    current_page = 0
+  }
+  if (page_temp != "/E:/Dropbox/crimedatatool/hate.html") {
+      current_page = 1
+  }
+  if (page_temp != "/E:/Dropbox/crimedatatool/arrest.html") {
+      current_page = 2
+  }
+  if (page_temp != "/E:/Dropbox/crimedatatool/police.html") {
+      current_page = 3
+  }
+  if (page_temp != "/E:/Dropbox/crimedatatool/nibrs.html") {
+    current_page = 4
+  }
+    $("#data_source").val(current_page)
+}
+
+function updateDataSource() {
+
+
+  if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
+    new_url_path = "https://crimedatatool.com"
+  }
+  if (data_sources[$("#data_source").val()] == "Hate Crime Statistics") {
+    new_url_path = "https://crimedatatool.com/arrest.html"
+  }
+  if (data_sources[$("#data_source").val()] == "Arrests by Age, Sex, and Race") {
+    new_url_path = "https://crimedatatool.com/hate.html"
+  }
+  if (data_sources[$("#data_source").val()] == "Law Enforcement Officers Killed and Assaulted (LEOKA)") {
+    new_url_path = "https://crimedatatool.com/police.html"
+  }
+  if (data_sources[$("#data_source").val()] == "National Incident-Based Reporting System (NIBRS)") {
+    new_url_path = "https://crimedatatool.com/nibrs.html"
+  }
+
+current_page = data_sources[$("#data_source").val()]
+  page_temp = window.location.pathname
+  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/E:/Dropbox/crimedatatool/index.html") {
+    window.location.href = new_url_path;
+  }
+  if (current_page == "Hate Crime Statistics" & page_temp != "/E:/Dropbox/crimedatatool/hate.html") {
+    window.location.href = new_url_path;
+  }
+  if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "/E:/Dropbox/crimedatatool/arrest.html") {
+    window.location.href = new_url_path;
+  }
+  if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/E:/Dropbox/crimedatatool/police.html") {
+    window.location.href = new_url_path;
+  }
+  if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/E:/Dropbox/crimedatatool/nibrs.html") {
+    window.location.href = new_url_path;
+  }
+}
+
+
 function updateAgencies(type, states) {
   agencies = getStateAgencies(type, states);
   agencies.sort();
@@ -603,6 +668,10 @@ function main(type, states, state_default, crimes, crime_starter) {
     $('.simple-select').chosen();
     resizeChosen();
   */
+
+makeDataSourceDropdown()
+  updateDataSource()
+
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
 

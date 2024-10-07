@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="js/chosen.jquery.js"></script>
   <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-<!--  <link rel="stylesheet" href="css/test.css" /> -->
+  <link rel="stylesheet" href="css/test.css" />
   <link rel="stylesheet" href="css/misc.css" />
 
 
@@ -69,7 +69,11 @@
 
 
   <div class="column sidebar">
-    <h2>Crime (UCR)</h2>
+    <h2>Offenses Known and Clearances by Arrest</h2>
+    <h3>Data Source</h3>
+    <br>
+    <select id="data_source" onchange="updateDataSource()"></select>
+    <br>
     <p>Enter a police agency to see its crime over time.</p>
     <h3>State:</h3>
     <br>
