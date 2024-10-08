@@ -133,7 +133,7 @@ function toggle_display(div, match_value) {
 
 
 function toggle_nibrs_display() {
-  $("h3").eq(2).html("Crime:");
+  $("h3").eq(2).html("Agency:");
   $("#percent_of_crimes").show();
   $("#rate").show();
   $("label[for='percent_of_crimes']").show()
