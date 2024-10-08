@@ -51,6 +51,9 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -68,28 +71,28 @@
     <h2>Law Enforcement Officers Killed and Assaulted (LEOKA)</h2>
     <h3>Data Source</h3>
     <br>
-    <select id="data_source" onchange="updateDataSource()"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="data_source" onchange="updateDataSource()"></select>
     <br>
     <p>Enter a police agency to see officer death and injuries over time.</p>
     <h3>State:</h3>
     <br>
-    <select id="state_dropdown" onchange="stateChangeFun('police', state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('police', state_values)"></select>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <select id="agency_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
     <br><br>
     <h3>Category:</h3>
     <br><br>
-    <select id="crime_dropdown" onchange="police_categoryChangeFun()"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="crime_dropdown" onchange="police_categoryChangeFun()"></select>
         <br><br>
     <h3>Subcategory:</h3>
     <br><br>
-    <select id="subcategory_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="subcategory_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
     <div id="weaponsDiv">
       <h3>Offender Weapon:</h3>
       <br>
-      <select class="simple-select" id="subsubcategory_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
+      <select class="js-example-basic-single" style="width: 85%" id="subsubcategory_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
     </div>
 
     <div id="policeSex">
