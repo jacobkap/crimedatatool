@@ -53,6 +53,9 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -72,22 +75,22 @@
     <h2>Offenses Known and Clearances by Arrest</h2>
     <h3>Data Source</h3>
     <br>
-    <select id="data_source" onchange="updateDataSource()"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="data_source" onchange="updateDataSource()"></select>
     <br>
     <p>Enter a police agency to see its crime over time.</p>
     <h3>State:</h3>
     <br>
-    <select id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select>
     <br>
     <!--   <select class="simple-select" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select> -->
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <div class="test"><select id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select></div>
+    <div class="test"><select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select></div>
     <br><br>
     <h3>Crime:</h3>
     <br>
-    <select id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%"   id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
     <br><br>
     <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('offenses', crime_state_values)">
     <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
@@ -133,6 +136,7 @@
     </div>
 
     <script>
+    $('.js-example-basic-single').select2();
       main("offenses", crime_state_values, 4, crime_values, "murder");
     </script>
   </div>
