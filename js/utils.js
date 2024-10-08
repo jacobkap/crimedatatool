@@ -673,7 +673,7 @@ function main(type, states, state_default, crimes, crime_starter) {
 
   makeDataSourceDropdown()
   updateDataSource()
-    $('.js-example-basic-single').select2();
+
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
 
