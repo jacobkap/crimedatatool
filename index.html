@@ -14,7 +14,7 @@
   <script src="js/utils.js"></script>
   <script src="js/change_funs.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="js/graph.js"></script>
   <script src="js/table.js"></script>
   <script src="js/datatool.js"></script>
@@ -94,11 +94,9 @@
   </div>
 
 
-  <div class="column_main">
     <div class="column main">
-      <div id="loader"></div>
 
-      <canvas id="graph" style="width:95%;height:500px;"></canvas>
+      <canvas id="graph" style="width:95%;height:600px;"></canvas>
       <div>
         <table id="table" class="display cell-border"></table>
       </div>
@@ -108,7 +106,6 @@
       main("offenses", crime_state_values, 4, crime_values, "murder");
       </script>
     </div>
-  </div>
 
 </body>
 

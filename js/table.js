@@ -123,7 +123,7 @@ function makeTable(type) {
       }
     }
   }
-//  console.log(table_headers)
+
   // Makes real (as they appear in the data) names and pretty names
   // as they will appear in the table.
   table_columns = [];
@@ -149,7 +149,7 @@ function makeTable(type) {
     "hover": true,
     "lengthChange": true,
     "paging": true,
-    "searching": true,
+    "searching": false,
     "pageLength": 25,
     "ordering": true,
     "order": [1, "desc"],

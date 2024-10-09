@@ -12,14 +12,11 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   }
   if (type == "police" && $("#checkbox_4").is(':checked')) {
     rate_type = "_rate_per_officer";
-  }
-  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+  } else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
     rate_type = "_percent_of_arrests";
-  }
-  if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
+  } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
     rate_type = "_percent_of_all_arrests";
-  }
-  if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+  } else if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
     rate_type = "_percent";
   }
   checkbox_names = ["Actual Offenses",
@@ -42,8 +39,6 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "hate") {
     checkbox_names = ["Violent", "Nonviolent", "Total"];
   }
-
-
 
   if (type == "nibrs") {
     if ($("#subcategory_dropdown").val() == "sex") {
@@ -294,59 +289,55 @@ function makeGraph(type, crimes) {
   xaxis_label = "Year";
 
   opts = {
-    spanGaps: false,
+    responsive: true,
+    plugins: {
     title: {
       display: true,
       position: 'top',
       text: title,
-      fontSize: 22,
-      fontColor: "black"
-    },
+      font: {
+        size: 22
+      },
+    }
+  },
     scales: {
-      xAxes: [{
+      x: {
+        display: true,
         ticks: {
-          maxRotation: 0,
-          minRotation: 0,
           autoSkip: true,
           maxTicksLimit: 10,
-          fontSize: 14
+          fontSize: 15
         },
-        scaleLabel: {
-          fontSize: 22,
-          fontColor: "#000000",
+        title: {
           display: true,
-          labelString: xaxis_label
-        },
-        type: 'time',
-        time: {
-          displayFormats: {
-            quarter: 'MMM YYYY'
-          }
-        }
-      }],
-      yAxes: [{
-        id: "A",
-        position: "left",
-        ticks: {
-          beginAtZero: true,
-          userCallback: function(value, index, values) {
-            value = value.toLocaleString();
-            return value;
+          text: xaxis_label,
+          font: {
+            size: 22,
           },
-          fontSize: 14
-        },
-        scaleLabel: {
-          fontSize: 22,
-          fontColor: "#000000",
-          display: true,
-          labelString: yaxis_label
         }
-      }]
+      },
+      y: {
+        id: "A",
+        ticks: {
+          autoSkip: true,
+          beginAtZero: true,
+          maxTicksLimit: 10,
+          fontSize: 15
+        },
+        title: {
+          display: true,
+          text: yaxis_label,
+          font: {
+            size: 22,
+          },
+        }
+      }
     },
     //  responsive: true,
     tooltips: {
-      mode: 'index',
-      intersect: false,
+      mode: 'nearest',
+      axis: "y",
+      intersect: true,
       callbacks: {
         label: function(tooltipItems, table_data) {
           value = tooltipItems.yLabel;
@@ -361,7 +352,7 @@ function makeGraph(type, crimes) {
       intersect: true
     }
   };
-
+Chart.defaults.color = 'black'
   myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -376,7 +367,7 @@ function makeGraph(type, crimes) {
 }
 
 function addYAxis() {
-  opts.scales.yAxes.push({
+  opts.scales.y.push({
     id: "B",
     position: "right",
     scaleLabel: {
