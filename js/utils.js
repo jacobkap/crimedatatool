@@ -644,7 +644,7 @@ function main(type, states, state_default, crimes, crime_starter) {
 
 
   if (window.location.hash == "") {
-    change_url(type)
+  //  change_url(type)
   } else {
     change_data_from_url(type);
   }
