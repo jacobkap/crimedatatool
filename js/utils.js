@@ -529,19 +529,22 @@ function makeDataSourceDropdown() {
     $("#data_source").append(new Option(text, val));
   });
 
-  if (page_temp == "/arrest.html") {
+  if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html") {
       current_page = 0
   }
-  if (page_temp == "/hate.html") {
+  if (page_temp == "/hate.html" || page_temp == "/E:/Dropbox/crimedatatool/hate.html") {
       current_page = 1
   }
-  if (page_temp == "/police.html") {
+  if (page_temp == "/police.html" || page_temp == "/E:/Dropbox/crimedatatool/police.html") {
       current_page = 2
   }
-  if (page_temp == "/nibrs.html") {
+  if (page_temp == "/nibrs.html" || page_temp == "/E:/Dropbox/crimedatatool/nibrs.html") {
     current_page = 3
   }
-  if (page_temp == "/" || page_temp == "/index.html") {
+
+
+  if (page_temp == "/" || page_temp == "/index.html"
+|| page_temp == "/E:/Dropbox/crimedatatool/" || page_temp == "/E:/Dropbox/crimedatatool/index.html") {
     current_page = 4
   }
     $("#data_source").val(current_page)

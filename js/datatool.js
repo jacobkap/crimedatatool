@@ -61,8 +61,15 @@ function subsetColumns(data, columns, output, type) {
         return x + rate_type;
       }
     });
-
+  if (output == "table" && type != "prisoners") {
+      columns[0] = "agency";
+      columns[1] = "year";
+      columns[2] = "state";
+      columns[3] = "population";
+      columns[4] = "ORI";
+    } else {
       columns[0] = "year";
+    }
   }
   data = _.map(data, function(currentObject) {
     return _.pick(currentObject, columns);
@@ -189,12 +196,18 @@ function get_data(type, states) {
   }
 
 
-
   return [tableData, colsForGraph, colsForTable, allAgencyData];
 }
 
 
 function getCrimeColumns(headers, type, output) {
+  if (type == "alcohol") {
+    columnNames = ["year", "number_of_beers", "number_of_shots_liquor", "number_of_glasses_wine", "number_of_drinks_total"];
+    if (output == "table") {
+      columnNames = ["state"].concat(columnNames);
+    }
+    return (columnNames);
+  }
 
   headers = headers.split(",");
   if (output == "graph") {
@@ -202,8 +215,6 @@ function getCrimeColumns(headers, type, output) {
   } else {
     columnNames = ["agency", "year", "state", "population", "ORI"];
   }
-
-
 
 
 
@@ -321,7 +332,7 @@ function getCrimeColumns(headers, type, output) {
 
   if (["offenses", "death", "hate", "jail", "school"].includes(type)) {
     crime = $("#crime_dropdown").val();
-  } else if (type == "arrests") {
+  }  else if (type == "arrests") {
     crime = $("#crime_dropdown").val();
     if (output == "graph") {
       arrest_category = $("#subcategory_dropdown").val();
@@ -345,7 +356,7 @@ function getCrimeColumns(headers, type, output) {
 
 
   for (var n = 0; n < headers.length; n++) {
-     if (type == "arrests") {
+   if (type == "arrests") {
       if ($("#subsubcategory_dropdown").val() == "Sex") {
         female_arrest = crime + "_tot_female_" + arrest_category;
         male_arrest = crime + "_tot_male_" + arrest_category;
@@ -394,8 +405,6 @@ function getCrimeColumns(headers, type, output) {
       columnNames = columnNames.filter(a => !a.includes('mtr_veh'));
     }
   }
-
-
 
   if (type == "police" && !columnNames.includes("total_employees_officers")) {
     columnNames.push("total_employees_officers");
