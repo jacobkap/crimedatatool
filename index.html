@@ -20,7 +20,7 @@
   <script src="data/data.js"></script>
   <script src="js/graph.js"></script>
   <script src="js/table.js"></script>
-    <script src="js/change_funs.js"></script>
+  <script src="js/change_funs.js"></script>
   <script src="js/utils.js"></script>
 
 
@@ -106,7 +106,9 @@
     </div>
 
     <script>
-    $('.js-example-basic-single').select2();
+    $('.js-example-basic-single').select2({
+      minimumResultsForSearch:2
+    });
     main("offenses", crime_state_values, 4, crime_values, "murder");
     </script>
   </div>

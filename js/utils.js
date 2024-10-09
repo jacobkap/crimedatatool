@@ -598,41 +598,25 @@ function updateAgencies(type, states) {
 
 function main(type, states, state_default, crimes, crime_starter) {
 
-  //Executes your code when the DOM is ready.  Acts the same as $(document).ready().
-  /*
-     //Calls the selectBoxIt method on your HTML select box.
-     $("select").selectBoxIt({
-       autoWidth: false,
-       dynamicPositioning: false
-     });
-    $('.simple-select').chosen();
-    resizeChosen();
-  */
 
   makeDataSourceDropdown()
-//  updateDataSource()
-
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
-
   if (type == "arrests") {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
     make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
     toggle_arrest_display();
   }
-
   if (type == "nibrs") {
     make_dropdown('#category_dropdown', nibrs_categories, "offense")
     make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
     toggle_nibrs_display()
   }
-
-
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
+        console.timeLog()
+            console.time()
       agencies = updateAgencies(type, states);
-
-
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
     make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
@@ -640,26 +624,27 @@ function main(type, states, state_default, crimes, crime_starter) {
     $("#policeSex").show();
   }
 
-  $('.simple-select').trigger('chosen:updated');
 
 
-  if (window.location.hash == "") {
-    change_url(type)
-  } else {
-    change_data_from_url(type);
-  }
-
+//  if (window.location.hash == "") {
+//    change_url(type)
+//  } else {
+//    change_data_from_url(type);
+//  }
 
   main_results = get_data(type, states);
+  console.time()
   table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
   all_data = main_results[3];
+  console.timeLog()
 
+  console.time()
   graph = makeGraph(type, crimes);
-  $("#graph").ready($("#loader").hide());
+    console.timeLog()
+      console.time()
   table = makeTable(type);
-
-  jQuery(window).on('resize', resizeChosen);
+    console.timeLog()
   makeDataSourceDropdown()
 }
