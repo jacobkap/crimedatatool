@@ -598,7 +598,18 @@ function updateAgencies(type, states) {
 
 function main(type, states, state_default, crimes, crime_starter) {
 
-
+  $('#list').DataTable({
+      "columns": [
+          {
+              "width": "45%"
+          },
+          null,
+          null
+      ],
+      "initComplete": function(){
+          $("#list").show();
+      }
+  });
   makeDataSourceDropdown()
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)

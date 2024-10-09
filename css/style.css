@@ -5,7 +5,9 @@ input[type="checkbox"] {
 }
 
 
-
+#list {
+    display: none;
+}
 
 .label-text {
   display: inline-block;
