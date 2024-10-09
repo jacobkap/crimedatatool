@@ -560,7 +560,7 @@ function updateDataSource() {
 
 current_page = data_sources[$("#data_source").val()]
   page_temp = window.location.pathname
-  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/index.html") {
+  if (current_page == "Offenses Known and Clearances by Arrest" & !["/index.html", "/"].includes(page_temp)) {
     window.location.href = new_url_path;
   }
   if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
