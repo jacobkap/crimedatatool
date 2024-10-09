@@ -3,19 +3,8 @@ function allowSaveGraph() {
 }
 
 function getGraphDataset(tableData, colsForGraph, type, crimes) {
-  if (type == "borderpatrol") {
-    colsForGraph[0] = "fiscal_year"
-  }
 
-  if (type == "prisoners" && $("#crime_dropdown").val() == "race_ethnicity") {
-    temp_graph_headers = []
-    for (var m = 0; m < colsForGraph.length; m++) {
-      if (!colsForGraph[m].startsWith("population")) {
-        temp_graph_headers.push(colsForGraph[m])
-      }
-    }
-    colsForGraph = temp_graph_headers
-  }
+
 
   rate_type = "_rate";
   if (!get_rate_type(type, binary = true)) {
@@ -38,10 +27,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     "Offenses Cleared Involving Only Persons Under age 18",
     "Unfounded Offenses"
   ];
-  if (type == "alcohol") {
-    checkbox_names = _.values(alcohol_categories);
-  }
-  if (["prisoners", "police"].includes(type)) {
+  if (["police"].includes(type)) {
     checkbox_names = ["Female", "Male", "Total"];
   }
   if (type == "arrests") {
@@ -56,9 +42,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (type == "hate") {
     checkbox_names = ["Violent", "Nonviolent", "Total"];
   }
-  if (type == "school") {
-    checkbox_names = ["Not on Campus", "On Campus - Total", "On Campus - Student Housing", "Public Property", "Total"];
-  }
+
 
 
   if (type == "nibrs") {
@@ -138,7 +122,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data7.push(data[i][colsForGraph[7]]);
   }
 
-  if (["offenses", "alcohol", "prisoners", "arrests", "hate", "school", "nibrs"].includes(type) || type == "police" &
+  if (["offenses", "arrests", "hate", "nibrs"].includes(type) || type == "police" &
     police_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
@@ -179,11 +163,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     if (type == "police") {
       crimes = police_subcategories[$("#crime_dropdown").val()];
     }
-    if (type == "borderpatrol") {
-      label = border_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
-    } else if (type == "jail") {
-      label = jail_categories[jail_state_values[$("#state_dropdown").val()]][label]
-    } else if (type == "nibrs" && $("#rate").is(':checked')) {
+     if (type == "nibrs" && $("#rate").is(':checked')) {
       label = label.replace(/_rate/g, "");
       label = label.replace(/_percent/g, "");
       label = crimes[label]
@@ -313,12 +293,6 @@ function makeGraph(type, crimes) {
   }
 
   xaxis_label = "Year";
-  if (type == "borderpatrol") {
-    xaxis_label = "Fiscal Year";
-  }
-  if (type == "jail" || $("#monthly").is(':checked')) {
-    xaxis_label = "Year-Month"
-  }
 
   opts = {
     spanGaps: false,
@@ -468,21 +442,6 @@ function getTitle(data, type) {
     if ($("#category_dropdown").val() == "property") {
       subtitle = "Property Data: " + nibrs_property_values[$("#crime_dropdown").val()];
     }
-  } else if (type == "school") {
-    title = school_state_values[$("#state_dropdown").val()];
-    subtitle = school_categories[$("#crime_dropdown").val()];
-    subtitle += ": " + school_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
-    if ($("#crime_dropdown").val() == "hate") {
-      subtitle += ", Bias Motivation: " + school_bias_motivations[$("#subsubcategory_dropdown").val()]
-    }
-  } else if (type == "borderpatrol") {
-    title = border_states[$("#state_dropdown").val()];
-    subtitle = border_categories[$("#crime_dropdown").val()];
-    subtitle = subtitle + ", " + border_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
-  } else if (type == "jail") {
-    title = jail_state_values[$("#state_dropdown").val()];
-    title += ", " + agencies[$("#agency_dropdown").val()] + " County Jail";
-    subtitle = jail_categories[jail_state_values[$("#state_dropdown").val()]][$("#crime_dropdown").val()];
   } else if (type == "police") {
     subtitle = police_categories[$("#crime_dropdown").val()];
     subtitle += ": " + police_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
@@ -492,20 +451,6 @@ function getTitle(data, type) {
       subtitle = subtitle + " - " + weapon;
     }
 
-  } else if (type == "prisoners") {
-    title = data[0].state + ' Prisons: ';
-    subtitle = prisoner_categories[$("#crime_dropdown").val()] + ": ";
-    subtitle += prisoners_subcategory[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
-
-    if ($("#subcategory_dropdown").val().includes("_crime")) {
-      subtitle += ", Race: " + prisoners_race[$("#subsubcategory_dropdown").val()]
-    }
-  } else if (type == "alcohol") {
-    title = data[0].state + ' Alcohol Consumption: ';
-    subtitle = "Annual per capita (population aged 14+) ";
-  } else if (type == "death") {
-    title = data[0].state;
-    subtitle = "Cause of Death: " + death_categories[$("#crime_dropdown").val()];
   } else if (type == "hate") {
     subtitle = "Hate Crime, Bias Motivation: " + hate_bias_motivations[$("#crime_dropdown").val()];
   }

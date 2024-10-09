@@ -35,12 +35,6 @@ function readCSV(csv) {
 
 function exportToCsv(tableData, type, states) {
 
-  if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
-    states = state_values;
-  }
-  if (type == "prisoners" && !$("#crime_dropdown").val().includes("_crime")) {
-    states = prisoners_state_values;
-  }
 
   data = tableData.reverse();
 
@@ -49,9 +43,6 @@ function exportToCsv(tableData, type, states) {
 
   if (get_rate_type(type, binary = true)) {
     rate_or_count = "rate_";
-  }
-  if (["death", "alcohol"].includes(type)) {
-    rate_or_count = "";
   }
   if (type == "police" && $("#checkbox_4").is(':checked')) {
     rate_or_count = "rate_per_officer_";
@@ -76,15 +67,6 @@ function exportToCsv(tableData, type, states) {
     filename += agencies[$("#agency_dropdown").val()] + "_";
   }
   filename += states[$("#state_dropdown").val()];
-  if (type == "prisoners") {
-    filename += "_" + prisoner_categories[$("#crime_dropdown").val()];
-  }
-  if (type == "borderpatrol") {
-    filename += "_" + border_categories[$("#crime_dropdown").val()];
-  }
-  if (type == "jail") {
-    filename = "crimedatatool.com_" + jail_state_values[$("#state_dropdown").val()] + "_" + agencies[$("#agency_dropdown").val()] + "_jail";
-  }
   filename += ".csv";
 
   var blob = new Blob([data], {
@@ -424,9 +406,7 @@ function countToRate(data, type, per_officer = false) {
   if (per_officer && type == "police") {
     population_column = "total_employees_officers";
   }
-  if (type == "school") {
-    population_column = "number_of_students";
-  }
+
   if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
     population_column = "all_arrests_total_tot_arrests";
   }
@@ -434,33 +414,6 @@ function countToRate(data, type, per_officer = false) {
     population_column = $("#crime_dropdown").val() + "_tot_" + $("#subcategory_dropdown").val();
     if ($("#subcategory_dropdown").val() == "tot") {
       population_column = $("#crime_dropdown").val() + "_tot_arrests";
-    }
-  }
-  if (type == "prisoners") {
-    total_population_column = "population";
-    female_population_column = "population_female";
-    male_population_column = "population_male";
-    if ($("#prisoners_rate_adult").is(':checked')) {
-      total_population_column = "population_adult";
-      female_population_column = "population_female_adult";
-      male_population_column = "population_male_adult";
-    } else if ($("#prisoners_rate_18_65").is(':checked')) {
-      total_population_column = "population_aged_18_65";
-      female_population_column = "population_female_aged_18_65";
-      male_population_column = "population_male_aged_18_65";
-    }
-
-    race_value = "total";
-    if (prisoner_categories[$("#crime_dropdown").val()] == "Race/Ethnicity") {
-      race_value = $("#subcategory_dropdown").val();
-    }
-    if (prisoner_categories[$("#crime_dropdown").val()].includes("Charge")) {
-      race_value = $("#subsubcategory_dropdown").val();
-    }
-    if (race_value != "total") {
-      total_population_column += "_" + race_value;
-      female_population_column += "_" + race_value;
-      male_population_column += "_" + race_value;
     }
   }
 
@@ -489,9 +442,6 @@ function countToRate(data, type, per_officer = false) {
         rate_val = data[data_keys[i]] / data[population_column];
         if (type != "school" && population_column !== "total_employees_officers") {
           rate_val = rate_val * 100000;
-        }
-        if (type == "school") {
-          rate_val = rate_val * 1000;
         }
       }
 
@@ -553,11 +503,8 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
   }
 
   url += type + "/";
-  if (type == "school") {
-    final_url = url + "agency_choices.json";
-  } else {
     final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
-  }
+
   if (largest_agencies) {
     final_url = url + "largest_agency_choices.json";
   }
@@ -689,34 +636,13 @@ function main(type, states, state_default, crimes, crime_starter) {
     toggle_nibrs_display()
   }
 
-  if (type == "jail") {
-    crimes = crimes[states[$("#state_dropdown").val()]]
-  }
+
   if (!["alcohol", "prisoners", "death", "borderpatrol", "school"].includes(type)) {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
     if (type != "school") {
       agencies = updateAgencies(type, states);
     }
-  }
-  if (type == "death") {
-    make_dropdown("#crime_dropdown", crimes, crime_starter);
-  }
-  if (type == "prisoners") {
-    make_dropdown("#crime_dropdown", crimes, crime_starter);
-    make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-    make_dropdown("#subsubcategory_dropdown", prisoners_race, "total")
-    toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
-  }
-  if (type == "borderpatrol") {
-    make_dropdown("#crime_dropdown", crimes, crime_starter);
-    make_dropdown('#subcategory_dropdown', border_subcategories[$('#crime_dropdown').val()], border_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-  }
-  if (type == "school") {
-    make_dropdown("#crime_dropdown", crimes, crime_starter);
-    make_dropdown('#subcategory_dropdown', school_subcategories[$('#crime_dropdown').val()], school_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-    make_dropdown("#subsubcategory_dropdown", school_bias_motivations, "total")
-    toggle_display("#school_bias_div", ["hate"])
   }
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
@@ -734,17 +660,7 @@ function main(type, states, state_default, crimes, crime_starter) {
     change_data_from_url(type);
   }
 
-  if (type == "borderpatrol") {
-    states = get_border_states($("#crime_dropdown").val())
-  }
 
-  if (type == "prisoners") {
-    if ($("#crime_dropdown").val().includes("_crime")) {
-      states = state_values
-    } else {
-      states = prisoners_state_values
-    }
-  }
   main_results = get_data(type, states);
   table_data = main_results[0];
   graph_headers = main_results[1];

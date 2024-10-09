@@ -49,18 +49,7 @@ find_url_string = function(url, string) {
   return (final);
 }
 
-get_border_states = function(crime) {
-  if (["sector_profile", "family", "staffing"].includes(crime)) {
-    border_states = border_sectors;
-  } else if (["southwest_apprehensions", "southwest_deaths"].includes(crime)) {
-    border_states = southwest_border_sectors;
-  } else if (["seizures"].includes(crime)) {
-    border_states = border_regions;
-  } else if (["nationwide"].includes(crime)) {
-    border_states = nationwide_only;
-  }
-  return (border_states)
-}
+
 
 change_data_from_url = function(type) {
   url = window.location.hash;
@@ -152,31 +141,12 @@ change_data_from_url = function(type) {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], [12, 1, 1], '#crime_dropdown');
     police_subcatergory_values = police_subcategories[$('#crime_dropdown').val()]
   }
-  if (type == "borderpatrol") {
-    make_dropdown('#subcategory_dropdown', border_subcategories[$('#crime_dropdown').val()], border_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-    border_states = get_border_states(category_val)
-    make_dropdown('#state_dropdown', border_states, 0)
-    var states = border_states;
-  }
-  if (type == "prisoners") {
-    if (category_val.includes("_crime")) {
-      make_dropdown('#state_dropdown', state_values, 0)
-    } else {
-      make_dropdown('#state_dropdown', prisoners_state_values, 0)
-    }
-    make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-    make_dropdown("#subsubcategory_dropdown", prisoners_race, "total")
-    toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
-  }
+
   if (type == "police") {
     toggle_display("#weaponsDiv", ["officers_assaulted"]);
     toggle_display("#policeSex", ["employees"]);
   }
-  if (type == "school") {
-    make_dropdown('#subcategory_dropdown', school_subcategories[$('#crime_dropdown').val()], school_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-    make_dropdown("#subsubcategory_dropdown", school_bias_motivations, "total")
-    toggle_display("#school_bias_div", ["hate"])
-  }
+
 
   state_values = $('#state_dropdown')[0].options;
   state_values = $.map(state_values, function(elem) {
@@ -191,8 +161,5 @@ change_data_from_url = function(type) {
     $('#agency_dropdown').val(agency_val);
   }
 
-  if (type == "prisoners") {
-    toggle_display("#subsubcategory_dropdown_div", [1, 5])
-  }
   $('.simple-select').trigger('chosen:updated');
 };

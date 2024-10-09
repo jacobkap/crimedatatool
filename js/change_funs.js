@@ -56,16 +56,6 @@ function checkboxesUpdate(type, always_on_box, crimes) {
   change_url(type)
 }
 
-function prisonersPopBoxChange(box_to_check) {
-  box_status = $(box_to_check).prop("checked");
-  $("#prisoners_rate").prop("checked", false);
-  $("#prisoners_rate_adult").prop("checked", false);
-  $("#prisoners_rate_18_65").prop("checked", false);
-
-  $(box_to_check).prop("checked", box_status);
-  agencyChangeFun('prisoners', prisoners_state_values, prisoner_categories);
-}
-
 
 function arrestsPopBoxChange(box_to_check) {
   box_status = $(box_to_check).prop("checked");
@@ -97,16 +87,6 @@ function stateChangeFun(type, states, crimes) {
   agencyChangeFun(type, states, crimes);
 }
 
-function jailStateChange(type, states, crimes) {
-  crimes = crimes[states[$("#state_dropdown").val()]]
-  default_starter = ["avg_daily_pop_total_jurisdiction", "average_daily_population", "total_population"]
-  default_starter = default_starter[$("#state_dropdown").val()]
-  $('#crime_dropdown').empty();
-  make_dropdown("#crime_dropdown", crimes, default_starter)
-
-  agencies = updateAgencies(type, states);
-  agencyChangeFun('jail', jail_state_values, jail_categories)
-}
 
 function police_categoryChangeFun() {
   make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
@@ -122,18 +102,6 @@ function arrest_subsubcategoryChangeFun() {
 
 
 
-function school_category_change() {
-  make_dropdown('#subcategory_dropdown', school_subcategories[$('#crime_dropdown').val()], school_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-  toggle_display("#school_bias_div", ["hate"])
-  agencyChangeFun('school', school_state_values);
-}
-
-function borderCategoryChange(type, states, crimes) {
-  make_dropdown('#subcategory_dropdown', border_subcategories[$('#crime_dropdown').val()], border_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-  border_states = get_border_states($("#crime_dropdown").val());
-  make_dropdown('#state_dropdown', border_states, 0);
-  agencyChangeFun('borderpatrol', border_states, border_categories);
-}
 
 function nibrcategoryChange() {
   if ($('#category_dropdown').val() == "property") {
@@ -192,38 +160,6 @@ function nibrsubcategoryChange() {
   agencyChangeFun('nibrs', nibrs_state_values, nibrs_crimes_temp);
 
 
-}
-
-function prisonerCategoryChange(current_category) {
-  toggle_display("#subsubcategory_dropdown_div", [1, 5])
-  make_dropdown('#subcategory_dropdown', prisoners_subcategory[$('#crime_dropdown').val()], prisoner_subcategory_starts[$('#crime_dropdown').val()], '#crime_dropdown')
-  toggle_display("#prisoners_race_div", ["custody_crime", "admissions_crime", "releases_crime"])
-
-  // If it's one of the prisoner_crime categories (from national corrections Reporting
-  // program), change states since it only has state info, not national-level info.
-  if ($("#crime_dropdown").val().includes("_crime") & !current_category.includes("_crime")) {
-    // If possible, keep same state when switching data sets.
-    if (!["US Prison Total", "Federal Prison Total", "State Prison Total"].includes(prisoners_state_values[$("#state_dropdown").val()])) {
-      current_state = prisoners_state_values[$("#state_dropdown").val()];
-      default_value = _.indexOf(state_values, current_state);
-    } else {
-      default_value = 4;
-    }
-    make_dropdown('#state_dropdown', state_values, default_value)
-    agencyChangeFun('prisoners', state_values);
-
-  } else if (!$("#crime_dropdown").val().includes("_crime") & current_category.includes("_crime")) {
-    // If possible, keep same state when switching data sets.
-    current_state = state_values[$("#state_dropdown").val()];
-    default_value = _.indexOf(prisoners_state_values, current_state);
-    make_dropdown('#state_dropdown', prisoners_state_values, default_value)
-    agencyChangeFun('prisoners', prisoners_state_values);
-
-  } else {
-    agencyChangeFun('prisoners', prisoners_state_values);
-  }
-  current_category = $("#crime_dropdown").val();
-  return (current_category);
 }
 
 

@@ -54,36 +54,6 @@ function fixTableName(name, type) {
     } else {
       name = temp_name;
     }
-  } else if (type == "prisoners") {
-    if (!["state", "year"].includes(name)) {
-      if ($("#crime_dropdown").val().includes("_crime")) {
-        temp_name = name;
-        crime = $("#subcategory_dropdown").val();
-
-        crime = " " + prison_crimes[crime]
-
-        temp_name = temp_name.replace($("#subcategory_dropdown").val() + "_", "");
-        temp_name = temp_name.replace(/_/g, " ");
-        temp_name = temp_name.replace("total total", "total");
-
-        temp_name = toTitleCase(temp_name);
-        name = crime + " " + temp_name;
-      } else {
-        temp1 = name.replace(/.*_female/, " Female");
-        temp2 = name.replace(/.*_male/, " Male");
-        temp3 = name.replace(/.*_total/, " Total");
-        name = name.replace(/_total|_female|_male/, "");
-        name = prisoners_subcategory[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
-        if (temp1 != temp_name) name += temp1;
-        if (temp2 != temp_name) name += temp2;
-        if (temp3 != temp_name) name += temp3;
-      }
-    }
-  } else if (type == "alcohol") {
-    name = alcohol_categories[name];
-  } else if (type == "jail") {
-    name = jail_categories[jail_state_values[$("#state_dropdown").val()]][name];
-
   } else if (type == "hate") {
     name = name.replace(/_/g, " ");
     name = toTitleCase(name);
@@ -95,33 +65,6 @@ function fixTableName(name, type) {
       name = name.replace(/_percent/g, "");
     }
     name = nibrs_crime_values[name];
-  } else if (type == "death") {
-    temp_name = name;
-    temp1 = name.replace(/deaths_.*/, " Deaths");
-    temp2 = name.replace(/.*crude/, " Crude Rate");
-    temp3 = name.replace(/.*_age_adjusted/, " Age-Adjusted Rate");
-    name = name.replace(/deaths_|_crude|_age_adjusted/, "");
-    name = death_categories[name];
-    if (temp1 != temp_name) name += temp1;
-    if (temp2 != temp_name) name += temp2;
-    if (temp3 != temp_name) name += temp3;
-  } else if (type == "borderpatrol") {
-    if (name == "sector") {
-      name = "Sector";
-    } else if (name == "fiscal_year") {
-      name = "Fiscal Year";
-    } else {
-      name = border_subcategories[$('#crime_dropdown').val()][name]
-    }
-  } else if (type == "school" && !default_table_headers.includes(name)) {
-    name = name.replace($('#crime_dropdown').val() + "_", "", name);
-    name = name.replace("_" + $('#subcategory_dropdown').val(), "", name);
-    name = name.replace("_" + $('#subsubcategory_dropdown').val(), "", name);
-    crime = school_subcategories[$('#crime_dropdown').val()][$('#subcategory_dropdown').val()];
-    name =  crime + ": " + school_locations[name];
-    if ($("#crime_dropdown").val() == "hate") {
-      name += ", " + school_bias_motivations[$("#subsubcategory_dropdown").val()]
-    }
   }
 
   if (name === undefined || default_table_headers.includes(name)) {
@@ -140,14 +83,6 @@ function fixTableName(name, type) {
       name += " %";
     } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
       name += " % of All Arrests for All Crimes";
-    } else if (type == "school") {
-      name += " Rate per 1,000 Students";
-    } else if (type == "prisoners") {
-      rate_val = get_rate_type(type)
-      if (rate_val == "_rate") rate_val = " Rate"
-      if (rate_val == "_rate_age_18_65") rate_val = " Rate Aged 18-65"
-      if (rate_val == "_rate_adults") rate_val = " Rate Adults"
-      name += rate_val;
     } else {
       name += " Rate";
     }
