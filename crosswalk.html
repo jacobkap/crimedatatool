@@ -5,52 +5,53 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-99359926-4');
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-99359926-4');
   </script>
 
 
-
-  <title>Crosswalk</title>
+  <title>Crimes in the United States</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Jacob Kaplan">
-  <meta name="description" content="The Crosswalk! Look out for cars!">
+  <meta name="description" content="Explore data from the Federal Bureau of Investigation's Uniform Crime Reporting (UCR) Program Data, including the Summary Reporting System (SRS) and National Incident-Based Reporting System (NIBRS) data.">
 
-  <script type="text/javascript" src="data/data.min.js"></script>
+  <script src="data/data.js"></script>
   <script src="js/utils.js"></script>
+  <script src="js/change_funs.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="js/graph.js"></script>
   <script src="js/table.js"></script>
   <script src="js/datatool.js"></script>
-
-  <link rel="stylesheet" href="css/test.css" />
-  <link rel="stylesheet" href="css/misc.css" />
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="js/dynamic_url.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-html5-1.5.1/fc-3.2.4/r-2.2.1/datatables.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/misc.css" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
 
-  <div class="myTopnav"></div>
 
-  <script>
-      ks()
-    $(function() {
-      $('.footer-wrap').load("reusable_js.html .foot");
-      $('.myTopnav').load("reusable_js.html #myTopnav");
-    })
-  </script>
 
+  <div class="topnav" id="myTopnav">
+    <nav role="navigation" id="site-nav" class="nav">
+      <div class="menu a">
+        <a href="/">Data Tool</a>
+      </div>
+    </nav>
+  </div>
 
 
     <div class="crosswalk">

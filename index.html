@@ -5,13 +5,13 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99359926-4"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
+  window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-99359926-4');
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'UA-99359926-4');
   </script>
 
 
@@ -19,10 +19,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Jacob Kaplan">
-  <meta name="description" content="Explore crime and clearances by
-      arrest data in the United States. All of the data comes from the
-      FBI's Uniform Crime Reporting (UCR) Program Data: Offenses Known and
-      Clearances by Arrest.">
+  <meta name="description" content="Explore data from the Federal Bureau of Investigation's Uniform Crime Reporting (UCR) Program Data, including the Summary Reporting System (SRS) and National Incident-Based Reporting System (NIBRS) data.">
 
   <script src="data/data.js"></script>
   <script src="js/utils.js"></script>
@@ -41,7 +38,7 @@
   <link rel="stylesheet" href="css/style.css" />
 
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -49,12 +46,12 @@
 
 
   <div class="topnav" id="myTopnav">
-        <nav role="navigation" id="site-nav" class="nav">
-          <div class="menu a">
-            <a href="/">Data Tool</a>
-              </div>
-        </nav>
+    <nav role="navigation" id="site-nav" class="nav">
+      <div class="menu a">
+        <a href="/">Data Tool</a>
       </div>
+    </nav>
+  </div>
 
   <div class="column sidebar">
     <h2>Offenses Known and Clearances by Arrest</h2>
@@ -102,27 +99,27 @@
       <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
       <hr>
     </div>
- <button type="button" onclick="exportToCsv(all_data, 'offenses', crime_state_values)">Download All Agency Data as CSV</button>
-      <br>
+    <button type="button" onclick="exportToCsv(all_data, 'offenses', crime_state_values)">Download All Agency Data as CSV</button>
+    <br>
     <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
   </div>
 
 
-<div class="column_main">
-  <div class="column main">
-    <div id="loader"></div>
+  <div class="column_main">
+    <div class="column main">
+      <div id="loader"></div>
 
-    <canvas id="graph" style="width:95%;height:500px;"></canvas>
-    <div>
-      <table id="table" class="display cell-border"></table>
-    </div>
+      <canvas id="graph" style="width:95%;height:500px;"></canvas>
+      <div>
+        <table id="table" class="display cell-border"></table>
+      </div>
 
-    <script>
-    $('.js-example-basic-single').select2();
+      <script>
+      $('.js-example-basic-single').select2();
       main("offenses", crime_state_values, 4, crime_values, "murder");
-    </script>
-  </div>
+      </script>
     </div>
+  </div>
 
   <div class="footer-wrap"></div>
 </body>
