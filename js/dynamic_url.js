@@ -6,13 +6,11 @@ change_url = function(type) {
   dropdowns = ["#agency_dropdown", "#crime_dropdown", "#subcategory_dropdown",
     "#subsubcategory_dropdown", '#rate', '#percent_of_arrests',
     '#monthly', '#checkbox_1', '#checkbox_2', '#checkbox_3',
-    '#checkbox_4', '#checkbox_5', '#checkbox_6',
-    "#prisoners_rate", "#prisoners_rate_adult", "#prisoners_rate_18_65", "#percent_of_crimes",
+    '#checkbox_4', '#checkbox_5', '#checkbox_6',"#percent_of_crimes",
   ]
   dropdown_labels = ["&agency=", "&category=", "&subcategory=", "&subsubcategory=",
     "&rate=", "&percent=", "&monthly=", "&checkbox_1=", "&checkbox_2=",
-    "&checkbox_3=", "&checkbox_4=", "&checkbox_5=", "&checkbox_6=",
-    "&prisoners_rate_val=", "&prisoners_rate_adult=", "&prisoners_rate_18_65=", "&percent_of_crimes="
+    "&checkbox_3=", "&checkbox_4=", "&checkbox_5=", "&checkbox_6=", "&percent_of_crimes="
   ]
   dropdown_type = ["text_selected", "value", "value", "value", "checked",
     "checked", "checked", "checked", "checked", "checked", "checked", "checked", "checked",
@@ -70,18 +68,13 @@ change_data_from_url = function(type) {
   checkbox4_val = find_url_string(split_url, "checkbox_4=")
   checkbox5_val = find_url_string(split_url, "checkbox_5=")
   checkbox6_val = find_url_string(split_url, "checkbox_6=")
-  prisoners_rate_val = find_url_string(split_url, "prisoners_rate_val=")
-  prisoners_rate_adult_val = find_url_string(split_url, "prisoners_rate_adult=")
-  prisoners_rate_18_65_val = find_url_string(split_url, "prisoners_rate_18_65=")
   percent_of_crimes_val = find_url_string(split_url, "percent_of_crimes=")
 
   checkbox = [rate_val, percent_val, monthly_val, checkbox1_val, checkbox2_val, checkbox3_val,
-    checkbox4_val, checkbox5_val, checkbox6_val, prisoners_rate_val,
-    prisoners_rate_adult_val, prisoners_rate_18_65_val, percent_of_crimes_val
+    checkbox4_val, checkbox5_val, checkbox6_val,  percent_of_crimes_val
   ];
   checkbox_div = ["#rate", "#percent", "#monthly", "#checkbox_1", "#checkbox_2", "#checkbox_3",
-    "#checkbox_4", "#checkbox_5", "#checkbox6", "#prisoners_rate_val",
-    "#prisoners_rate_adult", "#prisoners_rate_18_65", "#percent_of_crimes"
+    "#checkbox_4", "#checkbox_5", "#checkbox6",  "#percent_of_crimes"
   ];
   for (var i = 0; i < checkbox.length; i++) {
     if (checkbox[i].length != 0) {

@@ -72,8 +72,8 @@ function fixTableName(name, type) {
     name = name.replace(/^\w| \w/g, c => c.toUpperCase());
   }
 
-  if (get_rate_type(type, binary = true) && !["Agency", "State", "Population", "ORI", "School Name", "Number Of Students", "School Unique Id"].includes(name) &&
-    !name.startsWith("Year") && type != "death") {
+  if (get_rate_type(type, binary = true) && !["Agency", "State", "Population", "ORI"].includes(name) &&
+    !name.startsWith("Year")) {
 
     if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {} else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
       name += " % of Arrests";
@@ -93,10 +93,10 @@ function fixTableName(name, type) {
 
 function fixTableDataName(name, type) {
   rate_type = get_rate_type(type);
-  if (!["ORI", "agency", "state", "population", "school_name", "school_unique_ID", "number_of_students"].includes(name) &&
+  if (!["ORI", "agency", "state", "population"].includes(name) &&
     !name.startsWith("year") &&
     !name.startsWith("county")) {
-    if (get_rate_type(type, binary = true) && type != "death") {
+    if (get_rate_type(type, binary = true)) {
       name += rate_type;
     }
     if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {
@@ -111,7 +111,7 @@ function makeTable(type) {
   data = subsetColumns(table_data, table_headers, "table", type);
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
-    return !["agency", "year", "state", "ORI", "county", "sector", "fiscal_year", "school_name", "school_unique_ID"].includes(a);
+    return !["agency", "year", "state", "ORI", "county"].includes(a);
   });
   // Adds commas in numbers to make it easier to read!
   for (var m = 0; m < data.length; m++) {

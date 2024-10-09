@@ -63,9 +63,8 @@ function exportToCsv(tableData, type, states) {
   data = objToString(_.keys(tableData[0])) + '\n' + data;
 
   filename = "crimedatatool.com_" + type + "_" + rate_or_count;
-  if (!["prisoners", "death", "alcohol", "borderpatrol", "school"].includes(type)) {
     filename += agencies[$("#agency_dropdown").val()] + "_";
-  }
+
   filename += states[$("#state_dropdown").val()];
   filename += ".csv";
 
@@ -423,16 +422,7 @@ function countToRate(data, type, per_officer = false) {
   for (var i = 0; i < data_keys.length; i++) {
     if (!["agency", "year", "state", "population", "ORI", "school_name", "school_unique_ID", "number_of_students"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
 
-      if (type == "prisoners") {
-        if (data_keys[i].includes("_female")) {
-          population_column = female_population_column;
-        } else if (data_keys[i].includes("_male")) {
-          population_column = male_population_column;
-        } else {
-          population_column = total_population_column;
-        }
-        rate_val = data[data_keys[i]] / data[population_column] * 100000;
-      } else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+ if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
       } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
@@ -640,13 +630,11 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
 
 
-  if (!["alcohol", "prisoners", "death", "borderpatrol", "school"].includes(type)) {
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
-    if (type != "school") {
       agencies = updateAgencies(type, states);
-    }
-  }
+
+
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
     make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");

@@ -46,7 +46,7 @@ function checkboxesUpdate(type, always_on_box, crimes) {
 
   }
 
-  if (["death", "offenses"].includes(type)) {
+  if (["offenses"].includes(type)) {
     agencyChangeFun(type, state_values);
   } else if (type == "nibrs") {
     remake_graph(type, nibrs_crimes_temp)
@@ -190,11 +190,9 @@ function agencyChangeFun(type, states, crimes) {
     }
   }
 
-  if (type == "prisoners" && $("#crime_dropdown").val().includes("_crime")) {
-    main_results = get_data(type, state_values);
-  } else {
+
     main_results = get_data(type, states);
-  }
+
   table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];

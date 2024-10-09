@@ -87,7 +87,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     }
   }
 
-  if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked"))) && type != "death") {
+  if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked")))) {
     colsForGraph = _.map(colsForGraph, function(x) {
       if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
         return x + "_clearance_rate";
@@ -156,7 +156,6 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     }
 
     label = colsForGraph[1]
-    label = label.replace(/deaths_/g, "");
     label = label.replace(/_age_adjusted_rate/g, "");
     label = label.replace(/_crude_rate/g, "");
 
