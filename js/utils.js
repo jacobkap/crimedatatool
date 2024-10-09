@@ -533,8 +533,7 @@ function makeDataSourceDropdown() {
   }
 
 
-  if (page_temp == "/" || page_temp == "/index.html"
-|| page_temp == "/E:/Dropbox/crimedatatool/" || page_temp == "/E:/Dropbox/crimedatatool/index.html") {
+  if (page_temp == "/index.html" || page_temp == "/" || page_temp == "/E:/Dropbox/crimedatatool/" || page_temp == "/E:/Dropbox/crimedatatool/index.html") {
     current_page = 4
   }
     $("#data_source").val(current_page)
@@ -561,8 +560,7 @@ function updateDataSource() {
 
 current_page = data_sources[$("#data_source").val()]
   page_temp = window.location.pathname
-  if ((current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/") ||
-(current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/index.html")) {
+  if (current_page == "Offenses Known and Clearances by Arrest" & page_temp != "/index.html") {
     window.location.href = new_url_path;
   }
   if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
@@ -663,5 +661,5 @@ function main(type, states, state_default, crimes, crime_starter) {
   table = makeTable(type);
 
   jQuery(window).on('resize', resizeChosen);
-    makeDataSourceDropdown()
+  makeDataSourceDropdown()
 }
