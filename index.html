@@ -10,9 +10,7 @@
   <meta name="author" content="Jacob Kaplan">
   <meta name="description" content="Explore data from the Federal Bureau of Investigation's Uniform Crime Reporting (UCR) Program Data, including the Summary Reporting System (SRS) and National Incident-Based Reporting System (NIBRS) data.">
 
-  <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/css/jquery.dataTables.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 
 
@@ -30,7 +28,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-
+  <link rel="stylesheet" href="css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -105,11 +104,11 @@
     </div>
 
     <script>
-
+    $('.js-example-basic-single').select2({
+      minimumResultsForSearch:2
+    });
     document.addEventListener("DOMContentLoaded", function() {
-      $('.js-example-basic-single').select2({
-        minimumResultsForSearch:2
-      });
+
     main("offenses", crime_state_values, 4, crime_values, "murder");
     });
     </script>
