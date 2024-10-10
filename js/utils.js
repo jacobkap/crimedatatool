@@ -620,17 +620,17 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown('#category_dropdown', nibrs_categories, "offense")
     make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
     toggle_nibrs_display()
-  }
+  } else if (type == "police") {
+      make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
+      make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
+      toggle_display("#weaponsDiv", ["officers_assaulted"]);
+      $("#policeSex").show();
+    }
 
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
       agencies = updateAgencies(type, states);
-  if (type == "police") {
-    make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
-    make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
-    toggle_display("#weaponsDiv", ["officers_assaulted"]);
-    $("#policeSex").show();
-  }
+
 
 
 //  if (window.location.hash == "") {
@@ -646,7 +646,10 @@ function main(type, states, state_default, crimes, crime_starter) {
   table_headers = main_results[2];
   all_data = main_results[3];
   graph = makeGraph(type, crimes);
+  console.time()
   table = makeTable(type);
+  console.timeEnd()
       });
+
 //  makeDataSourceDropdown()
 }
