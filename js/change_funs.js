@@ -223,7 +223,6 @@ if (type == "nibrs" && $("#subcategory_dropdown").val() == "subtype") {
     toggle_nibrs_display();
 }
 
-  $('.simple-select').trigger('chosen:updated');
 }
 
 function remake_graph(type, crimes) {
