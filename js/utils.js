@@ -603,7 +603,7 @@ function main(type, states, state_default, crimes, crime_starter) {
 
   state_default = Math.floor(Math.random()*states.length)
   makeDataSourceDropdown()
-  ctx = document.getElementById("graph").getContext('2d');
+
   make_dropdown('#state_dropdown', states, state_default)
   if (type == "arrests") {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
@@ -635,6 +635,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   //  change_data_from_url(type);
   //}
       document.addEventListener("DOMContentLoaded", function() {
+          ctx = document.getElementById("graph").getContext('2d');
   main_results = get_data(type, states);
   table_data = main_results[0];
   graph_headers = main_results[1];
