@@ -43,7 +43,7 @@ h3 {
 
 .column {
   float: left;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .sidebar {
