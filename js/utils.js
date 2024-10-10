@@ -614,10 +614,11 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
     toggle_nibrs_display()
   }
+            console.time()
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
         console.timeLog()
-            console.time()
+
       agencies = updateAgencies(type, states);
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
@@ -627,7 +628,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
 
 
-
+console.log(window.location.hash)
   if (window.location.hash == "") {
     change_url(type)
   } else {
@@ -644,5 +645,5 @@ function main(type, states, state_default, crimes, crime_starter) {
   graph = makeGraph(type, crimes);
   table = makeTable(type);
     console.timeLog()
-//  makeDataSourceDropdown()
+  makeDataSourceDropdown()
 }
