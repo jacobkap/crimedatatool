@@ -629,11 +629,11 @@ function main(type, states, state_default, crimes, crime_starter) {
 
 
 console.log(window.location.hash)
-  if (window.location.hash == "") {
-    change_url(type)
-  } else {
-    change_data_from_url(type);
-  }
+//  if (window.location.hash == "") {
+//    change_url(type)
+  //} else {
+  //  change_data_from_url(type);
+  //}
 
   main_results = get_data(type, states);
     console.time()
