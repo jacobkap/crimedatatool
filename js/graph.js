@@ -289,6 +289,7 @@ function makeGraph(type, crimes) {
   xaxis_label = "Year";
 
   opts = {
+    animation: false,
     responsive: true,
     plugins: {
     title: {
@@ -407,6 +408,7 @@ function addYAxis() {
       enabled: false
     },
     options: opts
+
   });
 
   return (myLineChart);
