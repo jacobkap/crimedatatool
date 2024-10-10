@@ -90,8 +90,8 @@ function exportToCsv(tableData, type, states) {
 
 function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
   $(dropdown_id).empty();
-  $.each(dropdown_values, function(val, text) {
-    $(dropdown_id).append(new Option(text, val));
+  _.each(dropdown_values, function(val, text) {
+    $(dropdown_id).append(new Option(val, text));
   });
 
   if (Array.isArray(starter)) {
@@ -514,9 +514,10 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
 
 function makeDataSourceDropdown() {
   page_temp = window.location.pathname
+
   $("#data_source").empty();
-  $.each(data_sources, function(val, text) {
-    $("#data_source").append(new Option(text, val));
+  _.each(data_sources, function(val, text) {
+    $("#data_source").append(new Option(val, text));
   });
 
   if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html") {
@@ -583,8 +584,8 @@ function updateAgencies(type, states) {
   agencies = getStateAgencies(type, states);
   agencies.sort();
   $("#agency_dropdown").empty();
-  $.each(agencies, function(val, text) {
-    $("#agency_dropdown").append(new Option(text, val));
+  _.each(agencies, function(val, text) {
+    $("#agency_dropdown").append(new Option(val, text));
   });
   largest_agency_temp = states[$("#state_dropdown").val()];
   largest_agency_temp = _.filter(largest_agency, function(x) {
@@ -628,7 +629,6 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
 
 
-console.log(window.location.hash)
 //  if (window.location.hash == "") {
 //    change_url(type)
   //} else {
@@ -642,6 +642,7 @@ console.log(window.location.hash)
   table_headers = main_results[2];
   all_data = main_results[3];
     console.timeLog()
+    console.time()
   graph = makeGraph(type, crimes);
   table = makeTable(type);
     console.timeLog()

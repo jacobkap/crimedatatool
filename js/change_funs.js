@@ -144,8 +144,8 @@ function nibrsubcategoryChange() {
   }
 
   $("#crime_dropdown").empty();
-  $.each(nibrs_crimes_temp, function(val, text) {
-    $("#crime_dropdown").append(new Option(text, val));
+  _.each(nibrs_crimes_temp, function(val, text) {
+    $("#crime_dropdown").append(new Option(val, text));
   });
   if (_.keys(nibrs_crimes_temp).includes(current_crime)) {
     make_dropdown('#crime_dropdown', nibrs_crimes_temp, current_crime)
