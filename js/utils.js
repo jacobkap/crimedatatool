@@ -600,7 +600,7 @@ function updateAgencies(type, states) {
 
 function main(type, states, state_default, crimes, crime_starter) {
 
- state_default = Math.floor(Math.random()*crime_state_values.length)
+  state_default = Math.floor(Math.random()*states.length)
   makeDataSourceDropdown()
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
