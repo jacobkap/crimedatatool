@@ -1,15 +1,4 @@
-$('#list').DataTable({
-    "columns": [
-        {
-            "width": "45%"
-        },
-        null,
-        null
-    ],
-    "initComplete": function(){
-        $("#list").show();
-    }
-});
+
 
 function fixTableName(name, type) {
   temp_name = name;
@@ -154,6 +143,7 @@ function makeTable(type) {
 
   temp_table = $("#table").DataTable({
     data: data,
+    deferRender: true,
     columns: table_columns,
     "scrollX": true,
     "sScrollXInner": "100%",
