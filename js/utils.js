@@ -608,10 +608,12 @@ function updateAgencies(type, states) {
 
 function main(type, states, state_default, crimes, crime_starter) {
 
+console.time()
   state_default = Math.floor(Math.random()*states.length)
   makeDataSourceDropdown()
 
   make_dropdown('#state_dropdown', states, state_default)
+
   if (type == "arrests") {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
     make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
@@ -633,14 +635,14 @@ function main(type, states, state_default, crimes, crime_starter) {
     toggle_display("#weaponsDiv", ["officers_assaulted"]);
     $("#policeSex").show();
   }
-
+      console.timeEnd()
 
 //  if (window.location.hash == "") {
 //    change_url(type)
   //} else {
   //  change_data_from_url(type);
   //}
-      document.addEventListener("DOMContentLoaded", function() {
+  console.time()
           ctx = document.getElementById("graph").getContext('2d');
   main_results = get_data(type, states);
   table_data = main_results[0];
@@ -649,6 +651,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   all_data = main_results[3];
   graph = makeGraph(type, crimes);
   table = makeTable(type);
-      });
-  makeDataSourceDropdown()
+
+      console.timeEnd()
+//  makeDataSourceDropdown()
 }
