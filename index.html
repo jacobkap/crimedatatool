@@ -49,26 +49,26 @@
     <h2>Offenses Known and Clearances by Arrest</h2>
     <h3>Data Source</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%" id="data_source" onchange="updateDataSource()"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="data_source" ></select>
     <br>
     <h3>State:</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown"></select>
     <br>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <div class="test"><select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select></div>
+    <div class="test"><select class="js-example-basic-single" style="width: 85%" id="agency_dropdown"></select></div>
     <br><br>
     <h3>Crime:</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%"   id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%"   id="crime_dropdown" ></select>
     <br><br>
-    <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('offenses', crime_state_values)">
+    <input type="checkbox" id="rate" name="rate" value="rate">
     <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br><br>
     <div id="agency_level_boxes">
-      <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('offenses', crime_state_values)">
+      <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate">
       <label class="label-text fa" for="clearance_rate">Clearances as % of Crimes</label>
 
       <br><br>
