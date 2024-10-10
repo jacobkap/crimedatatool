@@ -83,6 +83,7 @@ function rateBoxesChange(dropdown_to_turnoff, type, states, crimes) {
 }
 
 function stateChangeFun(type, states, crimes) {
+  console.log("running stateChangeFun")
   updateAgencies(type, states);
   agencyChangeFun(type, states, crimes);
 }
