@@ -174,7 +174,7 @@ function nibrsubcategoryChange() {
 
 
 function agencyChangeFun(type, states, crimes) {
-
+console.log("running agencyChangeFun")
   if (type == "offenses") {
     if ($("#clearance_rate").is(":checked")) {
       $("#checkbox_2+span").text("% Cleared - Total");
