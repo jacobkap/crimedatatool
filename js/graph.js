@@ -356,6 +356,18 @@ function makeGraph(type, crimes) {
 Chart.defaults.color = 'black'
   myLineChart = new Chart(ctx, {
     type: 'line',
+    animation: {
+                    duration: 2000,
+                    onProgress: function(animation) {
+                        //add progress
+                        progress.value = animation.currentStep / animation.numSteps;
+                    },
+                    onComplete: function(animation) {
+                        window.setTimeout(function() {
+                            progress.value = 0;
+                        }, 2000);
+                    }
+                },
     data: {
       labels: years,
       datasets: graph_datasets
