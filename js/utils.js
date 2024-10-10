@@ -596,20 +596,11 @@ function updateAgencies(type, states) {
   return agencies;
 }
 
+
+
 function main(type, states, state_default, crimes, crime_starter) {
 
-  $('#list').DataTable({
-      "columns": [
-          {
-              "width": "45%"
-          },
-          null,
-          null
-      ],
-      "initComplete": function(){
-          $("#list").show();
-      }
-  });
+ state_default = Math.floor(Math.random()*crime_state_values.length)
   makeDataSourceDropdown()
   ctx = document.getElementById("graph").getContext('2d');
   make_dropdown('#state_dropdown', states, state_default)
@@ -637,11 +628,11 @@ function main(type, states, state_default, crimes, crime_starter) {
 
 
 
-//  if (window.location.hash == "") {
-//    change_url(type)
-//  } else {
-//    change_data_from_url(type);
-//  }
+  if (window.location.hash == "") {
+    change_url(type)
+  } else {
+    change_data_from_url(type);
+  }
 
   main_results = get_data(type, states);
   console.time()

@@ -1,3 +1,16 @@
+$('#list').DataTable({
+    "columns": [
+        {
+            "width": "45%"
+        },
+        null,
+        null
+    ],
+    "initComplete": function(){
+        $("#list").show();
+    }
+});
+
 function fixTableName(name, type) {
   temp_name = name;
   name = name.replace(/_rate/g, "");
