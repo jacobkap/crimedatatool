@@ -611,8 +611,10 @@ function main(type, states, state_default, crimes, crime_starter) {
 console.time()
   state_default = Math.floor(Math.random()*states.length)
   makeDataSourceDropdown()
-
+  console.timeEnd()
+  console.time()
   make_dropdown('#state_dropdown', states, state_default)
+  console.timeEnd()
 
   if (type == "arrests") {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
@@ -624,25 +626,29 @@ console.time()
     toggle_nibrs_display()
   }
 
-
+console.time()
     make_dropdown("#crime_dropdown", crimes, crime_starter);
+    console.timeEnd()
+    console.time()
     largest_agency = getStateAgencies(type, states, true);
+    console.timeEnd()
+    console.time()
       agencies = updateAgencies(type, states);
-
+console.timeEnd()
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
     make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
     toggle_display("#weaponsDiv", ["officers_assaulted"]);
     $("#policeSex").show();
   }
-      console.timeEnd()
+
 
 //  if (window.location.hash == "") {
 //    change_url(type)
   //} else {
   //  change_data_from_url(type);
   //}
-  console.time()
+      document.addEventListener("DOMContentLoaded", function() {
           ctx = document.getElementById("graph").getContext('2d');
   main_results = get_data(type, states);
   table_data = main_results[0];
@@ -651,7 +657,6 @@ console.time()
   all_data = main_results[3];
   graph = makeGraph(type, crimes);
   table = makeTable(type);
-
-      console.timeEnd()
+      });
 //  makeDataSourceDropdown()
 }
