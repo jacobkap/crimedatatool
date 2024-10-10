@@ -22,11 +22,9 @@ input[type="checkbox"] {
 
 * {
   box-sizing: border-box;
-  font-family: "PT Serif", serif;
 }
 
 body {
-  font-family: "PT Serif", serif;
   margin: 0;
 }
 
