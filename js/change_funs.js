@@ -53,7 +53,7 @@ function checkboxesUpdate(type, always_on_box, crimes) {
   } else {
     remake_graph(type, crimes);
   }
-  change_url(type)
+  //change_url(type)
 }
 
 
@@ -216,7 +216,7 @@ function agencyChangeFun(type, states, crimes) {
   table.destroy();
   $('#table').empty();
   table = makeTable(type);
-  change_url(type)
+  //change_url(type)
 
 if (type == "nibrs" && $("#subcategory_dropdown").val() == "subtype") {
     toggle_nibrs_display();
