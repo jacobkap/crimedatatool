@@ -11,13 +11,12 @@
   <meta name="description" content="Explore data from the Federal Bureau of Investigation's Uniform Crime Reporting (UCR) Program Data, including the Summary Reporting System (SRS) and National Incident-Based Reporting System (NIBRS) data.">
 
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/css/jquery.dataTables.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 
-  <script src="data/data.js"></script>
+  <script src="data/data.js" ></script>
     <script src="js/utils.js"></script>
       <script src="js/datatool.js"></script>
   <script src="js/graph.js"></script>
@@ -106,10 +105,13 @@
     </div>
 
     <script>
-    $('.js-example-basic-single').select2({
-      minimumResultsForSearch:2
-    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      $('.js-example-basic-single').select2({
+        minimumResultsForSearch:2
+      });
     main("offenses", crime_state_values, 4, crime_values, "murder");
+    });
     </script>
   </div>
 
