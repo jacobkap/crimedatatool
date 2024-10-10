@@ -88,6 +88,7 @@ function exportToCsv(tableData, type, states) {
   }
 }
 
+/*
 function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
   $(dropdown_id).empty();
   _.each(dropdown_values, function(val, text) {
@@ -100,14 +101,22 @@ function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
 
   $(dropdown_id).val(starter);
 }
+*/
 
+function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
+  const $dropdown = $(dropdown_id);
+  $dropdown.empty();  // Clear existing options
 
-function toggle_display(div, match_value) {
-  if (match_value.includes($("#crime_dropdown").val())) {
-    $(div).show();
-  } else {
-    $(div).hide();
+  // Use native forEach instead of Lodash's _.each
+  Object.entries(dropdown_values).forEach(([text, val]) => {
+    $dropdown.append(new Option(val, text));
+  });
+
+  if (Array.isArray(starter)) {
+    starter = starter[$(starter_div).val()];
   }
+
+  $dropdown.val(starter);
 }
 
 
