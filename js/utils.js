@@ -625,7 +625,7 @@ function main(type, states, state_default, crimes, crime_starter) {
 
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
-    agencies = updateAgencies(type, states);
+      agencies = updateAgencies(type, states);
 
   if (type == "police") {
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
