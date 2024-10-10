@@ -634,15 +634,15 @@ function main(type, states, state_default, crimes, crime_starter) {
   //} else {
   //  change_data_from_url(type);
   //}
-      document.addEventListener("DOMContentLoaded", function() {
-          ctx = document.getElementById("graph").getContext('2d');
-  main_results = get_data(type, states);
-  table_data = main_results[0];
-  graph_headers = main_results[1];
-  table_headers = main_results[2];
-  all_data = main_results[3];
-  graph = makeGraph(type, crimes);
-  table = makeTable(type);
-      });
+//      document.addEventListener("DOMContentLoaded", function() {
+//          ctx = document.getElementById("graph").getContext('2d');
+//  main_results = get_data(type, states);
+//  table_data = main_results[0];
+//  graph_headers = main_results[1];
+//  table_headers = main_results[2];
+//  all_data = main_results[3];
+//  graph = makeGraph(type, crimes);
+//  table = makeTable(type);
+//      });
   makeDataSourceDropdown()
 }
