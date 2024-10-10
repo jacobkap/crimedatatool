@@ -648,7 +648,7 @@ console.timeEnd()
   //} else {
   //  change_data_from_url(type);
   //}
-      document.addEventListener("DOMContentLoaded", function() {
+//      document.addEventListener("DOMContentLoaded", function() {
           ctx = document.getElementById("graph").getContext('2d');
   main_results = get_data(type, states);
   table_data = main_results[0];
@@ -657,6 +657,6 @@ console.timeEnd()
   all_data = main_results[3];
   graph = makeGraph(type, crimes);
   table = makeTable(type);
-      });
+//      });
 //  makeDataSourceDropdown()
 }
