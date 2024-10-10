@@ -1,21 +1,3 @@
-function ks(active = "no") {
-  if (active == "yes") {
-    $("body").hide();
-    var password_given = localStorage.getItem("password_given");
-    if (password_given === false | password_given === null) {
-      var testPassword = window.prompt("Page not currently available");
-      if (testPassword === "houdini") {
-        $("body").show();
-        localStorage.setItem("password_given", true);
-      } else {
-        location.reload();
-      }
-    } else {
-      $("body").show();
-    }
-  }
-}
-'[]'
 
 function readCSV(csv) {
   var result = null;
@@ -105,12 +87,17 @@ function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
 
 function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
   const $dropdown = $(dropdown_id);
-  $dropdown.empty();  // Clear existing options
+  $dropdown.empty();
 
-  // Use native forEach instead of Lodash's _.each
+  // Create a document fragment to batch DOM updates
+  const fragment = document.createDocumentFragment();
+
   Object.entries(dropdown_values).forEach(([text, val]) => {
-    $dropdown.append(new Option(val, text));
+    fragment.appendChild(new Option(val, text));
   });
+
+  // Append the fragment to the dropdown in one go
+  $dropdown.append(fragment);
 
   if (Array.isArray(starter)) {
     starter = starter[$(starter_div).val()];
@@ -118,7 +105,6 @@ function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
 
   $dropdown.val(starter);
 }
-
 
 
 
@@ -507,7 +493,7 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
   if (largest_agencies) {
     final_url = url + "largest_agency_choices.json";
   }
-  var state_agencies = $.getJSON({
+  var state_agencies = $.ajax({
     url: final_url,
     type: 'get',
     dataType: 'json',
@@ -516,6 +502,7 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
       result = data;
     }
   });
+
   state_agencies = state_agencies.responseJSON;
   return (state_agencies);
 }
@@ -524,10 +511,21 @@ function getStateAgencies(type, states = state_values, largest_agencies = false)
 function makeDataSourceDropdown() {
   page_temp = window.location.pathname
 
-  $("#data_source").empty();
-  _.each(data_sources, function(val, text) {
-    $("#data_source").append(new Option(val, text));
+
+  // Use a document fragment to batch DOM updates
+  const $dropdown = $("#data_source");
+  $dropdown.empty();  // Clear existing options
+
+  const fragment = document.createDocumentFragment();  // Create a document fragment
+
+  Object.entries(data_sources).forEach(([text, val]) => {
+    const option = new Option(val, text);  // Create a new option element
+    fragment.appendChild(option);  // Append the option to the fragment
   });
+
+  $dropdown.append(fragment);  // Append the fragment to the dropdown in one go
+
+
 
   if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html") {
       current_page = 0
@@ -592,10 +590,18 @@ current_page = data_sources[$("#data_source").val()]
 function updateAgencies(type, states) {
   agencies = getStateAgencies(type, states);
   agencies.sort();
-  $("#agency_dropdown").empty();
-  _.each(agencies, function(val, text) {
-    $("#agency_dropdown").append(new Option(val, text));
+  // Use a document fragment to batch DOM updates
+  const $dropdown = $("#agency_dropdown");
+  $dropdown.empty();  // Clear existing options
+
+  const fragment = document.createDocumentFragment();  // Create a document fragment
+
+  agencies.forEach((val, text) => {
+    const option = new Option(val, text);  // Create a new option element
+    fragment.appendChild(option);  // Append the option to the fragment
   });
+
+  $dropdown.append(fragment);  // Append the fragment to the dropdown in one go
   largest_agency_temp = states[$("#state_dropdown").val()];
   largest_agency_temp = _.filter(largest_agency, function(x) {
     return x.state == largest_agency_temp;
@@ -618,12 +624,12 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
     make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
     toggle_arrest_display();
-  }
-  if (type == "nibrs") {
+  } else if (type == "nibrs") {
     make_dropdown('#category_dropdown', nibrs_categories, "offense")
     make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
     toggle_nibrs_display()
   }
+
 
     make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
@@ -643,15 +649,15 @@ function main(type, states, state_default, crimes, crime_starter) {
   //} else {
   //  change_data_from_url(type);
   //}
-//      document.addEventListener("DOMContentLoaded", function() {
-//          ctx = document.getElementById("graph").getContext('2d');
-//  main_results = get_data(type, states);
-//  table_data = main_results[0];
-//  graph_headers = main_results[1];
-//  table_headers = main_results[2];
-//  all_data = main_results[3];
-//  graph = makeGraph(type, crimes);
-//  table = makeTable(type);
-//      });
+      document.addEventListener("DOMContentLoaded", function() {
+          ctx = document.getElementById("graph").getContext('2d');
+  main_results = get_data(type, states);
+  table_data = main_results[0];
+  graph_headers = main_results[1];
+  table_headers = main_results[2];
+  all_data = main_results[3];
+  graph = makeGraph(type, crimes);
+  table = makeTable(type);
+      });
   makeDataSourceDropdown()
 }

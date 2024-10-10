@@ -143,10 +143,19 @@ function nibrsubcategoryChange() {
     nibrs_crimes_temp = nibrs_crime_values["subtype_offenses_main"]
   }
 
-  $("#crime_dropdown").empty();
-  _.each(nibrs_crimes_temp, function(val, text) {
-    $("#crime_dropdown").append(new Option(val, text));
+  // Use a document fragment to batch DOM updates
+  const $dropdown = $("#crime_dropdown");
+  $dropdown.empty();  // Clear existing options
+
+  const fragment = document.createDocumentFragment();  // Create a document fragment
+
+  Object.entries(nibrs_crimes_temp).forEach(([text, val]) => {
+    const option = new Option(val, text);  // Create a new option element
+    fragment.appendChild(option);  // Append the option to the fragment
   });
+
+  $dropdown.append(fragment);  // Append the fragment to the dropdown in one go
+
   if (_.keys(nibrs_crimes_temp).includes(current_crime)) {
     make_dropdown('#crime_dropdown', nibrs_crimes_temp, current_crime)
   } else if ($('#category_dropdown').val() == "property" & $('#subcategory_dropdown').val() != "drugs") {

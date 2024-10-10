@@ -187,31 +187,27 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
 
 }
 
-
 function makeGraphObjects(data, color, label) {
+  // Replace empty strings with null using map
+  const cleanedData = data.map(item => (item === "" ? null : item));
 
-  for (var j = 0; j < data.length; j++) {
-    if (data[j] == "") {
-      data[j] = null;
-    }
-  }
-
-  obj = {
+  // Return the object directly
+  return {
     borderColor: color,
     borderWidth: 1.6,
     backgroundColor: color,
     fill: false,
     label: label,
-    data: data,
+    data: cleanedData,
     onAnimationComplete: allowSaveGraph,
     hidden: true,
     yAxisID: "A",
     position: "left",
     spanGaps: false,
-    radius: 1.5 // Dot size
+    radius: 1.5, // Dot size
   };
-  return obj;
 }
+
 
 
 function makeGraph(type, crimes) {
@@ -270,18 +266,11 @@ function makeGraph(type, crimes) {
 
   graph_datasets = getGraphDataset(table_data, graph_headers, type, crimes);
   if (type == "offenses" && $("#clearance_rate").is(":checked")) {
-    cleared_data = [];
-    _.each(graph_datasets, function(x) {
-      if (x.label.includes("Clear")) {
-        cleared_data.push(x);
-      }
-    });
-    not_cleared_data = [];
-    _.each(graph_datasets, function(x) {
-      if (!x.label.includes("Clear")) {
-        not_cleared_data.push(x);
-      }
-    });
+
+    const cleared_data = graph_datasets.filter(x => x.label.includes("Clear"));
+
+    const not_cleared_data = graph_datasets.filter(x => !x.label.includes("Clear"));
+
     graph_datasets = not_cleared_data;
 
   }
@@ -428,38 +417,49 @@ function addYAxis() {
 }
 
 function getTitle(data, type) {
-  title = data[0].agency;
-  if (type != "offenses" || !$("#agency_dropdown").children("option:selected").text().includes("Estimate")) {
-    title += ", " + data[0].state + ': ';
+  let title = data[0].agency;
 
-  }
-  subtitle = "";
-  if (type == "offenses") {
-    subtitle = crime_values[$("#crime_dropdown").val()];
-  } else if (type == "arrests") {
-    subtitle = arrest_values[$("#crime_dropdown").val()];
-    subtitle = "Arrests for: " + subtitle + ", Breakdown: " + arrests_breakdown[$("#subsubcategory_dropdown").val()] + ", Age: " +
-      arrest_age_categories[$("#subcategory_dropdown").val()];
-  } else if (type == "nibrs") {
-    subtitle = nibrs_crime_values["arrestee_offenses"][$("#crime_dropdown").val()]
-    subtitle = nibrs_categories[$("#category_dropdown").val()] + "s, " + subtitle
-    if ($("#category_dropdown").val() == "property") {
-      subtitle = "Property Data: " + nibrs_property_values[$("#crime_dropdown").val()];
-    }
-  } else if (type == "police") {
-    subtitle = police_categories[$("#crime_dropdown").val()];
-    subtitle += ": " + police_subcategories[$("#crime_dropdown").val()][$("#subcategory_dropdown").val()]
+  // Cache DOM values to avoid repeated DOM access
+  const selectedCrime = $("#crime_dropdown").val();
+  const selectedCategory = $("#category_dropdown").val();
+  const selectedSubcategory = $("#subcategory_dropdown").val();
+  const selectedSubsubcategory = $("#subsubcategory_dropdown").val();
 
-    if (police_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
-      weapon = _.values(police_weapons)[$("#subsubcategory_dropdown").val()];
-      subtitle = subtitle + " - " + weapon;
-    }
-
-  } else if (type == "hate") {
-    subtitle = "Hate Crime, Bias Motivation: " + hate_bias_motivations[$("#crime_dropdown").val()];
+  // Only append state if it's not an estimate for "offenses"
+  if (type !== "offenses" || !$("#agency_dropdown").children("option:selected").text().includes("Estimate")) {
+    title += `, ${data[0].state}: `;
   }
 
+  let subtitle = "";
 
-  title = [title, subtitle];
-  return title;
+  switch (type) {
+    case "offenses":
+      subtitle = crime_values[selectedCrime];
+      break;
+
+    case "arrests":
+      subtitle = `Arrests for: ${arrest_values[selectedCrime]}, Breakdown: ${arrests_breakdown[selectedSubsubcategory]}, Age: ${arrest_age_categories[selectedSubcategory]}`;
+      break;
+
+    case "nibrs":
+      subtitle = `${nibrs_categories[selectedCategory]}s, ${nibrs_crime_values["arrestee_offenses"][selectedCrime]}`;
+      if (selectedCategory === "property") {
+        subtitle = `Property Data: ${nibrs_property_values[selectedCrime]}`;
+      }
+      break;
+
+    case "police":
+      subtitle = `${police_categories[selectedCrime]}: ${police_subcategories[selectedCrime][selectedSubcategory]}`;
+      if (police_categories[selectedCrime] === "Officers Assaulted") {
+        const weapon = _.values(police_weapons)[selectedSubsubcategory];
+        subtitle += ` - ${weapon}`;
+      }
+      break;
+
+    case "hate":
+      subtitle = `Hate Crime, Bias Motivation: ${hate_bias_motivations[selectedCrime]}`;
+      break;
+  }
+
+  return [title, subtitle];
 }

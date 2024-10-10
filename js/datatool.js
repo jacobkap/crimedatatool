@@ -1,28 +1,4 @@
-function resizeChosen() {
-  $(".chosen-container").each(function() {
-    $(this).attr('style', 'width: 85%');
-  });
-}
 
-function disable_animation_on_mobile(graph_obj) {
-  if (window.innerWidth <= 800 || window.innerHeight <= 600) {
-    graph_obj.options.tooltips.enabled = false;
-    graph_obj.options.events = []
-  } else {
-    graph_obj.options.tooltips.enabled = true;
-  }
-}
-
-function objToString(obj) {
-  var str = '';
-  for (var p in obj) {
-    if (obj.hasOwnProperty(p)) {
-      str += obj[p] + ',';
-    }
-  }
-  str = str.slice(0, -1); // Removes comma at end.
-  return str;
-}
 
 function get_rate_type(type, binary = false) {
   rate_type = "";
@@ -84,119 +60,129 @@ function subsetColumns(data, columns, output, type) {
 }
 
 function getStateData(type, states) {
-  url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
-  if (type == "nibrs") {
-    url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper_nibrs/master/data/";
-    if ($("#category_dropdown").val() == "property") {
-          type = "nibrs_property";
+  // Define the base URL based on type
+  let baseUrl = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
+  if (type === "nibrs") {
+    baseUrl = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper_nibrs/master/data/";
+    if ($("#category_dropdown").val() === "property") {
+      type = "nibrs_property";
     }
   }
 
-  if ($("#monthly").is(':checked')) {
+  // Append "_monthly" if the checkbox is checked
+  if ($("#monthly").is(":checked")) {
     type += "_monthly";
   }
 
+  // Cache jQuery selectors for state and agency dropdowns
+  const stateValue = states[$("#state_dropdown").val()];
+  const agencyValue = agencies[$("#agency_dropdown").val()];
 
-  state = states[$("#state_dropdown").val()];
-  state = state.replace(/ /g, "_");
-  state = state.replace(/-/g, "_");
-  state = state.replace(/___/g, "_");
+  // Clean up the state and agency names using a single regex
+  const state = stateValue.replace(/[\s-]+/g, "_").replace(/___/g, "_");
+  const agency = agencyValue.replace(/[\s:]+/g, "_").replace(/__/g, "_");
 
+  // Construct the URL
+  let url = `${baseUrl}${type}/${state}_${agency}.csv`;
 
-    agency = agencies[$("#agency_dropdown").val()];
-    agency = agency.replace(/ /g, "_");
-    agency = agency.replace(/:/g, "_");
-    agency = agency.replace(/__/g, "_");
-    url += type + "/" + state + "_" + agency;
-
-  url += ".csv";
-  if (type == "nibrs" | type == 'nibrs_property') {
+  // Clean up the URL if it's NIBRS data
+  if (type === "nibrs" || type === "nibrs_property") {
     url = url.replace(/["()]/g, "");
   }
-  stateData = readCSV(url);
+
+  // Fetch and process the CSV data
+  let stateData = readCSV(url);
   stateData = stateData.split("\n");
+
   return stateData;
 }
 
 function sortByKey(array, key) {
-  return array.sort(function(a, b) {
-    var x = a[key];
-    var y = b[key];
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  });
+  return array.sort((a, b) => a[key].localeCompare(b[key]));
 }
 
 function getAgencyData(stateData, headers, table_headers, type) {
-  agencyData = data_object_fun(stateData, headers);
-  agencyData.pop();
-  agencyData.shift();
-  // fixes issue where year 2000 is sometimes set as "2e3"
-  for (var i = 0; i < agencyData.length; i++) {
-    if (agencyData[i].year == "2e3") {
-      agencyData[i].year = "2000";
+  // Get agency data and clean unnecessary rows
+  let agencyData = data_object_fun(stateData, headers);
+  agencyData = agencyData.slice(1, -1); // Removes the first and last element
+
+  // Fix year format issue where '2e3' should be '2000' and sort by year
+  agencyData = agencyData.map(entry => {
+    if (entry.year === "2e3") {
+      entry.year = "2000";
     }
-  }
+    return entry;
+  });
+
   agencyData = sortByKey(agencyData, "year");
 
-  agencyData = _.map(agencyData, function(x) {
-    return _.pick(x, table_headers);
-  });
-  if (get_rate_type(type, binary = true)) {
-    agencyData = _.map(agencyData, function(currentObject) {
-      return countToRate(currentObject, type);
-    });
+  // Pick only the relevant table headers
+  agencyData = agencyData.map(entry => _.pick(entry, table_headers));
+
+  // Cache the result of the rate type check
+  const isRateType = get_rate_type(type, true);
+
+  // Apply rate conversion if necessary
+  if (isRateType) {
+    agencyData = agencyData.map(currentObject => countToRate(currentObject, type));
   }
-  if (type == "offenses" && $("#clearance_rate").is(":checked")) {
-    agencyData = _.map(agencyData, function(currentObject) {
-      return makeCrimeClearanceRates(currentObject, type);
-    });
+
+  // Apply crime clearance rate logic if applicable
+  if (type === "offenses" && $("#clearance_rate").is(":checked")) {
+    agencyData = agencyData.map(currentObject => makeCrimeClearanceRates(currentObject, type));
   }
+
   return agencyData;
 }
 
+
 function get_data(type, states) {
-  stateData = getStateData(type, states);
-  headers = stateData[0];
-  colsForGraph = getCrimeColumns(headers, type, "graph");
+  let stateData = getStateData(type, states);
+  let headers = stateData[0];
+  let colsForGraph = getCrimeColumns(headers, type, "graph");
+  let colsForTable = getCrimeColumns(headers, type, "table");
 
-  // Reorder cols for graph to make clearance before clearance 18.
-  Array.prototype.move = function(from, to) {
-    this.splice(to, 0, this.splice(from, 1)[0]);
-  };
+  // Move 'clearance' column before 'clearance 18' if necessary
+  const moveElement = (arr, from, to) => arr.splice(to, 0, arr.splice(from, 1)[0]);
 
-  colsForTable = getCrimeColumns(headers, type, "table");
-  allAgencyData = data_object_fun(stateData, headers);
-  allAgencyData.pop();
-  allAgencyData.shift();
+  // Get all agency data, removing first and last elements
+  let allAgencyData = data_object_fun(stateData, headers).slice(1, -1);
 
-  if (get_rate_type(type, binary = true)) {
-    allAgencyData = _.map(allAgencyData, function(currentObject) {
-      return countToRate(currentObject, type);
-    });
-  }
-  if (type == "offenses" && $("#clearance_rate").is(":checked")) {
-    allAgencyData = _.map(allAgencyData, function(currentObject) {
-      return makeCrimeClearanceRates(currentObject, type);
-    });
+  const isRateType = get_rate_type(type, true);
+
+  // Apply rate conversions if necessary
+  if (isRateType) {
+    allAgencyData = allAgencyData.map(currentObject => countToRate(currentObject, type));
   }
 
-  tableData = getAgencyData(stateData, headers, colsForTable, type);
-
-  // Removes the total officer column used to make the rate
-  if (type == "police" && police_categories[$("#crime_dropdown").val()] != "Police Department Employees") {
-    tableData = _.map(tableData, function(x) {
-      return _.omit(x, "total_employees_officers");
-    });
-
-    index = colsForGraph.indexOf("total_employees_officers");
-    colsForGraph.splice(index, 1);
-    index = colsForTable.indexOf("total_employees_officers");
-    colsForTable.splice(index, 1);
+  // Apply clearance rate calculation if necessary
+  if (type === "offenses" && $("#clearance_rate").is(":checked")) {
+    allAgencyData = allAgencyData.map(currentObject => makeCrimeClearanceRates(currentObject, type));
   }
 
+  // Get the final table data
+  let tableData = getAgencyData(stateData, headers, colsForTable, type);
+
+  // Cache dropdown value for police category
+  const crimeDropdownValue = $("#crime_dropdown").val();
+
+  // Remove total officer column if necessary
+  if (type === "police" && police_categories[crimeDropdownValue] !== "Police Department Employees") {
+    tableData = tableData.map(x => _.omit(x, "total_employees_officers"));
+
+    // Remove total_employees_officers from both colsForGraph and colsForTable
+    const removeColumn = (arr, column) => {
+      const index = arr.indexOf(column);
+      if (index !== -1) arr.splice(index, 1);
+    };
+
+    removeColumn(colsForGraph, "total_employees_officers");
+    removeColumn(colsForTable, "total_employees_officers");
+  }
 
   return [tableData, colsForGraph, colsForTable, allAgencyData];
 }
+
 
 
 function getCrimeColumns(headers, type, output) {
@@ -415,22 +401,18 @@ function getCrimeColumns(headers, type, output) {
 
   return (columnNames);
 }
-
-Array.prototype.move = function(from, to) {
-  this.splice(to, 0, this.splice(from, 1)[0]);
-};
-
 function data_object_fun(arr, headers) {
-  headers = headers.split(",");
-  var jsonObj = [];
-  for (var i = 0; i < arr.length; i++) {
-    temp = arr[i];
-    var data = temp.split(',');
-    var obj = {};
-    for (var j = 0; j < data.length; j++) {
-      obj[headers[j].trim()] = data[j].trim();
-    }
-    jsonObj.push(obj);
-  }
-  return (jsonObj);
+  // Trim and split headers once
+  headers = headers.split(",").map(header => header.trim());
+
+  // Map over the array to create the objects
+  return arr.map(row => {
+    const data = row.split(",").map(item => item.trim());
+
+    // Use reduce to create the object
+    return headers.reduce((obj, header, index) => {
+      obj[header] = data[index];
+      return obj;
+    }, {});
+  });
 }
