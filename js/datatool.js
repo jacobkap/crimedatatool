@@ -25,7 +25,16 @@ function get_rate_type(type, binary = false) {
   return rate_type;
 }
 
-
+function objToString(obj) {
+  var str = '';
+  for (var p in obj) {
+    if (obj.hasOwnProperty(p)) {
+      str += obj[p] + ',';
+    }
+  }
+  str = str.slice(0, -1); // Removes comma at end.
+  return str;
+}
 function subsetColumns(data, columns, output, type) {
 
   rate_type = get_rate_type(type)

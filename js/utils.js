@@ -16,59 +16,51 @@ function readCSV(csv) {
 
 
 function exportToCsv(tableData, type, states) {
+  // Cache DOM values to avoid querying multiple times
+  const agency = $("#agency_dropdown").val();
+  const state = $("#state_dropdown").val();
 
-
-  data = tableData.reverse();
-
-  rate_or_count = "count_";
-
-
-  if (get_rate_type(type, binary = true)) {
+  // Determine the rate_or_count string based on conditions
+  let rate_or_count = "count_";
+  if (get_rate_type(type, true)) {
     rate_or_count = "rate_";
   }
-  if (type == "police" && $("#checkbox_4").is(':checked')) {
+  if (type === "police" && $("#checkbox_4").is(':checked')) {
     rate_or_count = "rate_per_officer_";
-  }
-  if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+  } else if (type === "arrests" && $("#percent_of_arrests").is(':checked')) {
     rate_or_count = "_percent_of_arrests";
-  }
-  if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
+  } else if (type === "arrests" && $("#percent_of_all_arrests").is(':checked')) {
     rate_or_count = "_percent_of_all_arrests";
-  }
-  if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
+  } else if (type === "nibrs" && $("#percent_of_crimes").is(':checked')) {
     rate_or_count = "percent_";
   }
 
+  // Generate CSV content
+  const headerRow = objToString(_.keys(tableData[0]));  // Get CSV headers
+  const csvRows = tableData.reverse().map(objToString); // Reverse and map the table data to CSV format
+  const csvContent = [headerRow, ...csvRows].join("\n"); // Join headers and rows
 
-  data = data.map(objToString);
-  data = data.join("\n");
-  data = objToString(_.keys(tableData[0])) + '\n' + data;
+  // Generate filename
+  let filename = `crimedatatool.com_${type}_${rate_or_count}`;
+  filename += agencies[agency] + "_";
+  filename += states[state] + ".csv";
 
-  filename = "crimedatatool.com_" + type + "_" + rate_or_count;
-    filename += agencies[$("#agency_dropdown").val()] + "_";
-
-  filename += states[$("#state_dropdown").val()];
-  filename += ".csv";
-
-  var blob = new Blob([data], {
-    type: 'text/csv;charset=utf-8;'
-  });
+  // Create and download CSV as a blob
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   if (navigator.msSaveBlob) { // IE 10+
     navigator.msSaveBlob(blob, filename);
   } else {
-    var link = document.createElement("a");
-    if (link.download !== undefined) { // feature detection
-      // Browsers that support HTML5 download attribute
-      var url = URL.createObjectURL(blob);
-      link.setAttribute("href", url);
-      link.setAttribute("download", filename);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }
+
 
 /*
 function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
