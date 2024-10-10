@@ -1,119 +1,111 @@
-
 function fixTableName(name, type) {
-  let temp_name = name;
+  temp_name = name;
+  name = name.replace(/_rate/g, "");
+  name = name.replace(/_percent/g, "");
+  name = name.replace(/_clearance/g, "");
+  name = name.replace(/_percent_of_arrests/g, "");
+  name = name.replace(/_non_hisp/g, " Non-Hispanic");
 
-  // Replace patterns in name
-  const replacements = {
-    _rate: "",
-    _percent: "",
-    _clearance: "",
-    _percent_of_arrests: "",
-    _non_hisp: " Non-Hispanic",
-  };
 
-  // Apply string replacements using the defined mapping
-  for (const [key, value] of Object.entries(replacements)) {
-    name = name.replace(new RegExp(key, 'g'), value);
-  }
-
-  // Cache jQuery selectors for dropdown values
-  const crimeDropdownVal = $("#crime_dropdown").val();
-  const subcategoryDropdownVal = $("#subcategory_dropdown").val();
-  const clearanceChecked = $("#clearance_rate").is(":checked");
-
-  if (type === "offenses") {
-    const temp1 = name.replace(/actual_.*/, "Actual ");
-    const temp2 = name.replace(/clr_18_.*/, clearanceChecked ? "Clearance Rate Under Age 18 - " : "Clearance Under Age 18 ");
-    const temp3 = name.replace(/tot_clr_[a-z].*/, clearanceChecked ? "Clearance Rate - " : "Clearance ");
-    const temp4 = name.replace(/unfound_.*/, "Unfounded ");
-
-    name = crime_values[name.replace(/actual_|clr_18_|tot_clr_|unfound_/, "")] || name;
-
-    if (temp1 !== temp_name) name = temp1 + name;
-    if (temp2 !== temp_name) name = temp2 + name;
-    if (temp3 !== temp_name) name = temp3 + name;
-    if (temp4 !== temp_name) name = temp4 + name;
-
-  } else if (type === "arrests" && !default_table_headers.includes(name)) {
-    if (name === "all_arrests_total_tot_arrests") {
-      name = "All Arrests Total in Agency";
+  if (type == "offenses") {
+    temp1 = name.replace(/actual_.*/, "Actual ");
+    if ($("#clearance_rate").is(":checked")) {
+      temp2 = name.replace(/clr_18_.*/, "Clearance Rate Under Age 18 - ");
+      temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance Rate - ");
     } else {
-      let temp_name = name.replace(`${crimeDropdownVal}_`, "").replace(/_/g, " ");
-      temp_name = temp_name
-        .replace("tot", "total")
-        .replace("juv", "juvenile")
-        .replace("amer ind", "American Indian");
-      name = arrest_values[crimeDropdownVal] + " " + toTitleCase(temp_name);
+      temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
+      temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
     }
+    temp4 = name.replace(/unfound_.*/, "Unfounded ");
+    name = name.replace(/actual_|clr_18_|tot_clr_|unfound_/, "");
+    name = crime_values[name];
+    if (temp1 != temp_name) name = temp1 + name;
+    if (temp2 != temp_name) name = temp2 + name;
+    if (temp3 != temp_name) name = temp3 + name;
+    if (temp4 != temp_name) name = temp4 + name;
+  } else if (type == "arrests" && !default_table_headers.includes(name)) {
 
-  } else if (type === "police" && !default_table_headers.includes(name)) {
-    const categoryIndexNum = _.indexOf(_.keys(police_categories), crimeDropdownVal);
-    const crime_val = _.keys(police_subcategories[categoryIndexNum])[subcategoryDropdownVal];
-    name = _.values(police_subcategories[categoryIndexNum])[_.indexOf(_.keys(police_subcategories[categoryIndexNum]), crime_val)];
-
-    let temp_name = name.replace(crime_val + "_", "").replace(/_/g, " ");
+    if (name == "all_arrests_total_tot_arrests") {
+      name = "All Arrests Total in Agency"
+    } else {
+    temp_name = name;
+    name = arrest_values[$("#crime_dropdown").val()];
+    temp_name = temp_name.replace($("#crime_dropdown").val() + "_", "");
+    temp_name = temp_name.replace(/_/g, " ");
+    temp_name = temp_name.replace("tot", "total");
+    temp_name = temp_name.replace("juv", "juvenile");
+    temp_name = temp_name.replace("amer ind", "American Indian");
     temp_name = toTitleCase(temp_name);
-
-    name = crimeDropdownVal === "0" ? name + " " + temp_name : temp_name;
-
-  } else if (type === "hate") {
-    name = toTitleCase(name.replace(/_/g, " "));
-
-  } else if (type === "nibrs") {
-    name = nibrs_crime_values[name] || name;
-    if ($("#rate").is(":checked")) name = name.replace(/_rate/g, "");
-    if ($("#percent_of_crimes").is(":checked")) name = name.replace(/_percent/g, "");
+    name = name + " " + temp_name;
   }
 
-  // Handle undefined or default headers
+  } else if (type == "police" && !default_table_headers.includes(name)) {
+    temp_name = name;
+    category_index_num = _.indexOf(_.keys(police_categories), $("#crime_dropdown").val());
+    crime_val = _.keys(police_subcategories[category_index_num])[$("#subcategory_dropdown").val()];
+    name = _.values(police_subcategories[category_index_num])[_.indexOf(_.keys(police_subcategories[category_index_num]), crime_val)];
+
+    temp_name = temp_name.replace(crime_val + "_", "");
+    temp_name = temp_name.replace(/_/g, " ");
+
+    temp_name = toTitleCase(temp_name);
+    if ($("#crime_dropdown").val() === "0") {
+      name = name + " " + temp_name;
+    } else {
+      name = temp_name;
+    }
+  } else if (type == "hate") {
+    name = name.replace(/_/g, " ");
+    name = toTitleCase(name);
+  } else if (type == "nibrs") {
+    if ($("#rate").is(':checked')) {
+      name = name.replace(/_rate/g, "");
+    }
+    if ($("#percent_of_crimes").is(':checked')) {
+      name = name.replace(/_percent/g, "");
+    }
+    name = nibrs_crime_values[name];
+  }
+
   if (name === undefined || default_table_headers.includes(name)) {
-    name = toTitleCase(temp_name.replace(/_/g, " "));
+    name = temp_name.replace(/_/g, " ");
+    name = name.replace(/^\w| \w/g, c => c.toUpperCase());
   }
 
-  // Add appropriate suffix for rate type or percentage
-  if (get_rate_type(type, true) && !["Agency", "State", "Population", "ORI"].includes(name) && !name.startsWith("Year")) {
-    if (type === "arrests" && $("#percent_of_arrests").is(':checked')) {
+  if (get_rate_type(type, binary = true) && !["Agency", "State", "Population", "ORI"].includes(name) &&
+    !name.startsWith("Year")) {
+
+    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {} else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
       name += " % of Arrests";
-    } else if (type === "police" && $("#checkbox_4").is(':checked')) {
+    } else if (type == "police" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
-    } else if (type === "nibrs" && $("#percent_of_crimes").is(':checked')) {
+    }  else if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
       name += " %";
-    } else if (type === "arrests" && $("#percent_of_all_arrests").is(':checked')) {
+    } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
       name += " % of All Arrests for All Crimes";
-    } else if (!(type === "offenses" && clearanceChecked && name.includes("Clear"))) {
+    } else {
       name += " Rate";
     }
   }
-
-  name = name.replace(/hispanic/, "Hispanic");
-
+      name = name.replace(/hispanic/, "Hispanic");
   return name;
 }
 
 function fixTableDataName(name, type) {
-  const rate_type = get_rate_type(type);
-  const isRateType = get_rate_type(type, true); // Cache binary check result
-
-  // Check if the name should have a rate type appended
+  rate_type = get_rate_type(type);
   if (!["ORI", "agency", "state", "population"].includes(name) &&
-      !name.startsWith("year") &&
-      !name.startsWith("county")) {
-
-    // Append rate type if applicable
-    if (isRateType) {
+    !name.startsWith("year") &&
+    !name.startsWith("county")) {
+    if (get_rate_type(type, binary = true)) {
       name += rate_type;
     }
-
-    // Special handling for offenses clearance rates
-    if (type === "offenses" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {
+    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {
       name += "_clearance_rate";
-      name = name.replace("_rate_clearance", "_clearance"); // Ensure proper ordering
+      name = name.replace("_rate_clearance", "_clearance");
     }
   }
-
   return name;
 }
-
 
 function makeTable(type) {
   data = subsetColumns(table_data, table_headers, "table", type);
@@ -134,22 +126,21 @@ function makeTable(type) {
 
   // Makes real (as they appear in the data) names and pretty names
   // as they will appear in the table.
-  const table_columns = table_headers.map(header => {
-    const label_name = fixTableName(header, type);
-    const data_name = fixTableDataName(header, type);
-
-    return {
+  table_columns = [];
+  for (var i = 0; i < table_headers.length; i++) {
+    label_name = fixTableName(table_headers[i], type);
+    data_name = fixTableDataName(table_headers[i], type);
+    table_columns.push({
       data: data_name,
       title: label_name,
       className: "dt-head-left dt-body-right"
-    };
-  });
+    });
+  }
 
 
 
   temp_table = $("#table").DataTable({
     data: data,
-    deferRender: true,
     columns: table_columns,
     "scrollX": true,
     "sScrollXInner": "100%",
@@ -159,7 +150,7 @@ function makeTable(type) {
     "lengthChange": true,
     "paging": true,
     "searching": false,
-    "pageLength": 15,
+    "pageLength": 25,
     "ordering": true,
     "order": [1, "desc"],
     "fixedHeader": true,
@@ -174,12 +165,11 @@ function makeTable(type) {
       leftColumns: 2
     }
   });
-
-
-
   return temp_table;
 }
 
 function toTitleCase(str) {
-  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }
