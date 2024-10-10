@@ -94,9 +94,7 @@ var state_values = [
   "Wyoming"
 ];
 
-var crime_state_values = state_values.concat(["United States"])
-
-
+var crime_state_values = state_values
 var nibrs_state_values = state_values
 
 

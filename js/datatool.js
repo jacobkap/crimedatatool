@@ -113,7 +113,6 @@ function getStateData(type, states) {
   if (type == "nibrs" | type == 'nibrs_property') {
     url = url.replace(/["()]/g, "");
   }
-
   stateData = readCSV(url);
   stateData = stateData.split("\n");
   return stateData;
