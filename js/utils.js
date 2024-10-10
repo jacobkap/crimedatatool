@@ -635,18 +635,14 @@ function main(type, states, state_default, crimes, crime_starter) {
   }
 
   main_results = get_data(type, states);
-  console.time()
+    console.time()
   table_data = main_results[0];
   graph_headers = main_results[1];
   table_headers = main_results[2];
   all_data = main_results[3];
-  console.timeLog()
-
-  console.time()
-  graph = makeGraph(type, crimes);
     console.timeLog()
-      console.time()
+  graph = makeGraph(type, crimes);
   table = makeTable(type);
     console.timeLog()
-  makeDataSourceDropdown()
+//  makeDataSourceDropdown()
 }
