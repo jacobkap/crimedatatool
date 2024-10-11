@@ -137,8 +137,6 @@ function makeTable(type) {
     });
   }
 
-
-
   temp_table = $("#table").DataTable({
     data: data,
     columns: table_columns,
