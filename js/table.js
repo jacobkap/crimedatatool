@@ -148,7 +148,7 @@ function makeTable(type) {
     "lengthChange": true,
     "paging": true,
     "searching": false,
-    "pageLength": 10,
+    "pageLength": 20,
     "ordering": true,
     "order": [1, "desc"],
     "fixedHeader": true,

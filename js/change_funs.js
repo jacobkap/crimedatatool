@@ -76,6 +76,14 @@ function nibrsPopBoxChange(box_to_check) {
   agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values['offense']);
 }
 
+function toggle_display(div, match_value) {
+  if (match_value.includes($("#crime_dropdown").val())) {
+    $(div).show();
+  } else {
+    $(div).hide();
+  }
+}
+
 
 function rateBoxesChange(dropdown_to_turnoff, type, states, crimes) {
   $(dropdown_to_turnoff).prop("checked", false);

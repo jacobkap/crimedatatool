@@ -611,6 +611,7 @@ function main(type, states, state_default, crimes, crime_starter) {
   state_default = Math.floor(Math.random()*states.length)
   makeDataSourceDropdown()
   make_dropdown('#state_dropdown', states, state_default)
+      make_dropdown("#crime_dropdown", crimes, crime_starter);
 
   if (type == "arrests") {
     make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
@@ -621,15 +622,15 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
     toggle_nibrs_display()
   } else if (type == "police") {
+
       make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
       make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
       toggle_display("#weaponsDiv", ["officers_assaulted"]);
       $("#policeSex").show();
     }
 
-    make_dropdown("#crime_dropdown", crimes, crime_starter);
     largest_agency = getStateAgencies(type, states, true);
-      agencies = updateAgencies(type, states);
+    agencies = updateAgencies(type, states);
 
 
 
