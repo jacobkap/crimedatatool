@@ -91,7 +91,6 @@ function rateBoxesChange(dropdown_to_turnoff, type, states, crimes) {
 }
 
 function stateChangeFun(type, states, crimes) {
-  console.log("running stateChangeFun")
   updateAgencies(type, states);
   agencyChangeFun(type, states, crimes);
 }
@@ -182,7 +181,6 @@ function nibrsubcategoryChange() {
 
 
 function agencyChangeFun(type, states, crimes) {
-  console.log("running agencyChangeFun")
   if (type == "offenses") {
     if ($("#clearance_rate").is(":checked")) {
       $("#checkbox_2+span").text("% Cleared - Total");
@@ -209,7 +207,7 @@ function agencyChangeFun(type, states, crimes) {
   }
 
 
-    main_results = get_data(type, states);
+  main_results = get_data(type, states);
 
   table_data = main_results[0];
   graph_headers = main_results[1];

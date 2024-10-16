@@ -36,9 +36,6 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       checkbox_names = ["Hispanic", "Non-Hispanic", "Total"];
     }
   }
-  if (type == "hate") {
-    checkbox_names = ["Violent", "Nonviolent", "Total"];
-  }
 
   if (type == "nibrs") {
     if ($("#subcategory_dropdown").val() == "sex") {
@@ -117,7 +114,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data7.push(data[i][colsForGraph[7]]);
   }
 
-  if (["offenses", "arrests", "hate", "nibrs"].includes(type) || type == "police" &
+  if (["offenses", "arrests", "nibrs"].includes(type) || type == "police" &
     police_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [
@@ -153,7 +150,6 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     label = colsForGraph[1]
     label = label.replace(/_age_adjusted_rate/g, "");
     label = label.replace(/_crude_rate/g, "");
-
     if (type == "police") {
       crimes = police_subcategories[$("#crime_dropdown").val()];
     }
@@ -424,7 +420,7 @@ function getTitle(data, type) {
   const selectedCategory = $("#category_dropdown").val();
   const selectedSubcategory = $("#subcategory_dropdown").val();
   const selectedSubsubcategory = $("#subsubcategory_dropdown").val();
-
+  const selectedHateSubsubcategory = $("#hate_crime_dropdown").val();
   // Only append state if it's not an estimate for "offenses"
   if (type !== "offenses" || !$("#agency_dropdown").children("option:selected").text().includes("Estimate")) {
     title += `, ${data[0].state}: `;
@@ -457,7 +453,7 @@ function getTitle(data, type) {
       break;
 
     case "hate":
-      subtitle = `Hate Crime, Bias Motivation: ${hate_bias_motivations[selectedCrime]}`;
+      subtitle = `Hate Crime, Bias Motivation: ${hate_bias_motivations[selectedCrime]}` + ` ` +  `${hate_offenses[selectedHateSubsubcategory]}`;
       break;
   }
 

@@ -318,8 +318,11 @@ function getCrimeColumns(headers, type, output) {
     crime = "hellodarknessmyoldfriend"
   }
 
-  if (["offenses",  "hate"].includes(type)) {
+  if (["offenses"].includes(type)) {
     crime = $("#crime_dropdown").val();
+  }  else if (type == "hate") {
+        crime = $("#crime_dropdown").val();
+        actual_crime = $("#hate_crime_dropdown").val();
   }  else if (type == "arrests") {
     crime = $("#crime_dropdown").val();
     if (output == "graph") {
@@ -383,6 +386,10 @@ function getCrimeColumns(headers, type, output) {
         if ([hispanic_arrest, nonhispanic_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
         }
+      }
+    } else if (type == "hate") {
+      if (headers[n].includes(crime + "_" + actual_crime)) {
+        columnNames.push(headers[n]);
       }
     } else {
       if (headers[n].includes(crime)) {

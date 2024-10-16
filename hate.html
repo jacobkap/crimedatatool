@@ -74,21 +74,17 @@
     <br>
     <select class="js-example-basic-single" style="width: 85%" id="crime_dropdown" onchange="agencyChangeFun('hate', state_values)">
     </select>
+    <br>
+    <h3>Crime Category:</h3>
+    <br>
+    <select class="js-example-basic-single" style="width: 85%" id="hate_crime_dropdown" onchange="agencyChangeFun('hate', state_values)">
+    </select>
 
     <br><br>
     <h3>Type of Hate Crime:</h3>
 
     <br>
 
-    <input type="checkbox" id="checkbox_1" onchange="checkboxesUpdate('hate', '#checkbox_1')"></input>
-    <label class="label-text fa" for="checkbox_1">Violent</label>
-    <br>
-    <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('hate', '#checkbox_1')"></input>
-    <label class="label-text fa" for="checkbox_2">Nonviolent</label>
-    <br>
-    <input type="checkbox" id="checkbox_3" checked onchange="checkboxesUpdate('hate', '#checkbox_1')"></input>
-    <label class="label-text fa" for="checkbox_3">Total</label>
-    <br>
     <hr>
         <button type="button" onclick="exportToCsv(all_data, 'hate', state_values)">Download All Agency Data as CSV</button>
     <hr>
@@ -115,7 +111,7 @@
       minimumResultsForSearch:2
     });
 
-  main("hate", state_values, 4, hate_bias_motivations, "anti_total");
+  main("hate", state_values, 4, hate_bias_motivations, "anti_jewish");
 
     </script>
 
