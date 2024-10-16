@@ -4,8 +4,6 @@ function allowSaveGraph() {
 
 function getGraphDataset(tableData, colsForGraph, type, crimes) {
 
-
-
   rate_type = "_rate";
   if (!get_rate_type(type, binary = true)) {
     rate_type = "";
@@ -152,6 +150,9 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     label = label.replace(/_crude_rate/g, "");
     if (type == "police") {
       crimes = police_subcategories[$("#crime_dropdown").val()];
+    }
+    if (type == "hate") {
+      crimes = hate_bias_motivations;
     }
      if (type == "nibrs" && $("#rate").is(':checked')) {
       label = label.replace(/_rate/g, "");
