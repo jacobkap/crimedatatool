@@ -63,38 +63,38 @@
     <br>
     <h3>State:</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('arson', crime_state_values)"></select>
     <br>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <div class="test"><select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select></div>
+    <div class="test"><select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('arson', crime_state_values)"></select></div>
     <br><br>
     <h3>Crime:</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%"   id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%"   id="crime_dropdown" onchange="agencyChangeFun('arson', crime_state_values)"></select>
     <br><br>
-
+    <div id="agency_level_boxes">
       <h3>Type of Crime:</h3>
       <br>
-      <input type="checkbox" id="checkbox_1" checked onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <input type="checkbox" id="checkbox_1" checked onchange="checkboxesUpdate('arson', '#checkbox_1')">
       <label class="label-text fa" for="checkbox_1">Actual Offenses</label>
       <br>
-      <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('arson', '#checkbox_1')">
       <label class="label-text fa" for="checkbox_2">Offenses Cleared - Total</label>
       <br>
-      <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('arson', '#checkbox_1')">
       <label class="label-text fa" for="checkbox_3">Offenses Cleared - All Under Age 18</label></input>
       <br>
-      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('arson', '#checkbox_1')">
       <label class="label-text fa" for="checkbox_4">Unfounded Offenses</label>
 
       <hr>
-      <input type="checkbox" id="monthly" onchange="agencyChangeFun('offenses', state_values)">
+      <input type="checkbox" id="monthly" onchange="agencyChangeFun('arson', state_values)">
       <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
       <hr>
     </div>
-    <button type="button" onclick="exportToCsv(all_data, 'offenses', crime_state_values)">Download All Agency Data as CSV</button>
+    <button type="button" onclick="exportToCsv(all_data, 'arson', crime_state_values)">Download All Agency Data as CSV</button>
     <br>
     <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
   </div>

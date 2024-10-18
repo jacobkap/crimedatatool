@@ -4,11 +4,12 @@ function fixTableName(name, type) {
   name = name.replace(/_percent/g, "");
   name = name.replace(/_clearance/g, "");
   name = name.replace(/_percent_of_arrests/g, "");
-  name = name.replace(/_non_hisp/g, " Non-Hispanic");
+  name = name.replace(/_non_hispanic/g, " Non-Hispanic");
 
 
-  if (type == "offenses") {
+  if (["offenses", "arson"].includes(type)) {
     temp1 = name.replace(/actual_.*/, "Actual ");
+    temp4 = name.replace(/unfounded_.*/, "Unfounded ");
     if ($("#clearance_rate").is(":checked")) {
       temp2 = name.replace(/cleared_18_.*/, "Clearance Rate Under Age 18 - ");
       temp3 = name.replace(/total_cleared_[a-z].*/, "Clearance Rate - ");
@@ -17,7 +18,11 @@ function fixTableName(name, type) {
       temp3 = name.replace(/total_cleared_[a-z].*/, "Clearance ");
     }
     name = name.replace(/actual_|cleared_18_|total_cleared_|unfounded_/, "");
+    if (type == "offenses") {
     name = crime_values[name];
+  } else if (type == "arson") {
+    name = arson_values[name];    
+  }
     if (temp1 != temp_name) name = temp1 + name;
     if (temp2 != temp_name) name = temp2 + name;
     if (temp3 != temp_name) name = temp3 + name;

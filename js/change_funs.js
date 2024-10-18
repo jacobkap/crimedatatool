@@ -191,20 +191,11 @@ function agencyChangeFun(type, states, crimes) {
     }
 
     agency = $("#agency_dropdown").children("option:selected").text()
-    if (agency.includes("Estimate")) {
-      crimes = state_level_crime_values;
-      $("#checkbox_1").prop("checked", true);
-      $("#checkbox_2").prop("checked", false);
-      $("#checkbox_3").prop("checked", false);
-      $("#checkbox_4").prop("checked", false);
-      $("#monthly").prop("checked", false);
 
-      $("#agency_level_boxes").hide();
-    } else {
       crimes = crime_values;
       $("#agency_level_boxes").show();
     }
-  }
+
 
 
   main_results = get_data(type, states);

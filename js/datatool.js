@@ -318,7 +318,7 @@ function getCrimeColumns(headers, type, output) {
     crime = "hellodarknessmyoldfriend"
   }
 
-  if (["offenses"].includes(type)) {
+  if (["offenses", "arson"].includes(type)) {
     crime = $("#crime_dropdown").val();
   }  else if (type == "hate") {
         crime = $("#crime_dropdown").val();
@@ -372,7 +372,7 @@ function getCrimeColumns(headers, type, output) {
         } else {
           total_arrest = crime + "_total_" + arrest_category;
         }
-        if ([amer_ind_arrest, asian_arrest, black_arrest, white_arrest, total_arrest].includes(headers[n])) {
+        if ([american_indian_arrest, asian_arrest, black_arrest, white_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
         }
       } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {

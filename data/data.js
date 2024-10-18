@@ -1,5 +1,6 @@
 var data_sources = [
   "Arrests by Age, Sex, and Race",
+  "Arson",
   "Hate Crime Statistics",
   "Law Enforcement Officers Killed and Assaulted (LEOKA)",
   "National Incident-Based Reporting System (NIBRS)",
@@ -621,7 +622,7 @@ var arson_values = {
 "other_commercial"  : "Structures: Other Commercial",
 "other_residential" : "Structures: Other Residential",
 "all_other_structures"  : "Structures: All Other Structures",
-"all_other" : "All Other Arsons"
+"all_other_arsons" : "All Other Arsons"
 }
 
 var arrest_values = {
