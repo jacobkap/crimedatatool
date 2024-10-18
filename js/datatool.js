@@ -349,39 +349,39 @@ function getCrimeColumns(headers, type, output) {
   for (var n = 0; n < headers.length; n++) {
    if (type == "arrests") {
       if ($("#subsubcategory_dropdown").val() == "Sex") {
-        female_arrest = crime + "_tot_female_" + arrest_category;
-        male_arrest = crime + "_tot_male_" + arrest_category;
-        if (arrest_category == "tot") {
-          female_arrest = crime + "_tot_female";
-          male_arrest = crime + "_tot_male";
+        female_arrest = crime + "_total_female_" + arrest_category;
+        male_arrest = crime + "_total_male_" + arrest_category;
+        if (arrest_category == "total") {
+          female_arrest = crime + "_total_female";
+          male_arrest = crime + "_total_male";
           arrest_category_temp = "arrests";
-          total_arrest = crime + "_tot_arrests";
+          total_arrest = crime + "_total_arrests";
         } else {
-          total_arrest = crime + "_tot_" + arrest_category;
+          total_arrest = crime + "_total_" + arrest_category;
         }
         if ([female_arrest, male_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
         }
       } else if ($("#subsubcategory_dropdown").val() == "Race") {
-        amer_ind_arrest = crime + "_" + arrest_category + "_amer_ind";
+        amer_ind_arrest = crime + "_" + arrest_category + "_american_indian";
         asian_arrest = crime + "_" + arrest_category + "_asian";
         black_arrest = crime + "_" + arrest_category + "_black";
         white_arrest = crime + "_" + arrest_category + "_white";
-        if (arrest_category == "tot") {
-          total_arrest = crime + "_tot_arrests"
+        if (arrest_category == "total") {
+          total_arrest = crime + "_total_arrests"
         } else {
-          total_arrest = crime + "_tot_" + arrest_category;
+          total_arrest = crime + "_total_" + arrest_category;
         }
         if ([amer_ind_arrest, asian_arrest, black_arrest, white_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
         }
       } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {
         hispanic_arrest = crime + "_" + arrest_category + "_hispanic";
-        nonhispanic_arrest = crime + "_" + arrest_category + "_non_hisp";
-        if (arrest_category == "tot") {
-          total_arrest = crime + "_tot_arrests"
+        nonhispanic_arrest = crime + "_" + arrest_category + "_non_hispanic";
+        if (arrest_category == "total") {
+          total_arrest = crime + "_total_arrests"
         } else {
-          total_arrest = crime + "_tot_" + arrest_category;
+          total_arrest = crime + "_total_" + arrest_category;
         }
         if ([hispanic_arrest, nonhispanic_arrest, total_arrest].includes(headers[n])) {
           columnNames.push(headers[n]);
@@ -397,7 +397,7 @@ function getCrimeColumns(headers, type, output) {
       }
     }
     if (["theft_total", "theft"].includes(crime)) {
-      columnNames = columnNames.filter(a => !a.includes('mtr_veh'));
+      columnNames = columnNames.filter(a => !a.includes('motor_vehicle'));
     }
   }
 
@@ -412,7 +412,7 @@ function getCrimeColumns(headers, type, output) {
 
 
   if (type == "arrests") {
-    columnNames.push("all_arrests_total_tot_arrests")
+    columnNames.push("all_arrests_total_total_arrests")
   }
 
   return (columnNames);

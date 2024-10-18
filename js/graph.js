@@ -112,7 +112,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data7.push(data[i][colsForGraph[7]]);
   }
 
-  if (["offenses", "arrests", "nibrs"].includes(type) || type == "police" &
+  if (["offenses", "arrests", "nibrs", "arson"].includes(type) || type == "police" &
     police_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
 
     final_data = [

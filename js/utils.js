@@ -394,12 +394,12 @@ function countToRate(data, type, per_officer = false) {
   }
 
   if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
-    population_column = "all_arrests_total_tot_arrests";
+    population_column = "all_arrests_total_total_arrests";
   }
   if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
-    population_column = $("#crime_dropdown").val() + "_tot_" + $("#subcategory_dropdown").val();
+    population_column = $("#crime_dropdown").val() + "_total_" + $("#subcategory_dropdown").val();
     if ($("#subcategory_dropdown").val() == "tot") {
-      population_column = $("#crime_dropdown").val() + "_tot_arrests";
+      population_column = $("#crime_dropdown").val() + "_total_arrests";
     }
   }
 
@@ -441,7 +441,7 @@ function countToRate(data, type, per_officer = false) {
 
 function makeCrimeClearanceRates(data) {
   data_keys = _.keys(data);
-  clearance_starters = ["tot_clr", "clr_18"];
+  clearance_starters = ["total_cleared", "cleared_18"];
 
   crime_column = data_keys.filter(function(element) {
     return element.includes("actual");
@@ -611,10 +611,10 @@ function main(type, states, state_default, crimes, crime_starter) {
   state_default = Math.floor(Math.random()*states.length)
   makeDataSourceDropdown()
   make_dropdown('#state_dropdown', states, state_default)
-      make_dropdown("#crime_dropdown", crimes, crime_starter);
+  make_dropdown("#crime_dropdown", crimes, crime_starter);
 
   if (type == "arrests") {
-    make_dropdown("#subcategory_dropdown", arrest_age_categories, "tot")
+    make_dropdown("#subcategory_dropdown", arrest_age_categories, "total")
     make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
     toggle_arrest_display();
   } else if (type == "nibrs") {

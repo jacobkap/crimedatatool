@@ -608,7 +608,21 @@ var state_level_crime_values = {
 };
 
 
-
+var arson_values = {
+  "grand_total"      : "Grand Total",
+"total_mobile"  : "Motor Vehicles: Total",
+"motor_vehicles"  : "Motor Vehicles: Motor Vehicles",
+"other_mobile"      : "Motor Vehicles: Other Mobile",
+"total_structures"  : "Structures: Total",
+"community_public" : "Structures: Community/Public",
+"industrial"        : "Structures: Industrial",
+"single_occupancy"  : "Structures: Single Occupancy",
+"storage"    : "Structures: Storage",
+"other_commercial"  : "Structures: Other Commercial",
+"other_residential" : "Structures: Other Residential",
+"all_other_structures"  : "Structures: All Other Structures",
+"all_other" : "All Other Arsons"
+}
 
 var arrest_values = {
   "all_arrests_total": "All Arrests Total",
@@ -709,9 +723,9 @@ police_subcategories["employees"] = {
 }
 
 var arrest_age_categories = {
-  "juv": "Juvenile",
+  "juvenile": "Juvenile",
   "adult": "Adult",
-  "tot": "Total",
+  "total": "Total",
 };
 
 var arrests_breakdown = {

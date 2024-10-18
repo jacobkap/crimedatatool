@@ -46,7 +46,7 @@ function checkboxesUpdate(type, always_on_box, crimes) {
 
   }
 
-  if (["offenses"].includes(type)) {
+  if (["offenses", "arson"].includes(type)) {
     agencyChangeFun(type, state_values);
   } else if (type == "nibrs") {
     remake_graph(type, nibrs_crimes_temp)
@@ -181,7 +181,7 @@ function nibrsubcategoryChange() {
 
 
 function agencyChangeFun(type, states, crimes) {
-  if (type == "offenses") {
+  if (["offenses", "arson"].includes(type)) {
     if ($("#clearance_rate").is(":checked")) {
       $("#checkbox_2+span").text("% Cleared - Total");
       $("#checkbox_3+span").text("% Cleared - All Under Age 18");

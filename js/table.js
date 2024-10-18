@@ -10,14 +10,13 @@ function fixTableName(name, type) {
   if (type == "offenses") {
     temp1 = name.replace(/actual_.*/, "Actual ");
     if ($("#clearance_rate").is(":checked")) {
-      temp2 = name.replace(/clr_18_.*/, "Clearance Rate Under Age 18 - ");
-      temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance Rate - ");
+      temp2 = name.replace(/cleared_18_.*/, "Clearance Rate Under Age 18 - ");
+      temp3 = name.replace(/total_cleared_[a-z].*/, "Clearance Rate - ");
     } else {
-      temp2 = name.replace(/clr_18_.*/, "Clearance Under Age 18 ");
-      temp3 = name.replace(/tot_clr_[a-z].*/, "Clearance ");
+      temp2 = name.replace(/cleared_18_.*/, "Clearance Under Age 18 ");
+      temp3 = name.replace(/total_cleared_[a-z].*/, "Clearance ");
     }
-    temp4 = name.replace(/unfound_.*/, "Unfounded ");
-    name = name.replace(/actual_|clr_18_|tot_clr_|unfound_/, "");
+    name = name.replace(/actual_|cleared_18_|total_cleared_|unfounded_/, "");
     name = crime_values[name];
     if (temp1 != temp_name) name = temp1 + name;
     if (temp2 != temp_name) name = temp2 + name;
@@ -25,16 +24,13 @@ function fixTableName(name, type) {
     if (temp4 != temp_name) name = temp4 + name;
   } else if (type == "arrests" && !default_table_headers.includes(name)) {
 
-    if (name == "all_arrests_total_tot_arrests") {
+    if (name == "all_arrests_total_total_arrests") {
       name = "All Arrests Total in Agency"
     } else {
     temp_name = name;
     name = arrest_values[$("#crime_dropdown").val()];
     temp_name = temp_name.replace($("#crime_dropdown").val() + "_", "");
     temp_name = temp_name.replace(/_/g, " ");
-    temp_name = temp_name.replace("tot", "total");
-    temp_name = temp_name.replace("juv", "juvenile");
-    temp_name = temp_name.replace("amer ind", "American Indian");
     temp_name = toTitleCase(temp_name);
     name = name + " " + temp_name;
   }

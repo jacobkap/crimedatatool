@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3N15LTX7MP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3N15LTX7MP');
+  </script>
+
+
+  <title>Uniform Crime Reporting (UCR) Program Data</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Jacob Kaplan">
+  <meta name="description" content="Explore data from the Federal Bureau of Investigation's Uniform Crime Reporting (UCR) Program Data, including the Summary Reporting System (SRS) and National Incident-Based Reporting System (NIBRS) data.">
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <script src="data/data.js" ></script>
+      <script src="js/utils.js"></script>
+        <script src="js/datatool.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/change_funs.js"></script>
+    <script src="js/dynamic_url.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+
+
+  <div class="topnav" id="myTopnav">
+    <nav role="navigation" id="site-nav" class="nav">
+      <div class="menu a">
+        <a href="/index.html">Data Tool</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="column sidebar">
+    <h2>Offenses Known and Clearances by Arrest</h2>
+    <h3>Data Source</h3>
+    <br>
+    <select class="js-example-basic-single" style="width: 85%" id="data_source" onchange="updateDataSource()"></select>
+    <br>
+    <h3>State:</h3>
+    <br>
+    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('offenses', crime_state_values)"></select>
+    <br>
+    <br><br>
+    <h3>Agency:</h3>
+    <br>
+    <div class="test"><select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select></div>
+    <br><br>
+    <h3>Crime:</h3>
+    <br>
+    <select class="js-example-basic-single" style="width: 85%"   id="crime_dropdown" onchange="agencyChangeFun('offenses', crime_state_values)"></select>
+    <br><br>
+
+      <h3>Type of Crime:</h3>
+      <br>
+      <input type="checkbox" id="checkbox_1" checked onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <label class="label-text fa" for="checkbox_1">Actual Offenses</label>
+      <br>
+      <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <label class="label-text fa" for="checkbox_2">Offenses Cleared - Total</label>
+      <br>
+      <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <label class="label-text fa" for="checkbox_3">Offenses Cleared - All Under Age 18</label></input>
+      <br>
+      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('offenses', '#checkbox_1')">
+      <label class="label-text fa" for="checkbox_4">Unfounded Offenses</label>
+
+      <hr>
+      <input type="checkbox" id="monthly" onchange="agencyChangeFun('offenses', state_values)">
+      <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
+      <hr>
+    </div>
+    <button type="button" onclick="exportToCsv(all_data, 'offenses', crime_state_values)">Download All Agency Data as CSV</button>
+    <br>
+    <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
+  </div>
+
+
+
+  <div class="column main">
+
+<div>
+    <canvas id="graph" style="width:95%;height:600px;"></canvas>
+   </div>
+    <div>
+      <table id="table" class="display cell-border"></table>
+    </div>
+      </div>
+
+    <script>
+    $('.js-example-basic-single').select2({
+      minimumResultsForSearch:2
+    });
+
+    main("arson", crime_state_values, 4, arson_values, "grand_total");
+
+    </script>
+
+
+</body>
+
+</html>
