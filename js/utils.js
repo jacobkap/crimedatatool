@@ -522,7 +522,7 @@ function makeDataSourceDropdown() {
   if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html") {
       current_page = 0
   }
-  if (page_temp == "/arsob.html" || page_temp == "/E:/Dropbox/crimedatatool/arson.html") {
+  if (page_temp == "/arson.html" || page_temp == "/E:/Dropbox/crimedatatool/arson.html") {
       current_page = 1
   }
   if (page_temp == "/hate.html" || page_temp == "/E:/Dropbox/crimedatatool/hate.html") {
@@ -547,7 +547,7 @@ function updateDataSource() {
     new_url_path = "https://crimedatatool.com/"
   }
   if (data_sources[$("#data_source").val()] == "Arson") {
-    new_url_path = "https://crimedatatool.com/arson/html"
+    new_url_path = "https://crimedatatool.com/arson.html"
   }
   if (data_sources[$("#data_source").val()] == "Hate Crime Statistics") {
     new_url_path = "https://crimedatatool.com/hate.html"
