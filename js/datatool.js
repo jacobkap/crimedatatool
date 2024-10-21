@@ -283,7 +283,7 @@ function getCrimeColumns(headers, type, output) {
       columnNames.push(category_value + "_serious_injury_" + crime);
     }
     if ($('#subcategory_dropdown').val() == "arrest_type") {
-      columnNames.push(category_value + "_on_view_afrrest_" + crime);
+      columnNames.push(category_value + "_on_view_arrest_" + crime);
       columnNames.push(category_value + "_summoned_cited_" + crime);
       columnNames.push(category_value + "_taken_into_custody_" + crime);
     }
