@@ -254,7 +254,7 @@ function getCrimeColumns(headers, type, output) {
     }
     if ($('#subcategory_dropdown').val() == "clearance") {
       columnNames.push(category_value + "_cleared_by_arrest_" + crime);
-      columnNames.push(category_value + "_death_of_suspect_" + crime);
+      columnNames.push(category_value + "_death_of_offender_" + crime);
       columnNames.push(category_value + "_extradition_denied_" + crime);
       columnNames.push(category_value + "_juvenile_no_custody_" + crime);
       columnNames.push(category_value + "_prosecution_declined_" + crime);
@@ -363,7 +363,7 @@ function getCrimeColumns(headers, type, output) {
           columnNames.push(headers[n]);
         }
       } else if ($("#subsubcategory_dropdown").val() == "Race") {
-        amer_ind_arrest = crime + "_" + arrest_category + "_american_indian";
+        american_indian_arrest = crime + "_" + arrest_category + "_american_indian";
         asian_arrest = crime + "_" + arrest_category + "_asian";
         black_arrest = crime + "_" + arrest_category + "_black";
         white_arrest = crime + "_" + arrest_category + "_white";
