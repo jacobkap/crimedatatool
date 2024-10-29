@@ -156,7 +156,7 @@ nibrs_subcategories["property"] = {
 nibrs_property_drugs_values = {
   "amphetamines_methamphetamines": "Amphetamines/Methamphetamines",
   "barbiturates": "Barbiturates",
-  "cocaine": "Cocaine (not Crack)",
+  "cocaine": "Cocaine (Not Crack)",
   "crack_cocaine": "Crack Cocaine",
   "hashish": "Hashish",
   "heroin": "Heroin",
@@ -218,7 +218,7 @@ nibrs_property_values = {
   "office_type_equipment": "Office-type Equipment",
   "other": "Other",
   "other_motor_vehicles": "Other Motor Vehicles",
-  "pending_inventory_of_property": "Pending Inventory (of property)",
+  "pending_inventory_of_property": "Pending Inventory of Property",
   "pets": "Pets",
   "photographic_optical_equipment": "Photographic Equipement",
   "portible_electronic_communications": "Portible Electronic Communications",
@@ -658,7 +658,7 @@ var arrest_values = {
 var police_weapons = {
   "assault_gun": "Gun",
   "assault_knife": "Knife",
-  "assault_oth_weap": "Other Weapon",
+  "assault_other_weapon": "Other Weapon",
   "assault_unarmed": "Unarmed",
   "total_assaults": "Total"
 };
@@ -680,12 +680,12 @@ police_subcategories["officers_assaulted"] = {
   "ambush": "Ambush",
   "burglary": "Burglary",
   "deranged": "Handling Person with Mental Illness",
-  "disturbance": "Disturbance (fight, domestic violence, etc.)",
-  "oth_arrest": "Attempt to Make Other Arrest",
+  "disturbance": "Disturbance (Fight, Domestic Violence, Etc.)",
+  "other_arrest": "Attempt to Make Other Arrest",
   "prisoner": "Custody of Prisoner",
-  "riot": "Civil Disorder (riot)",
+  "riot": "Civil Disorder (Riot)",
   "robbery": "Robbery",
-  "susp_pers": "Suspicious Person",
+  "suspicious_person": "Suspicious Person",
   "traffic": "Traffic Stop",
   "assaults_with_injury": "Total Assaults - With Injury",
   "assaults_no_injury": "Total Assaults - Without Injury",

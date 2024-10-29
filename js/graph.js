@@ -159,25 +159,12 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       label += " Rate"
       // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
     } else if (type == "police" && ["officers_assaulted", "officers_killed"].includes($("#crime_dropdown").val())) {
-      label = label.replace(/_rate/g, "");
-      label = label.replace(/_per_officer/g, "");
-      weapon = $("#subsubcategory_dropdown").val();
-      if (weapon == "total_assaults") {
-        weapon = "assaults_total"
-      }
-      label = label.replace("_" + weapon, "");
-      if (weapon == "assaults_total") {
-        weapon = "Total"
-      } else {
-        weapon = police_weapons[weapon];
-      }
-      label = crimes[label] + " " + weapon
+      label = "Incidents"
     } else if (type == "hate") {
         label = "# of Incidents"
       } else {
       label = crimes[label]
     }
-    console.log(label)
     final_data = [makeGraphObjects(data1, "#ca0020", label)];
     final_data[0].hidden = false;
   }
@@ -423,6 +410,7 @@ function getTitle(data, type) {
   const selectedSubcategory = $("#subcategory_dropdown").val();
   const selectedSubsubcategory = $("#subsubcategory_dropdown").val();
   const selectedHateSubsubcategory = $("#hate_crime_dropdown").val();
+
   // Only append state if it's not an estimate for "offenses"
   if (type !== "offenses" || !$("#agency_dropdown").children("option:selected").text().includes("Estimate")) {
     title += `, ${data[0].state}: `;
@@ -452,8 +440,8 @@ function getTitle(data, type) {
     case "police":
       subtitle = `${police_categories[selectedCrime]}: ${police_subcategories[selectedCrime][selectedSubcategory]}`;
       if (police_categories[selectedCrime] === "Officers Assaulted") {
-        const weapon = _.values(police_weapons)[selectedSubsubcategory];
-        subtitle += ` - ${weapon}`;
+        const weapon = ", Weapon: " + police_weapons[selectedSubsubcategory];
+        subtitle += `${weapon}`;
       }
       break;
 

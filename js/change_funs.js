@@ -1,5 +1,8 @@
 function checkboxesUpdate(type, always_on_box, crimes) {
     if (type != "nibrs") {
+      if (type == "arrests" & $("#subsubcategory_dropdown").val() == "Race") {
+        always_on_box = "#checkbox_5"
+      }
   if (!$("#checkbox_1").is(':checked') &&
     !$("#checkbox_2").is(':checked') &&
     !$("#checkbox_3").is(':checked') &&
