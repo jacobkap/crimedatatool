@@ -76,7 +76,7 @@ function nibrsPopBoxChange(box_to_check) {
   $("#rate").prop("checked", false);
 
   $(box_to_check).prop("checked", box_status);
-  agencyChangeFun('nibrs', nibrs_state_values, nibrs_crime_values['offense']);
+  agencyChangeFun('nibrs', state_values, nibrs_crime_values['offense']);
 }
 
 function toggle_display(div, match_value) {
@@ -177,7 +177,7 @@ function nibrsubcategoryChange() {
     make_dropdown('#crime_dropdown', nibrs_crimes_temp, _.keys(nibrs_crimes_temp)[0])
   }
   toggle_nibrs_display();
-  agencyChangeFun('nibrs', nibrs_state_values, nibrs_crimes_temp);
+  agencyChangeFun('nibrs', state_values, nibrs_crimes_temp);
 
 
 }

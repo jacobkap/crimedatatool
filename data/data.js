@@ -12,10 +12,7 @@ default_table_headers = [
   "year",
   "state",
   "population",
-  "ORI",
-  "school_name",
-  "school_unique_ID",
-  "number_of_students"
+  "ORI"
 ];
 
 yaxis_labels = {
@@ -32,13 +29,6 @@ yaxis_labels = {
   "police_rate_per_officer": "Rate per Officer",
   "hate": "# of Incidents",
 }
-
-
-
-
-var nationwide_only = [
-  "Nationwide - Total"
-];
 
 
 var state_values = [
@@ -94,9 +84,6 @@ var state_values = [
   "Wisconsin",
   "Wyoming"
 ];
-
-var crime_state_values = state_values
-var nibrs_state_values = state_values
 
 
 var nibrs_starts = {
