@@ -48,8 +48,8 @@ function subsetColumns(data, columns, output, type) {
     });
   if (output == "table") {
       columns[0] = "agency";
-      columns[1] = "year";
-      columns[2] = "state";
+      columns[1] = "state";
+      columns[2] = "year";
       columns[3] = "population";
       columns[4] = "ORI";
     } else {
@@ -201,7 +201,7 @@ function getCrimeColumns(headers, type, output) {
   if (output == "graph") {
     columnNames = ["year"];
   } else {
-    columnNames = ["agency", "year", "state", "population", "ORI"];
+    columnNames = ["agency", "state", "ORI", "year", "population"];
   }
 
 

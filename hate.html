@@ -80,17 +80,16 @@
     <select class="js-example-basic-single" style="width: 85%" id="hate_crime_dropdown" onchange="agencyChangeFun('hate', state_values)">
     </select>
 
-    <br><br>
-    <h3>Type of Hate Crime:</h3>
 
     <br>
 
-    <hr>
-        <button type="button" onclick="exportToCsv(all_data, 'hate', state_values)">Download All Agency Data as CSV</button>
-    <hr>
 
     <input type="checkbox" id="monthly" onchange="agencyChangeFun('hate', state_values)"></input>
     <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
+    <hr>
+    <br>
+
+        <button type="button" onclick="exportToCsv(all_data, 'hate', state_values)">Download All Agency Data as CSV</button>
     <hr>
 
   </div>

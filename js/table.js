@@ -21,7 +21,7 @@ function fixTableName(name, type) {
     if (type == "offenses") {
     name = crime_values[name];
   } else if (type == "arson") {
-    name = arson_values[name];    
+    name = arson_values[name];
   }
     if (temp1 != temp_name) name = temp1 + name;
     if (temp2 != temp_name) name = temp2 + name;
@@ -58,6 +58,8 @@ function fixTableName(name, type) {
   } else if (type == "hate") {
     name = name.replace(/_/g, " ");
     name = toTitleCase(name);
+    name = name.replace("Ori", "ORI");
+        name = name.replace("Anti ", "Anti-");
   } else if (type == "nibrs") {
     if ($("#rate").is(':checked')) {
       name = name.replace(/_rate/g, "");
@@ -112,7 +114,7 @@ function makeTable(type) {
   data = subsetColumns(table_data, table_headers, "table", type);
   data_keys = _.keys(data[0]);
   data_keys = data_keys.filter(function(a) {
-    return !["agency", "year", "state", "ORI", "county"].includes(a);
+    return !["agency", "state", "year", "ORI", "county"].includes(a);
   });
   // Adds commas in numbers to make it easier to read!
   for (var m = 0; m < data.length; m++) {
@@ -134,7 +136,7 @@ function makeTable(type) {
     table_columns.push({
       data: data_name,
       title: label_name,
-      className: "dt-head-left dt-body-right"
+      className: "dt-head-left dt-body-left"
     });
   }
 
@@ -149,7 +151,7 @@ function makeTable(type) {
     "lengthChange": true,
     "paging": true,
     "searching": false,
-    "pageLength": 20,
+    "pageLength": 25,
     "ordering": true,
     "order": [1, "desc"],
     "fixedHeader": true,
@@ -161,7 +163,7 @@ function makeTable(type) {
       }
     },
     fixedColumns: {
-      leftColumns: 2
+      leftColumns: 3
     }
   });
   return temp_table;

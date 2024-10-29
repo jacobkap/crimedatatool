@@ -151,9 +151,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     if (type == "police") {
       crimes = police_subcategories[$("#crime_dropdown").val()];
     }
-    if (type == "hate") {
-      crimes = hate_bias_motivations;
-    }
+
      if (type == "nibrs" && $("#rate").is(':checked')) {
       label = label.replace(/_rate/g, "");
       label = label.replace(/_percent/g, "");
@@ -174,9 +172,12 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
         weapon = police_weapons[weapon];
       }
       label = crimes[label] + " " + weapon
-    } else {
+    } else if (type == "hate") {
+        label = "# of Incidents"
+      } else {
       label = crimes[label]
     }
+    console.log(label)
     final_data = [makeGraphObjects(data1, "#ca0020", label)];
     final_data[0].hidden = false;
   }
@@ -433,6 +434,9 @@ function getTitle(data, type) {
     case "offenses":
       subtitle = crime_values[selectedCrime];
       break;
+    case "arson":
+        subtitle = arson_values[selectedCrime];
+        break;
 
     case "arrests":
       subtitle = `Arrests for: ${arrest_values[selectedCrime]}, Breakdown: ${arrests_breakdown[selectedSubsubcategory]}, Age: ${arrest_age_categories[selectedSubcategory]}`;
@@ -454,7 +458,7 @@ function getTitle(data, type) {
       break;
 
     case "hate":
-      subtitle = `Hate Crime, Bias Motivation: ${hate_bias_motivations[selectedCrime]}` + ` ` +  `${hate_offenses[selectedHateSubsubcategory]}`;
+      subtitle = `Bias Motivation: ${hate_bias_motivations[selectedCrime]}` + `, Offense: ` +  `${hate_offenses[selectedHateSubsubcategory]}`;
       break;
   }
 

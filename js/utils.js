@@ -519,22 +519,22 @@ function makeDataSourceDropdown() {
 
 
 
-  if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html") {
+  if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/arrest.html") {
       current_page = 0
   }
-  if (page_temp == "/arson.html" || page_temp == "/E:/Dropbox/crimedatatool/arson.html") {
+  if (page_temp == "/arson.html" || page_temp == "/E:/Dropbox/crimedatatool/arson.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/arson.html") {
       current_page = 1
   }
-  if (page_temp == "/hate.html" || page_temp == "/E:/Dropbox/crimedatatool/hate.html") {
+  if (page_temp == "/hate.html" || page_temp == "/E:/Dropbox/crimedatatool/hate.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/hate.html") {
       current_page = 2
   }
-  if (page_temp == "/police.html" || page_temp == "/E:/Dropbox/crimedatatool/police.html") {
+  if (page_temp == "/police.html" || page_temp == "/E:/Dropbox/crimedatatool/police.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/police.html") {
       current_page = 3
   }
-  if (page_temp == "/nibrs.html" || page_temp == "/E:/Dropbox/crimedatatool/nibrs.html") {
+  if (page_temp == "/nibrs.html" || page_temp == "/E:/Dropbox/crimedatatool/nibrs.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/nibrs.html") {
     current_page = 4
   }
-  if (page_temp == "/index.html" || page_temp == "/" || page_temp == "/E:/Dropbox/crimedatatool/" || page_temp == "/E:/Dropbox/crimedatatool/index.html") {
+  if (page_temp == "/index.html" || page_temp == "/" || page_temp == "/E:/Dropbox/crimedatatool/" || page_temp == "/E:/Dropbox/crimedatatool/index.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/index.html") {
     current_page = 5
   }
     $("#data_source").val(current_page)
