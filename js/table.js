@@ -153,7 +153,7 @@ function makeTable(type) {
     "searching": false,
     "pageLength": 25,
     "ordering": true,
-    "order": [1, "desc"],
+    "order": [3, "desc"],
     "fixedHeader": true,
     "render": function(data) {
       if (typeof(data) == "undefined") {

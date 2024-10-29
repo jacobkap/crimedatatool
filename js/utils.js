@@ -398,7 +398,7 @@ function countToRate(data, type, per_officer = false) {
   }
   if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
     population_column = $("#crime_dropdown").val() + "_total_" + $("#subcategory_dropdown").val();
-    if ($("#subcategory_dropdown").val() == "tot") {
+    if ($("#subcategory_dropdown").val() == "total") {
       population_column = $("#crime_dropdown").val() + "_total_arrests";
     }
   }
