@@ -579,6 +579,9 @@ current_page = data_sources[$("#data_source").val()]
   if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/nibrs.html") {
     window.location.href = new_url_path;
   }
+  if (current_page == "Arson" & page_temp != "/arson.html") {
+    window.location.href = new_url_path;
+  }
    makeDataSourceDropdown()
 }
 

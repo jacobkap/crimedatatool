@@ -254,7 +254,7 @@ function getCrimeColumns(headers, type, output) {
     }
     if ($('#subcategory_dropdown').val() == "clearance") {
       columnNames.push(category_value + "_cleared_by_arrest_" + crime);
-      columnNames.push(category_value + "_death_of_offender_" + crime);
+      columnNames.push(category_value + "_death_of_suspect_" + crime);
       columnNames.push(category_value + "_extradition_denied_" + crime);
       columnNames.push(category_value + "_juvenile_no_custody_" + crime);
       columnNames.push(category_value + "_prosecution_declined_" + crime);
