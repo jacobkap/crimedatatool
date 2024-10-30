@@ -408,10 +408,6 @@ function getCrimeColumns(headers, type, output) {
   if (type == "arrests") {
     index = columnNames.indexOf(total_arrest);
     columnNames.push(columnNames.splice(index, 1)[0]);
-  }
-
-
-  if (type == "arrests") {
     columnNames.push("all_arrests_total_total_arrests")
   }
 

@@ -431,7 +431,7 @@ function getTitle(data, type) {
       break;
 
     case "nibrs":
-      subtitle = `${nibrs_categories[selectedCategory]}s, ${nibrs_crime_values[$("#category_dropdown").val()][selectedCrime]}`;
+      //subtitle = `${nibrs_categories[selectedCategory]}s, ${nibrs_crime_values[$("#category_dropdown").val()][selectedCrime]}`;
       if (selectedCategory === "property") {
         subtitle = `Property Data: ${nibrs_property_values[selectedCrime]}`;
       }
