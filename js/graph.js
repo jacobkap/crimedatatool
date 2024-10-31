@@ -22,8 +22,14 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     "Offenses Cleared Involving Only Persons Under age 18",
     "Unfounded Offenses"
   ];
-  if (["police"].includes(type)) {
+  if (type == "police") {
     checkbox_names = ["Female", "Male", "Total"];
+  }
+  if (type == "police" & $("#crime_dropdown").val() == "officers_assaulted") {
+        checkbox_names = ["Gun", "Knife", "Other Weapon", "Unarmed", "Total"];
+  }
+  if (type == "police" & $("#crime_dropdown").val() == "officers_killed") {
+        checkbox_names = ["Killed by Felony", "Killed by Accident"];
   }
   if (type == "arrests") {
     if ($("#subsubcategory_dropdown").val() == "Sex") {
@@ -112,8 +118,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data7.push(data[i][colsForGraph[7]]);
   }
 
-  if (["offenses", "arrests", "nibrs", "arson"].includes(type) || type == "police" &
-    police_categories[$("#crime_dropdown").val()] == "Police Department Employees") {
+  if (["offenses", "arrests", "nibrs", "arson"].includes(type) || type == "police") {
 
     final_data = [
       makeGraphObjects(data1, "#ca0020", checkbox_names[0]),
@@ -440,8 +445,8 @@ function getTitle(data, type) {
     case "police":
       subtitle = `${police_categories[selectedCrime]}: ${police_subcategories[selectedCrime][selectedSubcategory]}`;
       if (police_categories[selectedCrime] === "Officers Assaulted") {
-        const weapon = ", Weapon: " + police_weapons[selectedSubsubcategory];
-        subtitle += `${weapon}`;
+    //    const weapon = ", Weapon: " + police_weapons[selectedSubsubcategory];
+    //    subtitle += `${weapon}`;
       }
       break;
 

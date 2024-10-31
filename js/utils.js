@@ -57,6 +57,7 @@ function exportToCsv(tableData, type, states) {
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
+    console.log()
     document.body.removeChild(link);
   }
 }
@@ -98,7 +99,61 @@ function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
   $dropdown.val(starter);
 }
 
+function toggle_leoka_display() {
+  if ($("#crime_dropdown").val() == "employees") {
+    $("#checkbox_1").show();
+    $("#checkbox_2").show();
+    $("#checkbox_3").show();
 
+    $("label[for='checkbox_1']").html("Female")
+    $("label[for='checkbox_2']").html("Male")
+    $("label[for='checkbox_3']").html("Total")
+
+    $("#checkbox_4").hide();
+    $("#checkbox_5").hide();
+    $("label[for='checkbox_4']").hide()
+    $("label[for='checkbox_5']").hide()
+
+
+$('#subcategory_dropdown').next(".select2-container").show();
+    $("h3").eq(4).html("Subcategory:");
+
+  } else if ($("#crime_dropdown").val() == "officers_assaulted") {
+    $("#checkbox_4").show();
+    $("#checkbox_5").show();
+    $("label[for='checkbox_4']").show()
+    $("label[for='checkbox_5']").show()
+
+    $("label[for='checkbox_1']").html("Gun")
+    $("label[for='checkbox_2']").html("Knife")
+    $("label[for='checkbox_3']").html("Other Weapon")
+
+    $("#checkbox_1").prop("checked", false);
+    $("#checkbox_2").prop("checked", false);
+    $("#checkbox_3").prop("checked", false);
+    $("#checkbox_5").prop("checked", true);
+
+$('#subcategory_dropdown').next(".select2-container").show();
+    $("h3").eq(4).html("Subcategory:");
+
+  } else if ($("#crime_dropdown").val() == "officers_killed") {
+    $("#checkbox_3").hide();
+    $("#checkbox_4").hide();
+    $("#checkbox_5").hide();
+    $("label[for='checkbox_3']").hide()
+    $("label[for='checkbox_4']").hide()
+    $("label[for='checkbox_5']").hide()
+
+    $("label[for='checkbox_1']").html("Killed by Felony")
+    $("label[for='checkbox_2']").html("Killed by Accident")
+
+    $("#checkbox_1").prop("checked", true);
+    $("#checkbox_2").prop("checked", true);
+
+$('#subcategory_dropdown').next(".select2-container").hide();
+    $("h3").eq(4).html("");
+  }
+}
 
 function toggle_nibrs_display() {
   $("h3").eq(2).html("Agency:");
@@ -386,7 +441,7 @@ function toggle_arrest_display() {
 
 function countToRate(data, type, per_officer = false) {
 
-  per_officer = $("#checkbox_4").is(':checked');
+  per_officer = $("#police_rate_per_officer").is(':checked');
   data_keys = _.keys(data);
   population_column = "population";
   if (per_officer && type == "police") {
@@ -634,8 +689,9 @@ function main(type, states, state_default, crimes, crime_starter) {
 
       make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
       make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
-      toggle_display("#weaponsDiv", ["officers_assaulted"]);
-      $("#policeSex").show();
+    //  toggle_display("#weaponsDiv", ["officers_assaulted"]);
+  //    $("#policeSex").show();
+  toggle_leoka_display()
     }
 
     largest_agency = getStateAgencies(type, states, true);

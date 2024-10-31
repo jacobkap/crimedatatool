@@ -129,15 +129,17 @@ change_data_from_url = function(type) {
   }
 
   if (type == "police") {
-    toggle_display("#weaponsDiv", [0]);
-    toggle_display("#policeSex", [2]);
+  //  toggle_display("#weaponsDiv", [0]);
+  //  toggle_display("#policeSex", [2]);
+  toggle_leoka_display()
     make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], [12, 1, 1], '#crime_dropdown');
     police_subcatergory_values = police_subcategories[$('#crime_dropdown').val()]
   }
 
   if (type == "police") {
-    toggle_display("#weaponsDiv", ["officers_assaulted"]);
-    toggle_display("#policeSex", ["employees"]);
+//    toggle_display("#weaponsDiv", ["officers_assaulted"]);
+//    toggle_display("#policeSex", ["employees"]);
+toggle_leoka_display()
   }
 
 

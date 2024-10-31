@@ -101,8 +101,9 @@ function stateChangeFun(type, states, crimes) {
 
 function police_categoryChangeFun() {
   make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
-  toggle_display("#weaponsDiv", ["officers_assaulted"]);
-  toggle_display("#policeSex", ["employees"]);
+//  toggle_display("#weaponsDiv", ["officers_assaulted"]);
+//  toggle_display("#policeSex", ["employees"]);
+toggle_leoka_display()
   agencyChangeFun('police', state_values, police_categories);
 }
 

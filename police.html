@@ -74,11 +74,6 @@
     <h3>Subcategory:</h3>
     <br><br>
     <select class="js-example-basic-single" style="width: 85%" id="subcategory_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
-    <div id="weaponsDiv">
-      <h3>Offender Weapon:</h3>
-      <br>
-      <select class="js-example-basic-single" style="width: 85%" id="subsubcategory_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
-    </div>
 
     <div id="policeSex">
       <h3>Officer Sex:</h3>
@@ -91,22 +86,28 @@
       <br>
       <input type="checkbox" id="checkbox_3" checked onchange="checkboxesUpdate('police', '#checkbox_3')"></input>
       <label class="label-text fa" for="checkbox_3">Total</label>
+      <br>
+      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('police', '#checkbox_5')"></input>
+      <label class="label-text fa" for="checkbox_4">Unarmed</label>
+      <br>
+      <input type="checkbox" id="checkbox_5" onchange="checkboxesUpdate('police', '#checkbox_5')"></input>
+      <label class="label-text fa" for="checkbox_5">Total</label>
     </div>
 
     <br><br>
     <hr>
-    <input type="checkbox" id="rate" name="police_rate" value="police_rate" onchange="rateBoxesChange('#checkbox_4', 'police', state_values)"></input>
+    <input type="checkbox" id="rate" name="rate" value="rate" onchange="rateBoxesChange('#police_rate_per_officer', 'police', state_values)"></input>
     <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br>
-    <input type="checkbox" id="checkbox_4" name="police_rate_per_officer" value="police_rate_per_officer" onchange="rateBoxesChange('#rate', 'police', state_values)"></input>
-    <label class="label-text fa" for="checkbox_4">Rate per Officer</label>
+    <input type="checkbox" id="police_rate_per_officer" name="police_rate_per_officer" value="police_rate_per_officer" onchange="rateBoxesChange('#rate', 'police', state_values)"></input>
+    <label class="label-text fa" for="police_rate_per_officer">Rate per Officer</label>
 
     <br><br>
     <hr>
     <input type="checkbox" id="monthly" onchange="agencyChangeFun('police', state_values)"></input>
     <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
     <hr>
-      <button type="button" onclick="exportToCsv(tableData, 'police', state_values)">Download All Agency Data as CSV</button>
+      <button type="button" onclick="exportToCsv(all_data, 'police', state_values)">Download All Agency Data as CSV</button>
     <br><br><br><br><br><br><br><br>
     <button type="button" onclick="exportToCsv(table_data, 'police', state_values)">Download Current Table Data as CSV</button>
     <br>

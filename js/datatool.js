@@ -8,7 +8,7 @@ function get_rate_type(type, binary = false) {
     rate_type = "_percent_of_arrests";
   } else if ($("#percent_of_all_arrests").is(':checked')) {
     rate_type = "_percent_of_all_arrests";
-  } else if (type == "police" && $("#checkbox_4").is(':checked')) {
+  } else if (type == "police" && $("#police_rate_per_officer").is(':checked')) {
     rate_type = "_rate_per_officer";
   }
 
@@ -176,18 +176,18 @@ function get_data(type, states) {
   const crimeDropdownValue = $("#crime_dropdown").val();
 
   // Remove total officer column if necessary
-  if (type === "police" && police_categories[crimeDropdownValue] !== "Police Department Employees") {
-    tableData = tableData.map(x => _.omit(x, "total_employees_officers"));
+//  if (type === "police" && police_categories[crimeDropdownValue] !== "Police Department Employees") {
+//    tableData = tableData.map(x => _.omit(x, "total_employees_officers"));
 
     // Remove total_employees_officers from both colsForGraph and colsForTable
-    const removeColumn = (arr, column) => {
-      const index = arr.indexOf(column);
-      if (index !== -1) arr.splice(index, 1);
-    };
+//    const removeColumn = (arr, column) => {
+//      const index = arr.indexOf(column);
+//      if (index !== -1) arr.splice(index, 1);
+//    };
 
-    removeColumn(colsForGraph, "total_employees_officers");
-    removeColumn(colsForTable, "total_employees_officers");
-  }
+//    removeColumn(colsForGraph, "total_employees_officers");
+//    removeColumn(colsForTable, "total_employees_officers");
+//  }
 
   return [tableData, colsForGraph, colsForTable, allAgencyData];
 }
@@ -339,7 +339,7 @@ function getCrimeColumns(headers, type, output) {
         weapon = weapon.replace("assault_", "");
         weapon = weapon.replace("_assaults", "");
       }
-      crime = crime + "_" + weapon;
+      // crime = crime + "_" + weapon;
       if (crime == "total_total_assaults") crime = "total_assaults_total";
     }
   }
