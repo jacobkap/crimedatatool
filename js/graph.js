@@ -8,7 +8,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
   if (!get_rate_type(type, binary = true)) {
     rate_type = "";
   }
-  if (type == "police" && $("#checkbox_4").is(':checked')) {
+  if (type == "leoka" && $("#checkbox_4").is(':checked')) {
     rate_type = "_rate_per_officer";
   } else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
     rate_type = "_percent_of_arrests";
@@ -22,13 +22,13 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     "Offenses Cleared Involving Only Persons Under age 18",
     "Unfounded Offenses"
   ];
-  if (type == "police") {
+  if (type == "leoka") {
     checkbox_names = ["Female", "Male", "Total"];
   }
-  if (type == "police" & $("#crime_dropdown").val() == "officers_assaulted") {
+  if (type == "leoka" & $("#crime_dropdown").val() == "officers_assaulted") {
         checkbox_names = ["Gun", "Knife", "Other Weapon", "Unarmed", "Total"];
   }
-  if (type == "police" & $("#crime_dropdown").val() == "officers_killed") {
+  if (type == "leoka" & $("#crime_dropdown").val() == "officers_killed") {
         checkbox_names = ["Killed by Felony", "Killed by Accident"];
   }
   if (type == "arrests") {
@@ -118,7 +118,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data7.push(data[i][colsForGraph[7]]);
   }
 
-  if (["offenses", "arrests", "nibrs", "arson"].includes(type) || type == "police") {
+  if (["offenses", "arrests", "nibrs", "arson"].includes(type) || type == "leoka") {
 
     final_data = [
       makeGraphObjects(data1, "#ca0020", checkbox_names[0]),
@@ -153,8 +153,8 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     label = colsForGraph[1]
     label = label.replace(/_age_adjusted_rate/g, "");
     label = label.replace(/_crude_rate/g, "");
-    if (type == "police") {
-      crimes = police_subcategories[$("#crime_dropdown").val()];
+    if (type == "leoka") {
+      crimes = leoka_subcategories[$("#crime_dropdown").val()];
     }
 
      if (type == "nibrs" && $("#rate").is(':checked')) {
@@ -162,8 +162,8 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
       label = label.replace(/_percent/g, "");
       label = crimes[label]
       label += " Rate"
-      // Temp fix since crimes variable doesn't exist and is causing issues for POLICE page
-    } else if (type == "police" && ["officers_assaulted", "officers_killed"].includes($("#crime_dropdown").val())) {
+      // Temp fix since crimes variable doesn't exist and is causing issues for leoka page
+    } else if (type == "leoka" && ["officers_assaulted", "officers_killed"].includes($("#crime_dropdown").val())) {
       label = "Incidents"
     } else if (type == "hate") {
         label = "# of Incidents"
@@ -206,7 +206,7 @@ function makeGraph(type, crimes) {
   yaxis_label = yaxis_labels[type + rate_val];
 
 
-  if (type == "police" && rate_val == "") {
+  if (type == "leoka" && rate_val == "") {
     if ($("#crime_dropdown").val().includes("killed")) {
       yaxis_label = "# of Officer Deaths";
     } else if ($("#crime_dropdown").val().includes("assault")) {
@@ -442,10 +442,10 @@ function getTitle(data, type) {
       }
       break;
 
-    case "police":
-      subtitle = `${police_categories[selectedCrime]}: ${police_subcategories[selectedCrime][selectedSubcategory]}`;
-      if (police_categories[selectedCrime] === "Officers Assaulted") {
-    //    const weapon = ", Weapon: " + police_weapons[selectedSubsubcategory];
+    case "leoka":
+      subtitle = `${leoka_categories[selectedCrime]}: ${leoka_subcategories[selectedCrime][selectedSubcategory]}`;
+      if (leoka_categories[selectedCrime] === "Officers Assaulted") {
+    //    const weapon = ", Weapon: " + leoka_weapons[selectedSubsubcategory];
     //    subtitle += `${weapon}`;
       }
       break;

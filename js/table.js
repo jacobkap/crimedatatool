@@ -40,11 +40,11 @@ function fixTableName(name, type) {
     name = name + " " + temp_name;
   }
 
-  } else if (type == "police" && !default_table_headers.includes(name)) {
+  } else if (type == "leoka" && !default_table_headers.includes(name)) {
     temp_name = name;
-    category_index_num = _.indexOf(_.keys(police_categories), $("#crime_dropdown").val());
-    crime_val = _.keys(police_subcategories[category_index_num])[$("#subcategory_dropdown").val()];
-    name = _.values(police_subcategories[category_index_num])[_.indexOf(_.keys(police_subcategories[category_index_num]), crime_val)];
+    category_index_num = _.indexOf(_.keys(leoka_categories), $("#crime_dropdown").val());
+    crime_val = _.keys(leoka_subcategories[category_index_num])[$("#subcategory_dropdown").val()];
+    name = _.values(leoka_subcategories[category_index_num])[_.indexOf(_.keys(leoka_subcategories[category_index_num]), crime_val)];
 
     temp_name = temp_name.replace(crime_val + "_", "");
     temp_name = temp_name.replace(/_/g, " ");
@@ -80,7 +80,7 @@ function fixTableName(name, type) {
 
     if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("Clear")) {} else if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
       name += " % of Arrests";
-    } else if (type == "police" && $("#checkbox_4").is(':checked')) {
+    } else if (type == "leoka" && $("#checkbox_4").is(':checked')) {
       name += " per Officer";
     }  else if (type == "nibrs" && $("#percent_of_crimes").is(':checked')) {
       name += " %";

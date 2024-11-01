@@ -128,17 +128,17 @@ change_data_from_url = function(type) {
     $("#checkbox_6").prop("checked", $.parseJSON(checkbox6_val .toLowerCase()))
   }
 
-  if (type == "police") {
+  if (type == "leoka") {
   //  toggle_display("#weaponsDiv", [0]);
-  //  toggle_display("#policeSex", [2]);
+  //  toggle_display("#leokaSex", [2]);
   toggle_leoka_display()
-    make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], [12, 1, 1], '#crime_dropdown');
-    police_subcatergory_values = police_subcategories[$('#crime_dropdown').val()]
+    make_dropdown('#subcategory_dropdown', leoka_subcategories[$('#crime_dropdown').val()], [12, 1, 1], '#crime_dropdown');
+    leoka_subcatergory_values = leoka_subcategories[$('#crime_dropdown').val()]
   }
 
-  if (type == "police") {
+  if (type == "leoka") {
 //    toggle_display("#weaponsDiv", ["officers_assaulted"]);
-//    toggle_display("#policeSex", ["employees"]);
+//    toggle_display("#leokaSex", ["employees"]);
 toggle_leoka_display()
   }
 

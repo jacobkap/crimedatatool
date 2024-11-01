@@ -8,7 +8,7 @@ function get_rate_type(type, binary = false) {
     rate_type = "_percent_of_arrests";
   } else if ($("#percent_of_all_arrests").is(':checked')) {
     rate_type = "_percent_of_all_arrests";
-  } else if (type == "police" && $("#police_rate_per_officer").is(':checked')) {
+  } else if (type == "leoka" && $("#leoka_rate_per_officer").is(':checked')) {
     rate_type = "_rate_per_officer";
   }
 
@@ -172,11 +172,11 @@ function get_data(type, states) {
   // Get the final table data
   let tableData = getAgencyData(stateData, headers, colsForTable, type);
 
-  // Cache dropdown value for police category
+  // Cache dropdown value for leoka category
   const crimeDropdownValue = $("#crime_dropdown").val();
 
   // Remove total officer column if necessary
-//  if (type === "police" && police_categories[crimeDropdownValue] !== "Police Department Employees") {
+//  if (type === "leoka" && leoka_categories[crimeDropdownValue] !== "Police Department Employees") {
 //    tableData = tableData.map(x => _.omit(x, "total_employees_officers"));
 
     // Remove total_employees_officers from both colsForGraph and colsForTable
@@ -328,17 +328,17 @@ function getCrimeColumns(headers, type, output) {
     if (output == "graph") {
       arrest_category = $("#subcategory_dropdown").val();
     }
-  } else if (type == "police") {
+  } else if (type == "leoka") {
     crime = $("#subcategory_dropdown").val()
 
-    if (police_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
+    if (leoka_categories[$("#crime_dropdown").val()] == "Officers Assaulted") {
       weapon = $("#subsubcategory_dropdown").val()
 
       // The total columns have slightly different names than others so this makes them work.
-      if (crime == "assaults_with_injury" || crime == "assaults_no_injury") {
-        weapon = weapon.replace("assault_", "");
-        weapon = weapon.replace("_assaults", "");
-      }
+    //  if (crime == "assaults_with_injury" || crime == "assaults_no_injury") {
+    //    weapon = weapon.replace("assault_", "");
+    //    weapon = weapon.replace("_assaults", "");
+    //  }
       // crime = crime + "_" + weapon;
       if (crime == "total_total_assaults") crime = "total_assaults_total";
     }
@@ -401,7 +401,7 @@ function getCrimeColumns(headers, type, output) {
     }
   }
 
-  if (type == "police" && !columnNames.includes("total_employees_officers")) {
+  if (type == "leoka" && !columnNames.includes("total_employees_officers")) {
     columnNames.push("total_employees_officers");
   }
 

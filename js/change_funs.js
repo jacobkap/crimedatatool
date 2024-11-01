@@ -99,12 +99,12 @@ function stateChangeFun(type, states, crimes) {
 }
 
 
-function police_categoryChangeFun() {
-  make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
+function leoka_categoryChangeFun() {
+  make_dropdown('#subcategory_dropdown', leoka_subcategories[$('#crime_dropdown').val()], leoka_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
 //  toggle_display("#weaponsDiv", ["officers_assaulted"]);
-//  toggle_display("#policeSex", ["employees"]);
+//  toggle_display("#leokaSex", ["employees"]);
 toggle_leoka_display()
-  agencyChangeFun('police', state_values, police_categories);
+  agencyChangeFun('leoka', state_values, leoka_categories);
 }
 
 function arrest_subsubcategoryChangeFun() {

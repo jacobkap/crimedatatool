@@ -25,7 +25,7 @@ function exportToCsv(tableData, type, states) {
   if (get_rate_type(type, true)) {
     rate_or_count = "rate_";
   }
-  if (type === "police" && $("#checkbox_4").is(':checked')) {
+  if (type === "leoka" && $("#checkbox_4").is(':checked')) {
     rate_or_count = "rate_per_officer_";
   } else if (type === "arrests" && $("#percent_of_arrests").is(':checked')) {
     rate_or_count = "_percent_of_arrests";
@@ -333,7 +333,7 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_3']").html("Non-Hispanic")
     $("label[for='checkbox_4']").html("Unknown")
     if ($('#category_dropdown').val() == "arrestee") {
-      $("label[for='checkbox_3']").html("Total")
+      $("label[for='checkbox_3']").html("Not Hispanic")
       $("#checkbox_4").hide();
       $("label[for='checkbox_4']").hide()
     }
@@ -441,10 +441,10 @@ function toggle_arrest_display() {
 
 function countToRate(data, type, per_officer = false) {
 
-  per_officer = $("#police_rate_per_officer").is(':checked');
+  per_officer = $("#leoka_rate_per_officer").is(':checked');
   data_keys = _.keys(data);
   population_column = "population";
-  if (per_officer && type == "police") {
+  if (per_officer && type == "leoka") {
     population_column = "total_employees_officers";
   }
 
@@ -583,7 +583,7 @@ function makeDataSourceDropdown() {
   if (page_temp == "/hate.html" || page_temp == "/E:/Dropbox/crimedatatool/hate.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/hate.html") {
       current_page = 2
   }
-  if (page_temp == "/police.html" || page_temp == "/E:/Dropbox/crimedatatool/police.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/police.html") {
+  if (page_temp == "/leoka.html" || page_temp == "/E:/Dropbox/crimedatatool/leoka.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/leoka.html") {
       current_page = 3
   }
   if (page_temp == "/nibrs.html" || page_temp == "/E:/Dropbox/crimedatatool/nibrs.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/nibrs.html") {
@@ -611,7 +611,7 @@ function updateDataSource() {
       new_url_path = "https://crimedatatool.com/arrest.html"
   }
   if (data_sources[$("#data_source").val()] == "Law Enforcement Officers Killed and Assaulted (LEOKA)") {
-    new_url_path = "https://crimedatatool.com/police.html"
+    new_url_path = "https://crimedatatool.com/leoka.html"
   }
   if (data_sources[$("#data_source").val()] == "National Incident-Based Reporting System (NIBRS)") {
     new_url_path = "https://crimedatatool.com/nibrs.html"
@@ -628,7 +628,7 @@ current_page = data_sources[$("#data_source").val()]
   if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "/arrest.html") {
     window.location.href = new_url_path;
   }
-  if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/police.html") {
+  if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/leoka.html") {
     window.location.href = new_url_path;
   }
   if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/nibrs.html") {
@@ -685,12 +685,12 @@ function main(type, states, state_default, crimes, crime_starter) {
     toggle_nibrs_display()
   } else if (type == "hate") {
     make_dropdown('#hate_crime_dropdown', hate_offenses, "theft")
-  } else if (type == "police") {
+  } else if (type == "leoka") {
 
-      make_dropdown('#subcategory_dropdown', police_subcategories[$('#crime_dropdown').val()], police_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
-      make_dropdown("#subsubcategory_dropdown", police_weapons, "total_assaults");
+      make_dropdown('#subcategory_dropdown', leoka_subcategories[$('#crime_dropdown').val()], leoka_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
+  //    make_dropdown("#subsubcategory_dropdown", leoka_weapons, "total_assaults");
     //  toggle_display("#weaponsDiv", ["officers_assaulted"]);
-  //    $("#policeSex").show();
+  //    $("#leokaSex").show();
   toggle_leoka_display()
     }
 

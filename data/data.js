@@ -24,9 +24,9 @@ yaxis_labels = {
   "arrests_rate": "Rate per 100,000 Population",
   "arrests_percent_of_arrests": "% of Arrests",
   "arrests_percent_of_all_arrests": "% of All Arrests for All Crimes",
-  "police": "# of People",
-  "police_rate": "Rate per 100,000 Population",
-  "police_rate_per_officer": "Rate per Officer",
+  "leoka": "# of People",
+  "leoka_rate": "Rate per 100,000 Population",
+  "leoka_rate_per_officer": "Rate per Officer",
   "hate": "# of Incidents",
 }
 
@@ -641,7 +641,7 @@ var arrest_values = {
   "weapons_carrying_possessing_etc": "Weapons Offenses"
 };
 
-var police_weapons = {
+var leoka_weapons = {
   "assault_gun": "Gun",
   "assault_knife": "Knife",
   "assault_other_weapon": "Other Weapon",
@@ -649,20 +649,20 @@ var police_weapons = {
   "total_assaults": "Total"
 };
 
-var police_categories = {
+var leoka_categories = {
   "officers_assaulted": "Officers Assaulted",
   "officers_killed": "Officers Killed",
   "employees": "Police Department Employees"
 };
 
-var police_categories_starts = {
+var leoka_categories_starts = {
   "officers_assaulted": "total",
   "officers_killed": "officers_killed_by_felony",
   "employees": "employees_total"
 };
 
-police_subcategories = [];
-police_subcategories["officers_assaulted"] = {
+leoka_subcategories = [];
+leoka_subcategories["officers_assaulted"] = {
   "ambush": "Ambush",
   "burglary": "Burglary",
   "deranged": "Handling Person with Mental Illness",
@@ -675,13 +675,13 @@ police_subcategories["officers_assaulted"] = {
   "traffic": "Traffic Stop",
   "assaults_with_injury": "Total Assaults - With Injury",
   "assaults_no_injury": "Total Assaults - Without Injury",
-  "total": "Total Assaults",
+  "all_assault": "Total Assaults",
 }
-police_subcategories["officers_killed"] = {
+leoka_subcategories["officers_killed"] = {
   "officers_killed_by_accident": "Killed by Accident",
   "officers_killed_by_felony": "Killed by Felony"
 }
-police_subcategories["employees"] = {
+leoka_subcategories["employees"] = {
   "employees_civilians": "Civilians",
   "employees_officers": "Officers",
   "employees_total": "Total Employees",

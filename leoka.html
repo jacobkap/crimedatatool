@@ -61,55 +61,55 @@
     <br>
     <h3>State:</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('police', state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="state_dropdown" onchange="stateChangeFun('leoka', state_values)"></select>
     <br><br>
     <h3>Agency:</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="agency_dropdown" onchange="agencyChangeFun('leoka', state_values)"></select>
     <br><br>
     <h3>Category:</h3>
     <br><br>
-    <select class="js-example-basic-single" style="width: 85%" id="crime_dropdown" onchange="police_categoryChangeFun()"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="crime_dropdown" onchange="leoka_categoryChangeFun()"></select>
         <br><br>
     <h3>Subcategory:</h3>
     <br><br>
-    <select class="js-example-basic-single" style="width: 85%" id="subcategory_dropdown" onchange="agencyChangeFun('police', state_values)"></select>
+    <select class="js-example-basic-single" style="width: 85%" id="subcategory_dropdown" onchange="agencyChangeFun('leoka', state_values)"></select>
 
-    <div id="policeSex">
+    <div id="leokaSex">
       <h3>Officer Sex:</h3>
       <br>
-      <input type="checkbox" id="checkbox_1" onchange="checkboxesUpdate('police', '#checkbox_3')"></input>
+      <input type="checkbox" id="checkbox_1" onchange="checkboxesUpdate('leoka', '#checkbox_3')"></input>
       <label class="label-text fa" for="checkbox_1">Female</label>
       <br>
-      <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('police', '#checkbox_3')"></input>
+      <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('leoka', '#checkbox_3')"></input>
       <label class="label-text fa" for="checkbox_2">Male</label>
       <br>
-      <input type="checkbox" id="checkbox_3" checked onchange="checkboxesUpdate('police', '#checkbox_3')"></input>
+      <input type="checkbox" id="checkbox_3" checked onchange="checkboxesUpdate('leoka', '#checkbox_3')"></input>
       <label class="label-text fa" for="checkbox_3">Total</label>
       <br>
-      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('police', '#checkbox_5')"></input>
+      <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('leoka', '#checkbox_5')"></input>
       <label class="label-text fa" for="checkbox_4">Unarmed</label>
       <br>
-      <input type="checkbox" id="checkbox_5" onchange="checkboxesUpdate('police', '#checkbox_5')"></input>
+      <input type="checkbox" id="checkbox_5" onchange="checkboxesUpdate('leoka', '#checkbox_5')"></input>
       <label class="label-text fa" for="checkbox_5">Total</label>
     </div>
 
     <br><br>
     <hr>
-    <input type="checkbox" id="rate" name="rate" value="rate" onchange="rateBoxesChange('#police_rate_per_officer', 'police', state_values)"></input>
+    <input type="checkbox" id="rate" name="rate" value="rate" onchange="rateBoxesChange('#leoka_rate_per_officer', 'leoka', state_values)"></input>
     <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br>
-    <input type="checkbox" id="police_rate_per_officer" name="police_rate_per_officer" value="police_rate_per_officer" onchange="rateBoxesChange('#rate', 'police', state_values)"></input>
-    <label class="label-text fa" for="police_rate_per_officer">Rate per Officer</label>
+    <input type="checkbox" id="leoka_rate_per_officer" name="leoka_rate_per_officer" value="leoka_rate_per_officer" onchange="rateBoxesChange('#rate', 'leoka', state_values)"></input>
+    <label class="label-text fa" for="leoka_rate_per_officer">Rate per Officer</label>
 
     <br><br>
     <hr>
-    <input type="checkbox" id="monthly" onchange="agencyChangeFun('police', state_values)"></input>
+    <input type="checkbox" id="monthly" onchange="agencyChangeFun('leoka', state_values)"></input>
     <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>
     <hr>
-      <button type="button" onclick="exportToCsv(all_data, 'police', state_values)">Download All Agency Data as CSV</button>
+      <button type="button" onclick="exportToCsv(all_data, 'leoka', state_values)">Download All Agency Data as CSV</button>
     <br><br><br><br><br><br><br><br>
-    <button type="button" onclick="exportToCsv(table_data, 'police', state_values)">Download Current Table Data as CSV</button>
+    <button type="button" onclick="exportToCsv(table_data, 'leoka', state_values)">Download Current Table Data as CSV</button>
     <br>
     <p>Please note that officers assaulted/killed data are only available for agencies that report all 12 months of the year.
   </div>
@@ -129,7 +129,7 @@
       minimumResultsForSearch:2
     });
 
-    main("police", state_values, 4, police_categories, "employees");
+    main("leoka", state_values, 4, leoka_categories, "employees");
 
     </script>
 
