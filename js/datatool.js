@@ -299,9 +299,9 @@ function getCrimeColumns(headers, type, output) {
       columnNames.push(category_value + "_american_indian_" + crime);
       columnNames.push(category_value + "_black_" + crime);
       columnNames.push(category_value + "_white_" + crime);
-      if ($('#category_dropdown').val() != "arrestee") {
+  //    if ($('#category_dropdown').val() != "arrestee") {
         columnNames.push(category_value + "_unknown_race_" + crime);
-      }
+    //  }
     }
     if ($('#subcategory_dropdown').val() == "age") {
       columnNames.push(category_value + "_adult_" + crime);
@@ -311,9 +311,9 @@ function getCrimeColumns(headers, type, output) {
     if ($('#subcategory_dropdown').val() == "ethnicity") {
       columnNames.push(category_value + "_hispanic_" + crime);
       columnNames.push(category_value + "_not_hispanic_" + crime);
-      if ($('#category_dropdown').val() != "arrestee") {
+  //    if ($('#category_dropdown').val() != "arrestee") {
         columnNames.push(category_value + "_unknown_ethnicity_" + crime);
-      }
+  //    }
     }
     crime = "hellodarknessmyoldfriend"
   }

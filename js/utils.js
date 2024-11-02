@@ -314,12 +314,12 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_4']").html("Black")
     $("label[for='checkbox_5']").html("White")
     $("label[for='checkbox_6']").html("Unknown")
-    if ($('#category_dropdown').val() == "arrestee") {
-      $("#checkbox_6").hide();
-      $("#checkbox_7").hide();
-      $("label[for='checkbox_6']").hide()
-      $("label[for='checkbox_7']").hide()
-    }
+  //  if ($('#category_dropdown').val() == "arrestee") {
+  //    $("#checkbox_6").hide();
+  //    $("#checkbox_7").hide();
+  //    $("label[for='checkbox_6']").hide()
+  //    $("label[for='checkbox_7']").hide()
+  //  }
   } else if ($("#subcategory_dropdown").val() == "ethnicity") {
     $("#checkbox_5").hide();
     $("#checkbox_6").hide();
@@ -332,11 +332,11 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_2']").html("Hispanic")
     $("label[for='checkbox_3']").html("Non-Hispanic")
     $("label[for='checkbox_4']").html("Unknown")
-    if ($('#category_dropdown').val() == "arrestee") {
-      $("label[for='checkbox_3']").html("Not Hispanic")
-      $("#checkbox_4").hide();
-      $("label[for='checkbox_4']").hide()
-    }
+//    if ($('#category_dropdown').val() == "arrestee") {
+//      $("label[for='checkbox_3']").html("Not Hispanic")
+//      $("#checkbox_4").hide();
+//      $("label[for='checkbox_4']").hide()
+//    }
   } else if ($("#subcategory_dropdown").val() == "sex") {
     $("#checkbox_5").hide();
     $("#checkbox_6").hide();
