@@ -156,6 +156,8 @@ $('#subcategory_dropdown').next(".select2-container").hide();
 }
 
 function toggle_nibrs_display() {
+  $("h3").eq(3).html("Crime:");
+
   $("h3").eq(2).html("Agency:");
   $("#percent_of_crimes").show();
   $("#rate").show();
@@ -198,7 +200,7 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_3']").html("Handgun Used")
     $("label[for='checkbox_4']").html("Other/Unknown Type Gun Used")
   } else if ($("#category_dropdown").val() == "property") {
-    $("h3").eq(2).html("Property Type:");
+    $("h3").eq(3).html("Property Type:");
     $("#percent_of_crimes").prop("checked", false);
     $("#percent_of_crimes").hide();
     $("label[for='percent_of_crimes']").hide()
@@ -222,7 +224,7 @@ function toggle_nibrs_display() {
     }
 
     if ($("#subcategory_dropdown").val() == "drugs") {
-      $("h3").eq(2).html("Drug Type:");
+      $("h3").eq(3).html("Drug Type:");
       $("#checkbox_1").prop("checked", true);
       $("#checkbox_6").prop("checked", false);
       $("#checkbox_1").hide();
