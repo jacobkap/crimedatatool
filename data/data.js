@@ -478,28 +478,6 @@ agency_desc_vals = {
   "population": "Population"
 };
 
-var hate_offenses = {
-"arson"  : "Arson",
-"assault" : "Assault",
-"bribery": "Bribery",
-"burglary_breaking_and_entering": "Burglary/Breaking and Entering",
-"drug_offense": "Drug Offenses",
-"extortion_blackmail": "Extortion/Blackmail",
-"fraud": "Fraud",
-"gambling_offenses": "Gambling Offenses",
-"human_trafficking": "Human Trafficking",
-"kidnapping_abduction": "Kidnapping/Abduction",
-"motor_vehicle_theft": "Motor Vehicle Theft",
-"murder_nonnegligent_manslaughter": "Murder/Nonnegligent Manslaughter",
-"negligent_manslaughter": "Negligent Manslaughter",
-"pornography_obscene_material": "Pornography/Obscene Material",
-"prostitution": "Prostitution",
-"robbery": "Robbery",
-"sex_offenses": "Sex Offenses",
-"stolen_property_offenses": "Stolen Property Offenses",
-"theft": "Theft",
-"weapon_law_violations": "Weapon Law Violations"
-}
 
 
 var hate_bias_motivations = {
@@ -536,7 +514,8 @@ var hate_bias_motivations = {
   "anti_protestant": "Anti-Protestant",
   "anti_sikh": "Anti-Sikh",
   "anti_transgender": "Anti-Transgender",
-  "anti_white": "Anti-White"
+  "anti_white": "Anti-White",
+  "anti_total" : "Anti-Total"
 };
 
 var crime_values = {

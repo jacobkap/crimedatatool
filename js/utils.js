@@ -497,6 +497,8 @@ function countToRate(data, type, per_officer = false) {
 
 
 function makeCrimeClearanceRates(data) {
+  storage = data
+  console.log(storage)
   data_keys = _.keys(data);
   clearance_starters = ["total_cleared", "cleared_18"];
 
@@ -685,8 +687,6 @@ function main(type, states, state_default, crimes, crime_starter) {
     make_dropdown('#category_dropdown', nibrs_categories, "offense")
     make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
     toggle_nibrs_display()
-  } else if (type == "hate") {
-    make_dropdown('#hate_crime_dropdown', hate_offenses, "theft")
   } else if (type == "leoka") {
 
       make_dropdown('#subcategory_dropdown', leoka_subcategories[$('#crime_dropdown').val()], leoka_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');

@@ -211,9 +211,9 @@ function agencyChangeFun(type, states, crimes) {
 
   remake_graph(type, crimes);
 
-  if (type == "offenses" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {
-    addYAxis();
-  }
+//  if (type == "offenses" && $("#clearance_rate").is(":checked") && ($("#checkbox_2").is(":checked") || $("#checkbox_3").is(":checked"))) {
+//    addYAxis();
+//  }
 
   table.destroy();
   $('#table').empty();

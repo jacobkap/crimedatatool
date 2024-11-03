@@ -102,7 +102,7 @@ function fixTableDataName(name, type) {
     if (get_rate_type(type, binary = true)) {
       name += rate_type;
     }
-    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("clr_")) {
+    if (type == "offenses" && $("#clearance_rate").is(":checked") && name.includes("clearance")) {
       name += "_clearance_rate";
       name = name.replace("_rate_clearance", "_clearance");
     }

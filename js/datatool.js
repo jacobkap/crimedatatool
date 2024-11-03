@@ -40,7 +40,7 @@ function subsetColumns(data, columns, output, type) {
   rate_type = get_rate_type(type)
   if ((rate_type != "" || (type == "offenses" && $("#clearance_rate").is(":checked")))) {
     columns = _.map(columns, function(x) {
-      if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
+      if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clearance")) {
         return x + "_clearance_rate";
       } else {
         return x + rate_type;
@@ -165,9 +165,9 @@ function get_data(type, states) {
   }
 
   // Apply clearance rate calculation if necessary
-  if (type === "offenses" && $("#clearance_rate").is(":checked")) {
-    allAgencyData = allAgencyData.map(currentObject => makeCrimeClearanceRates(currentObject, type));
-  }
+//  if (type === "offenses" && $("#clearance_rate").is(":checked")) {
+//    allAgencyData = allAgencyData.map(currentObject => makeCrimeClearanceRates(currentObject, type));
+//  }
 
   // Get the final table data
   let tableData = getAgencyData(stateData, headers, colsForTable, type);
@@ -322,7 +322,7 @@ function getCrimeColumns(headers, type, output) {
     crime = $("#crime_dropdown").val();
   }  else if (type == "hate") {
         crime = $("#crime_dropdown").val();
-        actual_crime = $("#hate_crime_dropdown").val();
+    //    actual_crime = $("#hate_crime_dropdown").val();
   }  else if (type == "arrests") {
     crime = $("#crime_dropdown").val();
     if (output == "graph") {
@@ -388,7 +388,7 @@ function getCrimeColumns(headers, type, output) {
         }
       }
     } else if (type == "hate") {
-      if (headers[n].includes(crime + "_" + actual_crime)) {
+      if (headers[n].includes(crime)) {
         columnNames.push(headers[n]);
       }
     } else {

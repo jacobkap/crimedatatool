@@ -22,6 +22,9 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     "Offenses Cleared Involving Only Persons Under age 18",
     "Unfounded Offenses"
   ];
+  if (type == "hate") {
+    checkbox_names = ["Arson", "Destruction of Property/Vandalism", "Other", "Property/Financial", "Violent", "Total"];
+  }
   if (type == "leoka") {
     checkbox_names = ["Female", "Male", "Total"];
   }
@@ -85,7 +88,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
 
   if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked")))) {
     colsForGraph = _.map(colsForGraph, function(x) {
-      if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clr_")) {
+      if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clearance")) {
         return x + "_clearance_rate";
       } else {
         return x + rate_type;
@@ -118,7 +121,7 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     data7.push(data[i][colsForGraph[7]]);
   }
 
-  if (["offenses", "arrests", "nibrs", "arson"].includes(type) || type == "leoka") {
+  if (["offenses", "arrests", "nibrs", "arson", "hate"].includes(type) || type == "leoka") {
 
     final_data = [
       makeGraphObjects(data1, "#ca0020", checkbox_names[0]),
@@ -268,85 +271,84 @@ function makeGraph(type, crimes) {
   xaxis_label = "Year";
 
   opts = {
-    animation: false,
-    responsive: true,
-    plugins: {
-    title: {
-      display: true,
-      position: 'top',
-      text: title,
-      font: {
-        size: 22
+      watermark: {
+          image: "crimedatatool_watermark.jpg",
+          x: -333,
+          y: 33,
+          opacity: 0.75,
+          alignToChartArea: true,
+          position: "back"
       },
-    }
-  },
-    scales: {
-      x: {
-        display: true,
-        ticks: {
-          autoSkip: true,
-          maxTicksLimit: 10,
-          fontSize: 15
-        },
-        title: {
-          display: true,
-          text: xaxis_label,
-          font: {
-            size: 22,
-          },
-        }
+      animation: true,
+      responsive: true,
+      plugins: {
+          title: {
+              display: true,
+              position: 'top',
+              text: title,
+              font: {
+                  size: 22
+              }
+          }
       },
-      y: {
-        id: "A",
-        ticks: {
-          autoSkip: true,
-          beginAtZero: true,
-          maxTicksLimit: 10,
-          fontSize: 15
-        },
-        title: {
-          display: true,
-          text: yaxis_label,
-          font: {
-            size: 22,
+      scales: {
+          x: {
+              display: true,
+              ticks: {
+                  autoSkip: true,
+                  maxTicksLimit: 10,
+                  font: {
+                      size: 15
+                  }
+              },
+              title: {
+                  display: true,
+                  text: xaxis_label,
+                  font: {
+                      size: 22
+                  }
+              }
           },
-        }
+          y: {
+              beginAtZero: true, // Ensures the y-axis starts at zero
+              display: true,
+              ticks: {
+                  autoSkip: true,
+                  maxTicksLimit: 10,
+                  font: {
+                      size: 15
+                  }
+              },
+              title: {
+                  display: true,
+                  text: yaxis_label,
+                  font: {
+                      size: 22
+                  }
+              }
+          }
+      },
+      interaction: {
+          mode: 'nearest',
+          intersect: true
+      },
+      plugins: {
+          tooltip: {
+              callbacks: {
+                  label: function(tooltipItem) {
+                      let value = tooltipItem.raw;
+                      value = value.toLocaleString();
+                      return tooltipItem.dataset.label + ": " + value;
+                  }
+              }
+          }
       }
-    },
-    //  responsive: true,
-    tooltips: {
-      mode: 'nearest',
-      axis: "y",
-      intersect: true,
-      callbacks: {
-        label: function(tooltipItems, table_data) {
-          value = tooltipItems.yLabel;
-          value = value.toLocaleString();
-          value = table_data.datasets[tooltipItems.datasetIndex].label + ": " + value;
-          return value;
-        }
-      }
-    },
-    hover: {
-      mode: 'nearest',
-      intersect: true
-    }
   };
+
+
 Chart.defaults.color = 'black'
   myLineChart = new Chart(ctx, {
     type: 'line',
-    animation: {
-                    duration: 2000,
-                    onProgress: function(animation) {
-                        //add progress
-                        progress.value = animation.currentStep / animation.numSteps;
-                    },
-                    onComplete: function(animation) {
-                        window.setTimeout(function() {
-                            progress.value = 0;
-                        }, 2000);
-                    }
-                },
     data: {
       labels: years,
       datasets: graph_datasets
@@ -414,7 +416,6 @@ function getTitle(data, type) {
   const selectedCategory = $("#category_dropdown").val();
   const selectedSubcategory = $("#subcategory_dropdown").val();
   const selectedSubsubcategory = $("#subsubcategory_dropdown").val();
-  const selectedHateSubsubcategory = $("#hate_crime_dropdown").val();
 
   // Only append state if it's not an estimate for "offenses"
   if (type !== "offenses" || !$("#agency_dropdown").children("option:selected").text().includes("Estimate")) {
@@ -436,7 +437,32 @@ function getTitle(data, type) {
       break;
 
     case "nibrs":
-      //subtitle = `${nibrs_categories[selectedCategory]}s, ${nibrs_crime_values[$("#category_dropdown").val()][selectedCrime]}`;
+    nibrs_crimes_temp = nibrs_crime_values["offense"]
+    if ($('#category_dropdown').val() == "victim") {
+      nibrs_crimes_temp = nibrs_crime_values["victim_demographics_offenses"]
+    }
+    if ($('#category_dropdown').val() == "property") {
+      nibrs_crimes_temp = nibrs_property_values
+    }
+    if ($('#category_dropdown').val() == "property" & $('#subcategory_dropdown').val() == "drugs") {
+      nibrs_crimes_temp = nibrs_property_drugs_values
+    }
+    if ($('#subcategory_dropdown').val() == "injury") {
+      nibrs_crimes_temp = nibrs_crime_values["injury_offenses"]
+    }
+    if ($('#category_dropdown').val() == "arrestee") {
+      nibrs_crimes_temp = nibrs_crime_values["arrestee_offenses"]
+    }
+    if ($('#category_dropdown').val() == "offense") {
+      nibrs_crimes_temp = nibrs_crime_values["offense"]
+    }
+    if ($('#subcategory_dropdown').val() == "gun") {
+      nibrs_crimes_temp = nibrs_crime_values["gun_offenses"]
+    }
+
+
+      subtitle = nibrs_crimes_temp[$("#crime_dropdown").val()] + ", " + nibrs_categories[$("#category_dropdown").val()] + " " + nibrs_subcategories[$("#category_dropdown").val()][$("#subcategory_dropdown").val()];
+
       if (selectedCategory === "property") {
         subtitle = `Property Data: ${nibrs_property_values[selectedCrime]}`;
       }
@@ -451,7 +477,7 @@ function getTitle(data, type) {
       break;
 
     case "hate":
-      subtitle = `Bias Motivation: ${hate_bias_motivations[selectedCrime]}` + `, Offense: ` +  `${hate_offenses[selectedHateSubsubcategory]}`;
+      subtitle = `Bias Motivation: ${hate_bias_motivations[selectedCrime]}`;
       break;
   }
 

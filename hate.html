@@ -37,7 +37,7 @@
   <script src="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-watermark@2.0.2/chartjs-plugin-watermark.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -75,14 +75,29 @@
     <select class="js-example-basic-single" style="width: 85%" id="crime_dropdown" onchange="agencyChangeFun('hate', state_values)">
     </select>
     <br>
-    <h3>Crime Category:</h3>
+    <h3>Offense Category:</h3>
     <br>
-    <select class="js-example-basic-single" style="width: 85%" id="hate_crime_dropdown" onchange="agencyChangeFun('hate', state_values)">
-    </select>
+    <input type="checkbox" id="checkbox_1" onchange="checkboxesUpdate('hate', '#checkbox_6')"></input>
+    <label class="label-text fa" for="checkbox_1">Arson</label>
+    <br>
+    <input type="checkbox" id="checkbox_2" onchange="checkboxesUpdate('hate', '#checkbox_6')"></input>
+    <label class="label-text fa" for="checkbox_2">Destruction of Property/Vandalism</label>
+    <br>
+    <input type="checkbox" id="checkbox_3" onchange="checkboxesUpdate('hate', '#checkbox_6')"></input>
+    <label class="label-text fa" for="checkbox_3">Other</label>
+    <br>
+    <input type="checkbox" id="checkbox_4" onchange="checkboxesUpdate('hate', '#checkbox_6')"></input>
+    <label class="label-text fa" for="checkbox_4">Property/Financial</label>
+    <br>
+    <input type="checkbox" id="checkbox_5" onchange="checkboxesUpdate('hate', '#checkbox_6')"></input>
+    <label class="label-text fa" for="checkbox_5">Violent</label>
+    <br>
+    <input type="checkbox" id="checkbox_6" checked onchange="checkboxesUpdate('hate', '#checkbox_6')"></input>
+    <label class="label-text fa" for="checkbox_6">Total</label>
 
 
     <br>
-
+    <hr>
 
     <input type="checkbox" id="monthly" onchange="agencyChangeFun('hate', state_values)"></input>
     <label class="label-text fa" for="monthly">Monthly Data (large file size)</label>

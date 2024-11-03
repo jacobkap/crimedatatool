@@ -30,7 +30,7 @@
   <script src="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-watermark@2.0.2/chartjs-plugin-watermark.min.js"></script>
 
     <script src="data/data.js" ></script>
       <script src="js/utils.js"></script>
@@ -77,9 +77,10 @@
     <input type="checkbox" id="rate" name="rate" value="rate" onchange="agencyChangeFun('offenses', state_values)">
     <label class="label-text fa" for="rate">Rate per 100,000 Population</label>
     <br><br>
-    <div id="agency_level_boxes">
-      <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('offenses', state_values)">
+<div id="agency_level_boxes">
+    <!--      <input type="checkbox" id="clearance_rate" name="clearance_rate" value="clearance_rate" onchange="agencyChangeFun('offenses', state_values)">
       <label class="label-text fa" for="clearance_rate">Clearances as % of Crimes</label>
+    -->
 
       <br><br>
       <h3>Type of Crime:</h3>
