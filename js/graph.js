@@ -18,165 +18,165 @@ function getGraphDataset(tableData, colsForGraph, type, crimes) {
     rate_type = "_percent";
   }
   checkbox_names = ["Actual Offenses",
-    "Total Offenses Cleared",
-    "Offenses Cleared Involving Only Persons Under age 18",
-    "Unfounded Offenses"
-  ];
-  if (type == "hate") {
-    checkbox_names = ["Arson", "Destruction of Property/Vandalism", "Other", "Property/Financial", "Violent", "Total"];
-  }
-  if (type == "leoka") {
+  "Total Offenses Cleared",
+  "Offenses Cleared Involving Only Persons Under age 18",
+  "Unfounded Offenses"
+];
+if (type == "hate") {
+  checkbox_names = ["Arson", "Destruction of Property/Vandalism", "Other", "Property/Financial", "Violent", "Total"];
+}
+if (type == "leoka") {
+  checkbox_names = ["Female", "Male", "Total"];
+}
+if (type == "leoka" & $("#crime_dropdown").val() == "officers_assaulted") {
+  checkbox_names = ["Gun", "Knife", "Other Weapon", "Unarmed", "Total"];
+}
+if (type == "leoka" & $("#crime_dropdown").val() == "officers_killed") {
+  checkbox_names = ["Killed by Felony", "Killed by Accident"];
+}
+if (type == "arrests") {
+  if ($("#subsubcategory_dropdown").val() == "Sex") {
     checkbox_names = ["Female", "Male", "Total"];
+  } else if ($("#subsubcategory_dropdown").val() == "Race") {
+    checkbox_names = ["American Indian", "Asian", "Black", "White", "Total"];
+  } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {
+    checkbox_names = ["Hispanic", "Non-Hispanic", "Total"];
   }
-  if (type == "leoka" & $("#crime_dropdown").val() == "officers_assaulted") {
-        checkbox_names = ["Gun", "Knife", "Other Weapon", "Unarmed", "Total"];
-  }
-  if (type == "leoka" & $("#crime_dropdown").val() == "officers_killed") {
-        checkbox_names = ["Killed by Felony", "Killed by Accident"];
-  }
-  if (type == "arrests") {
-    if ($("#subsubcategory_dropdown").val() == "Sex") {
-      checkbox_names = ["Female", "Male", "Total"];
-    } else if ($("#subsubcategory_dropdown").val() == "Race") {
-      checkbox_names = ["American Indian", "Asian", "Black", "White", "Total"];
-    } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {
-      checkbox_names = ["Hispanic", "Non-Hispanic", "Total"];
+}
+
+if (type == "nibrs") {
+  if ($("#subcategory_dropdown").val() == "sex") {
+    checkbox_names = ["Total", "Female", "Male", "Unknown"];
+  } else if ($("#subcategory_dropdown").val() == "race") {
+    checkbox_names = ["Total", "Asian", "American Indian", "Black", "White", "Unknown"];
+  } else if ($("#subcategory_dropdown").val() == "ethnicity") {
+    checkbox_names = ["Total", "Hispanic", "Non-Hispanic", "Unknown"];
+  } else if ($("#subcategory_dropdown").val() == "age") {
+    checkbox_names = ["Total", "Adult", "Minor (<18 years)", "Unknown"];
+  } else if ($("#subcategory_dropdown").val() == "injury") {
+    checkbox_names = ["Total", "No Injury", "Minor Injury", "Serious Injury"];
+  } else if ($("#subcategory_dropdown").val() == "subtype" && $("#crime_dropdown").val() != "animal_cruelty") {
+    checkbox_names = ["Total", "Buy/Possess/Consume", "Sell/Create/Operate"];
+  } else if ($("#subcategory_dropdown").val() == "subtype" && $("#crime_dropdown").val() == "animal_cruelty") {
+    checkbox_names = ["Total", "Abuse/Torture", "Animal Fighting", "Bestiality", "Neglect"];
+  } else if ($("#subcategory_dropdown").val() == "relationship") {
+    checkbox_names = ["Total", "Intimdate Partner (include exes)", "Other Family", "Other", "Stranger", "Unknown"];
+  } else if ($("#subcategory_dropdown").val() == "location") {
+    checkbox_names = ["Total", "Bar/Nightclub", "Home", "Other/Unknown", "Outside", "School"];
+  } else if ($("#subcategory_dropdown").val() == "gun") {
+    checkbox_names = ["Total", "Gun Not Used", "Handgun used", "Other/Unknown Type Gun Used"];
+  } else if ($("#subcategory_dropdown").val() == "arrest_type") {
+    checkbox_names = ["Total", "On-View", "Summoned/Cited", "Taken Into Custody"];
+  } else if ($("#subcategory_dropdown").val() == "clearance") {
+    checkbox_names = ["Total", "Cleared by Arrest", "Death of Suspect", "Extradition Denied",
+    "Juvenile/No Custody", "Prosecution Denied", "Victim Refused to Cooperate"
+  ];
+} else if ($("#subcategory_dropdown").val() == "total" && $("#category_dropdown").val() != "property") {
+  checkbox_names = ["Total"];
+} else if ($("#subcategory_dropdown").val() == "sex" && $("#category_dropdown").val() == "arrestee") {
+  checkbox_names = ["Total", "Female", "Male"];
+} else if ($("#subcategory_dropdown").val() == "race" && $("#category_dropdown").val() == "arrestee") {
+  checkbox_names = ["Total", "Asian", "American Indian", "Black", "White"];
+} else if ($("#subcategory_dropdown").val() == "ethnicity" && $("#category_dropdown").val() == "arrestee") {
+  checkbox_names = ["Total", "Hispanic", "Non-Hispanic"];
+} else if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() != "drugs") {
+  checkbox_names = ["Burned", "Counterfeited/Forged", "Destroyed/Damaged/Vandalized", "Recovered", "Seized", "Stolen/Robbed/Defrauded/Etc."];
+} else if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() == "drugs") {
+  checkbox_names = ["Total Incidents With Drug Seized"];
+}
+}
+
+if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked")))) {
+  colsForGraph = _.map(colsForGraph, function(x) {
+    if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clearance")) {
+      return x + "_clearance_rate";
+    } else {
+      return x + rate_type;
     }
-  }
-
-  if (type == "nibrs") {
-    if ($("#subcategory_dropdown").val() == "sex") {
-      checkbox_names = ["Total", "Female", "Male", "Unknown"];
-    } else if ($("#subcategory_dropdown").val() == "race") {
-      checkbox_names = ["Total", "Asian", "American Indian", "Black", "White", "Unknown"];
-    } else if ($("#subcategory_dropdown").val() == "ethnicity") {
-      checkbox_names = ["Total", "Hispanic", "Non-Hispanic", "Unknown"];
-    } else if ($("#subcategory_dropdown").val() == "age") {
-      checkbox_names = ["Total", "Adult", "Minor (<18 years)", "Unknown"];
-    } else if ($("#subcategory_dropdown").val() == "injury") {
-      checkbox_names = ["Total", "No Injury", "Minor Injury", "Serious Injury"];
-    } else if ($("#subcategory_dropdown").val() == "subtype" && $("#crime_dropdown").val() != "animal_cruelty") {
-      checkbox_names = ["Total", "Buy/Possess/Consume", "Sell/Create/Operate"];
-    } else if ($("#subcategory_dropdown").val() == "subtype" && $("#crime_dropdown").val() == "animal_cruelty") {
-      checkbox_names = ["Total", "Abuse/Torture", "Animal Fighting", "Bestiality", "Neglect"];
-    } else if ($("#subcategory_dropdown").val() == "relationship") {
-      checkbox_names = ["Total", "Intimdate Partner (include exes)", "Other Family", "Other", "Stranger", "Unknown"];
-    } else if ($("#subcategory_dropdown").val() == "location") {
-      checkbox_names = ["Total", "Bar/Nightclub", "Home", "Other/Unknown", "Outside", "School"];
-    } else if ($("#subcategory_dropdown").val() == "gun") {
-      checkbox_names = ["Total", "Gun Not Used", "Handgun used", "Other/Unknown Type Gun Used"];
-    } else if ($("#subcategory_dropdown").val() == "arrest_type") {
-      checkbox_names = ["Total", "On-View", "Summoned/Cited", "Taken Into Custody"];
-    } else if ($("#subcategory_dropdown").val() == "clearance") {
-      checkbox_names = ["Total", "Cleared by Arrest", "Death of Suspect", "Extradition Denied",
-        "Juvenile/No Custody", "Prosecution Denied", "Victim Refused to Cooperate"
-      ];
-    } else if ($("#subcategory_dropdown").val() == "total" && $("#category_dropdown").val() != "property") {
-      checkbox_names = ["Total"];
-    } else if ($("#subcategory_dropdown").val() == "sex" && $("#category_dropdown").val() == "arrestee") {
-      checkbox_names = ["Total", "Female", "Male"];
-    } else if ($("#subcategory_dropdown").val() == "race" && $("#category_dropdown").val() == "arrestee") {
-      checkbox_names = ["Total", "Asian", "American Indian", "Black", "White"];
-    } else if ($("#subcategory_dropdown").val() == "ethnicity" && $("#category_dropdown").val() == "arrestee") {
-      checkbox_names = ["Total", "Hispanic", "Non-Hispanic"];
-    } else if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() != "drugs") {
-      checkbox_names = ["Burned", "Counterfeited/Forged", "Destroyed/Damaged/Vandalized", "Recovered", "Seized", "Stolen/Robbed/Defrauded/Etc."];
-    } else if ($("#category_dropdown").val() == "property" & $("#subcategory_dropdown").val() == "drugs") {
-      checkbox_names = ["Total Incidents With Drug Seized"];
-    }
-  }
-
-  if ((get_rate_type(type, binary = true) || (type == "offenses" && $("#clearance_rate").is(":checked")))) {
-    colsForGraph = _.map(colsForGraph, function(x) {
-      if (type == "offenses" && $("#clearance_rate").is(":checked") && x.includes("clearance")) {
-        return x + "_clearance_rate";
-      } else {
-        return x + rate_type;
-      }
-    });
-    colsForGraph[0] = "year";
-  }
-
-  data = _.map(tableData, function(currentObject) {
-    return _.pick(currentObject, colsForGraph);
   });
+  colsForGraph[0] = "year";
+}
 
+data = _.map(tableData, function(currentObject) {
+  return _.pick(currentObject, colsForGraph);
+});
+
+years = [];
+data1 = [];
+data2 = [];
+data3 = [];
+data4 = [];
+data5 = [];
+data6 = [];
+data7 = [];
+
+for (var i = 0; i < data.length; i++) {
+  years.push(data[i][colsForGraph[0]]);
+  data1.push(data[i][colsForGraph[1]]);
+  data2.push(data[i][colsForGraph[2]]);
+  data3.push(data[i][colsForGraph[3]]);
+  data4.push(data[i][colsForGraph[4]]);
+  data5.push(data[i][colsForGraph[5]]);
+  data6.push(data[i][colsForGraph[6]]);
+  data7.push(data[i][colsForGraph[7]]);
+}
+
+if (["offenses", "arrests", "nibrs", "arson", "hate"].includes(type) || type == "leoka") {
+
+  final_data = [
+    makeGraphObjects(data1, "#ca0020", checkbox_names[0]),
+    makeGraphObjects(data2, "#f4a582", checkbox_names[1]),
+    makeGraphObjects(data3, "#92c5de", checkbox_names[2]),
+    makeGraphObjects(data4, "#0571b0", checkbox_names[3]),
+    makeGraphObjects(data5, "#008837", checkbox_names[4]),
+    makeGraphObjects(data6, "#000000", checkbox_names[5]),
+    makeGraphObjects(data7, "#800080", checkbox_names[6])
+  ];
+  for (var i = 0; i < 7; i++) {
+    final_data[i].hidden = false;
+  }
+  for (var i = 0; i < 7; i++) {
+    if (!$("#checkbox_" + (i + 1)).is(':checked')) {
+      final_data = _.filter(final_data, function(x) {
+        return x.label != checkbox_names[i];
+      });
+    }
+  }
+
+
+} else {
   years = [];
   data1 = [];
-  data2 = [];
-  data3 = [];
-  data4 = [];
-  data5 = [];
-  data6 = [];
-  data7 = [];
 
-  for (var i = 0; i < data.length; i++) {
-    years.push(data[i][colsForGraph[0]]);
-    data1.push(data[i][colsForGraph[1]]);
-    data2.push(data[i][colsForGraph[2]]);
-    data3.push(data[i][colsForGraph[3]]);
-    data4.push(data[i][colsForGraph[4]]);
-    data5.push(data[i][colsForGraph[5]]);
-    data6.push(data[i][colsForGraph[6]]);
-    data7.push(data[i][colsForGraph[7]]);
+  for (var n = 0; n < data.length; n++) {
+    years.push(data[n][colsForGraph[0]]);
+    data1.push(data[n][colsForGraph[1]]);
   }
 
-  if (["offenses", "arrests", "nibrs", "arson", "hate"].includes(type) || type == "leoka") {
+  label = colsForGraph[1]
+  label = label.replace(/_age_adjusted_rate/g, "");
+  label = label.replace(/_crude_rate/g, "");
+  if (type == "leoka") {
+    crimes = leoka_subcategories[$("#crime_dropdown").val()];
+  }
 
-    final_data = [
-      makeGraphObjects(data1, "#ca0020", checkbox_names[0]),
-      makeGraphObjects(data2, "#f4a582", checkbox_names[1]),
-      makeGraphObjects(data3, "#92c5de", checkbox_names[2]),
-      makeGraphObjects(data4, "#0571b0", checkbox_names[3]),
-      makeGraphObjects(data5, "#008837", checkbox_names[4]),
-      makeGraphObjects(data6, "#000000", checkbox_names[5]),
-      makeGraphObjects(data7, "#800080", checkbox_names[6])
-    ];
-    for (var i = 0; i < 7; i++) {
-      final_data[i].hidden = false;
-    }
-    for (var i = 0; i < 7; i++) {
-      if (!$("#checkbox_" + (i + 1)).is(':checked')) {
-        final_data = _.filter(final_data, function(x) {
-          return x.label != checkbox_names[i];
-        });
-      }
-    }
-
-
+  if (type == "nibrs" && $("#rate").is(':checked')) {
+    label = label.replace(/_rate/g, "");
+    label = label.replace(/_percent/g, "");
+    label = crimes[label]
+    label += " Rate"
+    // Temp fix since crimes variable doesn't exist and is causing issues for leoka page
+  } else if (type == "leoka" && ["officers_assaulted", "officers_killed"].includes($("#crime_dropdown").val())) {
+    label = "Incidents"
+  } else if (type == "hate") {
+    label = "# of Incidents"
   } else {
-    years = [];
-    data1 = [];
-
-    for (var n = 0; n < data.length; n++) {
-      years.push(data[n][colsForGraph[0]]);
-      data1.push(data[n][colsForGraph[1]]);
-    }
-
-    label = colsForGraph[1]
-    label = label.replace(/_age_adjusted_rate/g, "");
-    label = label.replace(/_crude_rate/g, "");
-    if (type == "leoka") {
-      crimes = leoka_subcategories[$("#crime_dropdown").val()];
-    }
-
-     if (type == "nibrs" && $("#rate").is(':checked')) {
-      label = label.replace(/_rate/g, "");
-      label = label.replace(/_percent/g, "");
-      label = crimes[label]
-      label += " Rate"
-      // Temp fix since crimes variable doesn't exist and is causing issues for leoka page
-    } else if (type == "leoka" && ["officers_assaulted", "officers_killed"].includes($("#crime_dropdown").val())) {
-      label = "Incidents"
-    } else if (type == "hate") {
-        label = "# of Incidents"
-      } else {
-      label = crimes[label]
-    }
-    final_data = [makeGraphObjects(data1, "#ca0020", label)];
-    final_data[0].hidden = false;
+    label = crimes[label]
   }
-  return final_data;
+  final_data = [makeGraphObjects(data1, "#ca0020", label)];
+  final_data[0].hidden = false;
+}
+return final_data;
 
 }
 
@@ -194,7 +194,6 @@ function makeGraphObjects(data, color, label) {
     data: cleanedData,
     onAnimationComplete: allowSaveGraph,
     hidden: true,
-    yAxisID: "A",
     position: "left",
     spanGaps: false,
     radius: 1.5, // Dot size
@@ -259,103 +258,78 @@ function makeGraph(type, crimes) {
 
   graph_datasets = getGraphDataset(table_data, graph_headers, type, crimes);
   if (type == "offenses" && $("#clearance_rate").is(":checked")) {
-
     const cleared_data = graph_datasets.filter(x => x.label.includes("Clear"));
-
     const not_cleared_data = graph_datasets.filter(x => !x.label.includes("Clear"));
-
     graph_datasets = not_cleared_data;
-
   }
 
   xaxis_label = "Year";
 
   opts = {
-      watermark: {
-          image: "crimedatatool_watermark.jpg",
-          x: -333,
-          y: 33,
-          opacity: 0.75,
-          alignToChartArea: true,
-          position: "back"
-      },
-      animation: true,
-      responsive: true,
-      plugins: {
-          title: {
-              display: true,
-              position: 'top',
-              text: title,
-              font: {
-                  size: 22
-              }
-          }
-      },
-      scales: {
-          x: {
-              display: true,
-              ticks: {
-                  autoSkip: true,
-                  maxTicksLimit: 10,
-                  font: {
-                      size: 15
-                  }
-              },
-              title: {
-                  display: true,
-                  text: xaxis_label,
-                  font: {
-                      size: 22
-                  }
-              }
-          },
-          y: {
-              beginAtZero: true, // Ensures the y-axis starts at zero
-              display: true,
-              ticks: {
-                  autoSkip: true,
-                  maxTicksLimit: 10,
-                  font: {
-                      size: 15
-                  }
-              },
-              title: {
-                  display: true,
-                  text: yaxis_label,
-                  font: {
-                      size: 22
-                  }
-              }
-          }
-      },
-      interaction: {
-          mode: 'nearest',
-          intersect: true
-      },
-      plugins: {
-          tooltip: {
-              callbacks: {
-                  label: function(tooltipItem) {
-                      let value = tooltipItem.raw;
-                      value = value.toLocaleString();
-                      return tooltipItem.dataset.label + ": " + value;
-                  }
-              }
-          }
+    watermark: {
+
+      image: "crimedatatool_watermark.jpg",
+      x: -333,
+      y: 53,
+      //    width: 53,
+      //        height: 60,
+      opacity: 0.75,
+      alignToChartArea: true,
+      position: "back"
+
+    },
+    animation: true,
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        position: 'top',
+        text: title,
+        font: {
+          size: 22
+        },
       }
+    },
+    scales: {
+      x: {
+        display: true,
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 10,
+          fontSize: 15
+        },
+        title: {
+          display: true,
+          text: xaxis_label,
+          font: {
+            size: 22,
+          },
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: yaxis_label,
+          font: {
+            size: 22,
+          },
+        }
+      }
+    },
   };
-
-
-Chart.defaults.color = 'black'
+  Chart.defaults.color = 'black'
+  console.log(graph_datasets)
   myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: years,
-      datasets: graph_datasets
+      datasets: graph_datasets,
+      yAxisID: 'y'
     },
     options: opts
   });
-//  disable_animation_on_mobile(myLineChart);
+  //  disable_animation_on_mobile(myLineChart);
 
   return (myLineChart);
 }
@@ -426,15 +400,15 @@ function getTitle(data, type) {
 
   switch (type) {
     case "offenses":
-      subtitle = crime_values[selectedCrime];
-      break;
+    subtitle = crime_values[selectedCrime];
+    break;
     case "arson":
-        subtitle = arson_values[selectedCrime];
-        break;
+    subtitle = arson_values[selectedCrime];
+    break;
 
     case "arrests":
-      subtitle = `Arrests for: ${arrest_values[selectedCrime]}, Breakdown: ${arrests_breakdown[selectedSubsubcategory]}, Age: ${arrest_age_categories[selectedSubcategory]}`;
-      break;
+    subtitle = `Arrests for: ${arrest_values[selectedCrime]}, Breakdown: ${arrests_breakdown[selectedSubsubcategory]}, Age: ${arrest_age_categories[selectedSubcategory]}`;
+    break;
 
     case "nibrs":
     nibrs_crimes_temp = nibrs_crime_values["offense"]
@@ -461,24 +435,24 @@ function getTitle(data, type) {
     }
 
 
-      subtitle = nibrs_crimes_temp[$("#crime_dropdown").val()] + ", " + nibrs_categories[$("#category_dropdown").val()] + " " + nibrs_subcategories[$("#category_dropdown").val()][$("#subcategory_dropdown").val()];
+    subtitle = nibrs_crimes_temp[$("#crime_dropdown").val()] + ", " + nibrs_categories[$("#category_dropdown").val()] + " " + nibrs_subcategories[$("#category_dropdown").val()][$("#subcategory_dropdown").val()];
 
-      if (selectedCategory === "property") {
-        subtitle = `Property Data: ${nibrs_property_values[selectedCrime]}`;
-      }
-      break;
+    if (selectedCategory === "property") {
+      subtitle = `Property Data: ${nibrs_property_values[selectedCrime]}`;
+    }
+    break;
 
     case "leoka":
-      subtitle = `${leoka_categories[selectedCrime]}: ${leoka_subcategories[selectedCrime][selectedSubcategory]}`;
-      if (leoka_categories[selectedCrime] === "Officers Assaulted") {
-    //    const weapon = ", Weapon: " + leoka_weapons[selectedSubsubcategory];
-    //    subtitle += `${weapon}`;
-      }
-      break;
+    subtitle = `${leoka_categories[selectedCrime]}: ${leoka_subcategories[selectedCrime][selectedSubcategory]}`;
+    if (leoka_categories[selectedCrime] === "Officers Assaulted") {
+      //    const weapon = ", Weapon: " + leoka_weapons[selectedSubsubcategory];
+      //    subtitle += `${weapon}`;
+    }
+    break;
 
     case "hate":
-      subtitle = `Bias Motivation: ${hate_bias_motivations[selectedCrime]}`;
-      break;
+    subtitle = `Bias Motivation: ${hate_bias_motivations[selectedCrime]}`;
+    break;
   }
 
   return [title, subtitle];

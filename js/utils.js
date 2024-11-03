@@ -65,16 +65,16 @@ function exportToCsv(tableData, type, states) {
 
 /*
 function make_dropdown(dropdown_id, dropdown_values, starter, starter_div) {
-  $(dropdown_id).empty();
-  _.each(dropdown_values, function(val, text) {
-    $(dropdown_id).append(new Option(val, text));
-  });
+$(dropdown_id).empty();
+_.each(dropdown_values, function(val, text) {
+$(dropdown_id).append(new Option(val, text));
+});
 
-  if (Array.isArray(starter)) {
-    starter = starter[$(starter_div).val()]
-  }
+if (Array.isArray(starter)) {
+starter = starter[$(starter_div).val()]
+}
 
-  $(dropdown_id).val(starter);
+$(dropdown_id).val(starter);
 }
 */
 
@@ -115,7 +115,7 @@ function toggle_leoka_display() {
     $("label[for='checkbox_5']").hide()
 
 
-$('#subcategory_dropdown').next(".select2-container").show();
+    $('#subcategory_dropdown').next(".select2-container").show();
     $("h3").eq(4).html("Subcategory:");
 
   } else if ($("#crime_dropdown").val() == "officers_assaulted") {
@@ -133,7 +133,7 @@ $('#subcategory_dropdown').next(".select2-container").show();
     $("#checkbox_3").prop("checked", false);
     $("#checkbox_5").prop("checked", true);
 
-$('#subcategory_dropdown').next(".select2-container").show();
+    $('#subcategory_dropdown').next(".select2-container").show();
     $("h3").eq(4).html("Subcategory:");
 
   } else if ($("#crime_dropdown").val() == "officers_killed") {
@@ -150,7 +150,7 @@ $('#subcategory_dropdown').next(".select2-container").show();
     $("#checkbox_1").prop("checked", true);
     $("#checkbox_2").prop("checked", true);
 
-$('#subcategory_dropdown').next(".select2-container").hide();
+    $('#subcategory_dropdown').next(".select2-container").hide();
     $("h3").eq(4).html("");
   }
 }
@@ -316,12 +316,12 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_4']").html("Black")
     $("label[for='checkbox_5']").html("White")
     $("label[for='checkbox_6']").html("Unknown")
-  //  if ($('#category_dropdown').val() == "arrestee") {
-  //    $("#checkbox_6").hide();
-  //    $("#checkbox_7").hide();
-  //    $("label[for='checkbox_6']").hide()
-  //    $("label[for='checkbox_7']").hide()
-  //  }
+    //  if ($('#category_dropdown').val() == "arrestee") {
+    //    $("#checkbox_6").hide();
+    //    $("#checkbox_7").hide();
+    //    $("label[for='checkbox_6']").hide()
+    //    $("label[for='checkbox_7']").hide()
+    //  }
   } else if ($("#subcategory_dropdown").val() == "ethnicity") {
     $("#checkbox_5").hide();
     $("#checkbox_6").hide();
@@ -334,11 +334,11 @@ function toggle_nibrs_display() {
     $("label[for='checkbox_2']").html("Hispanic")
     $("label[for='checkbox_3']").html("Non-Hispanic")
     $("label[for='checkbox_4']").html("Unknown")
-//    if ($('#category_dropdown').val() == "arrestee") {
-//      $("label[for='checkbox_3']").html("Not Hispanic")
-//      $("#checkbox_4").hide();
-//      $("label[for='checkbox_4']").hide()
-//    }
+    //    if ($('#category_dropdown').val() == "arrestee") {
+    //      $("label[for='checkbox_3']").html("Not Hispanic")
+    //      $("#checkbox_4").hide();
+    //      $("label[for='checkbox_4']").hide()
+    //    }
   } else if ($("#subcategory_dropdown").val() == "sex") {
     $("#checkbox_5").hide();
     $("#checkbox_6").hide();
@@ -466,7 +466,7 @@ function countToRate(data, type, per_officer = false) {
   for (var i = 0; i < data_keys.length; i++) {
     if (!["agency", "year", "state", "population", "ORI", "school_name", "school_unique_ID", "number_of_students"].includes(data_keys[i]) && !data_keys[i].startsWith("population_")) {
 
- if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
+      if (type == "arrests" && $("#percent_of_arrests").is(':checked')) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
       } else if (type == "arrests" && $("#percent_of_all_arrests").is(':checked')) {
         rate_val = data[data_keys[i]] / data[population_column] * 100;
@@ -489,233 +489,233 @@ function countToRate(data, type, per_officer = false) {
       new_key = data_keys[i] + rate_type;
       Object.defineProperty(data, new_key,
         Object.getOwnPropertyDescriptor(data, data_keys[i]));
-      delete data[data_keys[i]];
-    }
-  }
-  return data;
-}
-
-
-function makeCrimeClearanceRates(data) {
-  storage = data
-  console.log(storage)
-  data_keys = _.keys(data);
-  clearance_starters = ["total_cleared", "cleared_18"];
-
-  crime_column = data_keys.filter(function(element) {
-    return element.includes("actual");
-  });
-
-  for (var i = 0; i < crime_column.length; i++) {
-    for (var n = 0; n < clearance_starters.length; n++) {
-      rate_val = data[crime_column[i].replace("actual", clearance_starters[n])] / data[crime_column[i]];
-      rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
-
-      if (!isFinite(rate_val)) {
-        rate_val = NaN;
+        delete data[data_keys[i]];
       }
-      data[crime_column[i].replace("actual", clearance_starters[n])] = rate_val * 100;
-      rate_type = "_clearance_rate";
-
-      new_key = crime_column[i].replace("actual", clearance_starters[n]) + rate_type;
-      new_key = new_key.replace("_rate_clearance", "_clearance");
-      Object.defineProperty(data, new_key,
-        Object.getOwnPropertyDescriptor(data, crime_column[i].replace("actual", clearance_starters[n])));
-      delete data[crime_column[i].replace("actual", clearance_starters[n])];
-
     }
-  }
-  return data;
-}
-
-
-function getStateAgencies(type, states = state_values, largest_agencies = false) {
-  url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
-  if (type == "nibrs") {
-    url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper_nibrs/master/data/";
-  }
-  if ($("#monthly").is(':checked')) {
-    type += "_monthly";
+    return data;
   }
 
-  url += type + "/";
-    final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
 
-  if (largest_agencies) {
-    final_url = url + "largest_agency_choices.json";
-  }
-  var state_agencies = $.ajax({
-    url: final_url,
-    type: 'get',
-    dataType: 'json',
-    async: false,
-    success: function(data) {
-      result = data;
-    }
-  });
+  function makeCrimeClearanceRates(data) {
+    storage = data
+    console.log(storage)
+    data_keys = _.keys(data);
+    clearance_starters = ["total_cleared", "cleared_18"];
 
-  state_agencies = state_agencies.responseJSON;
-  return (state_agencies);
-}
+    crime_column = data_keys.filter(function(element) {
+      return element.includes("actual");
+    });
 
+    for (var i = 0; i < crime_column.length; i++) {
+      for (var n = 0; n < clearance_starters.length; n++) {
+        rate_val = data[crime_column[i].replace("actual", clearance_starters[n])] / data[crime_column[i]];
+        rate_val = parseFloat(rate_val).toFixed(2); // Rounds to 2 decimals
 
-function makeDataSourceDropdown() {
-  page_temp = window.location.pathname
+        if (!isFinite(rate_val)) {
+          rate_val = NaN;
+        }
+        data[crime_column[i].replace("actual", clearance_starters[n])] = rate_val * 100;
+        rate_type = "_clearance_rate";
 
+        new_key = crime_column[i].replace("actual", clearance_starters[n]) + rate_type;
+        new_key = new_key.replace("_rate_clearance", "_clearance");
+        Object.defineProperty(data, new_key,
+          Object.getOwnPropertyDescriptor(data, crime_column[i].replace("actual", clearance_starters[n])));
+          delete data[crime_column[i].replace("actual", clearance_starters[n])];
 
-  // Use a document fragment to batch DOM updates
-  const $dropdown = $("#data_source");
-  $dropdown.empty();  // Clear existing options
-
-  const fragment = document.createDocumentFragment();  // Create a document fragment
-
-  Object.entries(data_sources).forEach(([text, val]) => {
-    const option = new Option(val, text);  // Create a new option element
-    fragment.appendChild(option);  // Append the option to the fragment
-  });
-
-  $dropdown.append(fragment);  // Append the fragment to the dropdown in one go
-
-
-
-  if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/arrest.html") {
-      current_page = 0
-  }
-  if (page_temp == "/arson.html" || page_temp == "/E:/Dropbox/crimedatatool/arson.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/arson.html") {
-      current_page = 1
-  }
-  if (page_temp == "/hate.html" || page_temp == "/E:/Dropbox/crimedatatool/hate.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/hate.html") {
-      current_page = 2
-  }
-  if (page_temp == "/leoka.html" || page_temp == "/E:/Dropbox/crimedatatool/leoka.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/leoka.html") {
-      current_page = 3
-  }
-  if (page_temp == "/nibrs.html" || page_temp == "/E:/Dropbox/crimedatatool/nibrs.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/nibrs.html") {
-    current_page = 4
-  }
-  if (page_temp == "/index.html" || page_temp == "/" || page_temp == "/E:/Dropbox/crimedatatool/" || page_temp == "/E:/Dropbox/crimedatatool/index.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/index.html") {
-    current_page = 5
-  }
-    $("#data_source").val(current_page)
-}
-
-function updateDataSource() {
-
-
-  if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
-    new_url_path = "https://crimedatatool.com/"
-  }
-  if (data_sources[$("#data_source").val()] == "Arson") {
-    new_url_path = "https://crimedatatool.com/arson.html"
-  }
-  if (data_sources[$("#data_source").val()] == "Hate Crime Statistics") {
-    new_url_path = "https://crimedatatool.com/hate.html"
-  }
-  if (data_sources[$("#data_source").val()] == "Arrests by Age, Sex, and Race") {
-      new_url_path = "https://crimedatatool.com/arrest.html"
-  }
-  if (data_sources[$("#data_source").val()] == "Law Enforcement Officers Killed and Assaulted (LEOKA)") {
-    new_url_path = "https://crimedatatool.com/leoka.html"
-  }
-  if (data_sources[$("#data_source").val()] == "National Incident-Based Reporting System (NIBRS)") {
-    new_url_path = "https://crimedatatool.com/nibrs.html"
-  }
-
-current_page = data_sources[$("#data_source").val()]
-  page_temp = window.location.pathname
-  if (current_page == "Offenses Known and Clearances by Arrest" & !["/index.html", "/"].includes(page_temp)) {
-    window.location.href = new_url_path;
-  }
-  if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
-    window.location.href = new_url_path;
-  }
-  if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "/arrest.html") {
-    window.location.href = new_url_path;
-  }
-  if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/leoka.html") {
-    window.location.href = new_url_path;
-  }
-  if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/nibrs.html") {
-    window.location.href = new_url_path;
-  }
-  if (current_page == "Arson" & page_temp != "/arson.html") {
-    window.location.href = new_url_path;
-  }
-   makeDataSourceDropdown()
-}
-
-
-function updateAgencies(type, states) {
-  agencies = getStateAgencies(type, states);
-  agencies.sort();
-  // Use a document fragment to batch DOM updates
-  const $dropdown = $("#agency_dropdown");
-  $dropdown.empty();  // Clear existing options
-
-  const fragment = document.createDocumentFragment();  // Create a document fragment
-
-  agencies.forEach((val, text) => {
-    const option = new Option(val, text);  // Create a new option element
-    fragment.appendChild(option);  // Append the option to the fragment
-  });
-
-  $dropdown.append(fragment);  // Append the fragment to the dropdown in one go
-  largest_agency_temp = states[$("#state_dropdown").val()];
-  largest_agency_temp = _.filter(largest_agency, function(x) {
-    return x.state == largest_agency_temp;
-  });
-  largest_agency_temp = largest_agency_temp[0].agency;
-  largest_agency_temp = _.indexOf(agencies, largest_agency_temp);
-  $("#agency_dropdown").val(largest_agency_temp);
-  return agencies;
-}
-
-
-
-function main(type, states, state_default, crimes, crime_starter) {
-
-  state_default = Math.floor(Math.random()*states.length)
-  makeDataSourceDropdown()
-  make_dropdown('#state_dropdown', states, state_default)
-  make_dropdown("#crime_dropdown", crimes, crime_starter);
-
-  if (type == "arrests") {
-    make_dropdown("#subcategory_dropdown", arrest_age_categories, "total")
-    make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
-    toggle_arrest_display();
-  } else if (type == "nibrs") {
-    make_dropdown('#category_dropdown', nibrs_categories, "offense")
-    make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
-    toggle_nibrs_display()
-  } else if (type == "leoka") {
-
-      make_dropdown('#subcategory_dropdown', leoka_subcategories[$('#crime_dropdown').val()], leoka_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
-  //    make_dropdown("#subsubcategory_dropdown", leoka_weapons, "total_assaults");
-    //  toggle_display("#weaponsDiv", ["officers_assaulted"]);
-  //    $("#leokaSex").show();
-  toggle_leoka_display()
+        }
+      }
+      return data;
     }
 
-    largest_agency = getStateAgencies(type, states, true);
-    agencies = updateAgencies(type, states);
 
+    function getStateAgencies(type, states = state_values, largest_agencies = false) {
+      url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper/master/data/";
+      if (type == "nibrs") {
+        url = "https://raw.githubusercontent.com/jacobkap/crimedatatool_helper_nibrs/master/data/";
+      }
+      if ($("#monthly").is(':checked')) {
+        type += "_monthly";
+      }
 
+      url += type + "/";
+      final_url = url + states[$("#state_dropdown").val()] + "_agency_choices.json";
 
-//  if (window.location.hash == "") {
-//    change_url(type)
-  //} else {
-  //  change_data_from_url(type);
-  //}
-      document.addEventListener("DOMContentLoaded", function() {
-          ctx = document.getElementById("graph").getContext('2d');
-  main_results = get_data(type, states);
-  table_data = main_results[0];
-  graph_headers = main_results[1];
-  table_headers = main_results[2];
-  all_data = main_results[3];
-  graph = makeGraph(type, crimes);
-  table = makeTable(type);
+      if (largest_agencies) {
+        final_url = url + "largest_agency_choices.json";
+      }
+      var state_agencies = $.ajax({
+        url: final_url,
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+          result = data;
+        }
       });
 
-//  makeDataSourceDropdown()
-}
+      state_agencies = state_agencies.responseJSON;
+      return (state_agencies);
+    }
+
+
+    function makeDataSourceDropdown() {
+      page_temp = window.location.pathname
+
+
+      // Use a document fragment to batch DOM updates
+      const $dropdown = $("#data_source");
+      $dropdown.empty();  // Clear existing options
+
+      const fragment = document.createDocumentFragment();  // Create a document fragment
+
+      Object.entries(data_sources).forEach(([text, val]) => {
+        const option = new Option(val, text);  // Create a new option element
+        fragment.appendChild(option);  // Append the option to the fragment
+      });
+
+      $dropdown.append(fragment);  // Append the fragment to the dropdown in one go
+
+
+
+      if (page_temp == "/arrest.html" || page_temp == "/E:/Dropbox/crimedatatool/arrest.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/arrest.html") {
+        current_page = 0
+      }
+      if (page_temp == "/arson.html" || page_temp == "/E:/Dropbox/crimedatatool/arson.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/arson.html") {
+        current_page = 1
+      }
+      if (page_temp == "/hate.html" || page_temp == "/E:/Dropbox/crimedatatool/hate.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/hate.html") {
+        current_page = 2
+      }
+      if (page_temp == "/leoka.html" || page_temp == "/E:/Dropbox/crimedatatool/leoka.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/leoka.html") {
+        current_page = 3
+      }
+      if (page_temp == "/nibrs.html" || page_temp == "/E:/Dropbox/crimedatatool/nibrs.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/nibrs.html") {
+        current_page = 4
+      }
+      if (page_temp == "/index.html" || page_temp == "/" || page_temp == "/E:/Dropbox/crimedatatool/" || page_temp == "/E:/Dropbox/crimedatatool/index.html" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/" || page_temp == "/C:/Users/jkkap/Dropbox/crimedatatool/index.html") {
+        current_page = 5
+      }
+      $("#data_source").val(current_page)
+    }
+
+    function updateDataSource() {
+
+
+      if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
+        new_url_path = "https://crimedatatool.com/"
+      }
+      if (data_sources[$("#data_source").val()] == "Arson") {
+        new_url_path = "https://crimedatatool.com/arson.html"
+      }
+      if (data_sources[$("#data_source").val()] == "Hate Crime Statistics") {
+        new_url_path = "https://crimedatatool.com/hate.html"
+      }
+      if (data_sources[$("#data_source").val()] == "Arrests by Age, Sex, and Race") {
+        new_url_path = "https://crimedatatool.com/arrest.html"
+      }
+      if (data_sources[$("#data_source").val()] == "Law Enforcement Officers Killed and Assaulted (LEOKA)") {
+        new_url_path = "https://crimedatatool.com/leoka.html"
+      }
+      if (data_sources[$("#data_source").val()] == "National Incident-Based Reporting System (NIBRS)") {
+        new_url_path = "https://crimedatatool.com/nibrs.html"
+      }
+
+      current_page = data_sources[$("#data_source").val()]
+      page_temp = window.location.pathname
+      if (current_page == "Offenses Known and Clearances by Arrest" & !["/index.html", "/"].includes(page_temp)) {
+        window.location.href = new_url_path;
+      }
+      if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
+        window.location.href = new_url_path;
+      }
+      if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "/arrest.html") {
+        window.location.href = new_url_path;
+      }
+      if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/leoka.html") {
+        window.location.href = new_url_path;
+      }
+      if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/nibrs.html") {
+        window.location.href = new_url_path;
+      }
+      if (current_page == "Arson" & page_temp != "/arson.html") {
+        window.location.href = new_url_path;
+      }
+      makeDataSourceDropdown()
+    }
+
+
+    function updateAgencies(type, states) {
+      agencies = getStateAgencies(type, states);
+      agencies.sort();
+      // Use a document fragment to batch DOM updates
+      const $dropdown = $("#agency_dropdown");
+      $dropdown.empty();  // Clear existing options
+
+      const fragment = document.createDocumentFragment();  // Create a document fragment
+
+      agencies.forEach((val, text) => {
+        const option = new Option(val, text);  // Create a new option element
+        fragment.appendChild(option);  // Append the option to the fragment
+      });
+
+      $dropdown.append(fragment);  // Append the fragment to the dropdown in one go
+      largest_agency_temp = states[$("#state_dropdown").val()];
+      largest_agency_temp = _.filter(largest_agency, function(x) {
+        return x.state == largest_agency_temp;
+      });
+      largest_agency_temp = largest_agency_temp[0].agency;
+      largest_agency_temp = _.indexOf(agencies, largest_agency_temp);
+      $("#agency_dropdown").val(largest_agency_temp);
+      return agencies;
+    }
+
+
+
+    function main(type, states, state_default, crimes, crime_starter) {
+
+      state_default = Math.floor(Math.random()*states.length)
+      makeDataSourceDropdown()
+      make_dropdown('#state_dropdown', states, state_default)
+      make_dropdown("#crime_dropdown", crimes, crime_starter);
+
+      if (type == "arrests") {
+        make_dropdown("#subcategory_dropdown", arrest_age_categories, "total")
+        make_dropdown("#subsubcategory_dropdown", arrests_breakdown, "Race")
+        toggle_arrest_display();
+      } else if (type == "nibrs") {
+        make_dropdown('#category_dropdown', nibrs_categories, "offense")
+        make_dropdown("#subcategory_dropdown", nibrs_subcategories[$('#category_dropdown').val()], nibrs_starts[$('#category_dropdown').val()])
+        toggle_nibrs_display()
+      } else if (type == "leoka") {
+
+        make_dropdown('#subcategory_dropdown', leoka_subcategories[$('#crime_dropdown').val()], leoka_categories_starts[$('#crime_dropdown').val()], '#crime_dropdown');
+        //    make_dropdown("#subsubcategory_dropdown", leoka_weapons, "total_assaults");
+        //  toggle_display("#weaponsDiv", ["officers_assaulted"]);
+        //    $("#leokaSex").show();
+        toggle_leoka_display()
+      }
+
+      largest_agency = getStateAgencies(type, states, true);
+      agencies = updateAgencies(type, states);
+
+
+
+      //  if (window.location.hash == "") {
+      //    change_url(type)
+      //} else {
+      //  change_data_from_url(type);
+      //}
+      document.addEventListener("DOMContentLoaded", function() {
+        ctx = document.getElementById("graph").getContext('2d');
+        main_results = get_data(type, states);
+        table_data = main_results[0];
+        graph_headers = main_results[1];
+        table_headers = main_results[2];
+        all_data = main_results[3];
+        graph = makeGraph(type, crimes);
+        table = makeTable(type);
+      });
+
+      //  makeDataSourceDropdown()
+    }
