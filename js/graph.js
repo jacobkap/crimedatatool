@@ -197,6 +197,8 @@ function makeGraphObjects(data, color, label) {
     position: "left",
     spanGaps: false,
     radius: 1.5, // Dot size
+    pointHitRadius: 15,
+    hoverRadius: 5
   };
 }
 
