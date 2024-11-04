@@ -215,6 +215,9 @@ function makeGraph(type, crimes) {
       yaxis_label = "# of Assaults";
     }
   }
+  if (type == "arson") {
+    yaxis_label = "# of Incidents";
+  }
   if (type == "nibrs") {
     if ($("#category_dropdown").val().includes("offense")) {
       yaxis_label = "# of Offenses";
@@ -266,6 +269,17 @@ function makeGraph(type, crimes) {
   xaxis_label = "Year";
 
   opts = {
+    tooltips: {
+     mode: 'nearest',
+     intersect: false,
+  },
+  interaction: {
+            mode: 'x'
+        },
+  hover: {
+     mode: 'index',
+     intersect: false
+  },
     watermark: {
 
       image: "crimedatatool_watermark.jpg",
@@ -319,7 +333,6 @@ function makeGraph(type, crimes) {
     },
   };
   Chart.defaults.color = 'black'
-  console.log(graph_datasets)
   myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -371,9 +384,6 @@ function addYAxis() {
       datasets: graph_datasets
     },
     spanGaps: false,
-    tooltips: {
-      enabled: false
-    },
     options: opts
 
   });
@@ -440,6 +450,10 @@ function getTitle(data, type) {
     if (selectedCategory === "property") {
       subtitle = `Property Data: ${nibrs_property_values[selectedCrime]}`;
     }
+    if ($("#subcategory_dropdown").val()) {
+      subtitle = "Drugs Seized: " + nibrs_property_drugs_values[$("#crime_dropdown").val()]
+    }
+
     break;
 
     case "leoka":

@@ -153,7 +153,7 @@ nibrs_property_drugs_values = {
   "opium": "Opium",
   "other_depressants": "Other Depressants",
   "other_drugs": "Other Drugs",
-  "other_hallucinogrens": "Other Hallucinogens",
+  "other_hallucinogens": "Other Hallucinogens",
   "other_narcotics": "Other Narcotics",
   "other_stimulants": "Other Stimulants",
   "pcp": "PCP",
@@ -635,7 +635,7 @@ var leoka_categories = {
 };
 
 var leoka_categories_starts = {
-  "officers_assaulted": "total",
+  "officers_assaulted": "all_assault",
   "officers_killed": "officers_killed_by_felony",
   "employees": "employees_total"
 };

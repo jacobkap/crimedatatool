@@ -19,7 +19,9 @@ function exportToCsv(tableData, type, states) {
   // Cache DOM values to avoid querying multiple times
   const agency = $("#agency_dropdown").val();
   const state = $("#state_dropdown").val();
-
+  table_data.forEach(item => {
+      item.source = "crimedatatool.com"; // Replace with your desired logic for the value
+  });
   // Determine the rate_or_count string based on conditions
   let rate_or_count = "count_";
   if (get_rate_type(type, true)) {
@@ -57,7 +59,6 @@ function exportToCsv(tableData, type, states) {
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
-    console.log()
     document.body.removeChild(link);
   }
 }
@@ -131,6 +132,7 @@ function toggle_leoka_display() {
     $("#checkbox_1").prop("checked", false);
     $("#checkbox_2").prop("checked", false);
     $("#checkbox_3").prop("checked", false);
+    $("#checkbox_4").prop("checked", false);
     $("#checkbox_5").prop("checked", true);
 
     $('#subcategory_dropdown').next(".select2-container").show();
@@ -405,8 +407,8 @@ function toggle_arrest_display() {
     breakdown_name.innerText = "Sex:";
     $("#race").hide();
     $("#ethnicity").hide();
-    $("label[for='checkbox_1']").html("Female")
-    $("label[for='checkbox_2']").html("Male")
+    $("label[for='checkbox_1']").html("Male")
+    $("label[for='checkbox_2']").html("Female")
     $("label[for='checkbox_3']").html("Total")
     $("#checkbox_1").prop("checked", false);
     $("#checkbox_2").prop("checked", false);
@@ -497,8 +499,6 @@ function countToRate(data, type, per_officer = false) {
 
 
   function makeCrimeClearanceRates(data) {
-    storage = data
-    console.log(storage)
     data_keys = _.keys(data);
     clearance_starters = ["total_cleared", "cleared_18"];
 
