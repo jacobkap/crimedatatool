@@ -452,8 +452,8 @@ function getTitle(data, type) {
     if (selectedCategory === "property") {
       subtitle = `Property Data: ${nibrs_property_values[selectedCrime]}`;
     }
-    if ($("#subcategory_dropdown").val()) {
-      subtitle = "Drugs Seized: " + nibrs_property_drugs_values[$("#crime_dropdown").val()]
+    if ($("#subcategory_dropdown").val() == "drugs") {
+      subtitle = "Drug Seized: " + nibrs_property_drugs_values[$("#crime_dropdown").val()]
     }
 
     break;
