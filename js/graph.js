@@ -285,8 +285,8 @@ function makeGraph(type, crimes) {
     watermark: {
 
       image: "crimedatatool_watermark.jpg",
-      x: -333,
-      y: 33,
+      x: -233,
+      y: -63,
       //    width: 53,
       //        height: 60,
       opacity: 0.75,
