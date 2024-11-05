@@ -36,7 +36,7 @@ if (type == "leoka" & $("#crime_dropdown").val() == "officers_killed") {
 }
 if (type == "arrests") {
   if ($("#subsubcategory_dropdown").val() == "Sex") {
-    checkbox_names = ["Female", "Male", "Total"];
+    checkbox_names = ["Male", "Female", "Total"];
   } else if ($("#subsubcategory_dropdown").val() == "Race") {
     checkbox_names = ["American Indian", "Asian", "Black", "White", "Total"];
   } else if ($("#subsubcategory_dropdown").val() == "Ethnicity") {
