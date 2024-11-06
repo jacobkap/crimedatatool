@@ -120,8 +120,10 @@ function toggle_leoka_display() {
     $("h3").eq(4).html("Subcategory:");
 
   } else if ($("#crime_dropdown").val() == "officers_assaulted") {
+    $("#checkbox_3").show();
     $("#checkbox_4").show();
     $("#checkbox_5").show();
+    $("label[for='checkbox_3']").show()
     $("label[for='checkbox_4']").show()
     $("label[for='checkbox_5']").show()
 
