@@ -120,6 +120,7 @@ function toggle_leoka_display() {
     $("h3").eq(4).html("Subcategory:");
 
   } else if ($("#crime_dropdown").val() == "officers_assaulted") {
+        $("h3").eq(5).html("Offender Weapon");
     $("#checkbox_3").show();
     $("#checkbox_4").show();
     $("#checkbox_5").show();
@@ -138,8 +139,8 @@ function toggle_leoka_display() {
     $("#checkbox_5").prop("checked", true);
 
     $('#subcategory_dropdown').next(".select2-container").show();
-    $("h3").eq(4).html("Subcategory:");
 
+        $("h3").eq(4).html("Subcategory:");
   } else if ($("#crime_dropdown").val() == "officers_killed") {
     $("#checkbox_3").hide();
     $("#checkbox_4").hide();
@@ -155,7 +156,8 @@ function toggle_leoka_display() {
     $("#checkbox_2").prop("checked", true);
 
     $('#subcategory_dropdown').next(".select2-container").hide();
-    $("h3").eq(4).html("");
+        $("h3").eq(4).html("");
+    $("h3").eq(5).html("");
   }
 }
 
