@@ -382,7 +382,6 @@ nibrs_crime_values["victim_demographics_offenses"] = {
   "kidnapping_abduction": "Kidnapping/Abduction",
   "motor_vehicle_theft": "Motor Vehicle Theft",
   "robbery": "Robbery",
-  "sex_offenses_failure_to_register_as_a_sex_offender" : "Sex Offenses - Failure To Register As A Sex Offender",
   "sex_offenses_fondling_indecent_liberties_child_molest": "Sex Offenses - Fondling/Child Molest",
   "sex_offenses_incest": "Sex Offenses - Incest",
   "sex_offenses_rape": "Sex Offenses - Rape",

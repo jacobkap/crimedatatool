@@ -341,8 +341,12 @@ function getCrimeColumns(headers, type, output) {
     //  }
       // crime = crime + "_" + weapon;
       if (crime == "total_total_assaults") crime = "total_assaults_total";
+    } else {
+        if (leoka_categories[$("#crime_dropdown").val()] == "Officers Killed") {
+          crime = "officers_killed"
     }
   }
+}
 
 
 
