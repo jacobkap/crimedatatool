@@ -608,6 +608,7 @@ function countToRate(data, type, per_officer = false) {
         "#state=" + $("#state_dropdown").children("option:selected").text() +
         "&agency=" + $("#agency_dropdown").children("option:selected").text()
         console.log(new_url)
+        localStorage.setItem("user", new_url);
 
       if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
         new_url_path = "https://crimedatatool.com/"
