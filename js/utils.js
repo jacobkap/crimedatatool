@@ -20,7 +20,7 @@ function exportToCsv(tableData, type, states) {
   const agency = $("#agency_dropdown").val();
   const state = $("#state_dropdown").val();
   table_data.forEach(item => {
-      item.source = "crimedatatool.com"; // Replace with your desired logic for the value
+    item.source = "crimedatatool.com"; // Replace with your desired logic for the value
   });
   // Determine the rate_or_count string based on conditions
   let rate_or_count = "count_";
@@ -120,7 +120,7 @@ function toggle_leoka_display() {
     $("h3").eq(4).html("Subcategory:");
 
   } else if ($("#crime_dropdown").val() == "officers_assaulted") {
-        $("h3").eq(5).html("Offender Weapon");
+    $("h3").eq(5).html("Offender Weapon");
     $("#checkbox_3").show();
     $("#checkbox_4").show();
     $("#checkbox_5").show();
@@ -140,7 +140,7 @@ function toggle_leoka_display() {
 
     $('#subcategory_dropdown').next(".select2-container").show();
 
-        $("h3").eq(4).html("Subcategory:");
+    $("h3").eq(4).html("Subcategory:");
   } else if ($("#crime_dropdown").val() == "officers_killed") {
     $("#checkbox_3").hide();
     $("#checkbox_4").hide();
@@ -156,7 +156,7 @@ function toggle_leoka_display() {
     $("#checkbox_2").prop("checked", true);
 
     $('#subcategory_dropdown').next(".select2-container").hide();
-        $("h3").eq(4).html("");
+    $("h3").eq(4).html("");
     $("h3").eq(5).html("");
   }
 }
@@ -604,14 +604,15 @@ function countToRate(data, type, per_officer = false) {
     }
 
     function updateDataSource() {
-    const new_url = window.location.pathname +
-        "#state=" + $("#state_dropdown").children("option:selected").text() +
-        "&agency=" + $("#agency_dropdown").children("option:selected").text()
-        console.log(new_url)
-        localStorage.setItem("user", new_url);
+      new_url = window.location.pathname +
+      "#state=" + $("#state_dropdown").children("option:selected").text() +
+      "&agency=" + $("#agency_dropdown").children("option:selected").text()
+      console.log(new_url)
+      localStorage.setItem("user", new_url);
 
       if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
         new_url_path = "https://crimedatatool.com/"
+        new_url = new_url.replace("")
       }
       if (data_sources[$("#data_source").val()] == "Arson") {
         new_url_path = "https://crimedatatool.com/arson.html"
@@ -631,8 +632,9 @@ function countToRate(data, type, per_officer = false) {
 
       current_page = data_sources[$("#data_source").val()]
       page_temp = window.location.pathname
-       new_url_path = new_url_path + new_url
-       new_url_path = new_url_path.replace("html/", "html");
+      new_url = new_url.split("html")[1];
+      new_url_path = new_url_path + new_url
+      new_url_path = new_url_path.replace("html/", "html");
       if (current_page == "Offenses Known and Clearances by Arrest" & !["/index.html", "/"].includes(page_temp)) {
         window.location.href = new_url_path;
       }
@@ -656,7 +658,7 @@ function countToRate(data, type, per_officer = false) {
     }
 
 
-    function updateAgencies(type, states) {
+    function updateAgencies(type, states, agency_value) {
       agencies = getStateAgencies(type, states);
       agencies.sort();
       // Use a document fragment to batch DOM updates
@@ -677,7 +679,14 @@ function countToRate(data, type, per_officer = false) {
       });
       largest_agency_temp = largest_agency_temp[0].agency;
       largest_agency_temp = _.indexOf(agencies, largest_agency_temp);
-      $("#agency_dropdown").val(largest_agency_temp);
+
+      agency_number = agencies.findIndex(element => element === agency_value)
+      if (agency_number != -1) {
+              $("#agency_dropdown").val(agency_value);
+            //    agency_number = agencies.findIndex(element => element === agency_val)
+      } else {
+              $("#agency_dropdown").val(largest_agency_temp);
+      }
       return agencies;
     }
 
@@ -686,6 +695,18 @@ function countToRate(data, type, per_officer = false) {
     function main(type, states, state_default, crimes, crime_starter) {
 
       state_default = Math.floor(Math.random()*states.length)
+
+      $("#state_dropdown").val()
+
+      url_hash = window.location.hash
+      if (url_hash != "") {
+        split_url = url_hash.split("&");
+        state_val = find_url_string(split_url, "state=")
+        agency_val = find_url_string(split_url, "agency=")
+        state_default = state_values.findIndex(element => element === state_val)
+
+      }
+
       makeDataSourceDropdown()
       make_dropdown('#state_dropdown', states, state_default)
       make_dropdown("#crime_dropdown", crimes, crime_starter);
@@ -708,7 +729,7 @@ function countToRate(data, type, per_officer = false) {
       }
 
       largest_agency = getStateAgencies(type, states, true);
-      agencies = updateAgencies(type, states);
+      agencies = updateAgencies(type, states, agency_value);
 
 
 
