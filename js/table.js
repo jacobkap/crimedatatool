@@ -151,6 +151,7 @@ function makeTable(type) {
     "lengthChange": true,
     "paging": true,
     "searching": false,
+    lengthMenu: [ [10, 25, -1], [10, 25, "All"] ],
     "pageLength": 25,
     "ordering": true,
     "order": [3, "desc"],
