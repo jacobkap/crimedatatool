@@ -1,7 +1,9 @@
 change_url = function(type) {
 
   new_url = window.location.pathname +
-    "#state=" + $("#state_dropdown").children("option:selected").text()
+    "#state=" + $("#state_dropdown").children("option:selected").text() +
+    "&agency=" + $("#agency_dropdown").children("option:selected").text()
+      window.history.pushState("", 'Title', new_url);
 
   dropdowns = ["#agency_dropdown", "#crime_dropdown", "#subcategory_dropdown",
     "#subsubcategory_dropdown", '#rate', '#percent_of_arrests',

@@ -604,6 +604,9 @@ function countToRate(data, type, per_officer = false) {
     }
 
     function updateDataSource() {
+      new_url = window.location.pathname +
+        "#state=" + $("#state_dropdown").children("option:selected").text() +
+        "&agency=" + $("#agency_dropdown").children("option:selected").text()
 
 
       if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
@@ -629,21 +632,27 @@ function countToRate(data, type, per_officer = false) {
       page_temp = window.location.pathname
       if (current_page == "Offenses Known and Clearances by Arrest" & !["/index.html", "/"].includes(page_temp)) {
         window.location.href = new_url_path;
+        window.history.pushState("", 'Title', new_url);
       }
       if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
         window.location.href = new_url_path;
+        window.history.pushState("", 'Title', new_url);
       }
       if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "/arrest.html") {
         window.location.href = new_url_path;
+        window.history.pushState("", 'Title', new_url);
       }
       if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/leoka.html") {
         window.location.href = new_url_path;
+        window.history.pushState("", 'Title', new_url);
       }
       if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/nibrs.html") {
         window.location.href = new_url_path;
+        window.history.pushState("", 'Title', new_url);
       }
       if (current_page == "Arson" & page_temp != "/arson.html") {
         window.location.href = new_url_path;
+        window.history.pushState("", 'Title', new_url);
       }
       makeDataSourceDropdown()
     }
