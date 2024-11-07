@@ -658,7 +658,7 @@ function countToRate(data, type, per_officer = false) {
     }
 
 
-    function updateAgencies(type, states, agency_value) {
+    function updateAgencies(type, states, agency_value = "") {
       agencies = getStateAgencies(type, states);
       agencies.sort();
       // Use a document fragment to batch DOM updates
