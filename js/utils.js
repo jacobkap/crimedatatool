@@ -698,6 +698,7 @@ function countToRate(data, type, per_officer = false) {
 
       $("#state_dropdown").val()
 
+      agency_val = ""
       url_hash = window.location.hash
       if (url_hash != "") {
         split_url = url_hash.split("&");
@@ -729,7 +730,7 @@ function countToRate(data, type, per_officer = false) {
       }
 
       largest_agency = getStateAgencies(type, states, true);
-      agencies = updateAgencies(type, states, agency_value);
+      agencies = updateAgencies(type, states, agency_val);
 
 
 
