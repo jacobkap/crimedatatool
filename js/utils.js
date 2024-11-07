@@ -604,11 +604,10 @@ function countToRate(data, type, per_officer = false) {
     }
 
     function updateDataSource() {
-    const new_url = window.location.pathname +
+    new_url = window.location.pathname +
         "#state=" + $("#state_dropdown").children("option:selected").text() +
         "&agency=" + $("#agency_dropdown").children("option:selected").text()
-        console.log(new_url)
-        localStorage.setItem("user", new_url);
+        localStorage.setItem("url_value", new_url);
 
       if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
         new_url_path = "https://crimedatatool.com/"
@@ -632,26 +631,25 @@ function countToRate(data, type, per_officer = false) {
       current_page = data_sources[$("#data_source").val()]
       page_temp = window.location.pathname
       if (current_page == "Offenses Known and Clearances by Arrest" & !["/index.html", "/"].includes(page_temp)) {
-        window.location.replace = new_url_path;
+        window.location.href = new_url_path;
       }
       if (current_page == "Hate Crime Statistics" & page_temp != "/hate.html") {
-        window.location.replace = new_url_path;
+        window.location.href = new_url_path;
 
       }
       if (current_page == "Arrests by Age, Sex, and Race" & page_temp != "/arrest.html") {
-        window.location.replace = new_url_path;
+        window.location.href = new_url_path;
       }
       if (current_page == "Law Enforcement Officers Killed and Assaulted (LEOKA)" & page_temp != "/leoka.html") {
-        window.location.replace = new_url_path;
+        window.location.href = new_url_path;
       }
       if (current_page == "National Incident-Based Reporting System (NIBRS)" & page_temp != "/nibrs.html") {
-        window.location.replace = new_url_path;
+        window.location.href = new_url_path;
       }
       if (current_page == "Arson" & page_temp != "/arson.html") {
-        window.location.replace = new_url_path;
+        window.location.href = new_url_path;
       }
       makeDataSourceDropdown()
-      window.history.pushState("", 'Title', new_url);
     }
 
 
