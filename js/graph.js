@@ -271,6 +271,7 @@ function makeGraph(type, crimes) {
   xaxis_label = "Year";
 
   opts = {
+
     tooltips: {
      mode: 'nearest',
      intersect: false,
@@ -304,6 +305,9 @@ function makeGraph(type, crimes) {
         font: {
           size: 22
         },
+      },
+      legend: {
+        onClick: null
       }
     },
     scales: {
@@ -344,9 +348,18 @@ function makeGraph(type, crimes) {
     },
     options: opts
   });
-  //  disable_animation_on_mobile(myLineChart);
+    disable_animation_on_mobile(myLineChart);
 
   return (myLineChart);
+}
+
+function disable_animation_on_mobile(graph_obj) {
+  if (window.innerWidth <= 800 || window.innerHeight <= 600) {
+    graph_obj.options.tooltips.enabled = false;
+    graph_obj.options.events = []
+  } else {
+    graph_obj.options.tooltips.enabled = true;
+  }
 }
 
 function addYAxis() {
