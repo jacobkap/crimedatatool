@@ -604,10 +604,11 @@ function countToRate(data, type, per_officer = false) {
     }
 
     function updateDataSource() {
-    new_url = window.location.pathname +
+    const new_url = window.location.pathname +
         "#state=" + $("#state_dropdown").children("option:selected").text() +
         "&agency=" + $("#agency_dropdown").children("option:selected").text()
-        localStorage.setItem("url_value", new_url);
+        console.log(new_url)
+        localStorage.setItem("user", new_url);
 
       if (data_sources[$("#data_source").val()] == "Offenses Known and Clearances by Arrest") {
         new_url_path = "https://crimedatatool.com/"
@@ -630,6 +631,8 @@ function countToRate(data, type, per_officer = false) {
 
       current_page = data_sources[$("#data_source").val()]
       page_temp = window.location.pathname
+       new_url_path = new_url_path + new_url
+       new_url_path = new_url_path.replace("html/", "html");
       if (current_page == "Offenses Known and Clearances by Arrest" & !["/index.html", "/"].includes(page_temp)) {
         window.location.href = new_url_path;
       }
