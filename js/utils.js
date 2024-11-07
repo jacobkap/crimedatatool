@@ -685,11 +685,12 @@ function countToRate(data, type, per_officer = false) {
       largest_agency_temp = _.indexOf(agencies, largest_agency_temp);
 
       agency_number = agencies.findIndex(element => element === agency_value)
-      if (agency_number != -1) {
-              $("#agency_dropdown").val(agency_value);
-            //    agency_number = agencies.findIndex(element => element === agency_val)
+      if (agency_number == -1) {
+          $("#agency_dropdown").val(largest_agency_temp);
+
       } else {
-              $("#agency_dropdown").val(largest_agency_temp);
+        $("#agency_dropdown").val(agency_number);
+      //    agency_number = agencies.findIndex(element => element === agency_val)
       }
       return agencies;
     }
@@ -704,6 +705,7 @@ function countToRate(data, type, per_officer = false) {
 
       agency_val = ""
       url_hash = window.location.hash
+      console.log(url_hash)
       if (url_hash != "") {
         split_url = url_hash.split("&");
         state_val = find_url_string(split_url, "state=")
