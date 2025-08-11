@@ -300,7 +300,7 @@ nibrs_crime_values["offense"] = {
   "larceny_theft_offenses_theft_from_building" : "Theft - Theft from Building",
   "larceny_theft_offenses_theft_from_coin_operated_machine_or_device" : "Theft - Theft from Coin Operated Machine or Device",
   "larceny_theft_offenses_theft_from_motor_vehicle" : "Theft - Theft from Motor Vehicle",
-  "larceny_theft_offenses_theft_of_motor_vehicle_parts_accessories" : "Theft - Theft of Motor Vehicle Parts or Accessories"
+  "larceny_theft_offenses_theft_of_motor_vehicle_parts_accessories" : "Theft - Theft of Motor Vehicle Parts or Accessories",
   "treason" : "Treason",
   "motor_vehicle_theft": "Motor Vehicle Theft",
   "weapon_law_violations_explosives" : "Weapon Law Offenses - Explosives",
