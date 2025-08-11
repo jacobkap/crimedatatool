@@ -1,3 +1,4 @@
+
 function readCSV(csv) {
   var result = null;
   var scriptUrl = csv;
@@ -757,28 +758,3 @@ function countToRate(data, type, per_officer = false) {
 
       //  makeDataSourceDropdown()
     }
-
-// Responsive Hamburger Menu
-function toggleNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
-// Back to Top Button
-window.onscroll = function() {scrollFunction()};
-function scrollFunction() {
-  var btn = document.getElementById("backToTop");
-  if (!btn) return;
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    btn.style.display = "block";
-  } else {
-    btn.style.display = "none";
-  }
-}
-function backToTop() {
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
