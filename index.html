@@ -41,6 +41,24 @@
     <script src="js/dynamic_url.js"></script>
 
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .sidebar > * {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+    .sidebar h2, .sidebar h3 {
+      margin-top: 0.5em;
+      margin-bottom: 0.2em;
+    }
+    .sidebar select, .sidebar input, .sidebar button, .sidebar label {
+      margin-bottom: 0.5em;
+    }
+    /* Adjust vertical spacing between dropdowns/selects in the sidebar */
+    .sidebar select {
+      margin-bottom: 0.25em;
+      margin-top: 0.1em;
+    }
+  </style>
 </head>
 
 <body>
@@ -48,10 +66,11 @@
 
 
   <div class="topnav" id="myTopnav">
-    <nav role="navigation" id="site-nav" class="nav">
+    <nav role="navigation" id="site-nav" class="nav" aria-label="Main Navigation">
       <div class="menu a">
         <a href="/index.html">Data Tool</a>
         <a href="/about.html">About</a>
+        <a href="javascript:void(0);" class="icon" aria-label="Open navigation menu" onclick="toggleNav()">&#9776;</a>
       </div>
     </nav>
   </div>
@@ -104,7 +123,7 @@
       <hr>
     </div>
     <button type="button" onclick="exportToCsv(all_data, 'offenses', state_values)">Download All Agency Data</button>
-    <br><br><br><br><br><br><br><br><br>
+    <div style="height:1.2em;"></div>
     <button type="button" onclick="exportToCsv(table_data, 'offenses', state_values)">Download Current Table Data</button>
     <br>
     <p>Please note that data are only available for agencies that report all 12 months of the year.</p>
@@ -131,6 +150,7 @@
 
     </script>
 
+  <button onclick="backToTop()" id="backToTop" title="Back to Top" aria-label="Back to Top">&#8679;</button>
 
 </body>
 

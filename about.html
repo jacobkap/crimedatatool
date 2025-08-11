@@ -68,27 +68,32 @@
 
 <body>
 
-  <div class="topnav">
-    <a href="/index.html">Data Tool</a>
-    <a href="/about.html">About</a>
+  <div class="topnav" id="myTopnav">
+    <nav role="navigation" id="site-nav" class="nav" aria-label="Main Navigation">
+      <div class="menu a">
+        <a href="/index.html">Data Tool</a>
+        <a href="/about.html">About</a>
+        <a href="javascript:void(0);" class="icon" aria-label="Open navigation menu" onclick="toggleNav()">&#9776;</a>
+      </div>
+    </nav>
   </div>
 
   <div class="container">
     <h1>About</h1>
 
     <h2>Background and Purpose</h2>
-    <p>Crime Data Tool (CrimeDataTool.com) was developed in January 2017 to address the lack of an accessible, comprehensive platform for engaging with the FBI's Uniform Crime Reporting (UCR) data—the nation’s primary source of crime data. At the time, existing tools were difficult to use and limited in scope, with fewer crime categories and years of data than in the full data. These constraints made it challenging to access even basic statistics, such as the number of assaults each month within a single police agency over time. The goal of Crime Data Tool is to bridge this gap by making complex crime data accessible and user-friendly. Reliable, interpretable data is essential for effective crime policy and public safety strategies.
+    <p>Crime Data Tool (CrimeDataTool.com) was developed in January 2017 to address the lack of an accessible, comprehensive platform for engaging with the FBI's Uniform Crime Reporting (UCR) data—the nation's primary source of crime data. At the time, existing tools were difficult to use and limited in scope, with fewer crime categories and years of data than in the full data. These constraints made it challenging to access even basic statistics, such as the number of assaults each month within a single police agency over time. The goal of Crime Data Tool is to bridge this gap by making complex crime data accessible and user-friendly. Reliable, interpretable data is essential for effective crime policy and public safety strategies.
   <p>Crime Data Tool provides broad access to UCR data, enabling users to visualize and analyze trends in crime, arrests, officer employment, and related areas across various agencies and timeframes. The tool includes data on crimes, arrests, assaults and killings of police officers, and demographic information of individuals involved in crimes, among many other variables. </p>
     <p>With Crime Data Tool, users can select the dataset they are interested in, choose a specific police department, and customize the variables they wish to explore (for example, the number of rapes committed by adults or the number of male police officers employed). The platform then generates an interactive graph and table based on the selected data and allows users to download the data for further analysis or reporting.</p>
 
     <h3>Crime Data Tool  serves many purposes:</h3>
     <ul>
-      <li>Provides the public with transparency by showcasing the breadth of crime data available from the FBI’s UCR Program.</li>
+      <li>Provides the public with transparency by showcasing the breadth of crime data available from the FBI's UCR Program.</li>
       <li>Offers researchers and journalists a dependable, updated source of clean data to support reporting, analysis, and academic study.</li>
       <li>Enables evaluations of crime prevention strategies and fosters the development of new policies through accessible data analysis.</li>
       <li>Equips public officials and policymakers with tools to examine crime distributions and trends through interactive graphs and tables, supporting data-driven decision-making.</li>
     </ul>
-    <p>Crime Data Tool was built to expand access to UCR data, ensuring that valuable information is available beyond just those with technical expertise. While the site currently features comprehensive data from the UCR Program, including the National Incident-Based Reporting System (NIBRS), it represents only a portion of the available data. Expanding the tool’s capabilities to include more of the UCR’s full potential remains an ongoing goal.
+    <p>Crime Data Tool was built to expand access to UCR data, ensuring that valuable information is available beyond just those with technical expertise. While the site currently features comprehensive data from the UCR Program, including the National Incident-Based Reporting System (NIBRS), it represents only a portion of the available data. Expanding the tool's capabilities to include more of the UCR's full potential remains an ongoing goal.
 </p>
 <p>The full version of the data used on this site is available to download on the Harvard Dataverse website <a href="https://dataverse.harvard.edu/dataverse/ucrdata" target="_blank">here.</a>
 </p>
@@ -102,6 +107,10 @@
        <p>Thank you to <a href="https://scholars.duke.edu/person/bocar.ba" target="_blank">Bocar Ba</a>, <a href="https://chss.rowan.edu/departments/lawjustice/facultystaff/new_faculty/block-kristina.html" target="_blank">Kristina Block</a>, <a href="https://isr.unm.edu/staff/daniel-goldberg.html" target="_blank">Daniel Goldberg</a>, and <a href="https://jmummolo.scholar.princeton.edu/" target="_blank">Jonathan Mummolo</a> for your feedback, suggestions, support, and help on the site.</p>
 
   </div>
+
+  <button onclick="backToTop()" id="backToTop" title="Back to Top" aria-label="Back to Top">&#8679;</button>
+
+  <script src="js/utils.js"></script>
 
 </body>
 
